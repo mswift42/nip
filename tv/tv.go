@@ -24,3 +24,8 @@ type iplayerDocumentResult struct {
 	idoc iplayerDocument
 	Error error
 }
+
+type Category struct {
+	name string
+	docs []*iplayerDocument
+}
