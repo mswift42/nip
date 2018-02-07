@@ -1,0 +1,15 @@
+package tv
+
+// Programme represents an Iplayer TV programme. It consists of
+// the programme's title, subtitle, a short programme description,
+// The Iplayer Programme ID, the url to its thumbnail, the url
+// to the programme's website and a unique index.
+type Programme struct {
+	Title     string `json:"title"`
+	Subtitle  string `json:"subtitle"`
+	Synopsis  string `json:"synopsis"`
+	Pid       string `json:"pid"`
+	Thumbnail string `json:"thumbnail"`
+	URL       string `json:"url"`
+	Index     int    `json:"index"`
+}
