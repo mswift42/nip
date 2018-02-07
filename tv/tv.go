@@ -1,5 +1,7 @@
 package tv
 
+import "github.com/mswift42/goquery"
+
 // Programme represents an Iplayer TV programme. It consists of
 // the programme's title, subtitle, a short programme description,
 // The Iplayer Programme ID, the url to its thumbnail, the url
@@ -12,4 +14,13 @@ type Programme struct {
 	Thumbnail string `json:"thumbnail"`
 	URL       string `json:"url"`
 	Index     int    `json:"index"`
+}
+
+type iplayerDocument struct {
+	idoc *goquery.Document
+}
+
+type iplayerDocumentResult struct {
+	idoc iplayerDocument
+	Error error
 }
