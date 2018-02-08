@@ -7,7 +7,7 @@ type BeebUrl string
 func (bu BeebUrl) loadDocument() *iplayerDocumentResult {
 	doc, err := goquery.NewDocument(string(bu))
 	if err != nil {
-		return &iplayerDocumentResult{nil, err}
+		return &iplayerDocumentResult{iplayerDocument{}, err}
 	}
 	idoc := iplayerDocument{doc}
 	return &iplayerDocumentResult{idoc, nil}
@@ -32,7 +32,7 @@ type iplayerDocument struct {
 }
 
 type iplayerDocumentResult struct {
-	idoc iplayerDocument
+	idoc  iplayerDocument
 	Error error
 }
 
