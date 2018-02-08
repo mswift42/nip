@@ -28,7 +28,7 @@ type Programme struct {
 }
 
 type iplayerDocument struct {
-	idoc *goquery.Document
+	doc *goquery.Document
 }
 
 type iplayerDocumentResult struct {
