@@ -13,6 +13,12 @@ func (bu BeebUrl) loadDocument() *iplayerDocumentResult {
 	return &iplayerDocumentResult{idoc, nil}
 }
 
+type iplayerSelection goquery.Selection
+
+func (is *iplayerSelection) programme() *Programme {
+	return
+}
+
 // Programme represents an Iplayer TV programme. It consists of
 // the programme's title, subtitle, a short programme description,
 // The Iplayer Programme ID, the url to its thumbnail, the url
