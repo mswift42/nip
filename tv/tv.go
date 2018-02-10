@@ -13,10 +13,32 @@ func (bu BeebUrl) loadDocument() *iplayerDocumentResult {
 	return &iplayerDocumentResult{idoc, nil}
 }
 
-type iplayerSelection goquery.Selection
+type iplayerSelection struct {
+	sel *goquery.Selection
+}
 
-func (is *iplayerSelection) programme() *Programme {
-	return
+func (is *iplayerSelection) title() string {
+	return is.sel.Find(".secondary > .title").Text()
+}
+
+func (is *iplayerSelection) subtitle() string {
+	return is.sel.Find(".secondary > .subtitle").Text()
+}
+
+func (is *iplayerSelection) url() string {
+	return is.sel.Find("a").AttrOr("href", "")
+}
+
+func (is *iplayerSelection) thumbNail() string {
+	return is.sel.Find(".rs-image > picture > source").AttrOr("srcset", "")
+}
+
+func (is *iplayerSelection) pid() string {
+	pid := is.sel.AttrOr("data-ip-id", "")
+	if pid != "" {
+		return pid
+	}
+	return is.sel.Find(".list-item-inner > a").AttrOr("data-episode-id", "")
 }
 
 // Programme represents an Iplayer TV programme. It consists of
