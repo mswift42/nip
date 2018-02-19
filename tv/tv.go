@@ -17,12 +17,24 @@ type iplayerSelection struct {
 	sel *goquery.Selection
 }
 
+func (is *iplayerSelection) programme() *Programme {
+	title := is.title()
+	subtitle := is.subtitle()
+	url := is.url()
+	thumbnail := is.thumbNail()
+	pid := is.pid()
+}
+
 func (is *iplayerSelection) title() string {
 	return is.sel.Find(".secondary > .title").Text()
 }
 
 func (is *iplayerSelection) subtitle() string {
 	return is.sel.Find(".secondary > .subtitle").Text()
+}
+
+func (is *iplayerSelection) synopsis() string {
+	return is.sel.Find(".synopsis").Text()
 }
 
 func (is *iplayerSelection) url() string {
@@ -48,7 +60,7 @@ func (is *iplayerSelection) pid() string {
 type Programme struct {
 	Title     string `json:"title"`
 	Subtitle  string `json:"subtitle"`
-	Synopsis  string `json:"synopsis"`
+	Synopsis  string `json:"synopsis"`xiaomi
 	Pid       string `json:"pid"`
 	Thumbnail string `json:"thumbnail"`
 	URL       string `json:"url"`
