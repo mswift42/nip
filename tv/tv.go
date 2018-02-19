@@ -80,10 +80,8 @@ type Programme struct {
 type iplayerDocument struct {
 	doc *goquery.Document
 }
-
-func (id iplayerDocument) iplayerSelections() iplayerSelection {
-	return iplayerSelection{sel: id.doc.Find(".list-item")}
-}
+// TODO - Introduce iplayerSelectionResult
+// TODO - return from document slice of iplayerSelectionResults.
 
 type iplayerDocumentResult struct {
 	idoc  iplayerDocument

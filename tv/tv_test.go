@@ -13,13 +13,3 @@ func TestLoadingDocument(t *testing.T) {
 	}
 }
 
-func TestIplayerSelections(t *testing.T) {
-	url := TestHtmlUrl("testhtml/food1.html")
-	idr := url.loadDocument()
-	is := idr.idoc.iplayerSelections()
-	is1 := is.sel.Nodes[0]
-	if is1.Data != "li" {
-		t.Error("expected is1.Data to be li", is1.Data)
-	}
-	sels := is.sel.M
-}
