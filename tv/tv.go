@@ -59,11 +59,14 @@ type iplayerDocument struct {
 	doc *goquery.Document
 }
 
+func (id iplayerDocument) iplayerSelections() iplayerSelection {
+	return iplayerSelection{sel: id.doc.Find(".list-item")}
+}
+
 type iplayerDocumentResult struct {
 	idoc  iplayerDocument
 	Error error
 }
-
 type Category struct {
 	name string
 	docs []*iplayerDocument
