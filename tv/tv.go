@@ -20,9 +20,19 @@ type iplayerSelection struct {
 func (is *iplayerSelection) programme() *Programme {
 	title := is.title()
 	subtitle := is.subtitle()
+	synopsis := is.synopsis()
 	url := is.url()
 	thumbnail := is.thumbNail()
 	pid := is.pid()
+	return &Programme{
+		Title:     title,
+		Subtitle:  subtitle,
+		Synopsis:  synopsis,
+		PID:       pid,
+		Thumbnail: thumbnail,
+		URL:       url,
+		Index:     0,
+	}
 }
 
 func (is *iplayerSelection) title() string {
@@ -60,8 +70,8 @@ func (is *iplayerSelection) pid() string {
 type Programme struct {
 	Title     string `json:"title"`
 	Subtitle  string `json:"subtitle"`
-	Synopsis  string `json:"synopsis"`xiaomi
-	Pid       string `json:"pid"`
+	Synopsis  string `json:"synopsis"`
+	PID       string `json:"pid"`
 	Thumbnail string `json:"thumbnail"`
 	URL       string `json:"url"`
 	Index     int    `json:"index"`
