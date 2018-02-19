@@ -16,6 +16,12 @@ func (bu BeebUrl) loadDocument() *iplayerDocumentResult {
 type iplayerSelection struct {
 	sel *goquery.Selection
 }
+// iplayerSelectionResult has either an iplayerSelection for an iplayer programme
+// or if it has a "more Programmes available" notice, the link to its Programme Page.
+type iplayerSelectionResult struct {
+	prog        iplayerSelection
+	programPage Pager
+}
 
 func (is *iplayerSelection) programme() *Programme {
 	title := is.title()
