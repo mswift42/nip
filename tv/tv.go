@@ -20,10 +20,10 @@ type iplayerSelection struct {
 func newIplayerSelection(sel *goquery.Selection) *iplayerSelection{
 	return &iplayerSelection{sel}
 }
-// iplayerSelectionResult has either an iplayerSelection for an iplayer programme
+// iplayerSelectionResult has either an iplayer programme,
 // or if it has a "more Programmes available" notice, the link to its Programme Page.
 type iplayerSelectionResult struct {
-	prog        iplayerSelection
+	prog        *Programme
 	programPage Pager
 }
 
@@ -36,7 +36,7 @@ func (is *iplayerSelection) selectionResults() []*iplayerSelectionResult {
 			res = append(res, &iplayerSelectionResult{nil, page })
 		} else {
 			res = append(res,
-				&iplayerSelectionResult{*isel.programme(), ""})
+				&iplayerSelectionResult{isel.programme(), ""})
 		}
 	})
 }
