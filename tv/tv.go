@@ -17,9 +17,10 @@ type iplayerSelection struct {
 	sel *goquery.Selection
 }
 
-func newIplayerSelection(sel *goquery.Selection) *iplayerSelection{
+func newIplayerSelection(sel *goquery.Selection) *iplayerSelection {
 	return &iplayerSelection{sel}
 }
+
 // iplayerSelectionResult has either an iplayer programme,
 // or if it has a "more Programmes available" notice, the link to its Programme Page.
 type iplayerSelectionResult struct {
@@ -30,15 +31,16 @@ type iplayerSelectionResult struct {
 func (is *iplayerSelection) selectionResults() []*iplayerSelectionResult {
 	var res []*iplayerSelectionResult
 	is.sel.Each(func(i int, selection *goquery.Selection) {
-		isel :=newIplayerSelection(selection)
+		isel := newIplayerSelection(selection)
 		page := isel.programmeSite()
 		if page != "" {
-			res = append(res, &iplayerSelectionResult{nil, page })
+			res = append(res, &iplayerSelectionResult{nil, BeebUrl(page)})
 		} else {
 			res = append(res,
-				&iplayerSelectionResult{isel.programme(), ""})
+				&iplayerSelectionResult{isel.programme(), BeebUrl("")})
 		}
 	})
+	return res
 }
 
 func (is *iplayerSelection) programmeSite() string {
@@ -108,6 +110,7 @@ type Programme struct {
 type iplayerDocument struct {
 	doc *goquery.Document
 }
+
 // TODO - Introduce iplayerSelectionResult
 // TODO - return from document slice of iplayerSelectionResults.
 
