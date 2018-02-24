@@ -16,11 +16,33 @@ func (bu BeebUrl) loadDocument() *iplayerDocumentResult {
 type iplayerSelection struct {
 	sel *goquery.Selection
 }
+
+func newIplayerSelection(sel *goquery.Selection) *iplayerSelection{
+	return &iplayerSelection{sel}
+}
 // iplayerSelectionResult has either an iplayerSelection for an iplayer programme
 // or if it has a "more Programmes available" notice, the link to its Programme Page.
 type iplayerSelectionResult struct {
 	prog        iplayerSelection
 	programPage Pager
+}
+
+func (is *iplayerSelection) selectionResults() []*iplayerSelectionResult {
+	var res []*iplayerSelectionResult
+	is.sel.Each(func(i int, selection *goquery.Selection) {
+		isel :=newIplayerSelection(selection)
+		page := isel.programmeSite()
+		if page != "" {
+			res = append(res, &iplayerSelectionResult{nil, page })
+		} else {
+			res = append(res,
+				&iplayerSelectionResult{*isel.programme(), ""})
+		}
+	})
+}
+
+func (is *iplayerSelection) programmeSite() string {
+	return is.sel.Find(".view-more-container").AttrOr("href", "")
 }
 
 func (is *iplayerSelection) programme() *Programme {
