@@ -33,7 +33,7 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if progpage.prog != nil {
 		t.Error("Expected proramme to be nil: ", progpage.prog)
 	}
-	if progpage.programPage != BeebUrl("adam_curtis.html") {
+	if progpage.programPage != "adam_curtis.html" {
 		t.Error("Expected program Page to be 'adam_curtis.html' not: ", progpage.programPage)
 	}
 }

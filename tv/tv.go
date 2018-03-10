@@ -25,7 +25,7 @@ func newIplayerSelection(sel *goquery.Selection) *iplayerSelection {
 // or if it has a "more Programmes available" notice, the link to its Programme Page.
 type iplayerSelectionResult struct {
 	prog        *Programme
-	programPage Pager
+	programPage string
 }
 
 func (is *iplayerSelection) selectionResults() []*iplayerSelectionResult {
@@ -34,10 +34,10 @@ func (is *iplayerSelection) selectionResults() []*iplayerSelectionResult {
 		isel := newIplayerSelection(selection)
 		page := isel.programmeSite()
 		if page != "" {
-			res = append(res, &iplayerSelectionResult{nil, BeebUrl(page)})
+			res = append(res, &iplayerSelectionResult{nil, page})
 		} else {
 			res = append(res,
-				&iplayerSelectionResult{isel.programme(), BeebUrl("")})
+				&iplayerSelectionResult{isel.programme(), ""})
 		}
 	})
 	return res
