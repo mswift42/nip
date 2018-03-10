@@ -21,3 +21,12 @@ func TestLoadingDocument(t *testing.T) {
 	}
 }
 
+func TestIplayerSelectionResults(t *testing.T) {
+	url := TestHtmlUrl("testhtml/films1.html")
+	idr := url.loadDocument()
+	sel := iplayerSelection {idr.idoc.doc.Find(".list-item-inner")}
+	selres := sel.selectionResults()
+	if len(selres) != 20 {
+		t.Error("Expected length of selectionresults to equal: ", len(selres))
+	}
+}
