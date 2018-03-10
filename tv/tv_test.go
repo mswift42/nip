@@ -29,4 +29,11 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if len(selres) != 20 {
 		t.Error("Expected length of selectionresults to equal: ", len(selres))
 	}
+	progpage := selres[0]
+	if progpage.prog != nil {
+		t.Error("Expected proramme to be nil: ", progpage.prog)
+	}
+	if progpage.programPage != BeebUrl("adam_curtis.html") {
+		t.Error("Expected program Page to be 'adam_curtis.html' not: ", progpage.programPage)
+	}
 }
