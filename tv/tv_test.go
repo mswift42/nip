@@ -20,11 +20,10 @@ func TestLoadingDocument(t *testing.T) {
 		t.Error("Expected idoc not to be nil: ", idr.idoc)
 	}
 }
-
 func TestIplayerSelectionResults(t *testing.T) {
 	url := TestHtmlUrl("testhtml/films1.html")
 	idr := url.loadDocument()
-	sel := iplayerSelection {idr.idoc.doc.Find(".list-item-inner")}
+	sel := iplayerSelection{idr.idoc.doc.Find(".list-item-inner")}
 	selres := sel.selectionResults()
 	if len(selres) != 20 {
 		t.Error("Expected length of selectionresults to equal: ", len(selres))
@@ -36,4 +35,11 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if progpage.programPage != "adam_curtis.html" {
 		t.Error("Expected program Page to be 'adam_curtis.html' not: ", progpage.programPage)
 	}
+	if selres[1].prog.Title != "A Hijacking" {
+		t.Error("Expected second programme title to be 'A Hijacking', got: ", selres[1].prog.Title)
+	}
+	if selres[1].programPage != "" {
+		t.Error("Expected second programPage to be an empty string, got: ", selres[1].programPage)
+	}
+
 }
