@@ -120,5 +120,5 @@ type iplayerDocumentResult struct {
 }
 type Category struct {
 	name string
-	docs []*iplayerDocument
+	programmes []*Programme
 }
