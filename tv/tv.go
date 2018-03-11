@@ -122,3 +122,8 @@ type Category struct {
 	name string
 	programmes []*Programme
 }
+
+type mainCategoryDocument struct {
+	maindoc iplayerDocument
+	nextdocs []iplayerDocument
+}
