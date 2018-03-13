@@ -124,8 +124,8 @@ type Category struct {
 }
 
 type mainCategoryDocument struct {
-	maindoc iplayerDocument
-	nextdocs []iplayerDocument
+	maindoc *iplayerDocument
+	nextdocs []*iplayerDocument
 }
 
 func (mcd *mainCategoryDocument) nextPages() []string {
