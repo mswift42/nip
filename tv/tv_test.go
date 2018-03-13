@@ -41,5 +41,21 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if selres[1].programPage != "" {
 		t.Error("Expected second programPage to be an empty string, got: ", selres[1].programPage)
 	}
+}
 
+func TestMainCategoryDocumentNextPages(t *testing.T) {
+	url := TestHtmlUrl("testhtml/films1.html")
+	idr := url.loadDocument()
+	if idr.Error != nil {
+		t.Error("Expected no error loading document, got: ", idr.Error)
+	}
+	var emptydoc []*iplayerDocument
+	mcd := mainCategoryDocument{&idr.idoc, emptydoc}
+	np := mcd.nextPages()
+	if len(np) != 1 {
+		t.Error("Expected length of nextpages to be 1, got: ", len(np))
+	}
+	if np[0] != "films2.html" {
+		t.Error("Expected url of first nextPage to be films2.html, got: ", np[0])
+	}
 }
