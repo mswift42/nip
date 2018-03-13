@@ -127,3 +127,11 @@ type mainCategoryDocument struct {
 	maindoc iplayerDocument
 	nextdocs []iplayerDocument
 }
+
+func (mcd *mainCategoryDocument) nextPages() []string {
+	var url []string
+	mcd.maindoc.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
+		url = append(url, s.AttrOr("href", ""))
+	})
+	return url
+}
