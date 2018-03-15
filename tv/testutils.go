@@ -1,12 +1,18 @@
 package tv
 
 import (
-	"io/ioutil"
-	"github.com/mswift42/goquery"
 	"bytes"
+	"io/ioutil"
+
+	"github.com/mswift42/goquery"
 )
 
 type TestHtmlUrl string
+
+type testMainCategoryDocument struct {
+	ip *iplayerDocument
+	NextPages []string
+}
 
 func (thu TestHtmlUrl) loadDocument() *iplayerDocumentResult {
 	file, err := ioutil.ReadFile(string(thu))
@@ -15,7 +21,7 @@ func (thu TestHtmlUrl) loadDocument() *iplayerDocumentResult {
 	}
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(file))
 	if err != nil {
-		return &iplayerDocumentResult{iplayerDocument{},  err}
+		return &iplayerDocumentResult{iplayerDocument{}, err}
 	}
 	idoc := iplayerDocument{doc}
 	return &iplayerDocumentResult{idoc, nil}
