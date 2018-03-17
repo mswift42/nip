@@ -128,10 +128,10 @@ type mainCategoryDocument struct {
 	nextdocs []*iplayerDocument
 }
 
-func (mcd *mainCategoryDocument) nextPages() []Pager {
-	var url []Pager
+func (mcd *mainCategoryDocument) nextPages() []string {
+	var url []string
 	mcd.maindoc.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
-		url = append(url, BeebUrl(s.AttrOr("href", "")))
+		url = append(url, s.AttrOr("href", ""))
 	})
 	return url
 }
