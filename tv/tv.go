@@ -1,6 +1,8 @@
 package tv
 
-import "github.com/mswift42/goquery"
+import (
+	"github.com/mswift42/goquery"
+)
 
 type BeebUrl string
 
@@ -119,12 +121,12 @@ type iplayerDocumentResult struct {
 	Error error
 }
 type Category struct {
-	name string
+	name       string
 	programmes []*Programme
 }
 
 type mainCategoryDocument struct {
-	maindoc *iplayerDocument
+	maindoc  *iplayerDocument
 	nextdocs []*iplayerDocument
 }
 
@@ -134,4 +136,31 @@ func (mcd *mainCategoryDocument) nextPages() []string {
 		url = append(url, s.AttrOr("href", ""))
 	})
 	return url
+}
+
+func (mcd *mainCategoryDocument) collectNextPages(urls []string) []*iplayerDocumentResult {
+	var results []*iplayerDocumentResult
+	c := make(chan *iplayerDocumentResult)
+	for _, i := range urls {
+		bu := BeebUrl(i)
+
+	}
+}
+
+func collectDocuments(urls []string, c chan *iplayerDocumentResult) {
+	for _, i := range urls {
+		go func(u string) {
+			bu := BeebUrl(u)
+			idr := bu.loadDocument()
+			c <- idr
+		}(i)
+	}
+}
+
+func collectDocuments(urls []string, c chan []*iplayerDocumentResult) {
+	var res []*iplayerDocumentResult
+	for _, i := range urls {
+		bu := BeebUrl(i)
+		go bu.loadDocument()
+	}
 }
