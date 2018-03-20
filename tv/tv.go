@@ -141,10 +141,11 @@ func (mcd *mainCategoryDocument) nextPages() []string {
 func (mcd *mainCategoryDocument) collectNextPages(urls []string) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
-	for _, i := range urls {
-		bu := BeebUrl(i)
-
+	go collectDocuments(urls, c)
+	for i := 0; i < len(urls); i++ {
+		results = append(results, <-c)
 	}
+	return results
 }
 
 func collectDocuments(urls []string, c chan *iplayerDocumentResult) {
@@ -154,13 +155,5 @@ func collectDocuments(urls []string, c chan *iplayerDocumentResult) {
 			idr := bu.loadDocument()
 			c <- idr
 		}(i)
-	}
-}
-
-func collectDocuments(urls []string, c chan []*iplayerDocumentResult) {
-	var res []*iplayerDocumentResult
-	for _, i := range urls {
-		bu := BeebUrl(i)
-		go bu.loadDocument()
 	}
 }
