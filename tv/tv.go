@@ -138,7 +138,7 @@ func (mcd *mainCategoryDocument) nextPages() []string {
 	return url
 }
 
-func (mcd *mainCategoryDocument) collectNextPages(urls []string) []*iplayerDocumentResult {
+func (mcd *mainCategoryDocument) collectNextPages(urls []Pager) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
 	go collectDocuments(urls, c)
