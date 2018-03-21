@@ -148,11 +148,10 @@ func (mcd *mainCategoryDocument) collectNextPages(urls []string) []*iplayerDocum
 	return results
 }
 
-func collectDocuments(urls []string, c chan *iplayerDocumentResult) {
+func collectDocuments(urls []Pager, c chan *iplayerDocumentResult) {
 	for _, i := range urls {
-		go func(u string) {
-			bu := BeebUrl(u)
-			idr := bu.loadDocument()
+		go func(u Pager) {
+			idr := u.loadDocument()
 			c <- idr
 		}(i)
 	}
