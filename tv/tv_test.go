@@ -62,4 +62,7 @@ func TestMainCategoryDocumentNextPages(t *testing.T) {
 	if len(cnp) != len(np) {
 		t.Error("Expected length of of documents to be length of nextPages, got: ", len(cnp))
 	}
+	if cnp[0].Error != nil {
+		t.Error("Expected error in document result to be nil, got: ", cnp[0].Error)
+	}
 }
