@@ -14,6 +14,22 @@ type testMainCategoryDocument struct {
 	NextPages []string
 }
 
+func (tmcd testMainCategoryDocument) collectNextPages(urls []string) []*iplayerDocumentResult {
+	var results []*iplayerDocumentResult
+	c := make(chan *iplayerDocumentResult)
+	for _, i := range urls {
+		go func(u url) {
+			th := TestHtmlUrl(u)
+			idr := th.loadDocument()
+			c <- idr
+		}(i)
+	}
+	for i := 0; i < len(urls); i++ {
+		results = append(results, <-c)
+	}
+	return results
+}
+
 func (thu TestHtmlUrl) loadDocument() *iplayerDocumentResult {
 	file, err := ioutil.ReadFile(string(thu))
 	if err != nil {
