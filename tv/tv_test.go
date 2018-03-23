@@ -55,14 +55,14 @@ func TestMainCategoryDocumentNextPages(t *testing.T) {
 	if len(np) != 1 {
 		t.Error("Expected length of nextpages to be 1, got: ", len(np))
 	}
-	if np[0] != BeebUrl("films2.html") {
-		t.Error("Expected url of first nextPage to be films2.html, got: ", np[0])
+	if np[0] != "testhtml/films2.html" {
+		t.Error("Expected url of first nextPage to be testhtml/films2.html, got: ", np[0])
 	}
-	cnp := mcd.collectNextPages(np)
-	if len(cnp) != len(np) {
-		t.Error("Expected length of of documents to be length of nextPages, got: ", len(cnp))
-	}
-	if cnp[0].Error != nil {
-		t.Error("Expected error in document result to be nil, got: ", cnp[0].Error)
+	tmcd := testMainCategoryDocument{&idr.idoc, emptydoc}
+	cnp := tmcd.collectNextPages(np)
+	for _, i := range cnp {
+		if i.Error != nil {
+			t.Error("Expected document result error to be nil, got: ", i.Error)
+		}
 	}
 }

@@ -18,7 +18,7 @@ func (tmcd testMainCategoryDocument) collectNextPages(urls []string) []*iplayerD
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
 	for _, i := range urls {
-		go func(u url) {
+		go func(u string) {
 			th := TestHtmlUrl(u)
 			idr := th.loadDocument()
 			c <- idr
