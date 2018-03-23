@@ -11,7 +11,7 @@ type TestHtmlUrl string
 
 type testMainCategoryDocument struct {
 	ip *iplayerDocument
-	NextPages []string
+	nextPages []*iplayerDocument
 }
 
 func (tmcd testMainCategoryDocument) collectNextPages(urls []string) []*iplayerDocumentResult {
