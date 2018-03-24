@@ -24,7 +24,8 @@ func (tmcd testMainCategoryDocument) collectNextPages(urls []string) []*iplayerD
 			c <- idr
 		}(i)
 	}
-	for i := 0; i < len(urls); i++ {
+	close (c)
+	for range c {
 		results = append(results, <-c)
 	}
 	return results
