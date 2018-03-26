@@ -15,15 +15,20 @@ type testMainCategoryDocument struct {
 }
 // TODO  - return MainCategory with document Results
 // TODO - iterate over results and extract list of documents to return.
-func (thu TestHtmlUrl) newMainCategory() mainCategoryDocument {
-	var results []*iplayerDocumentResult
+func (thu TestHtmlUrl) newMainCategory() *mainCategoryDocument {
+	var results []*iplayerDocument
 	maindocres := thu.loadDocument()
 	if maindocres.Error != nil {
-		return results
+		return &mainCategoryDocument{ nil, results}
 	}
 	np := maindocres.idoc.nextPages()
-	results = collectNextPages(np)
-	return mainCategoryDocument{maindocres, results}
+	npresults := collectNextPages(np)
+	for _, i := range npresults {
+		if i.Error == nil {
+			results = append(results, &i.idoc)
+		}
+	}
+	return &mainCategoryDocument{&maindocres.idoc, results}
 }
 
 func  collectNextPages(urls []string) []*iplayerDocumentResult {
