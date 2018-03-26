@@ -15,6 +15,22 @@ func (bu BeebUrl) loadDocument() *iplayerDocumentResult {
 	return &iplayerDocumentResult{idoc, nil}
 }
 
+func (bu BeebUrl) newMainCategory() *mainCategoryDocument {
+	var results []*iplayerDocument
+	maindocres := bu.loadDocument()
+	if maindocres.Error != nil {
+		return &mainCategoryDocument{nil, results}
+	}
+	np := maindocres.idoc.nextPages()
+	npresults := collectNextPages(np)
+	for _, i := range npresults {
+		if i.Error == nil {
+			results = append(results, &i.idoc)
+		}
+	}
+	return &mainCategoryDocument{&maindocres.idoc, results}
+}
+
 type iplayerSelection struct {
 	sel *goquery.Selection
 }
