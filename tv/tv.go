@@ -113,9 +113,6 @@ type iplayerDocument struct {
 	doc *goquery.Document
 }
 
-// TODO - Introduce iplayerSelectionResult
-// TODO - return from document slice of iplayerSelectionResults.
-
 type iplayerDocumentResult struct {
 	idoc  iplayerDocument
 	Error error
@@ -136,6 +133,14 @@ func (mcd *mainCategoryDocument) nextPages() []string {
 		url = append(url, s.AttrOr("href", ""))
 	})
 	return url
+}
+
+func (id iplayerDocument) nextPages() []string {
+	var urls []string
+	id.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
+		urls = append(urls, s.AttrOr("href", ""))
+	})
+	return urls
 }
 
 func (mcd *mainCategoryDocument) collectNextPages(urls []Pager) []*iplayerDocumentResult {
