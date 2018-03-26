@@ -46,7 +46,9 @@ func TestIplayerSelectionResults(t *testing.T) {
 func TestNewTestMainCategory(t *testing.T) {
 	url := TestHtmlUrl("testhtml/films1.html")
 	nmc := url.newMainCategory()
-	if
+	if nmc.maindoc == nil {
+		t.Error("Expected maindocument to not be nil, got: ", nmc.maindoc)
+	}
 }
 
 func TestMainCategoryDocumentNextPages(t *testing.T) {
@@ -63,12 +65,5 @@ func TestMainCategoryDocumentNextPages(t *testing.T) {
 	}
 	if np[0] != "testhtml/films2.html" {
 		t.Error("Expected url of first nextPage to be testhtml/films2.html, got: ", np[0])
-	}
-	tmcd := testMainCategoryDocument{&idr.idoc, emptydoc}
-	cnp := tmcd.collectNextPages(np)
-	for _, i := range cnp {
-		if i.Error != nil {
-			t.Error("Expected document result error to be nil, got: ", i.Error)
-		}
 	}
 }
