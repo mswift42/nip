@@ -13,8 +13,9 @@ type testMainCategoryDocument struct {
 	ip *iplayerDocument
 	nextPages []*iplayerDocument
 }
-
-func (thu TestHtmlUrl) newMainCategory() []*iplayerDocumentResult {
+// TODO  - return MainCategory with document Results
+// TODO - iterate over results and extract list of documents to return.
+func (thu TestHtmlUrl) newMainCategory() mainCategoryDocument {
 	var results []*iplayerDocumentResult
 	maindocres := thu.loadDocument()
 	if maindocres.Error != nil {
@@ -22,7 +23,7 @@ func (thu TestHtmlUrl) newMainCategory() []*iplayerDocumentResult {
 	}
 	np := maindocres.idoc.nextPages()
 	results = collectNextPages(np)
-	return results
+	return mainCategoryDocument{maindocres, results}
 }
 
 func  collectNextPages(urls []string) []*iplayerDocumentResult {

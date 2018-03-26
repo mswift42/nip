@@ -43,6 +43,12 @@ func TestIplayerSelectionResults(t *testing.T) {
 	}
 }
 
+func TestNewTestMainCategory(t *testing.T) {
+	url := TestHtmlUrl("testhtml/films1.html")
+	nmc := url.newMainCategory()
+	if
+}
+
 func TestMainCategoryDocumentNextPages(t *testing.T) {
 	url := TestHtmlUrl("testhtml/films1.html")
 	idr := url.loadDocument()
