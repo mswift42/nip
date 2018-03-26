@@ -14,7 +14,18 @@ type testMainCategoryDocument struct {
 	nextPages []*iplayerDocument
 }
 
-func (tmcd testMainCategoryDocument) collectNextPages(urls []string) []*iplayerDocumentResult {
+func (thu TestHtmlUrl) newMainCategory() []*iplayerDocumentResult {
+	var results []*iplayerDocumentResult
+	maindocres := thu.loadDocument()
+	if maindocres.Error != nil {
+		return results
+	}
+	np := maindocres.idoc.nextPages()
+	results = collectNextPages(np)
+	return results
+}
+
+func  collectNextPages(urls []string) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
 	for _, i := range urls {
