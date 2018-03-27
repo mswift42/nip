@@ -41,8 +41,7 @@ func  collectNextPages(urls []string) []*iplayerDocumentResult {
 			c <- idr
 		}(i)
 	}
-	close (c)
-	for range c {
+	for i := 0; i < len(urls); i++ {
 		results = append(results, <-c)
 	}
 	return results
