@@ -13,8 +13,6 @@ type testMainCategoryDocument struct {
 	ip *iplayerDocument
 	nextPages []*iplayerDocument
 }
-// TODO  - return MainCategory with document Results
-// TODO - iterate over results and extract list of documents to return.
 func (thu TestHtmlUrl) newMainCategory() *mainCategoryDocument {
 	var results []*iplayerDocument
 	maindocres := thu.loadDocument()
