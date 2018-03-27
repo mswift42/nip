@@ -51,19 +51,3 @@ func TestNewTestMainCategory(t *testing.T) {
 	}
 }
 
-func TestMainCategoryDocumentNextPages(t *testing.T) {
-	url := TestHtmlUrl("testhtml/films1.html")
-	idr := url.loadDocument()
-	if idr.Error != nil {
-		t.Error("Expected no error loading document, got: ", idr.Error)
-	}
-	var emptydoc []*iplayerDocument
-	mcd := mainCategoryDocument{&idr.idoc, emptydoc}
-	np := mcd.nextPages()
-	if len(np) != 1 {
-		t.Error("Expected length of nextpages to be 1, got: ", len(np))
-	}
-	if np[0] != "testhtml/films2.html" {
-		t.Error("Expected url of first nextPage to be testhtml/films2.html, got: ", np[0])
-	}
-}
