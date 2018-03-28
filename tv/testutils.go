@@ -9,10 +9,6 @@ import (
 
 type TestHtmlUrl string
 
-type testMainCategoryDocument struct {
-	ip *iplayerDocument
-	nextPages []*iplayerDocument
-}
 func (thu TestHtmlUrl) newMainCategory() *mainCategoryDocument {
 	var results []*iplayerDocument
 	maindocres := thu.loadDocument()
