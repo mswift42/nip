@@ -15,9 +15,11 @@ func (bu BeebUrl) loadDocument(c chan<- *iplayerDocumentResult) *iplayerDocument
 	c <- &iplayerDocumentResult{idoc, nil}
 }
 
-func (p Pager) newMainCategory() *mainCategoryDocument {
+func newMainCategory(p Pager) *mainCategoryDocument {
 	var results []*iplayerDocument
-	maindocres := p.loadDocument()
+	c := make(chan *iplayerDocumentResult)
+	p.loadDocument(c)
+	maindocres := <-c
 	if maindocres.Error != nil {
 		return &mainCategoryDocument{nil, results}
 	}
