@@ -6,7 +6,7 @@ import (
 
 type BeebUrl string
 
-func (bu BeebUrl) loadDocument(c chan<- *iplayerDocumentResult) *iplayerDocumentResult {
+func (bu BeebUrl) loadDocument(c chan<- *iplayerDocumentResult) {
 	doc, err := goquery.NewDocument(string(bu))
 	if err != nil {
 		 c <- &iplayerDocumentResult{iplayerDocument{}, err}
@@ -174,19 +174,16 @@ func (mcd *mainCategoryDocument) collectNextPages(urls []Pager) []*iplayerDocume
 func collectDocuments(urls []Pager, c chan *iplayerDocumentResult) {
 	for _, i := range urls {
 		go func(u Pager) {
-			idr := u.loadDocument()
-			c <- idr
+			u.loadDocument(c)
 		}(i)
 	}
 }
-func  collectNextPages(urls []string) []*iplayerDocumentResult {
+func  collectNextPages(urls []Pager) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
 	for _, i := range urls {
-		go func(u string) {
-			th := TestHtmlUrl(u)
-			idr := th.loadDocument()
-			c <- idr
+		go func(u Pager) {
+			u.loadDocument(c)
 		}(i)
 	}
 	for i := 0; i < len(urls); i++ {
