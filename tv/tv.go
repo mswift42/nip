@@ -6,18 +6,18 @@ import (
 
 type BeebUrl string
 
-func (bu BeebUrl) loadDocument() *iplayerDocumentResult {
+func (bu BeebUrl) loadDocument(c chan<- *iplayerDocumentResult) *iplayerDocumentResult {
 	doc, err := goquery.NewDocument(string(bu))
 	if err != nil {
-		return &iplayerDocumentResult{iplayerDocument{}, err}
+		 c <- &iplayerDocumentResult{iplayerDocument{}, err}
 	}
 	idoc := iplayerDocument{doc}
-	return &iplayerDocumentResult{idoc, nil}
+	c <- &iplayerDocumentResult{idoc, nil}
 }
 
-func (bu BeebUrl) newMainCategory() *mainCategoryDocument {
+func (p Pager) newMainCategory() *mainCategoryDocument {
 	var results []*iplayerDocument
-	maindocres := bu.loadDocument()
+	maindocres := p.loadDocument()
 	if maindocres.Error != nil {
 		return &mainCategoryDocument{nil, results}
 	}

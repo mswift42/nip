@@ -26,15 +26,15 @@ func (thu TestHtmlUrl) newMainCategory() *mainCategoryDocument {
 }
 
 
-func (thu TestHtmlUrl) loadDocument() *iplayerDocumentResult {
+func (thu TestHtmlUrl) loadDocument(c chan<- *iplayerDocumentResult) *iplayerDocumentResult {
 	file, err := ioutil.ReadFile(string(thu))
 	if err != nil {
-		return &iplayerDocumentResult{iplayerDocument{}, err}
+		c <-  &iplayerDocumentResult{iplayerDocument{}, err}
 	}
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(file))
 	if err != nil {
-		return &iplayerDocumentResult{iplayerDocument{}, err}
+		c <- return &iplayerDocumentResult{iplayerDocument{}, err}
 	}
 	idoc := iplayerDocument{doc}
-	return &iplayerDocumentResult{idoc, nil}
+	c <-  &iplayerDocumentResult{idoc, nil}
 }
