@@ -161,10 +161,15 @@ func (id iplayerDocument) nextPages() []string {
 	return urls
 }
 
-func (mcd *mainCategoryDocument) collectNextPages(urls []Pager) []*iplayerDocumentResult {
+func (id iplayerDocument) collectPages(urls []string) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
-	go collectDocuments(urls, c)
+	for _, i := range urls {
+		go func(s string) {
+			bu := BeebUrl(s)
+			bu.loadDocument(c)
+		}(i)
+	}
 	for i := 0; i < len(urls); i++ {
 		results = append(results, <-c)
 	}
