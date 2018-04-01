@@ -4,7 +4,9 @@ import "testing"
 
 func TestLoadingDocument(t *testing.T) {
 	url := TestHtmlUrl("testhtml/food1.html")
-	idr := url.loadDocument()
+	c := make(chan *iplayerDocumentResult)
+	url.loadDocument(c)
+	idr := <-c
 	if idr.Error != nil {
 		t.Error("Expected error to be nil", idr.Error)
 	}
@@ -12,7 +14,8 @@ func TestLoadingDocument(t *testing.T) {
 		t.Error("Expected idoc not to be nil", idr.idoc)
 	}
 	url = TestHtmlUrl("testhtml/films1.html")
-	idr = url.loadDocument()
+	url.loadDocument(c)
+	idr = <-c
 	if idr.Error != nil {
 		t.Error("Expected error to be nil: ", idr.Error)
 	}
