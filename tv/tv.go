@@ -9,7 +9,7 @@ type BeebUrl string
 func (bu BeebUrl) loadDocument(c chan<- *iplayerDocumentResult) {
 	doc, err := goquery.NewDocument(string(bu))
 	if err != nil {
-		 c <- &iplayerDocumentResult{iplayerDocument{}, err}
+		c <- &iplayerDocumentResult{iplayerDocument{}, err}
 	}
 	idoc := iplayerDocument{doc}
 	c <- &iplayerDocumentResult{idoc, nil}
@@ -176,6 +176,26 @@ func (bu BeebUrl) collectPages(urls []string) []*iplayerDocumentResult {
 	return results
 }
 
+func collectPages(urls []interface{}) {
+	var results []*iplayerDocumentResult
+	c := make(chan *iplayerDocumentResult)
+	for _, i := range urls {
+		go func(u interface{}) {
+			switch val := u.(type) {
+			case BeebUrl:
+				bu := BeebUrl(val)
+				bu.loadDocument(c)
+			case TestHtmlUrl:
+				th := TestHtmlUrl(val)
+				th.loadDocument(c)
+			}
+		}(i)
+	}
+	for i := 0; i < len(urls); i++ {
+		results = append(results, <-c)
+	}
+}
+
 func collectDocuments(urls []Pager, c chan *iplayerDocumentResult) {
 	for _, i := range urls {
 		go func(u Pager) {
@@ -183,7 +203,7 @@ func collectDocuments(urls []Pager, c chan *iplayerDocumentResult) {
 		}(i)
 	}
 }
-func  collectNextPages(urls []Pager) []*iplayerDocumentResult {
+func collectNextPages(urls []Pager) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
 	for _, i := range urls {
