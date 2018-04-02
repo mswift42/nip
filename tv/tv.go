@@ -161,7 +161,7 @@ func (id iplayerDocument) nextPages() []string {
 	return urls
 }
 
-func (id iplayerDocument) collectPages(urls []string) []*iplayerDocumentResult {
+func (bu BeebUrl) collectPages(urls []string) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
 	for _, i := range urls {
