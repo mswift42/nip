@@ -24,7 +24,7 @@ func newMainCategory(p Pager) *mainCategoryDocument {
 		return &mainCategoryDocument{nil, results}
 	}
 	np := maindocres.idoc.nextPages()
-	npresults := collectNextPages(np)
+	npresults := collectPages(np)
 	for _, i := range npresults {
 		if i.Error == nil {
 			results = append(results, &i.idoc)
@@ -153,10 +153,10 @@ func (mcd *mainCategoryDocument) nextPages() []string {
 	return url
 }
 
-func (id iplayerDocument) nextPages() []string {
-	var urls []string
+func (id iplayerDocument) nextPages() []interface{} {
+	var urls []interface{}
 	id.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
-		urls = append(urls, s.AttrOr("href", ""))
+		urls = append(urls, BeebUrl(s.AttrOr("href", "")))
 	})
 	return urls
 }
@@ -176,7 +176,7 @@ func (bu BeebUrl) collectPages(urls []string) []*iplayerDocumentResult {
 	return results
 }
 
-func collectPages(urls []interface{}) {
+func collectPages(urls []interface{}) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
 	for _, i := range urls {
@@ -194,6 +194,7 @@ func collectPages(urls []interface{}) {
 	for i := 0; i < len(urls); i++ {
 		results = append(results, <-c)
 	}
+	return results
 }
 
 func collectDocuments(urls []Pager, c chan *iplayerDocumentResult) {
