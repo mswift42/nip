@@ -5,7 +5,7 @@ import "testing"
 func TestLoadingDocument(t *testing.T) {
 	url := TestHtmlUrl("testhtml/food1.html")
 	c := make(chan *iplayerDocumentResult)
-	url.loadDocument(c)
+	go url.loadDocument(c)
 	idr := <-c
 	if idr.Error != nil {
 		t.Error("Expected error to be nil", idr.Error)
@@ -14,7 +14,7 @@ func TestLoadingDocument(t *testing.T) {
 		t.Error("Expected idoc not to be nil", idr.idoc)
 	}
 	url = TestHtmlUrl("testhtml/films1.html")
-	url.loadDocument(c)
+	go url.loadDocument(c)
 	idr = <-c
 	if idr.Error != nil {
 		t.Error("Expected error to be nil: ", idr.Error)
@@ -26,7 +26,7 @@ func TestLoadingDocument(t *testing.T) {
 func TestIplayerSelectionResults(t *testing.T) {
 	url := TestHtmlUrl("testhtml/films1.html")
 	c := make(chan *iplayerDocumentResult)
-	url.loadDocument(c)
+	go url.loadDocument(c)
 	idr := <-c
 	sel := iplayerSelection{idr.idoc.doc.Find(".list-item-inner")}
 	selres := sel.selectionResults()
