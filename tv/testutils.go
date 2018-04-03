@@ -8,6 +8,7 @@ import (
 )
 
 type TestHtmlUrl string
+type TestIplayerDocument iplayerDocument
 
 func (thu TestHtmlUrl) loadDocument(c chan<- *iplayerDocumentResult) {
 	file, err := ioutil.ReadFile(string(thu))
@@ -21,6 +22,15 @@ func (thu TestHtmlUrl) loadDocument(c chan<- *iplayerDocumentResult) {
 	idoc := iplayerDocument{doc}
 	c <- &iplayerDocumentResult{idoc, nil}
 }
+
+func (tid TestIplayerDocument) nextPages() []interface{} {
+	var urls []interface{}
+	tid.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
+		urls = append(urls, TestHtmlUrl(s.AttrOr("href", "")))
+	})
+	return urls
+}
+
 
 func (thu TestHtmlUrl) collectPages(urls []string) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
