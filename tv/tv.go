@@ -18,7 +18,7 @@ func (bu BeebUrl) loadDocument(c chan<- *iplayerDocumentResult) {
 func newMainCategory(p Pager) *mainCategoryDocument {
 	var results []*iplayerDocument
 	c := make(chan *iplayerDocumentResult)
-	p.loadDocument(c)
+	go p.loadDocument(c)
 	maindocres := <-c
 	if maindocres.Error != nil {
 		return &mainCategoryDocument{nil, results}
@@ -28,6 +28,8 @@ func newMainCategory(p Pager) *mainCategoryDocument {
 	for _, i := range npresults {
 		if i.Error == nil {
 			results = append(results, &i.idoc)
+		} else {
+			panic(i.Error)
 		}
 	}
 	return &mainCategoryDocument{&maindocres.idoc, results}
@@ -175,6 +177,8 @@ func (bu BeebUrl) collectPages(urls []string) []*iplayerDocumentResult {
 	}
 	return results
 }
+
+
 
 func collectPages(urls []interface{}) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
