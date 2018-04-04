@@ -4,9 +4,9 @@ import (
 	"github.com/mswift42/goquery"
 )
 
-type BeebUrl string
+type BeebURL string
 
-func (bu BeebUrl) loadDocument(c chan<- *iplayerDocumentResult) {
+func (bu BeebURL) loadDocument(c chan<- *iplayerDocumentResult) {
 	doc, err := goquery.NewDocument(string(bu))
 	if err != nil {
 		c <- &iplayerDocumentResult{iplayerDocument{}, err}
@@ -158,17 +158,17 @@ func (mcd *mainCategoryDocument) nextPages() []string {
 func (id iplayerDocument) nextPages() []interface{} {
 	var urls []interface{}
 	id.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
-		urls = append(urls, BeebUrl(s.AttrOr("href", "")))
+		urls = append(urls, BeebURL(s.AttrOr("href", "")))
 	})
 	return urls
 }
 
-func (bu BeebUrl) collectPages(urls []string) []*iplayerDocumentResult {
+func (bu BeebURL) collectPages(urls []string) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
 	for _, i := range urls {
 		go func(s string) {
-			bu := BeebUrl(s)
+			bu := BeebURL(s)
 			bu.loadDocument(c)
 		}(i)
 	}
@@ -186,11 +186,11 @@ func collectPages(urls []interface{}) []*iplayerDocumentResult {
 	for _, i := range urls {
 		go func(u interface{}) {
 			switch val := u.(type) {
-			case BeebUrl:
-				bu := BeebUrl(val)
+			case BeebURL:
+				bu := BeebURL(val)
 				bu.loadDocument(c)
-			case TestHtmlUrl:
-				th := TestHtmlUrl(val)
+			case TestHTMLURL:
+				th := TestHTMLURL(val)
 				th.loadDocument(c)
 			}
 		}(i)

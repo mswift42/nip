@@ -3,7 +3,7 @@ package tv
 import "testing"
 
 func TestLoadingDocument(t *testing.T) {
-	url := TestHtmlUrl("testhtml/food1.html")
+	url := TestHTMLURL("testhtml/food1.html")
 	c := make(chan *iplayerDocumentResult)
 	go url.loadDocument(c)
 	idr := <-c
@@ -13,7 +13,7 @@ func TestLoadingDocument(t *testing.T) {
 	if idr.idoc.doc == nil {
 		t.Error("Expected idoc not to be nil", idr.idoc)
 	}
-	url = TestHtmlUrl("testhtml/films1.html")
+	url = TestHTMLURL("testhtml/films1.html")
 	go url.loadDocument(c)
 	idr = <-c
 	if idr.Error != nil {
@@ -24,7 +24,7 @@ func TestLoadingDocument(t *testing.T) {
 	}
 }
 func TestIplayerSelectionResults(t *testing.T) {
-	url := TestHtmlUrl("testhtml/films1.html")
+	url := TestHTMLURL("testhtml/films1.html")
 	c := make(chan *iplayerDocumentResult)
 	go url.loadDocument(c)
 	idr := <-c
@@ -48,19 +48,19 @@ func TestIplayerSelectionResults(t *testing.T) {
 	}
 }
 
-//func TestNewTestMainCategory(t *testing.T) {
-//	url := TestHtmlUrl("testhtml/films1.html")
-//	nmc := url.newMainCategory()
-//	if nmc.maindoc == nil {
-//		t.Error("Expected maindocument to not be nil, got: ", nmc.maindoc)
-//	}
-//	if len(nmc.nextdocs) != 1 {
-//		t.Error("Expected length of nextdocs to be 1, got: ", len(nmc.nextdocs))
-//	}
-//	sel := iplayerSelection{nmc.nextdocs[0].doc.Find(".list-item-inner")}
-//	selres := sel.selectionResults()
-//	if len(selres) != 4 {
-//		t.Error("Expected length of selectionresutls of films2.html to be 4, got: ", len(selres))
-//	}
-//}
+func TestNewTestMainCategory(t *testing.T) {
+	url := TestHTMLURL("testhtml/films1.html")
+	nmc := newMainCategory(url)
+	if nmc.maindoc == nil {
+		t.Error("Expected maindocument to not be nil, got: ", nmc.maindoc)
+	}
+	if len(nmc.nextdocs) != 1 {
+		t.Error("Expected length of nextdocs to be 1, got: ", len(nmc.nextdocs))
+	}
+	sel := iplayerSelection{nmc.nextdocs[0].doc.Find(".list-item-inner")}
+	selres := sel.selectionResults()
+	if len(selres) != 4 {
+		t.Error("Expected length of selectionresutls of films2.html to be 4, got: ", len(selres))
+	}
+}
 
