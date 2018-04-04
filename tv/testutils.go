@@ -7,10 +7,10 @@ import (
 	"github.com/mswift42/goquery"
 )
 
-type TestHtmlUrl string
+type TestHTMLURL string
 type TestIplayerDocument iplayerDocument
 
-func (thu TestHtmlUrl) loadDocument(c chan<- *iplayerDocumentResult) {
+func (thu TestHTMLURL) loadDocument(c chan<- *iplayerDocumentResult) {
 	file, err := ioutil.ReadFile(string(thu))
 	if err != nil {
 		c <- &iplayerDocumentResult{iplayerDocument{}, err}
@@ -26,18 +26,18 @@ func (thu TestHtmlUrl) loadDocument(c chan<- *iplayerDocumentResult) {
 func (tid TestIplayerDocument) nextPages() []interface{} {
 	var urls []interface{}
 	tid.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
-		urls = append(urls, TestHtmlUrl(s.AttrOr("href", "")))
+		urls = append(urls, TestHTMLURL(s.AttrOr("href", "")))
 	})
 	return urls
 }
 
 
-func (thu TestHtmlUrl) collectPages(urls []string) []*iplayerDocumentResult {
+func (thu TestHTMLURL) collectPages(urls []string) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
 	for _, i := range urls {
 		go func(s string) {
-			thu := TestHtmlUrl(s)
+			thu := TestHTMLURL(s)
 			thu.loadDocument(c)
 		}(i)
 	}
