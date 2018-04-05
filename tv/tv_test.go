@@ -48,19 +48,18 @@ func TestIplayerSelectionResults(t *testing.T) {
 	}
 }
 
-func TestNewTestMainCategory(t *testing.T) {
+func TestCollectPages(t *testing.T) {
 	url := TestHTMLURL("testhtml/films1.html")
-	nmc := newMainCategory(url)
-	if nmc.maindoc == nil {
-		t.Error("Expected maindocument to not be nil, got: ", nmc.maindoc)
+	c := make(chan *iplayerDocumentResult)
+	go url.loadDocument(c)
+	docres := <-c
+	if docres.Error != nil {
+		t.Error("Expected error in documentresult to be nil, got: ", docres.Error)
 	}
-	if len(nmc.nextdocs) != 1 {
-		t.Error("Expected length of nextdocs to be 1, got: ", len(nmc.nextdocs))
+	tid := TestIplayerDocument{docres.idoc}
+	np := tid.nextPages()
+	if len(np) != 1 {
+		t.Error("Expected length of nextPages to be 1, got: ", len(np))
 	}
-	sel := iplayerSelection{nmc.nextdocs[0].doc.Find(".list-item-inner")}
-	selres := sel.selectionResults()
-	if len(selres) != 4 {
-		t.Error("Expected length of selectionresutls of films2.html to be 4, got: ", len(selres))
-	}
-}
 
+}
