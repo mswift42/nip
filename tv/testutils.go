@@ -33,17 +33,3 @@ func (tid TestIplayerDocument) nextPages() []interface{} {
 	return urls
 }
 
-func (thu TestHTMLURL) collectPages(urls []string) []*iplayerDocumentResult {
-	var results []*iplayerDocumentResult
-	c := make(chan *iplayerDocumentResult)
-	for _, i := range urls {
-		go func(s string) {
-			thu := TestHTMLURL(s)
-			thu.loadDocument(c)
-		}(i)
-	}
-	for i := 0; i < len(urls); i++ {
-		results = append(results, <-c)
-	}
-	return results
-}
