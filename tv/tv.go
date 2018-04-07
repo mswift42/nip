@@ -163,6 +163,18 @@ func (id iplayerDocument) nextPages() []interface{} {
 	return urls
 }
 
+func (id iplayerDocument) programPages() []interface{} {
+	var urls []interface{}
+	isel := iplayerSelection{id.doc.Find(".list-item-inner")}
+	selres := isel.selectionResults()
+	for _, i := range selres {
+		if i.programPage != "" {
+			urls = append(urls, i.programPage)
+		}
+	}
+	return urls
+}
+
 func (bu BeebURL) collectPages(urls []string) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
@@ -200,6 +212,7 @@ func collectPages(urls []interface{}) []*iplayerDocumentResult {
 	}
 	return results
 }
+
 
 func collectDocuments(urls []Pager, c chan *iplayerDocumentResult) {
 	for _, i := range urls {
