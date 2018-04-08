@@ -190,6 +190,23 @@ func (bu BeebURL) collectPages(urls []string) []*iplayerDocumentResult {
 	return results
 }
 
+func (id *iplayerDocument) newMainCategory() *mainCategoryDocument {
+	var pages []*iplayerDocument
+	nextPages := collectPages(id.nextPages())
+	progpages := collectPages(id.programPages())
+	for _, i := range nextPages {
+		if i.Error == nil {
+			pages = append(pages, &i.idoc)
+		}
+	}
+	for _, i := range progpages {
+		if i.Error == nil {
+			pages = append(pages, &i.idoc)
+		}
+	}
+	return &mainCategoryDocument{id, pages}
+}
+
 
 
 func collectPages(urls []interface{}) []*iplayerDocumentResult {
