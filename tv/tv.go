@@ -169,7 +169,7 @@ func (id iplayerDocument) programPages() []interface{} {
 	selres := isel.selectionResults()
 	for _, i := range selres {
 		if i.programPage != "" {
-			urls = append(urls, i.programPage)
+			urls = append(urls, BeebURL(i.programPage))
 		}
 	}
 	return urls
@@ -205,6 +205,10 @@ func (id *iplayerDocument) newMainCategory() *mainCategoryDocument {
 		}
 	}
 	return &mainCategoryDocument{id, pages}
+}
+
+func newMainCagetory(np NextPager) []*iplayerDocument {
+
 }
 
 
