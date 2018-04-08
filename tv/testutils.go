@@ -33,3 +33,15 @@ func (tid TestIplayerDocument) nextPages() []interface{} {
 	return urls
 }
 
+func (tid TestIplayerDocument) programPages() []interface{} {
+	var urls []interface{}
+	isel := iplayerSelection{tid.idoc.doc.Find(".list-item-inner")}
+	selres := isel.selectionResults()
+	for _, i := range selres {
+		if i.programPage != "" {
+			urls = append(urls, TestHTMLURL(i.programPage))
+		}
+	}
+	return urls
+}
+
