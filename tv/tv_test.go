@@ -84,7 +84,7 @@ func TestNewMainCategory(t *testing.T) {
 	if fp == nil {
 		t.Error("Expected maindocument not be nil, got: ", fp)
 	}
-	if len(nmd.nextdocs) != 1 {
+	if len(nmd.nextdocs) != 2 {
 		t.Error("Expected length of nextdocs to be 2, got: ", len(nmd.nextdocs))
 	}
 }
