@@ -25,16 +25,16 @@ func (thu TestHTMLURL) loadDocument(c chan<- *iplayerDocumentResult) {
 	c <- &iplayerDocumentResult{idoc, nil}
 }
 
-func (tid *TestIplayerDocument) nextPages() []interface{} {
-	var urls []interface{}
+func (tid *TestIplayerDocument) nextPages() []Pager {
+	var urls []Pager
 	tid.idoc.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
 		urls = append(urls, TestHTMLURL(s.AttrOr("href", "")))
 	})
 	return urls
 }
 
-func (tid *TestIplayerDocument) programPages() []interface{} {
-	var urls []interface{}
+func (tid *TestIplayerDocument) programPages() []Pager {
+	var urls []Pager
 	isel := iplayerSelection{tid.idoc.doc.Find(".list-item-inner")}
 	selres := isel.selectionResults()
 	for _, i := range selres {
