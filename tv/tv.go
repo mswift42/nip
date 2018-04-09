@@ -15,7 +15,6 @@ func (bu BeebURL) loadDocument(c chan<- *iplayerDocumentResult) {
 	c <- &iplayerDocumentResult{idoc, nil}
 }
 
-
 type iplayerSelection struct {
 	sel *goquery.Selection
 }
@@ -213,23 +212,3 @@ func collectPages(urls []interface{}) []*iplayerDocumentResult {
 	return results
 }
 
-func collectDocuments(urls []Pager, c chan *iplayerDocumentResult) {
-	for _, i := range urls {
-		go func(u Pager) {
-			u.loadDocument(c)
-		}(i)
-	}
-}
-func collectNextPages(urls []Pager) []*iplayerDocumentResult {
-	var results []*iplayerDocumentResult
-	c := make(chan *iplayerDocumentResult)
-	for _, i := range urls {
-		go func(u Pager) {
-			u.loadDocument(c)
-		}(i)
-	}
-	for i := 0; i < len(urls); i++ {
-		results = append(results, <-c)
-	}
-	return results
-}
