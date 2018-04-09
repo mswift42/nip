@@ -6,6 +6,6 @@ type Pager interface {
 
 type NextPager interface {
 	mainDoc() *iplayerDocument
-	nextPages() []interface{}
-	programPages() []interface{}
+	nextPages() []Pager
+	programPages() []Pager
 }
