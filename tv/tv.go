@@ -155,7 +155,11 @@ func (mcd *mainCategoryDocument) nextPages() []string {
 	return url
 }
 
-func (id iplayerDocument) nextPages() []interface{} {
+func (id *iplayerDocument) mainDoc() *iplayerDocument {
+	return id
+}
+
+func (id *iplayerDocument) nextPages() []interface{} {
 	var urls []interface{}
 	id.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
 		urls = append(urls, BeebURL(s.AttrOr("href", "")))
@@ -163,7 +167,7 @@ func (id iplayerDocument) nextPages() []interface{} {
 	return urls
 }
 
-func (id iplayerDocument) programPages() []interface{} {
+func (id *iplayerDocument) programPages() []interface{} {
 	var urls []interface{}
 	isel := iplayerSelection{id.doc.Find(".list-item-inner")}
 	selres := isel.selectionResults()
@@ -190,28 +194,22 @@ func (bu BeebURL) collectPages(urls []string) []*iplayerDocumentResult {
 	return results
 }
 
-func (id *iplayerDocument) newMainCategory() *mainCategoryDocument {
+func newMainCagetory(np NextPager) *mainCategoryDocument {
 	var pages []*iplayerDocument
-	nextPages := collectPages(id.nextPages())
-	progpages := collectPages(id.programPages())
+	nextPages := collectPages(np.nextPages())
+	progPages := collectPages(np.programPages())
 	for _, i := range nextPages {
 		if i.Error == nil {
 			pages = append(pages, &i.idoc)
 		}
 	}
-	for _, i := range progpages {
+	for _, i := range progPages {
 		if i.Error == nil {
 			pages = append(pages, &i.idoc)
 		}
 	}
-	return &mainCategoryDocument{id, pages}
+	return &mainCategoryDocument{np.mainDoc(), pages}
 }
-
-func newMainCagetory(np NextPager) []*iplayerDocument {
-
-}
-
-
 
 func collectPages(urls []interface{}) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
@@ -233,7 +231,6 @@ func collectPages(urls []interface{}) []*iplayerDocumentResult {
 	}
 	return results
 }
-
 
 func collectDocuments(urls []Pager, c chan *iplayerDocumentResult) {
 	for _, i := range urls {
