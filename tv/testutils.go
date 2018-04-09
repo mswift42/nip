@@ -45,7 +45,7 @@ func (tid *TestIplayerDocument) programPages() []interface{} {
 	return urls
 }
 
-func (tid *TestIplayerDocument) mainDoc() *TestIplayerDocument {
-	return tid
+func (tid *TestIplayerDocument) mainDoc() *iplayerDocument {
+	return &tid.idoc
 }
 
