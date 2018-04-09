@@ -15,25 +15,6 @@ func (bu BeebURL) loadDocument(c chan<- *iplayerDocumentResult) {
 	c <- &iplayerDocumentResult{idoc, nil}
 }
 
-func newMainCategory(p Pager) *mainCategoryDocument {
-	var results []*iplayerDocument
-	c := make(chan *iplayerDocumentResult)
-	go p.loadDocument(c)
-	maindocres := <-c
-	if maindocres.Error != nil {
-		return &mainCategoryDocument{nil, results}
-	}
-	np := maindocres.idoc.nextPages()
-	npresults := collectPages(np)
-	for _, i := range npresults {
-		if i.Error == nil {
-			results = append(results, &i.idoc)
-		} else {
-			panic(i.Error)
-		}
-	}
-	return &mainCategoryDocument{&maindocres.idoc, results}
-}
 
 type iplayerSelection struct {
 	sel *goquery.Selection
@@ -194,7 +175,7 @@ func (bu BeebURL) collectPages(urls []string) []*iplayerDocumentResult {
 	return results
 }
 
-func newMainCagetory(np NextPager) *mainCategoryDocument {
+func newMainCategory(np NextPager) *mainCategoryDocument {
 	var pages []*iplayerDocument
 	nextPages := collectPages(np.nextPages())
 	progPages := collectPages(np.programPages())

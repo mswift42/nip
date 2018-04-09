@@ -69,3 +69,22 @@ func TestCollectPages(t *testing.T) {
 		t.Error("Expected error for first doc in collected Pages to be nil, got: ", cp[0].Error)
 	}
 }
+
+func TestNewMainCategory(t *testing.T) {
+	url := TestHTMLURL("testhtml/films1.html")
+	c := make(chan *iplayerDocumentResult)
+	go url.loadDocument(c)
+	docres := <-c
+	if docres.Error != nil {
+		t.Error("Expected error in documentresult to be nil, got: ", docres.Error)
+	}
+	tid := TestIplayerDocument{docres.idoc}
+	nmd := newMainCategory(&tid)
+	fp := nmd.maindoc
+	if fp == nil {
+		t.Error("Expected maindocument not be nil, got: ", fp)
+	}
+	if len(nmd.nextdocs) != 1 {
+		t.Error("Expected length of nextdocs to be 2, got: ", len(nmd.nextdocs))
+	}
+}
