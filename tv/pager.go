@@ -5,5 +5,6 @@ type Pager interface {
 }
 
 type NextPager interface {
-	collectPages([]string) []*iplayerDocumentResult
+	nextPages() []interface{}
+	programPages() []interface{}
 }
