@@ -139,16 +139,16 @@ func (id *iplayerDocument) mainDoc() *iplayerDocument {
 	return id
 }
 
-func (id *iplayerDocument) nextPages() []interface{} {
-	var urls []interface{}
+func (id *iplayerDocument) nextPages() []Pager  {
+	var urls []Pager
 	id.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
 		urls = append(urls, BeebURL(s.AttrOr("href", "")))
 	})
 	return urls
 }
 
-func (id *iplayerDocument) programPages() []interface{} {
-	var urls []interface{}
+func (id *iplayerDocument) programPages() []Pager {
+	var urls []Pager
 	isel := iplayerSelection{id.doc.Find(".list-item-inner")}
 	selres := isel.selectionResults()
 	for _, i := range selres {
@@ -191,19 +191,12 @@ func newMainCategory(np NextPager) *mainCategoryDocument {
 	return &mainCategoryDocument{np.mainDoc(), pages}
 }
 
-func collectPages(urls []interface{}) []*iplayerDocumentResult {
+func collectPages(urls []Pager) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
 	for _, i := range urls {
-		go func(u interface{}) {
-			switch val := u.(type) {
-			case BeebURL:
-				bu := BeebURL(val)
-				bu.loadDocument(c)
-			case TestHTMLURL:
-				th := TestHTMLURL(val)
-				th.loadDocument(c)
-			}
+		go func(u Pager) {
+				u.loadDocument(c)
 		}(i)
 	}
 	for i := 0; i < len(urls); i++ {
