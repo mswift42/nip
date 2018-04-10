@@ -159,20 +159,6 @@ func (id *iplayerDocument) programPages() []Pager {
 	return urls
 }
 
-func (bu BeebURL) collectPages(urls []string) []*iplayerDocumentResult {
-	var results []*iplayerDocumentResult
-	c := make(chan *iplayerDocumentResult)
-	for _, i := range urls {
-		go func(s string) {
-			bu := BeebURL(s)
-			bu.loadDocument(c)
-		}(i)
-	}
-	for i := 0; i < len(urls); i++ {
-		results = append(results, <-c)
-	}
-	return results
-}
 
 func newMainCategory(np NextPager) *mainCategoryDocument {
 	var pages []*iplayerDocument
