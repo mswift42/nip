@@ -149,11 +149,16 @@ func (id *iplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
 	urls = append(urls, id.nextPages()...)
 	np := collectPages(urls)
-	isel := iplayerSelection{id.doc.Find(".list-item-inner")}
-	selres := isel.selectionResults()
-	for _, i := range selres {
-		if i.programPage != "" {
-			urls = append(urls, BeebURL(i.programPage))
+	docs := documentsFromResults(np)
+	docs = append(docs, id)
+	var selres []*iplayerSelectionResult
+	for _, i := range docs {
+		isel := iplayerSelection{i.doc.Find(".list-item-inner")}
+		selres = append(selres, isel.selectionResults()...)
+		for _, i := range selres {
+			if i.programPage != "" {
+				urls = append(urls, BeebURL(i.programPage))
+			}
 		}
 	}
 	return urls, selres
