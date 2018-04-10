@@ -129,6 +129,10 @@ type mainCategoryDocument struct {
 	nextdocs []*iplayerDocument
 }
 
+func (mcd *mainCategoryDocument) programmes() []*Programme {
+
+}
+
 func (id *iplayerDocument) mainDoc() *iplayerDocument {
 	return id
 }
@@ -140,8 +144,8 @@ func (id *iplayerDocument) nextPages() []Pager {
 	})
 	return urls
 }
-
-func (id *iplayerDocument) programPages() []Pager {
+// TODO - Iterate over all nextPages documents to get programPages for ALL nextPage docs.
+func (id *iplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
 	isel := iplayerSelection{id.doc.Find(".list-item-inner")}
 	selres := isel.selectionResults()
@@ -150,7 +154,7 @@ func (id *iplayerDocument) programPages() []Pager {
 			urls = append(urls, BeebURL(i.programPage))
 		}
 	}
-	return urls
+	return urls, selres
 }
 
 func newMainCategory(np NextPager) *mainCategoryDocument {
