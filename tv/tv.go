@@ -147,6 +147,8 @@ func (id *iplayerDocument) nextPages() []Pager {
 // TODO - Iterate over all nextPages documents to get programPages for ALL nextPage docs.
 func (id *iplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
+	urls = append(urls, id.nextPages()...)
+	np := collectPages(urls)
 	isel := iplayerSelection{id.doc.Find(".list-item-inner")}
 	selres := isel.selectionResults()
 	for _, i := range selres {
@@ -155,6 +157,16 @@ func (id *iplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
 		}
 	}
 	return urls, selres
+}
+
+func documentsFromResults(docres []*iplayerDocumentResult) []*iplayerDocument {
+	var results []*iplayerDocument
+	for _, i := range docres {
+		if i.Error == nil {
+			results = append(results, &i.idoc)
+		}
+	}
+	return results
 }
 
 func newMainCategory(np NextPager) *mainCategoryDocument {
