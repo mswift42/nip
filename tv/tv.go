@@ -122,10 +122,8 @@ type Category struct {
 	programmes []*Programme
 }
 
-func newCategory(name, url string) *Category {
-
-}
-
+// TODO - Add newCategory method.
+// TODO - Add programmes method for mainCategoryDocument.
 type mainCategoryDocument struct {
 	maindoc  *iplayerDocument
 	nextdocs []*iplayerDocument
