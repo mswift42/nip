@@ -122,24 +122,20 @@ type Category struct {
 	programmes []*Programme
 }
 
+func newCategory(name, url string) *Category {
+
+}
+
 type mainCategoryDocument struct {
 	maindoc  *iplayerDocument
 	nextdocs []*iplayerDocument
-}
-
-func (mcd *mainCategoryDocument) nextPages() []string {
-	var url []string
-	mcd.maindoc.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
-		url = append(url, s.AttrOr("href", ""))
-	})
-	return url
 }
 
 func (id *iplayerDocument) mainDoc() *iplayerDocument {
 	return id
 }
 
-func (id *iplayerDocument) nextPages() []Pager  {
+func (id *iplayerDocument) nextPages() []Pager {
 	var urls []Pager
 	id.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
 		urls = append(urls, BeebURL(s.AttrOr("href", "")))
@@ -158,7 +154,6 @@ func (id *iplayerDocument) programPages() []Pager {
 	}
 	return urls
 }
-
 
 func newMainCategory(np NextPager) *mainCategoryDocument {
 	var pages []*iplayerDocument
@@ -182,7 +177,7 @@ func collectPages(urls []Pager) []*iplayerDocumentResult {
 	c := make(chan *iplayerDocumentResult)
 	for _, i := range urls {
 		go func(u Pager) {
-				u.loadDocument(c)
+			u.loadDocument(c)
 		}(i)
 	}
 	for i := 0; i < len(urls); i++ {
@@ -190,4 +185,3 @@ func collectPages(urls []Pager) []*iplayerDocumentResult {
 	}
 	return results
 }
-
