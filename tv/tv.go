@@ -144,7 +144,7 @@ func (id *iplayerDocument) nextPages() []Pager {
 	})
 	return urls
 }
-// TODO - Iterate over all nextPages documents to get programPages for ALL nextPage docs.
+
 func (id *iplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
 	urls = append(urls, id.nextPages()...)
