@@ -33,19 +33,25 @@ func (tid *TestIplayerDocument) nextPages() []Pager {
 	return urls
 }
 
-func (tid *TestIplayerDocument) programPages() []Pager {
+func (tid *TestIplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
-	isel := iplayerSelection{tid.idoc.doc.Find(".list-item-inner")}
-	selres := isel.selectionResults()
-	for _, i := range selres {
-		if i.programPage != "" {
-			urls = append(urls, TestHTMLURL(i.programPage))
+	urls = append(urls, tid.nextPages()...)
+	np := collectPages(urls)
+	docs := documentsFromResults(np)
+	docs = append(docs, &tid.idoc)
+	var selres []*iplayerSelectionResult
+	for _, i := range docs {
+		isel := iplayerSelection{i.doc.Find(".list-item-inner")}
+		selres = append(selres, isel.selectionResults()...)
+		for _, i := range selres {
+			if i.programPage != "" {
+				urls = append(urls, TestHTMLURL(i.programPage))
+			}
 		}
 	}
-	return urls
+	return urls, selres
 }
 
 func (tid *TestIplayerDocument) mainDoc() *iplayerDocument {
 	return &tid.idoc
 }
-
