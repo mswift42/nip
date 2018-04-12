@@ -127,11 +127,12 @@ type Category struct {
 type mainCategoryDocument struct {
 	maindoc  *iplayerDocument
 	nextdocs []*iplayerDocument
+	selectionresults []*iplayerSelectionResult
 }
-
-func (mcd *mainCategoryDocument) programmes() []*Programme {
-
-}
+// TODO - Implement programmes method.
+//func (mcd *mainCategoryDocument) programmes() []*Programme {
+//
+//}
 
 func (id *iplayerDocument) mainDoc() *iplayerDocument {
 	return id
@@ -176,19 +177,14 @@ func documentsFromResults(docres []*iplayerDocumentResult) []*iplayerDocument {
 
 func newMainCategory(np NextPager) *mainCategoryDocument {
 	var pages []*iplayerDocument
-	nextPages := collectPages(np.nextPages())
-	progPages := collectPages(np.programPages())
-	for _, i := range nextPages {
-		if i.Error == nil {
-			pages = append(pages, &i.idoc)
-		}
-	}
+	pp, selres  := np.programPages()
+	progPages := collectPages(pp)
 	for _, i := range progPages {
 		if i.Error == nil {
 			pages = append(pages, &i.idoc)
 		}
 	}
-	return &mainCategoryDocument{np.mainDoc(), pages}
+	return &mainCategoryDocument{np.mainDoc(), pages, selres }
 }
 
 func collectPages(urls []Pager) []*iplayerDocumentResult {
