@@ -196,6 +196,7 @@ func collectPages(urls []Pager) []*iplayerDocumentResult {
 		}(i)
 	}
 	for i := 0; i < len(urls); i++ {
+//func (mcd *mainCategoryDocument) programmes() []*Programme {
 		results = append(results, <-c)
 	}
 	return results
