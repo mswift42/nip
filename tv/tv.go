@@ -121,9 +121,8 @@ type Category struct {
 	name       string
 	programmes []*Programme
 }
-
-// TODO - Add newCategory method.
-// TODO - Add programmes method for mainCategoryDocument.
+// TODO - add map for already visited programme sites.
+// TODO - implement seenprogramme method.
 type mainCategoryDocument struct {
 	maindoc  *iplayerDocument
 	nextdocs []*iplayerDocument
