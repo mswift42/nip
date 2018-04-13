@@ -2,6 +2,7 @@ package tv
 
 import (
 	"github.com/mswift42/goquery"
+	"sync"
 )
 
 type BeebURL string
@@ -122,7 +123,7 @@ type Category struct {
 	programmes []*Programme
 }
 // TODO - add map for already visited programme sites.
-// TODO - implement seenprogramme method.
+// TODO - implement seenprogramme method
 type mainCategoryDocument struct {
 	maindoc  *iplayerDocument
 	nextdocs []*iplayerDocument
@@ -137,6 +138,8 @@ func (mcd *mainCategoryDocument) programmes() []*Programme {
 	}
 	return results
 }
+var seen = make(map[Pager]bool)
+var mutex = &sync.Mutex{}
 
 func (id *iplayerDocument) mainDoc() *iplayerDocument {
 	return id
