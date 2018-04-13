@@ -130,9 +130,15 @@ type mainCategoryDocument struct {
 	selectionresults []*iplayerSelectionResult
 }
 // TODO - Implement programmes method.
-//func (mcd *mainCategoryDocument) programmes() []*Programme {
-//
-//}
+func (mcd *mainCategoryDocument) programmes() []*Programme {
+	var results []*Programme
+	for _, i := range mcd.selectionresults {
+		if i.prog != nil {
+			results = append(results, i.prog)
+		}
+	}
+	return results
+}
 
 func (id *iplayerDocument) mainDoc() *iplayerDocument {
 	return id
