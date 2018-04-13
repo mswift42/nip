@@ -129,7 +129,6 @@ type mainCategoryDocument struct {
 	nextdocs []*iplayerDocument
 	selectionresults []*iplayerSelectionResult
 }
-// TODO - Implement programmes method.
 func (mcd *mainCategoryDocument) programmes() []*Programme {
 	var results []*Programme
 	for _, i := range mcd.selectionresults {

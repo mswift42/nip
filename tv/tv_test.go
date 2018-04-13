@@ -92,3 +92,4 @@ func TestNewMainCategory(t *testing.T) {
 		t.Error("Expected length of programmes to be 22, got: ", len(progs))
 	}
 }
+// TODO - Update testhtml pages for food section with all programpages.
