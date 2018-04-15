@@ -91,5 +91,20 @@ func TestNewMainCategory(t *testing.T) {
 	if len(progs) != 22 {
 		t.Error("Expected length of programmes to be 22, got: ", len(progs))
 	}
+	url = TestHTMLURL("testhtml/food1.html")
+	go url.loadDocument(c)
+	docres = <-c
+	tid = TestIplayerDocument{docres.idoc}
+	nmd = newMainCategory(&tid)
+	fp = nmd.maindoc
+	if fp == nil {
+		t.Error("Expected maindocument not to be nil, got: ", fp)
+	}
+	if len(nmd.selectionresults) != 24 {
+		t.Error("Expected length of selectionresuts to be 24, got: ", len(nmd.selectionresults))
+	}
+	progs =  nmd.programmes()
+	if len(progs) != 24 {
+		t.Error("Expected length of programmes to be 24, got: ", len(progs))
+	}
 }
-// TODO - Update testhtml pages for food section with all programpages.
