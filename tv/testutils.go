@@ -37,8 +37,8 @@ func (tid *TestIplayerDocument) programPages() ([]Pager, []*iplayerSelectionResu
 	var urls []Pager
 	urls = append(urls, tid.nextPages()...)
 	np := collectPages(urls)
-	docs := documentsFromResults(np)
-	docs = append(docs, &tid.idoc)
+	docs := []*iplayerDocument{&tid.idoc}
+	docs = append(docs, documentsFromResults(np)...)
 	var selres []*iplayerSelectionResult
 	for _, i := range docs {
 		isel := iplayerSelection{i.doc.Find(".list-item-inner")}
