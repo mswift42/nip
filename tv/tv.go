@@ -211,12 +211,16 @@ func newMainCategory(np NextPager) *mainCategoryDocument {
 func collectPages(urls []Pager) []*iplayerDocumentResult {
 	var results []*iplayerDocumentResult
 	c := make(chan *iplayerDocumentResult)
+	jobs := 0
 	for _, i := range urls {
-		go func(u Pager) {
-			u.loadDocument(c)
-		}(i)
+		if !seenLink(i) {
+			jobs++
+			go func(u Pager) {
+				u.loadDocument(c)
+			}(i)
+		}
 	}
-	for i := 0; i < len(urls); i++ {
+	for i := 0; i < jobs; i++ {
 //func (mcd *mainCategoryDocument) programmes() []*Programme {
 		results = append(results, <-c)
 	}
