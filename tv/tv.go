@@ -122,6 +122,16 @@ type iplayerDocumentResult struct {
 type programPage struct {
 	doc *iplayerDocument
 }
+
+func (pp *programPage) programmes() []*Programme {
+	var results []*Programme
+	pp.doc.doc.Find(".list-item-inner").Each(func(i int, s *goquery.Selection) {
+		isel := newIplayerSelection(s)
+		results = append(results, isel.programme())
+	})
+	return results
+}
+
 type Category struct {
 	name       string
 	programmes []*Programme
