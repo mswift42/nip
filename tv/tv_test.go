@@ -108,3 +108,19 @@ func TestNewMainCategory(t *testing.T) {
 		t.Error("Expected length of programmes to be 24, got: ", len(progs))
 	}
 }
+
+func TestProgramPage(t *testing.T) {
+	url := TestHTMLURL("testhtml/food1.html")
+	c := make(chan *iplayerDocumentResult)
+	go url.loadDocument(c)
+	docres := <-c
+	tid := TestIplayerDocument{docres.idoc}
+	nmd := newMainCategory(&tid)
+	pp := programPage{nmd.nextdocs[2]}
+	progs := pp.programmes()
+	if progs[0].Title != "" {
+		t.Error("Expected title to be, got: ", progs[0].Title)
+	}
+
+
+}
