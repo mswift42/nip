@@ -84,8 +84,8 @@ func TestNewMainCategory(t *testing.T) {
 	if fp == nil {
 		t.Error("Expected maindocument not be nil, got: ", fp)
 	}
-	if len(nmd.selectionresults) != 24 {
-		t.Error("Expected length of nextdocs to be 24, got: ", len(nmd.selectionresults))
+	if len(nmd.selectionresults) != 20 {
+		t.Error("Expected length of selectionresults to be 20, got: ", len(nmd.selectionresults))
 	}
 	progs := nmd.programmes()
 	if len(progs) != 22 {

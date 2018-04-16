@@ -118,17 +118,23 @@ type iplayerDocumentResult struct {
 	idoc  iplayerDocument
 	Error error
 }
+
+type programPage struct {
+	doc *iplayerDocument
+}
 type Category struct {
 	name       string
 	programmes []*Programme
 }
+
 // TODO - add map for already visited programme sites.
 // TODO - implement seenprogramme method
 type mainCategoryDocument struct {
-	maindoc  *iplayerDocument
-	nextdocs []*iplayerDocument
+	maindoc          *iplayerDocument
+	nextdocs         []*iplayerDocument
 	selectionresults []*iplayerSelectionResult
 }
+
 func (mcd *mainCategoryDocument) programmes() []*Programme {
 	var results []*Programme
 	for _, i := range mcd.selectionresults {
@@ -136,18 +142,16 @@ func (mcd *mainCategoryDocument) programmes() []*Programme {
 			results = append(results, i.prog)
 		}
 	}
-	for _, i := range mcd.nextdocs {
-
-	}
 	return results
 }
+
 var seen = make(map[Pager]bool)
 var mutex = &sync.Mutex{}
 
 func seenLink(p Pager) bool {
 	mutex.Lock()
 	if !seen[p] {
-		seen[s] = true
+		seen[p] = true
 		mutex.Unlock()
 		return false
 	}
@@ -198,14 +202,14 @@ func documentsFromResults(docres []*iplayerDocumentResult) []*iplayerDocument {
 
 func newMainCategory(np NextPager) *mainCategoryDocument {
 	var pages []*iplayerDocument
-	pp, selres  := np.programPages()
+	pp, selres := np.programPages()
 	progPages := collectPages(pp)
 	for _, i := range progPages {
 		if i.Error == nil {
 			pages = append(pages, &i.idoc)
 		}
 	}
-	return &mainCategoryDocument{np.mainDoc(), pages, selres }
+	return &mainCategoryDocument{np.mainDoc(), pages, selres}
 }
 
 func collectPages(urls []Pager) []*iplayerDocumentResult {
@@ -221,7 +225,7 @@ func collectPages(urls []Pager) []*iplayerDocumentResult {
 		}
 	}
 	for i := 0; i < jobs; i++ {
-//func (mcd *mainCategoryDocument) programmes() []*Programme {
+		//func (mcd *mainCategoryDocument) programmes() []*Programme {
 		results = append(results, <-c)
 	}
 	return results
