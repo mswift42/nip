@@ -72,6 +72,16 @@ func TestCollectPages(t *testing.T) {
 	}
 }
 
+func TestProgramPage(t *testing.T) {
+	url := TestHTMLURL("testhtml/classic_mary_berry.html")
+	c := make(chan *iplayerDocumentResult)
+	go url.loadDocument(c)
+	docres := <-c
+	if docres.Error != nil {
+		t.Error("Expected document to load without error, git: ", docres.Error)
+	}
+}
+
 func TestNewMainCategory(t *testing.T) {
 	url := TestHTMLURL("testhtml/films1.html")
 	c := make(chan *iplayerDocumentResult)
@@ -90,43 +100,5 @@ func TestNewMainCategory(t *testing.T) {
 	if len(progs) == 0 {
 		t.Error("Expected length of programmes > 0, got: ", len(progs))
 	}
-	fp := nmd.maindoc
-	if fp == nil {
-		t.Error("Expected maindocument not be nil, got: ", fp)
-	}
-	if len(nmd.selectionresults) != 20 {
-		t.Error("Expected length of selectionresults to be 20, got: ", len(nmd.selectionresults))
-	}
-	progs = nmd.programmes()
-	if len(progs) != 22 {
-		t.Error("Expected length of programmes to be 22, got: ", len(progs))
-	}
-	url = TestHTMLURL("testhtml/food1.html")
-	go url.loadDocument(c)
-	docres = <-c
-	tid = TestIplayerDocument{docres.idoc}
-	nmd = newMainCategory(&tid)
-	fp = nmd.maindoc
-	if fp == nil {
-		t.Error("Expected maindocument not to be nil, got: ", fp)
-	}
-	if len(nmd.selectionresults) != 24 {
-		t.Error("Expected length of selectionresuts to be 24, got: ", len(nmd.selectionresults))
-	}
-	progs =  nmd.programmes()
-	if len(progs) != 24 {
-		t.Error("Expected length of programmes to be 24, got: ", len(progs))
-	}
 }
 
-//func TestProgramPage(t *testing.T) {
-//	url := TestHTMLURL("testhtml/food1.html")
-//	c := make(chan *iplayerDocumentResult)
-//	go url.loadDocument(c)
-//	docres := <-c
-//	tid := TestIplayerDocument{docres.idoc}
-//	nmd := newMainCategory(&tid)
-//	if len(nmd.nextdocs) == 0 {
-//		t.Error("length of nextdocs should be > 0, got: ", len(nmd.nextdocs))
-//	}
-//}
