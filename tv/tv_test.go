@@ -82,6 +82,14 @@ func TestNewMainCategory(t *testing.T) {
 	}
 	tid := TestIplayerDocument{docres.idoc}
 	nmd := newMainCategory(&tid)
+	if len(nmd.nextdocs) != 2 {
+		t.Error("Expected length of nextdocs to be 2, got: ", len(nmd.nextdocs))
+	}
+	pp := programPage{nmd.nextdocs[1]}
+	progs := pp.programmes()
+	if len(progs) == 0 {
+		t.Error("Expected length of programmes > 0, got: ", len(progs))
+	}
 	fp := nmd.maindoc
 	if fp == nil {
 		t.Error("Expected maindocument not be nil, got: ", fp)
@@ -89,7 +97,7 @@ func TestNewMainCategory(t *testing.T) {
 	if len(nmd.selectionresults) != 20 {
 		t.Error("Expected length of selectionresults to be 20, got: ", len(nmd.selectionresults))
 	}
-	progs := nmd.programmes()
+	progs = nmd.programmes()
 	if len(progs) != 22 {
 		t.Error("Expected length of programmes to be 22, got: ", len(progs))
 	}
@@ -111,14 +119,14 @@ func TestNewMainCategory(t *testing.T) {
 	}
 }
 
-func TestProgramPage(t *testing.T) {
-	url := TestHTMLURL("testhtml/food1.html")
-	c := make(chan *iplayerDocumentResult)
-	go url.loadDocument(c)
-	docres := <-c
-	tid := TestIplayerDocument{docres.idoc}
-	nmd := newMainCategory(&tid)
-	if len(nmd.nextdocs) == 0 {
-		t.Error("length of nextdocs should be > 0, got: ", len(nmd.nextdocs))
-	}
-}
+//func TestProgramPage(t *testing.T) {
+//	url := TestHTMLURL("testhtml/food1.html")
+//	c := make(chan *iplayerDocumentResult)
+//	go url.loadDocument(c)
+//	docres := <-c
+//	tid := TestIplayerDocument{docres.idoc}
+//	nmd := newMainCategory(&tid)
+//	if len(nmd.nextdocs) == 0 {
+//		t.Error("length of nextdocs should be > 0, got: ", len(nmd.nextdocs))
+//	}
+//}
