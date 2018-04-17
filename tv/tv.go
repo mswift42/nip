@@ -3,6 +3,7 @@ package tv
 import (
 	"github.com/mswift42/goquery"
 	"sync"
+	"fmt"
 )
 
 type BeebURL string
@@ -211,15 +212,19 @@ func documentsFromResults(docres []*iplayerDocumentResult) []*iplayerDocument {
 }
 
 func newMainCategory(np NextPager) *mainCategoryDocument {
-	var pages []*iplayerDocument
+	var nextdocs []*iplayerDocument
 	pp, selres := np.programPages()
 	progPages := collectPages(pp)
 	for _, i := range progPages {
-		if i.Error == nil {
-			pages = append(pages, &i.idoc)
+		if &i.idoc != nil {
+			nextdocs = append(nextdocs, &i.idoc)
 		}
 	}
-	return &mainCategoryDocument{np.mainDoc(), pages, selres}
+	// 	fmt.Println(nextdocs)
+	am := mainCategoryDocument{np.mainDoc(), nextdocs, selres}
+	fmt.Println("mcd.maindoc: ", am.maindoc)
+	fmt.Println("mcd.nextdocs: ", am.nextdocs)
+	return &mainCategoryDocument{np.mainDoc(), nextdocs, selres}
 }
 
 func collectPages(urls []Pager) []*iplayerDocumentResult {

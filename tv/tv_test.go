@@ -2,7 +2,6 @@ package tv
 
 import (
 	"testing"
-	"fmt"
 )
 
 func TestLoadingDocument(t *testing.T) {
@@ -119,5 +118,7 @@ func TestProgramPage(t *testing.T) {
 	docres := <-c
 	tid := TestIplayerDocument{docres.idoc}
 	nmd := newMainCategory(&tid)
-	fmt.Println(nmd)
+	if len(nmd.nextdocs) == 0 {
+		t.Error("length of nextdocs should be > 0, got: ", len(nmd.nextdocs))
+	}
 }
