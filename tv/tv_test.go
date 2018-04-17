@@ -1,6 +1,9 @@
 package tv
 
-import "testing"
+import (
+	"testing"
+	"fmt"
+)
 
 func TestLoadingDocument(t *testing.T) {
 	url := TestHTMLURL("testhtml/food1.html")
@@ -37,8 +40,8 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if progpage.prog != nil {
 		t.Error("Expected proramme to be nil: ", progpage.prog)
 	}
-	if progpage.programPage != "adam_curtis.html" {
-		t.Error("Expected program Page to be 'adam_curtis.html' not: ", progpage.programPage)
+	if progpage.programPage != "testhtml/adam_curtis.html" {
+		t.Error("Expected program Page to be 'testhtml/adam_curtis.html' not: ", progpage.programPage)
 	}
 	if selres[1].prog.Title != "A Hijacking" {
 		t.Error("Expected second programme title to be 'A Hijacking', got: ", selres[1].prog.Title)
@@ -116,11 +119,5 @@ func TestProgramPage(t *testing.T) {
 	docres := <-c
 	tid := TestIplayerDocument{docres.idoc}
 	nmd := newMainCategory(&tid)
-	pp := programPage{nmd.nextdocs[2]}
-	progs := pp.programmes()
-	if progs[0].Title != "" {
-		t.Error("Expected title to be, got: ", progs[0].Title)
-	}
-
-
+	fmt.Println(nmd)
 }
