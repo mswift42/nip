@@ -125,12 +125,26 @@ type programPage struct {
 }
 
 func (pp *programPage) programmes() []*Programme {
+	fmt.Println("programpage: ", pp.doc)
 	var results []*Programme
-	pp.doc.doc.Find(".list-item-inner").Each(func(i int, s *goquery.Selection) {
+	title := pp.doc.doc.Find(".hero-header__title").Text()
+	fmt.Println(title)
+	pp.doc.doc.Find(".content-item").Each(func(i int, s *goquery.Selection) {
 		isel := newIplayerSelection(s)
+		fmt.Println("Printing title: ", isel.title())
+		fmt.Println(s.Find(".content-item__title").Text())
+		fmt.Println(s.Find(".3"))
 		results = append(results, isel.programme())
 	})
 	return results
+}
+
+func newProgrammeFromProgramPage(title string, s *goquery.Selection) *Programme {
+ 	sutitle := s.Find(".content-item__title").Text()
+ 	synopsis := s.Find(".content-item__description").Text()
+ 	url := s.Find("href").AttrOr("href", "")
+ 	thumbnail := s.Find(".rs-image > source").AttrOr("srcset", "")
+ 	pid :=
 }
 
 type Category struct {
@@ -220,10 +234,7 @@ func newMainCategory(np NextPager) *mainCategoryDocument {
 			nextdocs = append(nextdocs, &i.idoc)
 		}
 	}
-	// 	fmt.Println(nextdocs)
-	am := mainCategoryDocument{np.mainDoc(), nextdocs, selres}
-	fmt.Println("mcd.maindoc: ", am.maindoc)
-	fmt.Println("mcd.nextdocs: ", am.nextdocs)
+	fmt.Println("Outer loop: Nextdocs: ", nextdocs)
 	return &mainCategoryDocument{np.mainDoc(), nextdocs, selres}
 }
 
