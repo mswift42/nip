@@ -140,11 +140,11 @@ func (pp *programPage) programmes() []*Programme {
 }
 
 func newProgrammeFromProgramPage(title string, s *goquery.Selection) *Programme {
- 	sutitle := s.Find(".content-item__title").Text()
+ 	subtitle := s.Find(".content-item__title").Text()
  	synopsis := s.Find(".content-item__description").Text()
  	url := s.Find("href").AttrOr("href", "")
  	thumbnail := s.Find(".rs-image > source").AttrOr("srcset", "")
- 	pid :=
+ 	return &Programme{title, subtitle, synopsis, "", thumbnail, url, 0}
 }
 
 type Category struct {
