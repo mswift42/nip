@@ -113,6 +113,9 @@ func TestProgramPage(t *testing.T) {
 	if p1.URL != "/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6" {
 		t.Error("Expected url to '/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6', got: ", p1.URL)
 	}
+	if p1.Thumbnail != "https://ichef.bbci.co.uk/images/ic/784x441/p05yp36d.jpg" {
+		t.Error("Expected imageurl to be 'https://ichef.bbci.co.uk/images/ic/784x441/p05yp36d.jpg', got: ", p1.Thumbnail)
+	}
 }
 
 func TestNewMainCategory(t *testing.T) {

@@ -129,18 +129,23 @@ func (pp *programPage) programmes() []*Programme {
 	var results []*Programme
 	title := pp.doc.doc.Find(".hero-header__title").Text()
 	pp.doc.doc.Find(".content-item").Each(func(i int, s *goquery.Selection) {
-		fmt.Println(newProgrammeFromProgramPage(title, s))
+// 		fmt.Printf("Printing srcSet: %v", s.Find(".rs-image > picture").First().Html())
+		html, err := s.Find(".rs-image > picture").First().Html()
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(html)
 		results = append(results, newProgrammeFromProgramPage(title, s))
 	})
 	return results
 }
 
 func newProgrammeFromProgramPage(title string, s *goquery.Selection) *Programme {
- 	subtitle := s.Find(".content-item__title").Text()
- 	synopsis := s.Find(".content-item__info__secondary > .content-item__description").Text()
- 	url := s.Find("a").AttrOr("href", "")
- 	thumbnail := s.Find(".rs-image > source").AttrOr("srcset", "")
- 	return &Programme{title, subtitle, synopsis, "", thumbnail, url, 0}
+	subtitle := s.Find(".content-item__title").Text()
+	synopsis := s.Find(".content-item__info__secondary > .content-item__description").Text()
+	url := s.Find("a").AttrOr("href", "")
+	thumbnail := s.Find(".rs-image > picture > source").AttrOr("srcSet", "")
+	return &Programme{title, subtitle, synopsis, "", thumbnail, url, 0}
 }
 
 type Category struct {
