@@ -230,7 +230,6 @@ func newMainCategory(np NextPager) *mainCategoryDocument {
 			nextdocs = append(nextdocs, &i.idoc)
 		}
 	}
-	fmt.Println("Outer loop: Nextdocs: ", nextdocs)
 	return &mainCategoryDocument{np.mainDoc(), nextdocs, selres}
 }
 
