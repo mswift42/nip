@@ -128,13 +128,9 @@ func (pp *programPage) programmes() []*Programme {
 	fmt.Println("programpage: ", pp.doc)
 	var results []*Programme
 	title := pp.doc.doc.Find(".hero-header__title").Text()
-	fmt.Println(title)
 	pp.doc.doc.Find(".content-item").Each(func(i int, s *goquery.Selection) {
-		isel := newIplayerSelection(s)
-		fmt.Println("Printing title: ", isel.title())
-		fmt.Println(s.Find(".content-item__title").Text())
-		fmt.Println(s.Find(".3"))
-		results = append(results, isel.programme())
+		fmt.Println(newProgrammeFromProgramPage(title, s))
+		results = append(results, newProgrammeFromProgramPage(title, s))
 	})
 	return results
 }
