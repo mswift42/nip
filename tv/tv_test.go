@@ -91,12 +91,16 @@ func TestCollectPages(t *testing.T) {
 }
 
 func TestProgramPage(t *testing.T) {
-	url := TestHTMLURL("testhtml/classic_mary_berry.html")
-	c := make(chan *iplayerDocumentResult)
-	go url.loadDocument(c)
-	docres := <-c
-	if docres.Error != nil {
-		t.Error("Expected document to load without error, git: ", docres.Error)
+	doc := documentLoader("testhtml/classic_mary_berry.html")
+	pp := programPage{doc}
+	progs := pp.programmes()
+	if len(progs) != 6 {
+		t.Error("Expected length of programmes to be 6, got: ", len(progs))
+	}
+	for _, i := range progs {
+		if i.Title != "Classic Mary Berry" {
+			t.Error("Expected Title to be 'Classic Mary Berry, got: ", i.Title)
+		}
 	}
 }
 
