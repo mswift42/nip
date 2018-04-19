@@ -110,6 +110,9 @@ func TestProgramPage(t *testing.T) {
 	if p1.Synopsis != expected {
 		t.Error("Expected synopsis to be " + expected + " got: ", p1.Synopsis)
 	}
+	if p1.URL != "/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6" {
+		t.Error("Expected url to '/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6', got: ", p1.URL)
+	}
 }
 
 func TestNewMainCategory(t *testing.T) {

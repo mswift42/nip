@@ -138,7 +138,7 @@ func (pp *programPage) programmes() []*Programme {
 func newProgrammeFromProgramPage(title string, s *goquery.Selection) *Programme {
  	subtitle := s.Find(".content-item__title").Text()
  	synopsis := s.Find(".content-item__info__secondary > .content-item__description").Text()
- 	url := s.Find("href").AttrOr("href", "")
+ 	url := s.Find("a").AttrOr("href", "")
  	thumbnail := s.Find(".rs-image > source").AttrOr("srcset", "")
  	return &Programme{title, subtitle, synopsis, "", thumbnail, url, 0}
 }
