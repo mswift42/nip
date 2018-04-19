@@ -102,6 +102,14 @@ func TestProgramPage(t *testing.T) {
 			t.Error("Expected Title to be 'Classic Mary Berry, got: ", i.Title)
 		}
 	}
+	p1 := progs[0]
+	if p1.Subtitle != "Series 1: Episode 6" {
+		t.Error("Expected subtitle to be 'Series 1: Episode 6', got: ", p1.Subtitle)
+	}
+	expected := "Mary unleashes some of her classic favourites that have made a comeback"
+	if p1.Synopsis != expected {
+		t.Error("Expected synopsis to be " + expected + " got: ", p1.Synopsis)
+	}
 }
 
 func TestNewMainCategory(t *testing.T) {
