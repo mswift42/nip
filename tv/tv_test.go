@@ -24,7 +24,25 @@ func TestLoadingDocument(t *testing.T) {
 	if idr.idoc.doc == nil {
 		t.Error("Expected idoc not to be nil: ", idr.idoc)
 	}
+	url = TestHTMLURL("testhtml/nosuchfile.html")
+	go url.loadDocument(c)
+	idr = <-c
+	if idr.Error == nil {
+		t.Error("Expected to get error, got: ", idr.Error)
+	}
 }
+
+func documentLoader(url string) *iplayerDocument {
+	thu := TestHTMLURL(url)
+	c := make(chan *iplayerDocumentResult)
+	go thu.loadDocument(c)
+	idr := <-c
+	if idr.Error != nil {
+		panic(idr.Error)
+	}
+	return &idr.idoc
+}
+
 func TestIplayerSelectionResults(t *testing.T) {
 	url := TestHTMLURL("testhtml/films1.html")
 	c := make(chan *iplayerDocumentResult)
@@ -101,4 +119,3 @@ func TestNewMainCategory(t *testing.T) {
 		t.Error("Expected length of programmes > 0, got: ", len(progs))
 	}
 }
-
