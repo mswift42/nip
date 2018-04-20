@@ -102,6 +102,12 @@ var classic_mary = []struct {
 		"Mary unleashes some her classic favourites that have made a comeback.",
 		"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
 	},
+	{
+		"Series 1: Episode 5",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p061mhz1.jpg",
+		"Mary Berry returns to one of her most loved locations - Port Isaac in Cornwall.",
+		"https://www.bbc.co.uk/iplayer/episode/b09xsw6b/classic-mary-berry-series-1-episode-5",
+	},
 }
 
 func TestProgramPage(t *testing.T) {
@@ -116,22 +122,7 @@ func TestProgramPage(t *testing.T) {
 			t.Error("Expected Title to be 'Classic Mary Berry, got: ", i.Title)
 		}
 	}
-	p1 := progs[0]
-	if p1.Subtitle != "Series 1: Episode 6" {
-		t.Error("Expected subtitle to be 'Series 1: Episode 6', got: ", p1.Subtitle)
-	}
-	expected := "Mary unleashes some of her classic favourites that have made a comeback."
-	if p1.Synopsis != expected {
-		t.Error("Expected synopsis to be "+expected+" got: ", p1.Synopsis)
-	}
-	if p1.URL != "/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6" {
-		t.Error("Expected url to '/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6', got: ", p1.URL)
-	}
-	if p1.Thumbnail != "https://ichef.bbci.co.uk/images/ic/304x171/p062dlmz.jpg" {
-		t.Error("Expected imageurl to be 'https://ichef.bbci.co.uk/images/ic/784x441/p05yp36d.jpg', got: ", p1.Thumbnail)
-	}
 }
-
 func TestNewMainCategory(t *testing.T) {
 	url := TestHTMLURL("testhtml/films1.html")
 	c := make(chan *iplayerDocumentResult)
