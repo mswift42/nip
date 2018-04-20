@@ -122,6 +122,11 @@ func TestProgramPage(t *testing.T) {
 			t.Error("Expected Title to be 'Classic Mary Berry, got: ", i.Title)
 		}
 	}
+	for i := range classic_mary {
+		if progs[i].Subtitle != classic_mary[i].subtitle {
+			t.Error("Expected subtitle to be : " + classic_mary[i].subtitle + " got: ", progs[i].Subtitle)
+		}
+	}
 }
 func TestNewMainCategory(t *testing.T) {
 	url := TestHTMLURL("testhtml/films1.html")
