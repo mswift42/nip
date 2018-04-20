@@ -108,6 +108,12 @@ var classic_mary = []struct {
 		"Mary Berry returns to one of her most loved locations - Port Isaac in Cornwall.",
 		"https://www.bbc.co.uk/iplayer/episode/b09xsw6b/classic-mary-berry-series-1-episode-5",
 	},
+	{
+		"Series 1: Episode 4",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p06106t8.jpg",
+		"Mary has always loved entertaining and creates some timeless classics.",
+		"https://www.bbc.co.uk/iplayer/episode/b09x0tfw/classic-mary-berry-series-1-episode-4",
+	},
 }
 
 func TestProgramPage(t *testing.T) {
@@ -124,7 +130,7 @@ func TestProgramPage(t *testing.T) {
 	}
 	for i := range classic_mary {
 		if progs[i].Subtitle != classic_mary[i].subtitle {
-			t.Error("Expected subtitle to be : " + classic_mary[i].subtitle + " got: ", progs[i].Subtitle)
+			t.Error("Expected subtitle to be : "+classic_mary[i].subtitle+" got: ", progs[i].Subtitle)
 		}
 	}
 }
