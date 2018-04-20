@@ -4,6 +4,7 @@ import (
 	"github.com/mswift42/goquery"
 	"sync"
 	"fmt"
+	"strings"
 )
 
 type BeebURL string
@@ -130,11 +131,6 @@ func (pp *programPage) programmes() []*Programme {
 	title := pp.doc.doc.Find(".hero-header__title").Text()
 	pp.doc.doc.Find(".content-item").Each(func(i int, s *goquery.Selection) {
 // 		fmt.Printf("Printing srcSet: %v", s.Find(".rs-image > picture").First().Html())
-		html, err := s.Find(".rs-image > picture").First().Html()
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println(html)
 		results = append(results, newProgrammeFromProgramPage(title, s))
 	})
 	return results
@@ -144,8 +140,15 @@ func newProgrammeFromProgramPage(title string, s *goquery.Selection) *Programme 
 	subtitle := s.Find(".content-item__title").Text()
 	synopsis := s.Find(".content-item__info__secondary > .content-item__description").Text()
 	url := s.Find("a").AttrOr("href", "")
-	thumbnail := s.Find(".rs-image > picture > source").AttrOr("srcSet", "")
+	// thumbnail := iplayerSelection{s}.extractThumbnail()
+	sel := iplayerSelection{s}
+	thumbnail := sel.extractThumbnail()
 	return &Programme{title, subtitle, synopsis, "", thumbnail, url, 0}
+}
+
+func (is *iplayerSelection) extractThumbnail() string {
+	set := is.sel.Find(".rs-image > picture > source").AttrOr("srcset", "")
+	return strings.Split(set, " ")[0]
 }
 
 type Category struct {
