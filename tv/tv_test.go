@@ -99,20 +99,20 @@ var classic_mary = []struct {
 	{
 		"Series 1: Episode 6",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p062dlmz.jpg",
-		"Mary unleashes some her classic favourites that have made a comeback.",
+		"Mary unleashes some of her classic favourites that have made a comeback.",
 		"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
 	},
 	{
 		"Series 1: Episode 5",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p061mhz1.jpg",
 		"Mary Berry returns to one of her most loved locations - Port Isaac in Cornwall.",
-		"https://www.bbc.co.uk/iplayer/episode/b09xsw6b/classic-mary-berry-series-1-episode-5",
+		"/iplayer/episode/b09xsw6b/classic-mary-berry-series-1-episode-5",
 	},
 	{
 		"Series 1: Episode 4",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p06106t8.jpg",
 		"Mary has always loved entertaining and creates some timeless classics.",
-		"https://www.bbc.co.uk/iplayer/episode/b09x0tfw/classic-mary-berry-series-1-episode-4",
+		"/iplayer/episode/b09x0tfw/classic-mary-berry-series-1-episode-4",
 	},
 }
 
@@ -131,6 +131,12 @@ func TestProgramPage(t *testing.T) {
 	for i := range classic_mary {
 		if progs[i].Subtitle != classic_mary[i].subtitle {
 			t.Error("Expected subtitle to be : "+classic_mary[i].subtitle+" got: ", progs[i].Subtitle)
+		}
+		if progs[i].Synopsis != classic_mary[i].synopsis {
+			t.Error("Expected synopsis to be : "+classic_mary[i].synopsis+" gog: ", progs[i].Synopsis)
+		}
+		if progs[i].URL != classic_mary[i].url {
+			t.Error("Expected url to be: " + classic_mary[i].url + " got: ", progs[i].URL)
 		}
 	}
 }
