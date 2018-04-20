@@ -90,6 +90,20 @@ func TestCollectPages(t *testing.T) {
 	}
 }
 
+var classic_mary = []struct {
+	subtitle  string
+	thumbnail string
+	synopsis  string
+	url       string
+}{
+	{
+		"Series 1: Episode 6",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p062dlmz.jpg",
+		"Mary unleashes some her classic favourites that have made a comeback.",
+		"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
+	},
+}
+
 func TestProgramPage(t *testing.T) {
 	doc := documentLoader("testhtml/classic_mary_berry.html")
 	pp := programPage{doc}
@@ -108,7 +122,7 @@ func TestProgramPage(t *testing.T) {
 	}
 	expected := "Mary unleashes some of her classic favourites that have made a comeback."
 	if p1.Synopsis != expected {
-		t.Error("Expected synopsis to be " + expected + " got: ", p1.Synopsis)
+		t.Error("Expected synopsis to be "+expected+" got: ", p1.Synopsis)
 	}
 	if p1.URL != "/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6" {
 		t.Error("Expected url to '/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6', got: ", p1.URL)
