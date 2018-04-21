@@ -114,6 +114,18 @@ var classic_mary = []struct {
 		"Mary has always loved entertaining and creates some timeless classics.",
 		"/iplayer/episode/b09x0tfw/classic-mary-berry-series-1-episode-4",
 	},
+	{
+		"Series 1: Episode 3",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p06084xr.jpg",
+		"Mary embraces the countryside with cooking inspired by food grown on farms and in gardens.",
+		"/iplayer/episode/b09w3ynk/classic-mary-berry-series-1-episode-3",
+	},
+	{
+		"Series 1: Episode 2",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p05zf2vg.jpg",
+		"Mary Berry takes inspiration from a visit to a groundbreaking primary school in London.",
+		"/iplayer/episode/b09vfd5d/classic-mary-berry-series-1-episode-2",
+	},
 }
 
 func TestProgramPage(t *testing.T) {
@@ -136,7 +148,7 @@ func TestProgramPage(t *testing.T) {
 			t.Error("Expected synopsis to be : "+classic_mary[i].synopsis+" gog: ", progs[i].Synopsis)
 		}
 		if progs[i].URL != classic_mary[i].url {
-			t.Error("Expected url to be: " + classic_mary[i].url + " got: ", progs[i].URL)
+			t.Error("Expected url to be: "+classic_mary[i].url+" got: ", progs[i].URL)
 		}
 	}
 }
