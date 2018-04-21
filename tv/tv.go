@@ -130,7 +130,6 @@ func (pp *programPage) programmes() []*Programme {
 	var results []*Programme
 	title := pp.doc.doc.Find(".hero-header__title").Text()
 	pp.doc.doc.Find(".content-item").Each(func(i int, s *goquery.Selection) {
-// 		fmt.Printf("Printing srcSet: %v", s.Find(".rs-image > picture").First().Html())
 		results = append(results, newProgrammeFromProgramPage(title, s))
 	})
 	return results
@@ -140,7 +139,6 @@ func newProgrammeFromProgramPage(title string, s *goquery.Selection) *Programme 
 	subtitle := s.Find(".content-item__title").Text()
 	synopsis := s.Find(".content-item__info__secondary > .content-item__description").Text()
 	url := s.Find("a").AttrOr("href", "")
-	// thumbnail := iplayerSelection{s}.extractThumbnail()
 	sel := iplayerSelection{s}
 	thumbnail := sel.extractThumbnail()
 	return &Programme{title, subtitle, synopsis, "", thumbnail, url, 0}
