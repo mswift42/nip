@@ -124,7 +124,7 @@ var classic_mary = []struct {
 		"Series 1: Episode 2",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p05zf2vg.jpg",
 		"Mary Berry takes inspiration from a visit to a groundbreaking primary school in London.",
-		"/iplayer/episode/b09vfd5d/classic-mary-berry-series-1-episode-2",
+		"/iplayer/episode/b09vfd5d/ad/classic-mary-berry-series-1-episode-2",
 	},
 }
 
