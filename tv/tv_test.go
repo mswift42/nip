@@ -126,6 +126,12 @@ var classic_mary = []struct {
 		"Mary Berry takes inspiration from a visit to a groundbreaking primary school in London.",
 		"/iplayer/episode/b09vfd5d/ad/classic-mary-berry-series-1-episode-2",
 	},
+	{
+		"Series 1: Episode 1",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p05yp3kv.jpg",
+		"Mary Berry indulges her love of comfort food with homely recipes.",
+		"/iplayer/episode/b09tp4ff/ad/classic-mary-berry-series-1-episode-1",
+	},
 }
 
 func TestProgramPage(t *testing.T) {
