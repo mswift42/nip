@@ -174,7 +174,7 @@ func (mcd *mainCategoryDocument) programmes() []*Programme {
 
 var seen = make(map[Pager]bool)
 var mutex = &sync.Mutex{}
-
+// TODO - replace with map from sync package.
 func seenLink(p Pager) bool {
 	mutex.Lock()
 	if !seen[p] {

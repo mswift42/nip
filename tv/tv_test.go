@@ -159,6 +159,7 @@ func TestProgramPage(t *testing.T) {
 	}
 }
 func TestNewMainCategory(t *testing.T) {
+	// TODO - use documentloader helper method.
 	url := TestHTMLURL("testhtml/films1.html")
 	c := make(chan *iplayerDocumentResult)
 	go url.loadDocument(c)
