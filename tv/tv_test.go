@@ -69,14 +69,8 @@ func TestIplayerSelectionResults(t *testing.T) {
 }
 
 func TestCollectPages(t *testing.T) {
-	url := TestHTMLURL("testhtml/films1.html")
-	c := make(chan *iplayerDocumentResult)
-	go url.loadDocument(c)
-	docres := <-c
-	if docres.Error != nil {
-		t.Error("Expected error in documentresult to be nil, got: ", docres.Error)
-	}
-	tid := TestIplayerDocument{docres.idoc}
+	doc := documentLoader("testhtml/films1.html")
+	tid := TestIplayerDocument{doc}
 	np := tid.nextPages()
 	if len(np) != 1 {
 		t.Error("Expected length of nextPages to be 1, got: ", len(np))
@@ -90,7 +84,7 @@ func TestCollectPages(t *testing.T) {
 	}
 }
 
-var classic_mary = []struct {
+var classicMary = []struct {
 	subtitle  string
 	thumbnail string
 	synopsis  string
@@ -146,20 +140,20 @@ func TestProgramPage(t *testing.T) {
 			t.Error("Expected Title to be 'Classic Mary Berry, got: ", i.Title)
 		}
 	}
-	for i := range classic_mary {
-		if progs[i].Subtitle != classic_mary[i].subtitle {
-			t.Error("Expected subtitle to be : "+classic_mary[i].subtitle+" got: ", progs[i].Subtitle)
+	for i := range classicMary {
+		if progs[i].Subtitle != classicMary[i].subtitle {
+			t.Error("Expected subtitle to be : "+classicMary[i].subtitle+" got: ", progs[i].Subtitle)
 		}
-		if progs[i].Synopsis != classic_mary[i].synopsis {
-			t.Error("Expected synopsis to be : "+classic_mary[i].synopsis+" gog: ", progs[i].Synopsis)
+		if progs[i].Synopsis != classicMary[i].synopsis {
+			t.Error("Expected synopsis to be : "+classicMary[i].synopsis+" gog: ", progs[i].Synopsis)
 		}
-		if progs[i].URL != classic_mary[i].url {
-			t.Error("Expected url to be: "+classic_mary[i].url+" got: ", progs[i].URL)
+		if progs[i].URL != classicMary[i].url {
+			t.Error("Expected url to be: "+classicMary[i].url+" got: ", progs[i].URL)
 		}
 	}
 }
 func TestNewMainCategory(t *testing.T) {
-	doc := documentLoader("testhtml/fiilms1.html")
+	doc := documentLoader("testhtml/films1.html")
 	tid := TestIplayerDocument{doc}
 	nmd := newMainCategory(&tid)
 	if len(nmd.nextdocs) != 2 {
