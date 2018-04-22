@@ -159,15 +159,8 @@ func TestProgramPage(t *testing.T) {
 	}
 }
 func TestNewMainCategory(t *testing.T) {
-	// TODO - use documentloader helper method.
-	url := TestHTMLURL("testhtml/films1.html")
-	c := make(chan *iplayerDocumentResult)
-	go url.loadDocument(c)
-	docres := <-c
-	if docres.Error != nil {
-		t.Error("Expected error in documentresult to be nil, got: ", docres.Error)
-	}
-	tid := TestIplayerDocument{docres.idoc}
+	doc := documentLoader("testhtml/fiilms1.html")
+	tid := TestIplayerDocument{doc}
 	nmd := newMainCategory(&tid)
 	if len(nmd.nextdocs) != 2 {
 		t.Error("Expected length of nextdocs to be 2, got: ", len(nmd.nextdocs))
