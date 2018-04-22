@@ -9,7 +9,7 @@ import (
 
 type TestHTMLURL string
 type TestIplayerDocument struct {
-	idoc iplayerDocument
+	idoc *iplayerDocument
 }
 
 func (thu TestHTMLURL) loadDocument(c chan<- *iplayerDocumentResult) {
@@ -37,7 +37,7 @@ func (tid *TestIplayerDocument) programPages() ([]Pager, []*iplayerSelectionResu
 	var urls []Pager
 	urls = append(urls, tid.nextPages()...)
 	np := collectPages(urls)
-	docs := []*iplayerDocument{&tid.idoc}
+	docs := []*iplayerDocument{tid.idoc}
 	docs = append(docs, documentsFromResults(np)...)
 	var selres []*iplayerSelectionResult
 	for _, i := range docs {
@@ -53,5 +53,5 @@ func (tid *TestIplayerDocument) programPages() ([]Pager, []*iplayerSelectionResu
 }
 
 func (tid *TestIplayerDocument) mainDoc() *iplayerDocument {
-	return &tid.idoc
+	return tid.idoc
 }
