@@ -172,19 +172,21 @@ func (mcd *mainCategoryDocument) programmes() []*Programme {
 	return results
 }
 
-var seen = make(map[Pager]bool)
-var mutex = &sync.Mutex{}
+//var seen = make(map[Pager]bool)
+//var mutex = &sync.Mutex{}
 // TODO - replace with map from sync package.
-func seenLink(p Pager) bool {
-	mutex.Lock()
-	if !seen[p] {
-		seen[p] = true
-		mutex.Unlock()
-		return false
-	}
-	mutex.Unlock()
-	return true
-}
+var seen = &sync.Map{}
+//func seenLink(p Pager) bool {
+//	mutex.Lock()
+//	if !seen[p] {
+//		seen[p] = true
+//		mutex.Unlock()
+//		return false
+//	}
+//	mutex.Unlock()
+//	return true
+//}
+
 
 func (id *iplayerDocument) mainDoc() *iplayerDocument {
 	return id
@@ -244,7 +246,9 @@ func collectPages(urls []Pager) []*iplayerDocumentResult {
 	c := make(chan *iplayerDocumentResult)
 	jobs := 0
 	for _, i := range urls {
-		if !seenLink(i) {
+		_, ok := seen.LoadOrStore(i, true)
+		if !ok {
+
 			jobs++
 			go func(u Pager) {
 				u.loadDocument(c)
