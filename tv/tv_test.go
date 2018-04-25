@@ -164,6 +164,9 @@ func TestNewMainCategory(t *testing.T) {
 	if !contains(progs, "/iplayer/episode/b041ycwk/a-hijacking") {
 		t.Error("Expected programmes to contain url of A Hijacking.")
 	}
+	if !contains(progs, "/iplayer/episode/b052vb0d/storyville-love-is-all-100-years-of-love-and-courtship") {
+		t.Error("Expected programmes to contain url of storyville: love is all...")
+	}
 	doc = documentLoader("testhtml/food1.html")
 	tid  = TestIplayerDocument{doc}
 	nmd = newMainCategory(&tid)
