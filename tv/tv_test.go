@@ -164,7 +164,10 @@ func TestNewMainCategory(t *testing.T) {
 	if len(progs) == 0 {
 		t.Error("Expected length of programmes > 0, got: ", len(progs))
 	}
-
+	progs = nmd.programmes()
+	if len(progs) != 28 {
+		t.Error("Expected length of programmes for nmd to be 28, got: ", len(progs))
+	}
 	doc = documentLoader("testhtml/food1.html")
 	tid  = TestIplayerDocument{doc}
 	nmd = newMainCategory(&tid)
