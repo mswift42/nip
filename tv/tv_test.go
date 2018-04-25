@@ -157,6 +157,18 @@ var filmurls = []struct {
 	{
 		"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
 	},
+	{
+		"/iplayer/episode/b037nqvz/strawberry-fields",
+	},
+	{
+	"/iplayer/episode/b01q0k5b/wallace-and-gromit-a-close-shave",
+	},
+	{
+		"/iplayer/episode/b08nfjwt/wallace-and-gromit-the-wrong-trousers",
+	},
+	{
+	"/iplayer/episode/b018ycwz/the-young-victoria",
+	},
 }
 
 func TestNewMainCategory(t *testing.T) {
