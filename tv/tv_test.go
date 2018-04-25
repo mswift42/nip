@@ -32,7 +32,6 @@ func TestLoadingDocument(t *testing.T) {
 	}
 }
 
-
 func TestIplayerSelectionResults(t *testing.T) {
 	url := TestHTMLURL("testhtml/films1.html")
 	c := make(chan *iplayerDocumentResult)
@@ -142,6 +141,24 @@ func TestProgramPage(t *testing.T) {
 		}
 	}
 }
+
+var filmurls = []struct {
+	url string
+}{
+	{
+		"/iplayer/episode/b041ycwk/a-hijacking",
+	},
+	{
+		"/iplayer/episode/b052vb0d/storyville-love-is-all-100-years-of-love-and-courtship",
+	},
+	{
+		"/iplayer/episode/p04b183c/adam-curtis-hypernormalisation",
+	},
+	{
+		"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
+	},
+}
+
 func TestNewMainCategory(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
 	tid := TestIplayerDocument{doc}
@@ -167,8 +184,9 @@ func TestNewMainCategory(t *testing.T) {
 	if !contains(progs, "/iplayer/episode/b052vb0d/storyville-love-is-all-100-years-of-love-and-courtship") {
 		t.Error("Expected programmes to contain url of storyville: love is all...")
 	}
+
 	doc = documentLoader("testhtml/food1.html")
-	tid  = TestIplayerDocument{doc}
+	tid = TestIplayerDocument{doc}
 	nmd = newMainCategory(&tid)
 	if len(nmd.nextdocs) != 19 {
 		t.Error("Expected length of nextdocs to be 19, got: ", len(nmd.nextdocs))
@@ -178,5 +196,3 @@ func TestNewMainCategory(t *testing.T) {
 		t.Error("Expected length of programmes to be 88, got: ", len(progs))
 	}
 }
-
-
