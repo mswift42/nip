@@ -55,3 +55,15 @@ func (tid *TestIplayerDocument) programPages() ([]Pager, []*iplayerSelectionResu
 func (tid *TestIplayerDocument) mainDoc() *iplayerDocument {
 	return tid.idoc
 }
+
+
+func documentLoader(url string) *iplayerDocument {
+	thu := TestHTMLURL(url)
+	c := make(chan *iplayerDocumentResult)
+	go thu.loadDocument(c)
+	idr := <-c
+	if idr.Error != nil {
+		panic(idr.Error)
+	}
+	return &idr.idoc
+}
