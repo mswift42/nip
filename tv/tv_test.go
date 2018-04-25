@@ -158,6 +158,12 @@ func TestNewMainCategory(t *testing.T) {
 	if len(progs) != 28 {
 		t.Error("Expected length of programmes for nmd to be 28, got: ", len(progs))
 	}
+	if !contains(progs, "/iplayer/episode/p04b183c/adam-curtis-hypernormalisation") {
+		t.Error("Expected programmes to contain url of adam-curtis hypern.")
+	}
+	if !contains(progs, "/iplayer/episode/b041ycwk/a-hijacking") {
+		t.Error("Expected programmes to contain url of A Hijacking.")
+	}
 	doc = documentLoader("testhtml/food1.html")
 	tid  = TestIplayerDocument{doc}
 	nmd = newMainCategory(&tid)

@@ -67,9 +67,9 @@ func documentLoader(url string) *iplayerDocument {
 	return &idr.idoc
 }
 
-func contains(progs[]*Programme, programme *Programme) bool {
+func contains(progs[]*Programme, url string) bool {
 	for _, i := range progs {
-		if i.URL == programme.URL {
+		if i.URL == url {
 			return true
 		}
 	}
