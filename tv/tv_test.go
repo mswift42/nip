@@ -180,6 +180,9 @@ func TestNewMainCategory(t *testing.T) {
 			t.Errorf("Expected %s to be in programmes", i.url)
 		}
 	}
+	if contains(progs, "some_random_url") {
+		t.Error("Some random url should not be in programmes.")
+	}
 	doc = documentLoader("testhtml/food1.html")
 	tid = TestIplayerDocument{doc}
 	nmd = newMainCategory(&tid)

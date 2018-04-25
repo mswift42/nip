@@ -3,7 +3,6 @@ package tv
 import (
 	"github.com/mswift42/goquery"
 	"sync"
-	"fmt"
 	"strings"
 )
 
@@ -126,7 +125,6 @@ type programPage struct {
 }
 
 func (pp *programPage) programmes() []*Programme {
-	fmt.Println("programpage: ", pp.doc)
 	var results []*Programme
 	title := pp.doc.doc.Find(".hero-header__title").Text()
 	pp.doc.doc.Find(".content-item").Each(func(i int, s *goquery.Selection) {
@@ -260,7 +258,6 @@ func collectPages(urls []Pager) []*iplayerDocumentResult {
 		}
 	}
 	for i := 0; i < jobs; i++ {
-		//func (mcd *mainCategoryDocument) programmes() []*Programme {
 		results = append(results, <-c)
 	}
 	return results
