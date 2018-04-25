@@ -56,7 +56,6 @@ func (tid *TestIplayerDocument) mainDoc() *iplayerDocument {
 	return tid.idoc
 }
 
-
 func documentLoader(url string) *iplayerDocument {
 	thu := TestHTMLURL(url)
 	c := make(chan *iplayerDocumentResult)
@@ -66,4 +65,13 @@ func documentLoader(url string) *iplayerDocument {
 		panic(idr.Error)
 	}
 	return &idr.idoc
+}
+
+func contains(progs[]*Programme, programme *Programme) bool {
+	for _, i := range progs {
+		if i.URL == programme.URL {
+			return true
+		}
+	}
+	return false
 }
