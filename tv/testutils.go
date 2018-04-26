@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 
 	"github.com/mswift42/goquery"
+	"fmt"
 )
 
 type TestHTMLURL string
@@ -36,17 +37,21 @@ func (tid *TestIplayerDocument) nextPages() []Pager {
 func (tid *TestIplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
 	urls = append(urls, tid.nextPages()...)
+	fmt.Println(urls)
 	np := collectPages(urls)
 	docs := []*iplayerDocument{tid.idoc}
 	docs = append(docs, documentsFromResults(np)...)
 	var selres []*iplayerSelectionResult
+	fmt.Println("Iterating over docs:  ")
 	for _, i := range docs {
+		fmt.Println("doc: ", i)
 		isel := iplayerSelection{i.doc.Find(".list-item-inner")}
 		selres = append(selres, isel.selectionResults()...)
-		for _, i := range selres {
-			if i.programPage != "" {
-				urls = append(urls, TestHTMLURL(i.programPage))
-			}
+	}
+	for _, i := range selres {
+		if i.programPage != "" {
+			fmt.Println(i.programPage)
+			urls = append(urls, TestHTMLURL(i.programPage))
 		}
 	}
 	return urls, selres
