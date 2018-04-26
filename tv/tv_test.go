@@ -223,12 +223,15 @@ func TestNewMainCategory(t *testing.T) {
 		t.Error("Expected length of nextdocs to be 19, got: ", len(nmd.nextdocs))
 	}
 	progs = nmd.programmes()
-	if len(progs) != 88 {
-		t.Error("Expected length of programmes to be 88, got: ", len(progs))
+	if len(progs) != 92 {
+		t.Error("Expected length of programmes to be 92, got: ", len(progs))
 	}
 	for _, i := range foodurls {
 		if !contains(progs, i.url) {
 			t.Errorf("Expected %s to be in programmes", i.url)
 		}
+	}
+	for _, i := range progs {
+		fmt.Println(i.Title, "   ", i.URL)
 	}
 }
