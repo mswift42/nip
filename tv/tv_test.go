@@ -1,6 +1,7 @@
 package tv
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -161,13 +162,27 @@ var filmurls = []struct {
 		"/iplayer/episode/b037nqvz/strawberry-fields",
 	},
 	{
-	"/iplayer/episode/b01q0k5b/wallace-and-gromit-a-close-shave",
+		"/iplayer/episode/b01q0k5b/wallace-and-gromit-a-close-shave",
 	},
 	{
 		"/iplayer/episode/b08nfjwt/wallace-and-gromit-the-wrong-trousers",
 	},
 	{
-	"/iplayer/episode/b018ycwz/the-young-victoria",
+		"/iplayer/episode/b018ycwz/the-young-victoria",
+	},
+}
+
+var foodurls = []struct {
+	url string
+}{
+	{
+		"/iplayer/episode/b00mtr6m/caribbean-food-made-easy-episode-4",
+	},
+	{
+		"/iplayer/episode/b0752bbd/chef-vs-science-the-ultimate-kitchen-challenge",
+	},
+	{
+		"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
 	},
 }
 
@@ -184,6 +199,9 @@ func TestNewMainCategory(t *testing.T) {
 		t.Error("Expected length of programmes > 0, got: ", len(progs))
 	}
 	progs = nmd.programmes()
+	for _, i := range progs {
+		fmt.Println(i.Title)
+	}
 	if len(progs) != 28 {
 		t.Error("Expected length of programmes for nmd to be 28, got: ", len(progs))
 	}
