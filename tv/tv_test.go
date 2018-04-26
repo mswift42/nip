@@ -184,6 +184,9 @@ var foodurls = []struct {
 	{
 		"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
 	},
+	{
+		"/iplayer/episode/p05rts0s/delia-smiths-cookery-course-series-1-10-puddings",
+	},
 }
 
 func TestNewMainCategory(t *testing.T) {
@@ -222,5 +225,10 @@ func TestNewMainCategory(t *testing.T) {
 	progs = nmd.programmes()
 	if len(progs) != 88 {
 		t.Error("Expected length of programmes to be 88, got: ", len(progs))
+	}
+	for _, i := range foodurls {
+		if !contains(progs, i.url) {
+			t.Errorf("Expected %s to be in programmes", i.url)
+		}
 	}
 }

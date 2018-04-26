@@ -4,6 +4,8 @@ import (
 	"github.com/mswift42/goquery"
 	"sync"
 	"strings"
+	"log"
+	"fmt"
 )
 
 type BeebURL string
@@ -204,15 +206,17 @@ func (id *iplayerDocument) nextPages() []Pager {
 
 func (id *iplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
+	var docs []*iplayerDocument
 	urls = append(urls, id.nextPages()...)
 	np := collectPages(urls)
-	docs := documentsFromResults(np)
 	docs = append(docs, id)
+	docs = append(docs, documentsFromResults(np)...)
 	var selres []*iplayerSelectionResult
 	for _, i := range docs {
 		isel := iplayerSelection{i.doc.Find(".list-item-inner")}
 		selres = append(selres, isel.selectionResults()...)
 		for _, i := range selres {
+			fmt.Println(i.programPage)
 			if i.programPage != "" {
 				urls = append(urls, BeebURL(i.programPage))
 			}
@@ -238,6 +242,8 @@ func newMainCategory(np NextPager) *mainCategoryDocument {
 	for _, i := range progPages {
 		if &i.idoc != nil {
 			nextdocs = append(nextdocs, &i.idoc)
+		} else {
+			log.Fatal(i.Error)
 		}
 	}
 	return &mainCategoryDocument{np.mainDoc(), nextdocs, selres}
