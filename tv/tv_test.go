@@ -49,8 +49,8 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if progpage.programPage != "testhtml/adam_curtis.html" {
 		t.Error("Expected program Page to be 'testhtml/adam_curtis.html' not: ", progpage.programPage)
 	}
-	if selres[1].prog.Title != "A Hijacking" {
-		t.Error("Expected second programme title to be 'A Hijacking', got: ", selres[1].prog.Title)
+	if selres[1].prog.Title != "Bill" {
+		t.Error("Expected second programme title to be 'Bill', got: ", selres[1].prog.Title)
 	}
 	if selres[1].programPage != "" {
 		t.Error("Expected second programPage to be an empty string, got: ", selres[1].programPage)
@@ -192,10 +192,10 @@ func TestNewMainCategory(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
 	tid := TestIplayerDocument{doc}
 	nmd := newMainCategory(&tid)
-	if len(nmd.nextdocs) != 2 {
-		t.Error("Expected length of nextdocs to be 2, got: ", len(nmd.nextdocs))
+	if len(nmd.nextdocs) != 1 {
+		t.Error("Expected length of nextdocs to be 1, got: ", len(nmd.nextdocs))
 	}
-	pp := programPage{nmd.nextdocs[1]}
+	pp := programPage{nmd.nextdocs[0]}
 	progs := pp.programmes()
 	if len(progs) == 0 {
 		t.Error("Expected length of programmes > 0, got: ", len(progs))
