@@ -146,7 +146,7 @@ var filmurls = []struct {
 	url string
 }{
 	{
-		"/iplayer/episode/b041ycwk/a-hijacking",
+		"https://www.bbc.co.uk/iplayer/episode/b08lvcg1/bill",
 	},
 	{
 		"/iplayer/episode/b052vb0d/storyville-love-is-all-100-years-of-love-and-courtship",
@@ -158,16 +158,10 @@ var filmurls = []struct {
 		"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
 	},
 	{
-		"/iplayer/episode/b037nqvz/strawberry-fields",
-	},
-	{
 		"/iplayer/episode/b01q0k5b/wallace-and-gromit-a-close-shave",
 	},
 	{
 		"/iplayer/episode/b08nfjwt/wallace-and-gromit-the-wrong-trousers",
-	},
-	{
-		"/iplayer/episode/b018ycwz/the-young-victoria",
 	},
 }
 
