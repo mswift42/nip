@@ -1,7 +1,6 @@
 package tv
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -202,9 +201,6 @@ func TestNewMainCategory(t *testing.T) {
 		t.Error("Expected length of programmes > 0, got: ", len(progs))
 	}
 	progs = nmd.programmes()
-	for _, i := range progs {
-		fmt.Println(i.Title)
-	}
 	if len(progs) != 28 {
 		t.Error("Expected length of programmes for nmd to be 28, got: ", len(progs))
 	}
@@ -230,8 +226,5 @@ func TestNewMainCategory(t *testing.T) {
 		if !contains(progs, i.url) {
 			t.Errorf("Expected %s to be in programmes", i.url)
 		}
-	}
-	for _, i := range progs {
-		fmt.Println(i.Title, "   ", i.URL)
 	}
 }
