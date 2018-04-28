@@ -2,6 +2,7 @@ package tv
 
 import (
 	"testing"
+	"fmt"
 )
 
 func TestLoadingDocument(t *testing.T) {
@@ -146,10 +147,10 @@ var filmurls = []struct {
 	url string
 }{
 	{
-		"https://www.bbc.co.uk/iplayer/episode/b08lvcg1/bill",
+		"/iplayer/episode/b08lvcg1/bill",
 	},
 	{
-		"/iplayer/episode/b052vb0d/storyville-love-is-all-100-years-of-love-and-courtship",
+		"/iplayer/episode/b04n1hfy/storyville-112-weddings",
 	},
 	{
 		"/iplayer/episode/p04b183c/adam-curtis-hypernormalisation",
@@ -195,6 +196,9 @@ func TestNewMainCategory(t *testing.T) {
 		t.Error("Expected length of programmes > 0, got: ", len(progs))
 	}
 	progs = nmd.programmes()
+	for _, i := range progs {
+		fmt.Println(i.Title, "   ", i.URL)
+	}
 	if len(progs) != 28 {
 		t.Error("Expected length of programmes for nmd to be 28, got: ", len(progs))
 	}
