@@ -154,8 +154,6 @@ type Category struct {
 	programmes []*Programme
 }
 
-// TODO - add map for already visited programme sites.
-// TODO - implement seenprogramme method
 type mainCategoryDocument struct {
 	maindoc          *iplayerDocument
 	nextdocs         []*iplayerDocument
@@ -190,7 +188,6 @@ var seen = &sync.Map{}
 //	mutex.Unlock()
 //	return true
 //}
-
 
 func (id *iplayerDocument) mainDoc() *iplayerDocument {
 	return id
