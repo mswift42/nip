@@ -178,20 +178,7 @@ func (mcd *mainCategoryDocument) programmes() []*Programme {
 	return results
 }
 
-//var seen = make(map[Pager]bool)
-//var mutex = &sync.Mutex{}
-// TODO - replace with map from sync package.
 var seen = &sync.Map{}
-//func seenLink(p Pager) bool {
-//	mutex.Lock()
-//	if !seen[p] {
-//		seen[p] = true
-//		mutex.Unlock()
-//		return false
-//	}
-//	mutex.Unlock()
-//	return true
-//}
 
 func (id *iplayerDocument) mainDoc() *iplayerDocument {
 	return id
