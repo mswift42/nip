@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 
 	"github.com/mswift42/goquery"
+	"fmt"
 )
 
 type TestHTMLURL string
@@ -35,6 +36,7 @@ func (tid *TestIplayerDocument) nextPages() []Pager {
 
 func (tid *TestIplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
+	fmt.Println("Printing next Pages: ", tid.nextPages())
 	urls = append(urls, tid.nextPages()...)
 	np := collectPages(urls)
 	docs := []*iplayerDocument{tid.idoc}
