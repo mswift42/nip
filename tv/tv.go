@@ -154,6 +154,10 @@ type Category struct {
 	programmes []*Programme
 }
 
+func newCategory(name string, mcd *mainCategoryDocument) *Category {
+	return &Category{name, mcd.programmes()}
+}
+
 type mainCategoryDocument struct {
 	maindoc          *iplayerDocument
 	nextdocs         []*iplayerDocument
