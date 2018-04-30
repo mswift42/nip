@@ -41,16 +41,20 @@ func (tid *TestIplayerDocument) programPages() ([]Pager, []*iplayerSelectionResu
 	np := collectPages(urls)
 	docs := []*iplayerDocument{tid.idoc}
 	docs = append(docs, documentsFromResults(np)...)
+	fmt.Println(docs)
 	var selres []*iplayerSelectionResult
 	for _, i := range docs {
 		isel := iplayerSelection{i.doc.Find(".list-item-inner")}
 		selres = append(selres, isel.selectionResults()...)
+		fmt.Println(selres)
 	}
 	for _, i := range selres {
 		if i.programPage != "" {
+			fmt.Println("Printing Program Page: ", i.programPage)
 			urls = append(urls, TestHTMLURL(i.programPage))
 		}
 	}
+	fmt.Println(urls)
 	return urls, selres
 }
 
