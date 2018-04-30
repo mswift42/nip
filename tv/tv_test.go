@@ -186,43 +186,27 @@ var foodurls = []struct {
 func TestNewMainCategory(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
 	tid := TestIplayerDocument{doc}
-	nmd := newMainCategory(&tid)
-	if len(nmd.nextdocs) != 1 {
-		t.Error("Expected length of nextdocs to be 1, got: ", len(nmd.nextdocs))
+	pp, _  := tid.programPages()
+	fmt.Println(pp)
+	if len(pp) != 3 {
+		t.Error("Expected length of programPages to be 3, got: ", len(pp))
 	}
-	pp := programPage{nmd.nextdocs[0]}
-	progs := pp.programmes()
-	if len(progs) == 0 {
-		t.Error("Expected length of programmes > 0, got: ", len(progs))
+	if pp[0] != TestHTMLURL("testhtml/films2.html") {
+		t.Error("Expected first program Page to be films2.html, got: ", pp[0])
 	}
-	progs = nmd.programmes()
-	for _, i := range progs {
-		fmt.Println(i.Title, "   ", i.URL)
-	}
-	if len(progs) != 28 {
-		t.Error("Expected length of programmes for nmd to be 28, got: ", len(progs))
-	}
-	for _, i := range filmurls {
-		if !contains(progs, i.url) {
-			t.Errorf("Expected %s to be in programmes", i.url)
-		}
-	}
-	if contains(progs, "some_random_url") {
-		t.Error("Some random url should not be in programmes.")
-	}
-	doc = documentLoader("testhtml/food1.html")
-	tid = TestIplayerDocument{doc}
-	nmd = newMainCategory(&tid)
-	if len(nmd.nextdocs) != 19 {
-		t.Error("Expected length of nextdocs to be 19, got: ", len(nmd.nextdocs))
-	}
-	progs = nmd.programmes()
-	if len(progs) != 92 {
-		t.Error("Expected length of programmes to be 92, got: ", len(progs))
-	}
-	for _, i := range foodurls {
-		if !contains(progs, i.url) {
-			t.Errorf("Expected %s to be in programmes", i.url)
-		}
-	}
+	//doc = documentLoader("testhtml/food1.html")
+	//tid = TestIplayerDocument{doc}
+	//nmd := newMainCategory(&tid)
+	//if len(nmd.nextdocs) != 19 {
+	//	t.Error("Expected length of nextdocs to be 19, got: ", len(nmd.nextdocs))
+	//}
+	//progs := nmd.programmes()
+	//if len(progs) != 92 {
+	//	t.Error("Expected length of programmes to be 92, got: ", len(progs))
+	//}
+	//for _, i := range foodurls {
+	//	if !contains(progs, i.url) {
+	//		t.Errorf("Expected %s to be in programmes", i.url)
+	//	}
+	//}
 }
