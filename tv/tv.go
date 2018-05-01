@@ -224,7 +224,7 @@ func documentsFromResults(docres []*iplayerDocumentResult) []*iplayerDocument {
 	}
 	return results
 }
-
+// TODO - give programPages []nextdocs as argument.
 func newMainCategory(np NextPager) *mainCategoryDocument {
 	var nextdocs []*iplayerDocument
 	var progpagedocs []*iplayerDocument

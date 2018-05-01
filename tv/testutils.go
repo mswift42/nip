@@ -33,14 +33,11 @@ func (tid *TestIplayerDocument) nextPages() []Pager {
 	})
 	return urls
 }
-
+// TODO - Receive []nextdocs as argument.
+// TODO - iterate over []nextdocs and programpages for all documents.
 func (tid *TestIplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
-	fmt.Println("Printing next Pages: ", tid.nextPages())
-	urls = append(urls, tid.nextPages()...)
-	np := collectPages(urls)
 	docs := []*iplayerDocument{tid.idoc}
-	docs = append(docs, documentsFromResults(np)...)
 	fmt.Println(docs)
 	var selres []*iplayerSelectionResult
 	for _, i := range docs {
