@@ -232,19 +232,21 @@ func newMainCategory(np NextPager) *mainCategoryDocument {
 	nextPages := collectPages(npages)
 	for _, i := range nextPages {
 		if &i.idoc != nil {
-
+			nextdocs = append(nextdocs, &i.idoc)
+		} else {
+			log.Fatal(&i.Error)
 		}
 	}
 	pp, selres := np.programPages()
 	progPages := collectPages(pp)
 	for _, i := range progPages {
 		if &i.idoc != nil {
-			nextdocs = append(nextdocs, &i.idoc)
+			progpagedocs = append(progpagedocs, &i.idoc)
 		} else {
-			log.Fatal(i.Error)
+			log.Fatal(&i.Error)
 		}
 	}
-	return &mainCategoryDocument{np.mainDoc(), npagesnextdocs, selres}
+	return &mainCategoryDocument{np.mainDoc(), nextdocs, progpagedocs, selres}
 }
 
 func collectPages(urls []Pager) []*iplayerDocumentResult {
