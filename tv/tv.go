@@ -173,7 +173,7 @@ func (mcd *mainCategoryDocument) programmes() []*Programme {
 			results = append(results, i.prog)
 		}
 	}
-	for _, i := range mcd.nextdocs {
+	for _, i := range mcd.programpagedocs {
 		pp := programPage{i}
 		results = append(results, pp.programmes()...)
 	}
