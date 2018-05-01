@@ -189,9 +189,19 @@ func TestNewMainCategory(t *testing.T) {
 	if len(np) != 1 {
 		t.Error("Expected length of nextpages to be 1, got: ", len(np))
 	}
+	nmd := newMainCategory(&tid)
+	progs := nmd.programmes()
+	if len(progs) != 21 {
+		t.Error("Expected length of film programmes to be 27, got: ", len(progs))
+	}
+	for _, i := range filmurls {
+		if !contains(progs, i.url) {
+			t.Errorf("Expected filmurls to contain %s ", i.url)
+		}
+	}
 	doc = documentLoader("testhtml/food1.html")
 	tid = TestIplayerDocument{doc}
-	nmd := newMainCategory(&tid)
+	nmd = newMainCategory(&tid)
 	if len(nmd.nextdocs) != 1 {
 		t.Error("Expected length of nextdocs to be 19, got: ", len(nmd.nextdocs))
 	}
