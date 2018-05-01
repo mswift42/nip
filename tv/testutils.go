@@ -39,6 +39,7 @@ func (tid *TestIplayerDocument) nextPages() []Pager {
 func (tid *TestIplayerDocument) programPages(nextdocs []*iplayerDocument) ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
 	docs := []*iplayerDocument{tid.idoc}
+	docs = append(docs, nextdocs...)
 	fmt.Println(docs)
 	var selres []*iplayerSelectionResult
 	for _, i := range docs {

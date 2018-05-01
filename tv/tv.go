@@ -235,7 +235,7 @@ func newMainCategory(np NextPager) *mainCategoryDocument {
 			log.Fatal(&i.Error)
 		}
 	}
-	pp, selres := np.programPages()
+	pp, selres := np.programPages(nextdocs)
 	progPages := collectPages(pp)
 	for _, i := range progPages {
 		if &i.idoc != nil {
