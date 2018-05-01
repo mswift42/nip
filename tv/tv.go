@@ -194,13 +194,11 @@ func (id *iplayerDocument) nextPages() []Pager {
 	return urls
 }
 
-func (id *iplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
+func (id *iplayerDocument) programPages(nextdocs []*iplayerDocument) ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
 	var docs []*iplayerDocument
-	urls = append(urls, id.nextPages()...)
-	np := collectPages(urls)
 	docs = append(docs, id)
-	docs = append(docs, documentsFromResults(np)...)
+	docs = append(docs, nextdocs...)
 	var selres []*iplayerSelectionResult
 	for _, i := range docs {
 		isel := iplayerSelection{i.doc.Find(".list-item-inner")}
