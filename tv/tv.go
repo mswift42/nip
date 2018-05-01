@@ -158,7 +158,6 @@ func newCategory(name string, mcd *mainCategoryDocument) *Category {
 	return &Category{name, mcd.programmes()}
 }
 
-// TODO - separate nextpages docs and programpages docs.
 type mainCategoryDocument struct {
 	maindoc          *iplayerDocument
 	nextdocs         []*iplayerDocument
