@@ -33,9 +33,10 @@ func (tid *TestIplayerDocument) nextPages() []Pager {
 	})
 	return urls
 }
+
 // TODO - Receive []nextdocs as argument.
 // TODO - iterate over []nextdocs and programpages for all documents.
-func (tid *TestIplayerDocument) programPages() ([]Pager, []*iplayerSelectionResult) {
+func (tid *TestIplayerDocument) programPages(nextdocs []*iplayerDocument) ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
 	docs := []*iplayerDocument{tid.idoc}
 	fmt.Println(docs)
@@ -70,7 +71,7 @@ func documentLoader(url string) *iplayerDocument {
 	return &idr.idoc
 }
 
-func contains(progs[]*Programme, url string) bool {
+func contains(progs []*Programme, url string) bool {
 	for _, i := range progs {
 		if i.URL == url {
 			return true
