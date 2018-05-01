@@ -227,6 +227,14 @@ func documentsFromResults(docres []*iplayerDocumentResult) []*iplayerDocument {
 
 func newMainCategory(np NextPager) *mainCategoryDocument {
 	var nextdocs []*iplayerDocument
+	var progpagedocs []*iplayerDocument
+	npages := np.nextPages()
+	nextPages := collectPages(npages)
+	for _, i := range nextPages {
+		if &i.idoc != nil {
+
+		}
+	}
 	pp, selres := np.programPages()
 	progPages := collectPages(pp)
 	for _, i := range progPages {
@@ -236,7 +244,7 @@ func newMainCategory(np NextPager) *mainCategoryDocument {
 			log.Fatal(i.Error)
 		}
 	}
-	return &mainCategoryDocument{np.mainDoc(), nextdocs, selres}
+	return &mainCategoryDocument{np.mainDoc(), npagesnextdocs, selres}
 }
 
 func collectPages(urls []Pager) []*iplayerDocumentResult {
