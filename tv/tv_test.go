@@ -2,7 +2,6 @@ package tv
 
 import (
 	"testing"
-	"fmt"
 )
 
 func TestLoadingDocument(t *testing.T) {
@@ -186,27 +185,26 @@ var foodurls = []struct {
 func TestNewMainCategory(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
 	tid := TestIplayerDocument{doc}
-	pp, _  := tid.programPages()
-	fmt.Println(pp)
-	if len(pp) != 3 {
-		t.Error("Expected length of programPages to be 3, got: ", len(pp))
+	np := tid.nextPages()
+	if len(np) != 1 {
+		t.Error("Expected length of nextpages to be 1, got: ", len(np))
 	}
-	if pp[0] != TestHTMLURL("testhtml/films2.html") {
-		t.Error("Expected first program Page to be films2.html, got: ", pp[0])
+	doc = documentLoader("testhtml/food1.html")
+	tid = TestIplayerDocument{doc}
+	nmd := newMainCategory(&tid)
+	if len(nmd.nextdocs) != 1 {
+		t.Error("Expected length of nextdocs to be 19, got: ", len(nmd.nextdocs))
 	}
-	//doc = documentLoader("testhtml/food1.html")
-	//tid = TestIplayerDocument{doc}
-	//nmd := newMainCategory(&tid)
-	//if len(nmd.nextdocs) != 19 {
-	//	t.Error("Expected length of nextdocs to be 19, got: ", len(nmd.nextdocs))
-	//}
-	//progs := nmd.programmes()
-	//if len(progs) != 92 {
-	//	t.Error("Expected length of programmes to be 92, got: ", len(progs))
-	//}
-	//for _, i := range foodurls {
-	//	if !contains(progs, i.url) {
-	//		t.Errorf("Expected %s to be in programmes", i.url)
-	//	}
-	//}
+	if len(nmd.programpagedocs) != 19 {
+		t.Error("Expected length of programPage docs to be 19, got: ", len(nmd.programpagedocs))
+	}
+	progs := nmd.programmes()
+	if len(progs) != 92 {
+		t.Error("Expected length of programmes to be 92, got: ", len(progs))
+	}
+	for _, i := range foodurls {
+		if !contains(progs, i.url) {
+			t.Errorf("Expected %s to be in programmes", i.url)
+		}
+	}
 }
