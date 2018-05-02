@@ -189,7 +189,13 @@ func TestNewMainCategory(t *testing.T) {
 	if len(np) != 1 {
 		t.Error("Expected length of nextpages to be 1, got: ", len(np))
 	}
+	if np[0] != TestHTMLURL("testhtml/films2.html") {
+		t.Error("Expected nextpage to be 'testhtml/films2.html', got: ", np[0])
+	}
 	nmd := newMainCategory(&tid)
+	if len(nmd.programpagedocs) != 2 {
+		t.Error("Expected length of programpagedocs to be 2, got: ", len(nmd.programpagedocs))
+	}
 	progs := nmd.programmes()
 	if len(progs) != 21 {
 		t.Error("Expected length of film programmes to be 27, got: ", len(progs))
