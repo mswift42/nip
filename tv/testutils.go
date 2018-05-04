@@ -70,6 +70,17 @@ func documentLoader(url string) *iplayerDocument {
 	return &idr.Idoc
 }
 
+func RemoteDocumentLoader(url string) *iplayerDocument {
+	bu := BeebURL(url)
+	c := make(chan *IplayerDocumentResult)
+	go bu.LoadDocument(c)
+	idr := <-c
+	if idr.Error != nil {
+		panic(idr.Error)
+	}
+	return &idr.Idoc
+}
+
 func contains(progs []*Programme, url string) bool {
 	for _, i := range progs {
 		if i.URL == url {
