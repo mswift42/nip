@@ -212,7 +212,7 @@ func (id *iplayerDocument) programPages(nextdocs []*iplayerDocument) ([]Pager, [
 	return urls, selres
 }
 
-func documentsFromResults(docres []*iplayerDocumentResult) []*iplayerDocument {
+func DocumentsFromResults(docres []*iplayerDocumentResult) []*iplayerDocument {
 	var results []*iplayerDocument
 	for _, i := range docres {
 		if i.Error == nil {
@@ -222,7 +222,7 @@ func documentsFromResults(docres []*iplayerDocumentResult) []*iplayerDocument {
 	return results
 }
 // TODO - give programPages []nextdocs as argument.
-func newMainCategory(np NextPager) *mainCategoryDocument {
+func NewMainCategory(np NextPager) *mainCategoryDocument {
 	var nextdocs []*iplayerDocument
 	var progpagedocs []*iplayerDocument
 	npages := np.nextPages()
