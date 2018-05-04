@@ -10,13 +10,13 @@ import (
 
 type BeebURL string
 
-func (bu BeebURL) loadDocument(c chan<- *iplayerDocumentResult) {
+func (bu BeebURL) LoadDocument(c chan<- *IplayerDocumentResult) {
 	doc, err := goquery.NewDocument(string(bu))
 	if err != nil {
-		c <- &iplayerDocumentResult{iplayerDocument{}, err}
+		c <- &IplayerDocumentResult{iplayerDocument{}, err}
 	}
 	idoc := iplayerDocument{doc}
-	c <- &iplayerDocumentResult{idoc, nil}
+	c <- &IplayerDocumentResult{idoc, nil}
 }
 
 type iplayerSelection struct {
@@ -117,8 +117,8 @@ type iplayerDocument struct {
 	doc *goquery.Document
 }
 
-type iplayerDocumentResult struct {
-	idoc  iplayerDocument
+type IplayerDocumentResult struct {
+	Idoc  iplayerDocument
 	Error error
 }
 
@@ -212,11 +212,11 @@ func (id *iplayerDocument) programPages(nextdocs []*iplayerDocument) ([]Pager, [
 	return urls, selres
 }
 
-func DocumentsFromResults(docres []*iplayerDocumentResult) []*iplayerDocument {
+func DocumentsFromResults(docres []*IplayerDocumentResult) []*iplayerDocument {
 	var results []*iplayerDocument
 	for _, i := range docres {
 		if i.Error == nil {
-			results = append(results, &i.idoc)
+			results = append(results, &i.Idoc)
 		}
 	}
 	return results
@@ -228,8 +228,8 @@ func NewMainCategory(np NextPager) *mainCategoryDocument {
 	npages := np.nextPages()
 	nextPages := collectPages(npages)
 	for _, i := range nextPages {
-		if &i.idoc != nil {
-			nextdocs = append(nextdocs, &i.idoc)
+		if &i.Idoc != nil {
+			nextdocs = append(nextdocs, &i.Idoc)
 		} else {
 			log.Fatal(&i.Error)
 		}
@@ -237,8 +237,8 @@ func NewMainCategory(np NextPager) *mainCategoryDocument {
 	pp, selres := np.programPages(nextdocs)
 	progPages := collectPages(pp)
 	for _, i := range progPages {
-		if &i.idoc != nil {
-			progpagedocs = append(progpagedocs, &i.idoc)
+		if &i.Idoc != nil {
+			progpagedocs = append(progpagedocs, &i.Idoc)
 		} else {
 			log.Fatal(&i.Error)
 		}
@@ -246,9 +246,9 @@ func NewMainCategory(np NextPager) *mainCategoryDocument {
 	return &mainCategoryDocument{np.mainDoc(), nextdocs, progpagedocs, selres}
 }
 
-func collectPages(urls []Pager) []*iplayerDocumentResult {
-	var results []*iplayerDocumentResult
-	c := make(chan *iplayerDocumentResult)
+func collectPages(urls []Pager) []*IplayerDocumentResult {
+	var results []*IplayerDocumentResult
+	c := make(chan *IplayerDocumentResult)
 	jobs := 0
 	for _, i := range urls {
 		_, ok := seen.LoadOrStore(i, true)

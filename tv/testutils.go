@@ -13,17 +13,17 @@ type TestIplayerDocument struct {
 	idoc *iplayerDocument
 }
 
-func (thu TestHTMLURL) loadDocument(c chan<- *iplayerDocumentResult) {
+func (thu TestHTMLURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	file, err := ioutil.ReadFile(string(thu))
 	if err != nil {
-		c <- &iplayerDocumentResult{iplayerDocument{}, err}
+		c <- &IplayerDocumentResult{iplayerDocument{}, err}
 	}
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(file))
 	if err != nil {
-		c <- &iplayerDocumentResult{iplayerDocument{}, err}
+		c <- &IplayerDocumentResult{iplayerDocument{}, err}
 	}
 	idoc := iplayerDocument{doc}
-	c <- &iplayerDocumentResult{idoc, nil}
+	c <- &IplayerDocumentResult{idoc, nil}
 }
 
 func (tid *TestIplayerDocument) nextPages() []Pager {
@@ -61,13 +61,13 @@ func (tid *TestIplayerDocument) mainDoc() *iplayerDocument {
 
 func documentLoader(url string) *iplayerDocument {
 	thu := TestHTMLURL(url)
-	c := make(chan *iplayerDocumentResult)
+	c := make(chan *IplayerDocumentResult)
 	go thu.loadDocument(c)
 	idr := <-c
 	if idr.Error != nil {
 		panic(idr.Error)
 	}
-	return &idr.idoc
+	return &idr.Idoc
 }
 
 func contains(progs []*Programme, url string) bool {

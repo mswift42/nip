@@ -1,7 +1,7 @@
 package tv
 
 type Pager interface {
-	loadDocument(chan<- *iplayerDocumentResult)
+	loadDocument(chan<- *IplayerDocumentResult)
 }
 
 type NextPager interface {
