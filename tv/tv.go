@@ -10,7 +10,7 @@ import (
 
 type BeebURL string
 
-func (bu BeebURL) LoadDocument(c chan<- *IplayerDocumentResult) {
+func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	doc, err := goquery.NewDocument(string(bu))
 	if err != nil {
 		c <- &IplayerDocumentResult{iplayerDocument{}, err}

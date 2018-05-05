@@ -6,14 +6,14 @@ import (
 
 func TestLoadingDocument(t *testing.T) {
 	url := TestHTMLURL("testhtml/food1.html")
-	c := make(chan *iplayerDocumentResult)
+	c := make(chan *IplayerDocumentResult)
 	go url.loadDocument(c)
 	idr := <-c
 	if idr.Error != nil {
 		t.Error("Expected error to be nil", idr.Error)
 	}
-	if idr.idoc.doc == nil {
-		t.Error("Expected idoc not to be nil", idr.idoc)
+	if idr.Idoc.doc == nil {
+		t.Error("Expected Idoc not to be nil", idr.Idoc)
 	}
 	url = TestHTMLURL("testhtml/films1.html")
 	go url.loadDocument(c)
@@ -21,8 +21,8 @@ func TestLoadingDocument(t *testing.T) {
 	if idr.Error != nil {
 		t.Error("Expected error to be nil: ", idr.Error)
 	}
-	if idr.idoc.doc == nil {
-		t.Error("Expected idoc not to be nil: ", idr.idoc)
+	if idr.Idoc.doc == nil {
+		t.Error("Expected Idoc not to be nil: ", idr.Idoc)
 	}
 	url = TestHTMLURL("testhtml/nosuchfile.html")
 	go url.loadDocument(c)
@@ -34,10 +34,10 @@ func TestLoadingDocument(t *testing.T) {
 
 func TestIplayerSelectionResults(t *testing.T) {
 	url := TestHTMLURL("testhtml/films1.html")
-	c := make(chan *iplayerDocumentResult)
+	c := make(chan *IplayerDocumentResult)
 	go url.loadDocument(c)
 	idr := <-c
-	sel := iplayerSelection{idr.idoc.doc.Find(".list-item-inner")}
+	sel := iplayerSelection{idr.Idoc.doc.Find(".list-item-inner")}
 	selres := sel.selectionResults()
 	if len(selres) != 20 {
 		t.Error("Expected length of selectionresults to equal: ", len(selres))
@@ -122,7 +122,7 @@ func TestProgramPage(t *testing.T) {
 	pp := programPage{doc}
 	progs := pp.programmes()
 	if len(progs) != 6 {
-		t.Error("Expected length of programmes to be 6, got: ", len(progs))
+		t.Error("Expected length of Programmes to be 6, got: ", len(progs))
 	}
 	for _, i := range progs {
 		if i.Title != "Classic Mary Berry" {
@@ -192,13 +192,13 @@ func TestNewMainCategory(t *testing.T) {
 	if np[0] != TestHTMLURL("testhtml/films2.html") {
 		t.Error("Expected nextpage to be 'testhtml/films2.html', got: ", np[0])
 	}
-	nmd := newMainCategory(&tid)
+	nmd := NewMainCategory(&tid)
 	if len(nmd.programpagedocs) != 2 {
 		t.Error("Expected length of programpagedocs to be 2, got: ", len(nmd.programpagedocs))
 	}
-	progs := nmd.programmes()
+	progs := nmd.Programmes()
 	if len(progs) != 21 {
-		t.Error("Expected length of film programmes to be 27, got: ", len(progs))
+		t.Error("Expected length of film Programmes to be 27, got: ", len(progs))
 	}
 	for _, i := range filmurls {
 		if !contains(progs, i.url) {
@@ -207,7 +207,7 @@ func TestNewMainCategory(t *testing.T) {
 	}
 	doc = documentLoader("testhtml/food1.html")
 	tid = TestIplayerDocument{doc}
-	nmd = newMainCategory(&tid)
+	nmd = NewMainCategory(&tid)
 	if len(nmd.nextdocs) != 1 {
 		t.Error("Expected length of nextdocs to be 19, got: ", len(nmd.nextdocs))
 	}
