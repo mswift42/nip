@@ -73,7 +73,7 @@ func documentLoader(url string) *iplayerDocument {
 func RemoteDocumentLoader(url string) *iplayerDocument {
 	bu := BeebURL(url)
 	c := make(chan *IplayerDocumentResult)
-	go bu.LoadDocument(c)
+	go bu.loadDocument(c)
 	idr := <-c
 	if idr.Error != nil {
 		panic(idr.Error)
