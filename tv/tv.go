@@ -154,18 +154,18 @@ type Category struct {
 	programmes []*Programme
 }
 
-func newCategory(name string, mcd *mainCategoryDocument) *Category {
-	return &Category{name, mcd.programmes()}
+func newCategory(name string, mcd *MainCategoryDocument) *Category {
+	return &Category{name, mcd.Programmes()}
 }
 
-type mainCategoryDocument struct {
+type MainCategoryDocument struct {
 	maindoc          *iplayerDocument
 	nextdocs         []*iplayerDocument
 	programpagedocs  []*iplayerDocument
 	selectionresults []*iplayerSelectionResult
 }
 
-func (mcd *mainCategoryDocument) programmes() []*Programme {
+func (mcd *MainCategoryDocument) Programmes() []*Programme {
 	var results []*Programme
 	for _, i := range mcd.selectionresults {
 		if i.prog != nil {
@@ -222,7 +222,7 @@ func DocumentsFromResults(docres []*IplayerDocumentResult) []*iplayerDocument {
 	return results
 }
 // TODO - give programPages []nextdocs as argument.
-func NewMainCategory(np NextPager) *mainCategoryDocument {
+func NewMainCategory(np NextPager) *MainCategoryDocument {
 	var nextdocs []*iplayerDocument
 	var progpagedocs []*iplayerDocument
 	npages := np.nextPages()
@@ -243,7 +243,7 @@ func NewMainCategory(np NextPager) *mainCategoryDocument {
 			log.Fatal(&i.Error)
 		}
 	}
-	return &mainCategoryDocument{np.mainDoc(), nextdocs, progpagedocs, selres}
+	return &MainCategoryDocument{np.mainDoc(), nextdocs, progpagedocs, selres}
 }
 
 func collectPages(urls []Pager) []*IplayerDocumentResult {
