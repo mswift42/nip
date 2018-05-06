@@ -140,6 +140,16 @@ func TestProgramPage(t *testing.T) {
 			t.Error("Expected url to be: "+classicMary[i].url+" got: ", progs[i].URL)
 		}
 	}
+	doc = documentLoader("testhtml/storyville.html")
+	pp = programPage{doc}
+	progs = pp.programmes()
+	if len(progs) != 4 {
+		t.Error("Expected length of Programmes to be 4, got: ", len(progs))
+	}
+	if progs[0].Title != "112 Weddings" {
+		t.Error("Expected title of first storyville programme to be '112 Weddings', "+
+			"got: ", progs[0].Title)
+	}
 }
 
 var filmurls = []struct {
