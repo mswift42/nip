@@ -49,8 +49,8 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if progpage.programPage != "testhtml/adam_curtis.html" {
 		t.Error("Expected program Page to be 'testhtml/adam_curtis.html' not: ", progpage.programPage)
 	}
-	if selres[1].prog.Title != "Bill" {
-		t.Error("Expected second programme title to be 'Bill', got: ", selres[1].prog.Title)
+	if selres[1].prog.Title != "A Simple Plan" {
+		t.Error("Expected second programme title to be 'A Simple Plan', got: ", selres[1].prog.Title)
 	}
 	if selres[1].programPage != "" {
 		t.Error("Expected second programPage to be an empty string, got: ", selres[1].programPage)
