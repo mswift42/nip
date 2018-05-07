@@ -146,50 +146,29 @@ func TestProgramPage(t *testing.T) {
 	if len(progs) != 4 {
 		t.Error("Expected length of Programmes to be 4, got: ", len(progs))
 	}
-	if progs[0].Title != "112 Weddings" {
-		t.Error("Expected title of first storyville programme to be '112 Weddings', "+
+	if progs[0].Title != "Storyville" {
+		t.Error("Expected title of first storyville programme to be 'Storyville', "+
 			"got: ", progs[0].Title)
+	}
+	if progs[0].Subtitle != "112 Weddings" {
+		t.Error("Expected subtitle of first storyville programme to be '112 Wedddings'," +
+			"got: ", progs[0].Subtitle)
 	}
 }
 
-var filmurls = []struct {
-	url string
-}{
-	{
-		"/iplayer/episode/b08lvcg1/bill",
-	},
-	{
+var filmurls = []string {
 		"/iplayer/episode/b04n1hfy/storyville-112-weddings",
-	},
-	{
 		"/iplayer/episode/p04b183c/adam-curtis-hypernormalisation",
-	},
-	{
 		"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
-	},
-	{
 		"/iplayer/episode/b01q0k5b/wallace-and-gromit-a-close-shave",
-	},
-	{
 		"/iplayer/episode/b08nfjwt/wallace-and-gromit-the-wrong-trousers",
-	},
 }
 
-var foodurls = []struct {
-	url string
-}{
-	{
+var foodurls = []string {
 		"/iplayer/episode/b00mtr6m/caribbean-food-made-easy-episode-4",
-	},
-	{
 		"/iplayer/episode/b0752bbd/chef-vs-science-the-ultimate-kitchen-challenge",
-	},
-	{
 		"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
-	},
-	{
 		"/iplayer/episode/p05rts0s/delia-smiths-cookery-course-series-1-10-puddings",
-	},
 }
 
 func TestNewMainCategory(t *testing.T) {
@@ -211,8 +190,8 @@ func TestNewMainCategory(t *testing.T) {
 		t.Error("Expected length of film Programmes to be 27, got: ", len(progs))
 	}
 	for _, i := range filmurls {
-		if !contains(progs, i.url) {
-			t.Errorf("Expected filmurls to contain %s ", i.url)
+		if !contains(progs, i) {
+			t.Errorf("Expected filmurls to contain %s ", i)
 		}
 	}
 	doc = documentLoader("testhtml/food1.html")
