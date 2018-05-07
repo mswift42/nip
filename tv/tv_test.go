@@ -63,6 +63,14 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if len(selres) != 2 {
 		t.Error("Expected length of selectionresults to equal 2, got: ", len(selres))
 	}
+	if selres[0].prog.Title != "Wallace and Gromit: A Close Shave" {
+		t.Error("Expected title of first films2 programme to be wallace and gromit, got: ",
+			selres[0].prog.Title)
+	}
+	if selres[1].prog.Title != "Wonder Boys" {
+		t.Error("Expected title of second films2 programme to be 'Wonder Boys', got: ",
+			selres[1].prog.Title)
+	}
 }
 
 func TestCollectPages(t *testing.T) {
