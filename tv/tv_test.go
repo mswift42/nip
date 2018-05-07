@@ -151,24 +151,26 @@ func TestProgramPage(t *testing.T) {
 			"got: ", progs[0].Title)
 	}
 	if progs[0].Subtitle != "112 Weddings" {
-		t.Error("Expected subtitle of first storyville programme to be '112 Wedddings'," +
+		t.Error("Expected subtitle of first storyville programme to be '112 Wedddings',"+
 			"got: ", progs[0].Subtitle)
 	}
 }
 
-var filmurls = []string {
-		"/iplayer/episode/b04n1hfy/storyville-112-weddings",
-		"/iplayer/episode/p04b183c/adam-curtis-hypernormalisation",
-		"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
-		"/iplayer/episode/b01q0k5b/wallace-and-gromit-a-close-shave",
-		"/iplayer/episode/b08nfjwt/wallace-and-gromit-the-wrong-trousers",
+var filmurls = []string{
+	"/iplayer/episode/b04n1hfy/storyville-112-weddings",
+	"/iplayer/episode/p04b183c/adam-curtis-hypernormalisation",
+	"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
+	"/iplayer/episode/b03p8shj/buena-vista-social-club",
+	"/iplayer/episode/b00749zc/primary-colors",
+	"/iplayer/episode/b01q0k5b/wallace-and-gromit-a-close-shave",
+	"/iplayer/episode/b08nfjwt/wallace-and-gromit-the-wrong-trousers",
 }
 
-var foodurls = []string {
-		"/iplayer/episode/b00mtr6m/caribbean-food-made-easy-episode-4",
-		"/iplayer/episode/b0752bbd/chef-vs-science-the-ultimate-kitchen-challenge",
-		"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
-		"/iplayer/episode/p05rts0s/delia-smiths-cookery-course-series-1-10-puddings",
+var foodurls = []string{
+	"/iplayer/episode/b00mtr6m/caribbean-food-made-easy-episode-4",
+	"/iplayer/episode/b0752bbd/chef-vs-science-the-ultimate-kitchen-challenge",
+	"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
+	"/iplayer/episode/p05rts0s/delia-smiths-cookery-course-series-1-10-puddings",
 }
 
 func TestNewMainCategory(t *testing.T) {
