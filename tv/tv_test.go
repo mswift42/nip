@@ -1,6 +1,7 @@
 package tv
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -86,6 +87,13 @@ func TestCollectPages(t *testing.T) {
 	}
 	if cp[0].Error != nil {
 		t.Error("Expected error for first doc in collected Pages to be nil, got: ", cp[0].Error)
+	}
+	doc = documentLoader("testhtml/films2.html")
+	tid = TestIplayerDocument{doc}
+	np = tid.nextPages()
+	fmt.Println(np)
+	if len(np) != 1 {
+		t.Error("Expected length of nextPages to be 1, got: ", len(np))
 	}
 }
 
