@@ -55,6 +55,14 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if selres[1].programPage != "" {
 		t.Error("Expected second programPage to be an empty string, got: ", selres[1].programPage)
 	}
+	url = TestHTMLURL("testhtml/films2.html")
+	go url.loadDocument(c)
+	idr = <-c
+	sel = iplayerSelection{idr.Idoc.doc.Find(".list-item-inner")}
+	selres = sel.selectionResults()
+	if len(selres) != 2 {
+		t.Error("Expected length of selectionresults to equal 2, got: ", len(selres))
+	}
 }
 
 func TestCollectPages(t *testing.T) {
