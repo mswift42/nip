@@ -163,7 +163,6 @@ var filmurls = []string{
 	"/iplayer/episode/b03p8shj/buena-vista-social-club",
 	"/iplayer/episode/b00749zc/primary-colors",
 	"/iplayer/episode/b01q0k5b/wallace-and-gromit-a-close-shave",
-	"/iplayer/episode/b08nfjwt/wallace-and-gromit-the-wrong-trousers",
 }
 
 var foodurls = []string{
