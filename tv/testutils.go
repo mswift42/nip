@@ -33,7 +33,8 @@ func (tid *TestIplayerDocument) nextPages() []Pager {
 	})
 	return urls
 }
-
+// TODO - Add iplayerDocument method that returns list-item-inner iplayerSelection.
+// TODO - extract testiplayerdocument / iplayerDocument specific stuff into separate method.
 func (tid *TestIplayerDocument) programPages(nextdocs []*iplayerDocument) ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
 	docs := []*iplayerDocument{tid.idoc}
