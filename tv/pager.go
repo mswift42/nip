@@ -7,5 +7,5 @@ type Pager interface {
 type NextPager interface {
 	mainDoc() *iplayerDocument
 	nextPages() []Pager
-	programPages([]*iplayerDocument) ([]Pager, []*iplayerSelectionResult)
+	programPages([]*iplayerSelectionResult) []Pager
 }
