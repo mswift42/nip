@@ -61,6 +61,7 @@ func (tid *TestIplayerDocument) programPages(selres []*iplayerSelectionResult) [
 			urls = append(urls, TestHTMLURL(i.programPage))
 		}
 	}
+	return urls
 }
 
 func (tid *TestIplayerDocument) mainDoc() *iplayerDocument {
