@@ -43,6 +43,14 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if len(selres) != 20 {
 		t.Error("Expected length of selectionresults to equal: ", len(selres))
 	}
+	nsel := idr.Idoc.programmeListSelection()
+	nselres := nsel.selectionResults()
+	if len(selres) != 20 {
+		t.Error("Expected length of selectionResults to equal 20, got: ", len(nselres))
+	}
+	if selres[0].programPage != nselres[0].programPage {
+		t.Error("Expected both selectionResults to be the same, got: ", nselres[0].programPage)
+	}
 	progpage := selres[0]
 	if progpage.prog != nil {
 		t.Error("Expected proramme to be nil: ", progpage.prog)
