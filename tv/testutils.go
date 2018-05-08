@@ -33,7 +33,6 @@ func (tid *TestIplayerDocument) nextPages() []Pager {
 	})
 	return urls
 }
-// TODO - Add iplayerDocument method that returns list-item-inner iplayerSelection.
 // TODO - extract testiplayerdocument / iplayerDocument specific stuff into separate method.
 func (tid *TestIplayerDocument) programPages(nextdocs []*iplayerDocument) ([]Pager, []*iplayerSelectionResult) {
 	var urls []Pager
@@ -42,9 +41,8 @@ func (tid *TestIplayerDocument) programPages(nextdocs []*iplayerDocument) ([]Pag
 	fmt.Println(docs)
 	var selres []*iplayerSelectionResult
 	for _, i := range docs {
-		isel := iplayerSelection{i.doc.Find(".list-item-inner")}
+		isel := i.programmeListSelection()
 		selres = append(selres, isel.selectionResults()...)
-		fmt.Println(selres)
 	}
 	for _, i := range selres {
 		if i.programPage != "" {
