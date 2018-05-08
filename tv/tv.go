@@ -117,6 +117,10 @@ type iplayerDocument struct {
 	doc *goquery.Document
 }
 
+func (id *iplayerDocument) programmeListSelection() *iplayerSelection {
+	return &iplayerSelection{id.doc.Find(".list-item-inner")}
+}
+
 type IplayerDocumentResult struct {
 	Idoc  iplayerDocument
 	Error error
