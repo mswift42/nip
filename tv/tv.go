@@ -197,23 +197,30 @@ func (id *iplayerDocument) nextPages() []Pager {
 	return urls
 }
 
-func (id *iplayerDocument) programPages(nextdocs []*iplayerDocument) ([]Pager, []*iplayerSelectionResult) {
+func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Pager {
 	var urls []Pager
-	var docs []*iplayerDocument
-	docs = append(docs, id)
-	docs = append(docs, nextdocs...)
-	var selres []*iplayerSelectionResult
-	for _, i := range docs {
-		isel := iplayerSelection{i.doc.Find(".list-item-inner")}
-		selres = append(selres, isel.selectionResults()...)
-		for _, i := range selres {
-			fmt.Println(i.programPage)
-			if i.programPage != "" {
-				urls = append(urls, BeebURL(i.programPage))
-			}
+	for _, i := range selres {
+		if i.programPage != "" {
+			urls = append(urls, BeebURL(i.programPage))
 		}
 	}
-	return urls, selres
+	return urls
+
+	//var docs []*iplayerDocument
+	//docs = append(docs, id)
+	//docs = append(docs, nextdocs...)
+	//var selres []*iplayerSelectionResult
+	//for _, i := range docs {
+	//	isel := iplayerSelection{i.doc.Find(".list-item-inner")}
+	//	selres = append(selres, isel.selectionResults()...)
+	//	for _, i := range selres {
+	//		fmt.Println(i.programPage)
+	//		if i.programPage != "" {
+	//			urls = append(urls, BeebURL(i.programPage))
+	//		}
+	//	}
+	//}
+	//return urls, selres
 }
 
 func DocumentsFromResults(docres []*IplayerDocumentResult) []*iplayerDocument {
@@ -226,7 +233,7 @@ func DocumentsFromResults(docres []*IplayerDocumentResult) []*iplayerDocument {
 	return results
 }
 func NewMainCategory(np NextPager) *MainCategoryDocument {
-	var nextdocs []*iplayerDocument
+	 nextdocs := []*iplayerDocument{np.mainDoc()}
 	var progpagedocs []*iplayerDocument
 	npages := np.nextPages()
 	nextPages := collectPages(npages)
@@ -237,8 +244,13 @@ func NewMainCategory(np NextPager) *MainCategoryDocument {
 			log.Fatal(&i.Error)
 		}
 	}
-	pp, selres := np.programPages(nextdocs)
-	progPages := collectPages(pp)
+	var selres []*iplayerSelectionResult
+	for _, i := range nextdocs {
+		isel := i.programmeListSelection()
+		selres = append(selres, isel.selectionResults()...)
+	}
+	urls := np.programPages(selres)
+	progPages := collectPages(urls)
 	for _, i := range progPages {
 		if &i.Idoc != nil {
 			progpagedocs = append(progpagedocs, &i.Idoc)
