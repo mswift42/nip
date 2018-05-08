@@ -232,6 +232,7 @@ func DocumentsFromResults(docres []*IplayerDocumentResult) []*iplayerDocument {
 	}
 	return results
 }
+// TODO - Check correct nextdocs , progpageDocs are set as field.
 func NewMainCategory(np NextPager) *MainCategoryDocument {
 	 nextdocs := []*iplayerDocument{np.mainDoc()}
 	var progpagedocs []*iplayerDocument
@@ -250,6 +251,7 @@ func NewMainCategory(np NextPager) *MainCategoryDocument {
 		selres = append(selres, isel.selectionResults()...)
 	}
 	urls := np.programPages(selres)
+	fmt.Println(urls)
 	progPages := collectPages(urls)
 	for _, i := range progPages {
 		if &i.Idoc != nil {

@@ -32,27 +32,6 @@ func (tid *TestIplayerDocument) nextPages() []Pager {
 	})
 	return urls
 }
-// TODO - extract testiplayerdocument / iplayerDocument specific stuff into separate method.
-// TODO - move non NextPager stuff into NewMainCategoryDocument.
-//func (tid *TestIplayerDocument) programPages(nextdocs []*iplayerDocument) ([]Pager, []*iplayerSelectionResult) {
-//	var urls []Pager
-//	docs := []*iplayerDocument{tid.idoc}
-//	docs = append(docs, nextdocs...)
-//	fmt.Println(docs)
-//	var selres []*iplayerSelectionResult
-//	for _, i := range docs {
-//		isel := i.programmeListSelection()
-//		selres = append(selres, isel.selectionResults()...)
-//	}
-//	for _, i := range selres {
-//		if i.programPage != "" {
-//			fmt.Println("Printing Program Page: ", i.programPage)
-//			urls = append(urls, TestHTMLURL(i.programPage))
-//		}
-//	}
-//	fmt.Println(urls)
-//	return urls, selres
-//}
 
 func (tid *TestIplayerDocument) programPages(selres []*iplayerSelectionResult) []Pager {
 	var urls []Pager
