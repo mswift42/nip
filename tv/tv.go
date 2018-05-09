@@ -205,22 +205,6 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 		}
 	}
 	return urls
-
-	//var docs []*iplayerDocument
-	//docs = append(docs, id)
-	//docs = append(docs, nextdocs...)
-	//var selres []*iplayerSelectionResult
-	//for _, i := range docs {
-	//	isel := iplayerSelection{i.doc.Find(".list-item-inner")}
-	//	selres = append(selres, isel.selectionResults()...)
-	//	for _, i := range selres {
-	//		fmt.Println(i.programPage)
-	//		if i.programPage != "" {
-	//			urls = append(urls, BeebURL(i.programPage))
-	//		}
-	//	}
-	//}
-	//return urls, selres
 }
 
 func DocumentsFromResults(docres []*IplayerDocumentResult) []*iplayerDocument {
@@ -260,7 +244,7 @@ func NewMainCategory(np NextPager) *MainCategoryDocument {
 			log.Fatal(&i.Error)
 		}
 	}
-	return &MainCategoryDocument{np.mainDoc(), nextdocs, progpagedocs, selres}
+	return &MainCategoryDocument{np.mainDoc(), nextdocs[1:], progpagedocs, selres}
 }
 
 func collectPages(urls []Pager) []*IplayerDocumentResult {
