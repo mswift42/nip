@@ -105,6 +105,19 @@ func TestCollectPages(t *testing.T) {
 	}
 }
 
+func TestProgramPages(t *testing.T) {
+	doc := documentLoader("testhtml/films1.html")
+	tid := TestIplayerDocument{doc}
+	selres := tid.idoc.programmeListSelection().selectionResults()
+	urls := tid.programPages(selres)
+	if len(urls) != 2 {
+		t.Error("Expected length of urls to be 2, got: ", len(urls))
+	}
+	if urls[0] != TestHTMLURL("testhtml/adam_curtis.html") {
+		t.Error("Expected first url to be 'adam_curtis', got: ", urls[0])
+	}
+}
+
 var classicMary = []struct {
 	subtitle  string
 	thumbnail string
