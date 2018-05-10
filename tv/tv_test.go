@@ -116,6 +116,9 @@ func TestProgramPages(t *testing.T) {
 	if urls[0] != TestHTMLURL("testhtml/adam_curtis.html") {
 		t.Error("Expected first url to be 'adam_curtis', got: ", urls[0])
 	}
+	if urls[1] != TestHTMLURL("testhtml/storyville.html") {
+		t.Error("Expected second url to be 'storyville', got: ", urls[1])
+	}
 }
 
 var classicMary = []struct {
