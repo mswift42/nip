@@ -132,6 +132,15 @@ func TestProgramPages(t *testing.T) {
 	if urls[14] != TestHTMLURL("testhtml/saturday_kitchen.html") {
 		t.Error("expected last programpage to be 'saturday kitchen' got: ", urls[14])
 	}
+	docs := collectPages(urls)
+	if len(docs) != 15 {
+		t.Error("Expected length of collected docs to be 15, got: ", len(docs))
+	}
+	for _, i := range docs {
+		if i.Error != nil {
+			t.Error("Expected error to be nil, got: ", i.Error)
+		}
+	}
 }
 
 var classicMary = []struct {
