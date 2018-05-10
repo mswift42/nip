@@ -119,6 +119,19 @@ func TestProgramPages(t *testing.T) {
 	if urls[1] != TestHTMLURL("testhtml/storyville.html") {
 		t.Error("Expected second url to be 'storyville', got: ", urls[1])
 	}
+	doc = documentLoader("testhtml/food1.html")
+	tid = TestIplayerDocument{doc}
+	selres = tid.idoc.programmeListSelection().selectionResults()
+	urls = tid.programPages(selres)
+	if len(urls) != 15 {
+		t.Error("Expected length of urls to be 15, got: ", len(urls))
+	}
+	if urls[0] != TestHTMLURL("testhtml/back_in_time_for_tea.html") {
+		t.Error("Expected first food page to be 'back_in_time_for_tea', got: ", urls[0])
+	}
+	if urls[14] != TestHTMLURL("testhtml/saturday_kitchen.html") {
+		t.Error("expected last programpage to be 'saturday kitchen' got: ", urls[14])
+	}
 }
 
 var classicMary = []struct {
