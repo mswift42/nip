@@ -255,11 +255,19 @@ func TestProgramPage(t *testing.T) {
 			t.Error("Expected title to be Adam Curtis, got: ", i.Title)
 		}
 	}
-	if progs[0].Subtitle != "HyperNormalisation" {
-		t.Error("Expected subtitle of 1st prog to be 'HyperNormalisation', got: ", progs[0].Subtitle)
-	}
-	if progs[1].Subtitle != "Bitter Lake" {
-		t.Error("Expected 2nd programmes subtitle to be 'Bitter Lake', got: ", progs[1].Subtitle)
+	for i := range progs {
+		if progs[i].Subtitle != adam_curtis[i].subtitle {
+			t.Errorf("Expected subtitle to be %s, got: %s", adam_curtis[i].subtitle, progs[i].Subtitle)
+		}
+		if progs[i].URL != adam_curtis[i].url {
+			t.Errorf("Expected url to be %s, got: %s", adam_curtis[i].url, progs[i].URL)
+		}
+		if progs[i].Thumbnail != adam_curtis[i].thumbnail {
+			t.Errorf("Expected thumbnail to be %s, got: %s", adam_curtis[i].thumbnail, progs[i].Thumbnail)
+		}
+		if progs[i].Synopsis != adam_curtis[i].synopsis {
+			t.Errorf("Expected synopsis to be %s, got: %s", adam_curtis[i].synopsis, progs[i].Synopsis)
+		}
 	}
 }
 
