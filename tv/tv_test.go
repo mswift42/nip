@@ -224,6 +224,17 @@ func TestProgramPage(t *testing.T) {
 		t.Error("Expected subtitle of first storyville programme to be '112 Wedddings',"+
 			"got: ", progs[0].Subtitle)
 	}
+	doc = documentLoader("testhtml/adam_curtis.html")
+	pp = programPage{doc}
+	progs = pp.programmes()
+	if len(progs) != 2 {
+		t.Error("Expected length of adam_curtis programmes to be 2, got: ", len(progs))
+	}
+	for _, i := range progs {
+		if i.Title != "Adam Curtis" {
+			t.Error("Expected title to be Adam Curtis, got: ", i.Title)
+		}
+	}
 }
 
 var filmurls = []string{
