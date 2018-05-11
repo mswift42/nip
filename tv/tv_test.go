@@ -235,6 +235,12 @@ func TestProgramPage(t *testing.T) {
 			t.Error("Expected title to be Adam Curtis, got: ", i.Title)
 		}
 	}
+	if progs[0].Subtitle != "HyperNormalisation" {
+		t.Error("Expected subtitle of 1st prog to be 'HyperNormalisation', got: ", progs[0].Subtitle)
+	}
+	if progs[1].Subtitle != "Bitter Lake" {
+		t.Error("Expected 2nd programmes subtitle to be 'Bitter Lake', got: ", progs[1].Subtitle)
+	}
 }
 
 var filmurls = []string{
