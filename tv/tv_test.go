@@ -187,6 +187,26 @@ var classicMary = []struct {
 	},
 }
 
+var adam_curtis = []struct {
+	subtitle  string
+	thumbnail string
+	synopsis  string
+	url       string
+}{
+	{
+		"HyperNormalisation",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p04c0tsb.jpg",
+		"Welcome to the post-truth world. You know it’s not real. But you accept it as normal.",
+		"/iplayer/episode/p04b183c/adam-curtis-hypernormalisation",
+	},
+	{
+		"Bitter Lake",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p02h7n5x.jpg",
+		"An adventurous and epic film by Adam Curtis.",
+		"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
+	},
+}
+
 func TestProgramPage(t *testing.T) {
 	doc := documentLoader("testhtml/classic_mary_berry.html")
 	pp := programPage{doc}
