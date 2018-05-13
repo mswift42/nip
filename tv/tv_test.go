@@ -288,38 +288,8 @@ var foodurls = []string{
 }
 
 func TestNewMainCategory(t *testing.T) {
-	doc := documentLoader("testhtml/films1.html")
-	tid := TestIplayerDocument{doc}
-	np := tid.nextPages()
-	if len(np) != 1 {
-		t.Error("Expected length of nextpages to be 1, got: ", len(np))
-	}
-	if np[0] != TestHTMLURL("testhtml/films2.html") {
-		t.Error("Expected nextpage to be 'testhtml/films2.html', got: ", np[0])
-	}
-	nmd := NewMainCategory(&tid)
-	if len(nmd.programpagedocs) != 2 {
-		t.Error("Expected length of programpagedocs to be 2, got: ", len(nmd.programpagedocs))
-	}
-	progs := nmd.Programmes()
-	if len(progs) != 21 {
-		t.Error("Expected length of film Programmes to be 27, got: ", len(progs))
-	}
-	for _, i := range filmurls {
-		if !contains(progs, i) {
-			t.Errorf("Expected filmurls to contain %s ", i)
-		}
-	}
-	doc = documentLoader("testhtml/food1.html")
-	tid = TestIplayerDocument{doc}
-	nmd = NewMainCategory(&tid)
-	if len(nmd.nextdocs) != 1 {
-		t.Error("Expected length of nextdocs to be 19, got: ", len(nmd.nextdocs))
-	}
-	if len(nmd.programpagedocs) != 19 {
-		t.Error("Expected length of programPage docs to be 19, got: ", len(nmd.programpagedocs))
-	}
-	if len(nmd.selectionresults) != 24 {
-		t.Error("Expected length of selectionresults to be 24, got: ", len(nmd.selectionresults))
-	}
+	doc := documentLoader("testhtml/food1.html")
+	td := TestIplayerDocument{doc}
+	nmc := NewMainCategory(td)
+
 }
