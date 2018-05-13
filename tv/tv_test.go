@@ -297,4 +297,19 @@ func TestNewMainCategory(t *testing.T) {
 	if len(nmc.nextdocs) != 1 {
 		t.Error("Expected length of nextdocs to be 1, got: ", len(nmc.nextdocs))
 	}
+	food2 := nmc.nextdocs[0]
+	isel := iplayerSelection{food2.doc.Find(".list-item-inner")}
+	selres := isel.selectionResults()
+	if selres[0].programPage != "testhtml/saturday_kitchen_best_bites.html" {
+		t.Error("Expected 1st entry in food2 page to be 'Saturday Kitchen best bites', got: ",
+			selres[0].programPage)
+	}
+	if len(selres) != 4 {
+		t.Error("Expected length of selectionresults to be 4, got: ", len(selres))
+	}
+	for _, i := range selres {
+		if i.prog != nil {
+			t.Error("Expected prog to be nil, got: ", i.prog.Title)
+		}
+	}
 }
