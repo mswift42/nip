@@ -55,8 +55,8 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if progpage.prog != nil {
 		t.Error("Expected proramme to be nil: ", progpage.prog)
 	}
-	if progpage.programPage != "testhtml/adam_curtis.html" {
-		t.Error("Expected program Page to be 'testhtml/adam_curtis.html' not: ", progpage.programPage)
+	if progpage.programPage != "testhtml/AdamCurtis.html" {
+		t.Error("Expected program Page to be 'testhtml/AdamCurtis.html' not: ", progpage.programPage)
 	}
 	if selres[1].prog.Title != "A Simple Plan" {
 		t.Error("Expected second programme title to be 'A Simple Plan', got: ", selres[1].prog.Title)
@@ -113,8 +113,8 @@ func TestProgramPages(t *testing.T) {
 	if len(urls) != 2 {
 		t.Error("Expected length of urls to be 2, got: ", len(urls))
 	}
-	if urls[0] != TestHTMLURL("testhtml/adam_curtis.html") {
-		t.Error("Expected first url to be 'adam_curtis', got: ", urls[0])
+	if urls[0] != TestHTMLURL("testhtml/AdamCurtis.html") {
+		t.Error("Expected first url to be 'AdamCurtis', got: ", urls[0])
 	}
 	if urls[1] != TestHTMLURL("testhtml/storyville.html") {
 		t.Error("Expected second url to be 'storyville', got: ", urls[1])
@@ -187,7 +187,7 @@ var classicMary = []struct {
 	},
 }
 
-var adam_curtis = []struct {
+var AdamCurtis = []struct {
 	subtitle  string
 	thumbnail string
 	synopsis  string
@@ -244,11 +244,11 @@ func TestProgramPage(t *testing.T) {
 		t.Error("Expected subtitle of first storyville programme to be '112 Wedddings',"+
 			"got: ", progs[0].Subtitle)
 	}
-	doc = documentLoader("testhtml/adam_curtis.html")
+	doc = documentLoader("testhtml/AdamCurtis.html")
 	pp = programPage{doc}
 	progs = pp.programmes()
 	if len(progs) != 2 {
-		t.Error("Expected length of adam_curtis programmes to be 2, got: ", len(progs))
+		t.Error("Expected length of AdamCurtis programmes to be 2, got: ", len(progs))
 	}
 	for _, i := range progs {
 		if i.Title != "Adam Curtis" {
@@ -256,17 +256,17 @@ func TestProgramPage(t *testing.T) {
 		}
 	}
 	for i := range progs {
-		if progs[i].Subtitle != adam_curtis[i].subtitle {
-			t.Errorf("Expected subtitle to be %s, got: %s", adam_curtis[i].subtitle, progs[i].Subtitle)
+		if progs[i].Subtitle != AdamCurtis[i].subtitle {
+			t.Errorf("Expected subtitle to be %s, got: %s", AdamCurtis[i].subtitle, progs[i].Subtitle)
 		}
-		if progs[i].URL != adam_curtis[i].url {
-			t.Errorf("Expected url to be %s, got: %s", adam_curtis[i].url, progs[i].URL)
+		if progs[i].URL != AdamCurtis[i].url {
+			t.Errorf("Expected url to be %s, got: %s", AdamCurtis[i].url, progs[i].URL)
 		}
-		if progs[i].Thumbnail != adam_curtis[i].thumbnail {
-			t.Errorf("Expected thumbnail to be %s, got: %s", adam_curtis[i].thumbnail, progs[i].Thumbnail)
+		if progs[i].Thumbnail != AdamCurtis[i].thumbnail {
+			t.Errorf("Expected thumbnail to be %s, got: %s", AdamCurtis[i].thumbnail, progs[i].Thumbnail)
 		}
-		if progs[i].Synopsis != adam_curtis[i].synopsis {
-			t.Errorf("Expected synopsis to be %s, got: %s", adam_curtis[i].synopsis, progs[i].Synopsis)
+		if progs[i].Synopsis != AdamCurtis[i].synopsis {
+			t.Errorf("Expected synopsis to be %s, got: %s", AdamCurtis[i].synopsis, progs[i].Synopsis)
 		}
 	}
 }
