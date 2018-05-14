@@ -55,8 +55,8 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if progpage.prog != nil {
 		t.Error("Expected proramme to be nil: ", progpage.prog)
 	}
-	if progpage.programPage != "testhtml/AdamCurtis.html" {
-		t.Error("Expected program Page to be 'testhtml/AdamCurtis.html' not: ", progpage.programPage)
+	if progpage.programPage != "testhtml/adam_curtis.html" {
+		t.Error("Expected program Page to be 'testhtml/adam_curtis.html' not: ", progpage.programPage)
 	}
 	if selres[1].prog.Title != "A Simple Plan" {
 		t.Error("Expected second programme title to be 'A Simple Plan', got: ", selres[1].prog.Title)
@@ -113,8 +113,8 @@ func TestProgramPages(t *testing.T) {
 	if len(urls) != 2 {
 		t.Error("Expected length of urls to be 2, got: ", len(urls))
 	}
-	if urls[0] != TestHTMLURL("testhtml/AdamCurtis.html") {
-		t.Error("Expected first url to be 'AdamCurtis', got: ", urls[0])
+	if urls[0] != TestHTMLURL("testhtml/adam_curtis.html") {
+		t.Error("Expected first url to be 'adam_curtis', got: ", urls[0])
 	}
 	if urls[1] != TestHTMLURL("testhtml/storyville.html") {
 		t.Error("Expected second url to be 'storyville', got: ", urls[1])
@@ -244,7 +244,7 @@ func TestProgramPage(t *testing.T) {
 		t.Error("Expected subtitle of first storyville programme to be '112 Wedddings',"+
 			"got: ", progs[0].Subtitle)
 	}
-	doc = documentLoader("testhtml/AdamCurtis.html")
+	doc = documentLoader("testhtml/adam_curtis.html")
 	pp = programPage{doc}
 	progs = pp.programmes()
 	if len(progs) != 2 {
@@ -311,5 +311,9 @@ func TestNewMainCategory(t *testing.T) {
 		if i.prog != nil {
 			t.Error("Expected prog to be nil, got: ", i.prog.Title)
 		}
+	}
+	foodprogpagedocs := nmc.programpagedocs
+	if len(foodprogpagedocs) != 19 {
+		t.Error("Expected length of programpage docs to be 19, got: ", len(foodprogpagedocs))
 	}
 }
