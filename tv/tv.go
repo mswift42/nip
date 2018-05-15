@@ -183,7 +183,22 @@ func (mcd *MainCategoryDocument) Programmes() []*Programme {
 	return results
 }
 
-var seen = &sync.Map{}
+// TODO - store iplayerDocumentResult in map.
+
+// var seen = &sync.Map{}
+
+
+
+
+//func seenLink(p Pager) (*IplayerDocumentResult, bool) {
+//	mutex.Lock()
+//	if res, ok := seen[p]; ok {
+//		mutex.Unlock()
+//		return res, true
+//	}
+//
+//	mutex.Unlock()
+//}
 
 func (id *iplayerDocument) mainDoc() *iplayerDocument {
 	return id
@@ -216,9 +231,10 @@ func DocumentsFromResults(docres []*IplayerDocumentResult) []*iplayerDocument {
 	}
 	return results
 }
+
 // TODO - Check correct nextdocs , progpageDocs are set as field.
 func NewMainCategory(np NextPager) *MainCategoryDocument {
-	 nextdocs := []*iplayerDocument{np.mainDoc()}
+	nextdocs := []*iplayerDocument{np.mainDoc()}
 	var progpagedocs []*iplayerDocument
 	npages := np.nextPages()
 	nextPages := collectPages(npages)
@@ -248,25 +264,50 @@ func NewMainCategory(np NextPager) *MainCategoryDocument {
 	return &MainCategoryDocument{np.mainDoc(), nextdocs[1:], progpagedocs, selres}
 }
 
+//func collectPages(urls []Pager) []*IplayerDocumentResult {
+//	var results []*IplayerDocumentResult
+//	fmt.Println("Length of urls: ", len(urls))
+//	c := make(chan *IplayerDocumentResult)
+//	jobs := 0
+//	for _, i := range urls {
+//		_, ok := seen.LoadOrStore(i, true)
+//		if !ok {
+//			fmt.Println("Not Ok: ", i)
+//			jobs++
+//			go func(u Pager) {
+//				u.loadDocument(c)
+//			}(i)
+//		} else {
+//			fmt.Println("Ok: ", i)
+//		}
+//	}
+//	for i := 0; i < jobs; i++ {
+//		results = append(results, <-c)
+//	}
+//	fmt.Println("Length of results: ", results)
+//	return results
+//}
+
+var seen = make(map[Pager]*IplayerDocumentResult)
+var mutex = &sync.Mutex{}
 func collectPages(urls []Pager) []*IplayerDocumentResult {
 	var results []*IplayerDocumentResult
-	fmt.Println("Length of urls: ", len(urls))
+	fmt.Println("Length of ulrs: ", len(urls))
 	c := make(chan *IplayerDocumentResult)
-	jobs := 0
 	for _, i := range urls {
-		_, ok := seen.LoadOrStore(i, true)
-		if !ok {
-			fmt.Println("Not Ok: ", i)
-			jobs++
+		mutex.Lock()
+		if res, ok := seen[i]; ok {
+			results = append(results, res)
+			mutex.Unlock()
+		} else {
 			go func(u Pager) {
 				u.loadDocument(c)
 			}(i)
-		} else {
-			fmt.Println("Ok: ", i)
+			res := <-c
+			seen[i] = res
+			mutex.Unlock()
+			results = append(results, res)
 		}
-	}
-	for i := 0; i < jobs; i++ {
-		results = append(results, <-c)
 	}
 	fmt.Println("Length of results: ", results)
 	return results
