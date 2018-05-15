@@ -238,6 +238,7 @@ func NewMainCategory(np NextPager) *MainCategoryDocument {
 	fmt.Println(urls)
 	progPages := collectPages(urls)
 	for _, i := range progPages {
+		fmt.Println(i)
 		if &i.Idoc != nil {
 			progpagedocs = append(progpagedocs, &i.Idoc)
 		} else {
@@ -249,20 +250,24 @@ func NewMainCategory(np NextPager) *MainCategoryDocument {
 
 func collectPages(urls []Pager) []*IplayerDocumentResult {
 	var results []*IplayerDocumentResult
+	fmt.Println("Length of urls: ", len(urls))
 	c := make(chan *IplayerDocumentResult)
 	jobs := 0
 	for _, i := range urls {
 		_, ok := seen.LoadOrStore(i, true)
 		if !ok {
-
+			fmt.Println("Not Ok: ", i)
 			jobs++
 			go func(u Pager) {
 				u.loadDocument(c)
 			}(i)
+		} else {
+			fmt.Println("Ok: ", i)
 		}
 	}
 	for i := 0; i < jobs; i++ {
 		results = append(results, <-c)
 	}
+	fmt.Println("Length of results: ", results)
 	return results
 }
