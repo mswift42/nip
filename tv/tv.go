@@ -15,7 +15,7 @@ func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	if err != nil {
 		c <- &IplayerDocumentResult{iplayerDocument{}, err}
 	}
-	idoc := iplayerDocument{doc}
+	idoc := iplayerDocument{doc, string(bu)}
 	c <- &IplayerDocumentResult{idoc, nil}
 }
 
