@@ -21,7 +21,7 @@ func (thu TestHTMLURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	if err != nil {
 		c <- &IplayerDocumentResult{iplayerDocument{}, err}
 	}
-	idoc := iplayerDocument{doc}
+	idoc := iplayerDocument{doc, string(thu)}
 	c <- &IplayerDocumentResult{idoc, nil}
 }
 
