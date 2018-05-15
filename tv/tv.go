@@ -288,6 +288,8 @@ func NewMainCategory(np NextPager) *MainCategoryDocument {
 //	return results
 //}
 
+// TODO - Check if loadDocument should be using a map[pager]iplayerdocumentresult
+
 var seen = make(map[Pager]*IplayerDocumentResult)
 var mutex = &sync.Mutex{}
 func collectPages(urls []Pager) []*IplayerDocumentResult {
