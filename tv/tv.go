@@ -115,6 +115,7 @@ type Programme struct {
 
 type iplayerDocument struct {
 	doc *goquery.Document
+	url string
 }
 
 func (id *iplayerDocument) programmeListSelection() *iplayerSelection {
