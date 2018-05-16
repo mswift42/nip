@@ -322,4 +322,14 @@ func TestNewMainCategory(t *testing.T) {
 			t.Errorf("Expected foodprogs to contain %s ", i)
 		}
 	}
+	doc = documentLoader("testhtml/films1.html")
+	td = TestIplayerDocument{doc}
+	nmc = NewMainCategory(&td)
+	if len(nmc.nextdocs) != 1 {
+		t.Error("Expected length of nextdocs to be 1, got: ", len(nmc.nextdocs))
+	}
+	filmprogpagedocs := nmc.programpagedocs
+	if len(filmprogpagedocs) != 2 {
+		t.Error("Expected length of film programpages to be 2, got: ", len(filmprogpagedocs))
+	}
 }
