@@ -316,4 +316,10 @@ func TestNewMainCategory(t *testing.T) {
 	if len(foodprogpagedocs) != 19 {
 		t.Error("Expected length of programpage docs to be 19, got: ", len(foodprogpagedocs))
 	}
+	foodprogs := nmc.Programmes()
+	for _, i := range foodurls {
+		if !contains(foodprogs, i) {
+			t.Errorf("Expected foodprogs to contain %s ", i)
+		}
+	}
 }
