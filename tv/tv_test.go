@@ -277,6 +277,10 @@ var filmurls = []string{
 	"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
 	"/iplayer/episode/b03p8shj/buena-vista-social-club",
 	"/iplayer/episode/b00749zc/primary-colors",
+	"/iplayer/episode/b0078nh3/wonder-boys",
+	"/iplayer/episode/b0078cwc/a-simple-plan",
+	"/iplayer/episode/p0351g0z/fear-itself",
+	"/iplayer/episode/b05rmlr9/the-homesman",
 	"/iplayer/episode/b01q0k5b/wallace-and-gromit-a-close-shave",
 }
 
