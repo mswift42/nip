@@ -340,4 +340,9 @@ func TestNewMainCategory(t *testing.T) {
 	if len(filmprogrammes) != 26 {
 		t.Error("Expected length of programmes to be 26, got: ", len(filmprogrammes))
 	}
+	for _, i := range filmurls {
+		if !contains(filmprogrammes, i) {
+			t.Errorf("Expected filmprogrammes to contain %s ", i)
+		}
+	}
 }
