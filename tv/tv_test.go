@@ -332,4 +332,12 @@ func TestNewMainCategory(t *testing.T) {
 	if len(filmprogpagedocs) != 2 {
 		t.Error("Expected length of film programpages to be 2, got: ", len(filmprogpagedocs))
 	}
+	filmres := nmc.selectionresults
+	if len(filmres) != 22 {
+		t.Error("Expected length of selectionresults to be 22, got: ", len(filmres))
+	}
+	filmprogrammes := nmc.Programmes()
+	if len(filmprogrammes) != 26 {
+		t.Error("Expected length of programmes to be 26, got: ", len(filmprogrammes))
+	}
 }
