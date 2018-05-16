@@ -11,11 +11,18 @@ import (
 type BeebURL string
 
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
-	doc, err := goquery.NewDocument(string(bu))
+	var url string
+	if strings.HasPrefix(string(bu), "/iplayer/") {
+		url = "https://www.bbc.co.uk" + string(bu)
+	} else {
+		url = string(bu)
+	}
+	doc, err := goquery.NewDocument(url)
 	if err != nil {
 		c <- &IplayerDocumentResult{iplayerDocument{}, err}
 	}
 	idoc := iplayerDocument{doc, string(bu)}
+	fmt.Println("Loading document: ", string(bu))
 	c <- &IplayerDocumentResult{idoc, nil}
 }
 

@@ -9,8 +9,16 @@ func main() {
 	url := "https://www.bbc.co.uk/iplayer/categories/films/all?sort=atoz&page=1"
 	doc := tv.RemoteDocumentLoader(url)
 	nmc := tv.NewMainCategory(doc)
+	fmt.Println(nmc)
 	progs := nmc.Programmes()
 	for _, i := range progs {
-		fmt.Println(i.Title)
+		fmt.Println(i.Title, "\t\t", i.Subtitle)
+	}
+	foodurl := "https://www.bbc.co.uk/iplayer/categories/food/all?sort=atoz&page=1"
+	doc = tv.RemoteDocumentLoader(foodurl)
+	nmc = tv.NewMainCategory(doc)
+	progs = nmc.Programmes()
+	for _, i := range progs {
+		fmt.Println(i.Title, "\t", i.Subtitle)
 	}
 }
