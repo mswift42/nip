@@ -21,8 +21,7 @@ func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	if err != nil {
 		c <- &IplayerDocumentResult{iplayerDocument{}, err}
 	}
-	idoc := iplayerDocument{doc, string(bu)}
-	fmt.Println("Loading document: ", string(bu))
+	idoc := iplayerDocument{doc, bu}
 	c <- &IplayerDocumentResult{idoc, nil}
 }
 
@@ -122,7 +121,7 @@ type Programme struct {
 
 type iplayerDocument struct {
 	doc *goquery.Document
-	url string
+	url Pager
 }
 
 func (id *iplayerDocument) programmeListSelection() *iplayerSelection {
@@ -304,6 +303,7 @@ func collectPages(urls []Pager) []*IplayerDocumentResult {
 	var results []*IplayerDocumentResult
 	fmt.Println("Length of ulrs: ", len(urls))
 	c := make(chan *IplayerDocumentResult)
+	jobs := 0
 	for _, i := range urls {
 		mutex.Lock()
 		if res, ok := seen[i]; ok {
@@ -313,11 +313,19 @@ func collectPages(urls []Pager) []*IplayerDocumentResult {
 			go func(u Pager) {
 				u.loadDocument(c)
 			}(i)
-			res := <-c
-			seen[i] = res
-			mutex.Unlock()
-			results = append(results, res)
+			jobs++
+			//res := <-c
+			//seen[i] = res
+			//mutex.Unlock()
+			//results = append(results, res)
 		}
+	}
+	for i := 0;i<jobs;i++ {
+		res := <-c
+		mutex.Lock()
+		seen[res.Idoc.url] = res
+		mutex.Unlock()
+		results = append(results, res)
 	}
 	fmt.Println("Length of results: ", results)
 	return results
