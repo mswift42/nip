@@ -303,7 +303,6 @@ func collectPages(urls []Pager) []*IplayerDocumentResult {
 	var results []*IplayerDocumentResult
 	fmt.Println("Length of urls: ", len(urls))
 	c := make(chan *IplayerDocumentResult)
-	jobs := 0
 	for _, i := range urls {
 		mutex.Lock()
 		if res, ok := seen[i]; ok {
@@ -313,19 +312,11 @@ func collectPages(urls []Pager) []*IplayerDocumentResult {
 			go func(u Pager) {
 				u.loadDocument(c)
 			}(i)
-			jobs++
-			//res := <-c
-			//seen[i] = res
-			//mutex.Unlock()
-			//results = append(results, res)
+			res := <-c
+			seen[i] = res
+			mutex.Unlock()
+			results = append(results, res)
 		}
-	}
-	for i := 0;i<jobs;i++ {
-		res := <-c
-		mutex.Lock()
-		seen[res.Idoc.url] = res
-		mutex.Unlock()
-		results = append(results, res)
 	}
 	fmt.Println("Length of results: ", results)
 	return results
