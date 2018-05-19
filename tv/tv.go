@@ -104,6 +104,7 @@ func (is *iplayerSelection) pid() string {
 	}
 	return is.sel.Find(".list-item-inner > a").AttrOr("data-episode-id", "")
 }
+// TODO - Add available until field to Programme.
 
 // Programme represents an Iplayer TV programme. It consists of
 // the programme's title, subtitle, a short programme description,
@@ -189,20 +190,6 @@ func (mcd *MainCategoryDocument) Programmes() []*Programme {
 	}
 	return results
 }
-
-// TODO - store iplayerDocumentResult in map.
-
-// var seen = &sync.Map{}
-
-//func seenLink(p Pager) (*IplayerDocumentResult, bool) {
-//	mutex.Lock()
-//	if res, ok := seen[p]; ok {
-//		mutex.Unlock()
-//		return res, true
-//	}
-//
-//	mutex.Unlock()
-//}
 
 func (id *iplayerDocument) mainDoc() *iplayerDocument {
 	return id
