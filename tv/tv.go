@@ -194,9 +194,6 @@ func (mcd *MainCategoryDocument) Programmes() []*Programme {
 
 // var seen = &sync.Map{}
 
-
-
-
 //func seenLink(p Pager) (*IplayerDocumentResult, bool) {
 //	mutex.Lock()
 //	if res, ok := seen[p]; ok {
@@ -271,33 +268,9 @@ func NewMainCategory(np NextPager) *MainCategoryDocument {
 	return &MainCategoryDocument{np.mainDoc(), nextdocs[1:], progpagedocs, selres}
 }
 
-//func collectPages(urls []Pager) []*IplayerDocumentResult {
-//	var results []*IplayerDocumentResult
-//	fmt.Println("Length of urls: ", len(urls))
-//	c := make(chan *IplayerDocumentResult)
-//	jobs := 0
-//	for _, i := range urls {
-//		_, ok := seen.LoadOrStore(i, true)
-//		if !ok {
-//			fmt.Println("Not Ok: ", i)
-//			jobs++
-//			go func(u Pager) {
-//				u.loadDocument(c)
-//			}(i)
-//		} else {
-//			fmt.Println("Ok: ", i)
-//		}
-//	}
-//	for i := 0; i < jobs; i++ {
-//		results = append(results, <-c)
-//	}
-//	fmt.Println("Length of results: ", results)
-//	return results
-//}
-
-
 var seen = make(map[Pager]*IplayerDocumentResult)
 var mutex = &sync.Mutex{}
+
 func collectPages(urls []Pager) []*IplayerDocumentResult {
 	var results []*IplayerDocumentResult
 	fmt.Println("Length of urls: ", len(urls))
@@ -316,7 +289,7 @@ func collectPages(urls []Pager) []*IplayerDocumentResult {
 			}(i)
 		}
 	}
-	for i := 0;i<jobs;i++ {
+	for i := 0; i < jobs; i++ {
 		res := <-c
 		mutex.Lock()
 		seen[res.Idoc.url] = res
