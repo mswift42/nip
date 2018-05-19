@@ -292,6 +292,9 @@ var foodurls = []string{
 	"/iplayer/episode/p05rsy31/ken-homs-chinese-cookery-rice",
 	"/iplayer/episode/p05rsw3r/ken-homs-chinese-cookery-meat",
 	"/iplayer/episode/p05rr3hn/ken-homs-chinese-cookery-noodles",
+	"/iplayer/episode/p05tjrrz/madhur-jaffreys-flavours-of-india-tamil-nadu",
+	"/iplayer/episode/p05t9skh/madhur-jaffreys-flavours-of-india-goa",
+	"/iplayer/episode/p05t9pn8/madhur-jaffreys-flavours-of-india-punjab",
 }
 
 func TestNewMainCategory(t *testing.T) {
