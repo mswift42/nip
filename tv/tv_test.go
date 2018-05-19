@@ -289,6 +289,9 @@ var foodurls = []string{
 	"/iplayer/episode/b0752bbd/chef-vs-science-the-ultimate-kitchen-challenge",
 	"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
 	"/iplayer/episode/p05rts0s/delia-smiths-cookery-course-series-1-10-puddings",
+	"/iplayer/episode/p05rsy31/ken-homs-chinese-cookery-rice",
+	"/iplayer/episode/p05rsw3r/ken-homs-chinese-cookery-meat",
+	"/iplayer/episode/p05rr3hn/ken-homs-chinese-cookery-noodles",
 }
 
 func TestNewMainCategory(t *testing.T) {
