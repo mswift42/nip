@@ -295,6 +295,14 @@ var foodurls = []string{
 	"/iplayer/episode/p05tjrrz/madhur-jaffreys-flavours-of-india-tamil-nadu",
 	"/iplayer/episode/p05t9skh/madhur-jaffreys-flavours-of-india-goa",
 	"/iplayer/episode/p05t9pn8/madhur-jaffreys-flavours-of-india-punjab",
+	"/iplayer/episode/b07xsyr1/yes-chef-series-1-20-friday-final-4",
+	"/iplayer/episode/b07xsq9v/yes-chef-series-1-19-mary-ann-gilchrist",
+	"/iplayer/episode/b07xspv0/yes-chef-series-1-18-ryan-simpson",
+	"/iplayer/episode/b07xsplr/yes-chef-series-1-17-atul-kochhar",
+	"/iplayer/episode/b01mwxk4/lorraines-fast-fresh-and-easy-food-6-everyday-easy",
+	"/iplayer/episode/b01mrcxt/lorraines-fast-fresh-and-easy-food-5-posh-nosh",
+	"/iplayer/episode/b01ml70w/lorraines-fast-fresh-and-easy-food-4-baking-it",
+	"/iplayer/episode/b01mfxyy/lorraines-fast-fresh-and-easy-food-3-simple-classics",
 }
 
 func TestNewMainCategory(t *testing.T) {
