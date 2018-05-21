@@ -236,6 +236,10 @@ func TestProgramPage(t *testing.T) {
 		if progs[i].URL != classicMary[i].url {
 			t.Error("Expected url to be: "+classicMary[i].url+" got: ", progs[i].URL)
 		}
+		if progs[i].Available != classicMary[i].available {
+			t.Errorf("Expected available to be %s, got: %s",
+				classicMary[i].available, progs[i].Available)
+		}
 	}
 	doc = documentLoader("testhtml/storyville.html")
 	pp = programPage{doc}
