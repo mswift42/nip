@@ -1,12 +1,11 @@
 package tv
 
 import (
-	"github.com/mswift42/goquery"
-	"sync"
-	"strings"
-	"log"
 	"fmt"
-	"time"
+	"github.com/mswift42/goquery"
+	"log"
+	"strings"
+	"sync"
 )
 
 type BeebURL string
@@ -108,16 +107,10 @@ func (is *iplayerSelection) pid() string {
 	return is.sel.Find(".list-item-inner > a").AttrOr("data-episode-id", "")
 }
 
-func (is *iplayerSelection) available() time.Time {
-	availablestring := is.sel.Find(".tertiary > availability > period").AttrOr("title", "")
-	datestring := strings.Replace(availablestring, "available until ", "", 1)
-	layout := "15:04 02 Jan 2006"
-	t, err := time.Parse(layout, datestring)
-	if err != nil {
-		fmt.Println(err)
-	}
-	return t
+func (is *iplayerSelection) available() string {
+	return is.sel.Find(".tertiary > availability > period").AttrOr("title", "")
 }
+
 // TODO - Add available until field to Programme.
 
 // Programme represents an Iplayer TV programme. It consists of
@@ -132,7 +125,7 @@ type Programme struct {
 	Thumbnail string `json:"thumbnail"`
 	URL       string `json:"url"`
 	Index     int    `json:"index"`
-	Available time.Time `json:"available"`
+	Available string `json:"available"`
 }
 
 type iplayerDocument struct {
@@ -166,9 +159,10 @@ func newProgrammeFromProgramPage(title string, s *goquery.Selection) *Programme 
 	subtitle := s.Find(".content-item__title").Text()
 	synopsis := s.Find(".content-item__info__secondary > .content-item__description").Text()
 	url := s.Find("a").AttrOr("href", "")
+	available := s.Find(".content-item__sublabels > span").Last().Text()
 	sel := iplayerSelection{s}
 	thumbnail := sel.extractThumbnail()
-	return &Programme{title, subtitle, synopsis, "", thumbnail, url, 0}
+	return &Programme{title, subtitle, synopsis, "", thumbnail, url, 0, available}
 }
 
 func (is *iplayerSelection) extractThumbnail() string {
