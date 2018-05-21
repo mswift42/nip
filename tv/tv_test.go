@@ -148,42 +148,49 @@ var classicMary = []struct {
 	thumbnail string
 	synopsis  string
 	url       string
+	available string
 }{
 	{
 		"Series 1: Episode 6",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p062dlmz.jpg",
 		"Mary unleashes some of her classic favourites that have made a comeback.",
 		"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
+		"Available for 19 days",
 	},
 	{
 		"Series 1: Episode 5",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p061mhz1.jpg",
 		"Mary Berry returns to one of her most loved locations - Port Isaac in Cornwall.",
 		"/iplayer/episode/b09xsw6b/classic-mary-berry-series-1-episode-5",
+		"Available for 16 days",
 	},
 	{
 		"Series 1: Episode 4",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p06106t8.jpg",
 		"Mary has always loved entertaining and creates some timeless classics.",
 		"/iplayer/episode/b09x0tfw/classic-mary-berry-series-1-episode-4",
+		"Available for 9 days",
 	},
 	{
 		"Series 1: Episode 3",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p06084xr.jpg",
 		"Mary embraces the countryside with cooking inspired by food grown on farms and in gardens.",
 		"/iplayer/episode/b09w3ynk/classic-mary-berry-series-1-episode-3",
+		"Available until Mon 1pm",
 	},
 	{
 		"Series 1: Episode 2",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p05zf2vg.jpg",
 		"Mary Berry takes inspiration from a visit to a groundbreaking primary school in London.",
 		"/iplayer/episode/b09vfd5d/ad/classic-mary-berry-series-1-episode-2",
+		"Available for 13 days",
 	},
 	{
 		"Series 1: Episode 1",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p05yp3kv.jpg",
 		"Mary Berry indulges her love of comfort food with homely recipes.",
 		"/iplayer/episode/b09tp4ff/ad/classic-mary-berry-series-1-episode-1",
+		"Available for 6 days",
 	},
 }
 
