@@ -6,6 +6,7 @@ import (
 	"strings"
 	"log"
 	"fmt"
+	"time"
 )
 
 type BeebURL string
@@ -103,6 +104,17 @@ func (is *iplayerSelection) pid() string {
 		return pid
 	}
 	return is.sel.Find(".list-item-inner > a").AttrOr("data-episode-id", "")
+}
+
+func (is *iplayerSelection) available() time.Time {
+	availablestring := is.sel.Find(".tertiary > availability > period").AttrOr("title", "")
+	datestring := strings.Replace(availablestring, "available until ", "", 1)
+	layout := "15:04 02 Jan 2006"
+	t, err := time.Parse(layout, datestring)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return t
 }
 // TODO - Add available until field to Programme.
 
@@ -223,7 +235,6 @@ func DocumentsFromResults(docres []*IplayerDocumentResult) []*iplayerDocument {
 	return results
 }
 
-// TODO - Check correct nextdocs , progpageDocs are set as field.
 func NewMainCategory(np NextPager) *MainCategoryDocument {
 	nextdocs := []*iplayerDocument{np.mainDoc()}
 	var progpagedocs []*iplayerDocument
