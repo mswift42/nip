@@ -199,18 +199,21 @@ var AdamCurtis = []struct {
 	thumbnail string
 	synopsis  string
 	url       string
+	available string
 }{
 	{
 		"HyperNormalisation",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p04c0tsb.jpg",
 		"Welcome to the post-truth world. You know it’s not real. But you accept it as normal.",
 		"/iplayer/episode/p04b183c/adam-curtis-hypernormalisation",
+		"Available for over a year",
 	},
 	{
 		"Bitter Lake",
 		"https://ichef.bbci.co.uk/images/ic/304x171/p02h7n5x.jpg",
 		"An adventurous and epic film by Adam Curtis.",
 		"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
+		"Available for over a year",
 	},
 }
 
@@ -278,6 +281,9 @@ func TestProgramPage(t *testing.T) {
 		}
 		if progs[i].Synopsis != AdamCurtis[i].synopsis {
 			t.Errorf("Expected synopsis to be %s, got: %s", AdamCurtis[i].synopsis, progs[i].Synopsis)
+		}
+		if progs[i].Available != AdamCurtis[i].available {
+			t.Errorf("Expected available to be %s, got: %s", AdamCurtis[i].available, progs[i].Available)
 		}
 	}
 }
