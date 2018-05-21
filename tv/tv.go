@@ -67,6 +67,7 @@ func (is *iplayerSelection) programme() *Programme {
 	url := is.url()
 	thumbnail := is.thumbNail()
 	pid := is.pid()
+	available := is.available()
 	return &Programme{
 		Title:     title,
 		Subtitle:  subtitle,
@@ -75,6 +76,7 @@ func (is *iplayerSelection) programme() *Programme {
 		Thumbnail: thumbnail,
 		URL:       url,
 		Index:     0,
+		Available: available,
 	}
 }
 
@@ -130,6 +132,7 @@ type Programme struct {
 	Thumbnail string `json:"thumbnail"`
 	URL       string `json:"url"`
 	Index     int    `json:"index"`
+	Available time.Time `json:"available"`
 }
 
 type iplayerDocument struct {
