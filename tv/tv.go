@@ -108,7 +108,11 @@ func (is *iplayerSelection) pid() string {
 }
 
 func (is *iplayerSelection) available() string {
-	return is.sel.Find(".period").AttrOr("title", "")
+	avail :=  is.sel.Find(".period").AttrOr("title", "")
+	if avail == "" {
+		return is.sel.Find(".availability-duration").Text()
+	}
+	return avail
 }
 
 // TODO - Add available until field to Programme.
