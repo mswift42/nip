@@ -331,7 +331,12 @@ var filmprogs = []struct {
 	available string
 }{
 	{
-
+		"A Simple Plan",
+		"",
+		"/iplayer/episode/b0078cwc/a-simple-plan",
+		"Bill Paxton gets caught up in lies, deceit and murder after the discovery of $4 million.",
+		"https://ichef.bbci.co.uk/images/ic/336x189/p06586p5.jpg",
+		"Available until 09:00 27 May 2018",
 	},
 }
 
@@ -391,6 +396,37 @@ func TestNewMainCategory(t *testing.T) {
 	for _, i := range filmurls {
 		if !contains(filmprogrammes, i) {
 			t.Errorf("Expected filmprogrammes to contain %s ", i)
+		}
+	}
+	for i := range filmprogs {
+		found := findProgramme(filmprogrammes, filmprogs[i].url)
+		if found == nil {
+			t.Errorf("Expected programme: %q to be found.",
+				filmprogs[i].title + " " + filmprogs[i].subtitle)
+		}
+		if filmprogs[i].title != found.Title {
+			t.Errorf("Expected programme to have title: %q. got: %q", filmprogs[i].title,
+				found.Title)
+		}
+		if filmprogs[i].subtitle != found.Subtitle {
+			t.Errorf("Expected programme to have subtitle: %q. got: %q",
+				filmprogs[i].subtitle, found.Subtitle)
+		}
+		if filmprogs[i].url != found.URL {
+			t.Errorf("Expected programme to have url: %q. got: %q",
+				filmprogs[i].url, found.URL)
+		}
+		if filmprogs[i].synopsis != found.Synopsis {
+			t.Errorf("Expected programme to have synopsis: %q. got: %q",
+				filmprogs[i].synopsis, found.Synopsis)
+		}
+		if filmprogs[i].thumbnail != found.Thumbnail {
+			t.Errorf("Expected programme to have thumbnail: %q. got: %q",
+				filmprogs[i].thumbnail, found.Thumbnail)
+		}
+		if filmprogs[i].available != found.Available {
+			t.Errorf("Expected programme to hava availability: %q. got: %q",
+				filmprogs[i].available, found.Available)
 		}
 	}
 }
