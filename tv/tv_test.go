@@ -354,6 +354,14 @@ var filmprogs = []struct {
 		"https://ichef.bbci.co.uk/images/ic/336x189/p063zb3m.jpg",
 		"Available until 22:40 20 May 2018",
 	},
+	{
+		"Fear Itself",
+		"",
+		"/iplayer/episode/p0351g0z/fear-itself",
+		"Uncover how films scare us with this mesmerising journey through horror cinema.",
+		"https://ichef.bbci.co.uk/images/ic/336x189/p035db1t.jpg",
+		"Available for over a year",
+	},
 }
 
 func TestNewMainCategory(t *testing.T) {
