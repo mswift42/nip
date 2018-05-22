@@ -77,3 +77,12 @@ func contains(progs []*Programme, url string) bool {
 	}
 	return false
 }
+
+func findProgramme(progs []*Programme, url string) *Programme {
+	for _, i := range progs {
+		if i.URL == url {
+			return i
+		}
+	}
+	return nil
+}
