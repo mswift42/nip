@@ -362,6 +362,14 @@ var filmprogs = []struct {
 		"https://ichef.bbci.co.uk/images/ic/336x189/p035db1t.jpg",
 		"Available for over a year",
 	},
+	{
+		"The Homesman",
+		"",
+		"/iplayer/episode/b05rmlr9/the-homesman",
+		"Hilary Swank and Tommy Lee Jones star in this characterful western drama.",
+		"https://ichef.bbci.co.uk/images/ic/336x189/p053038q.jpg",
+		"Available until 09:00 30 August 2018",
+	},
 }
 
 func TestNewMainCategory(t *testing.T) {
