@@ -338,6 +338,22 @@ var filmprogs = []struct {
 		"https://ichef.bbci.co.uk/images/ic/336x189/p06586p5.jpg",
 		"Available until 09:00 27 May 2018",
 	},
+	{
+		"Bill",
+		"",
+		"/iplayer/episode/b08lvcg1/bill",
+		"Bill Shakespeare (Matthew Baynton) leaves Stratford to follow his dream.",
+		"https://ichef.bbci.co.uk/images/ic/336x189/p05r6x03.jpg",
+		"Available until 19:00 23 May 2018",
+	},
+	{
+		"Buena Vista Social Club",
+		"",
+		"/iplayer/episode/b03p8shj/buena-vista-social-club",
+		"A group of Cuban musicians are brought together by Ry Cooder to record their music.",
+		"https://ichef.bbci.co.uk/images/ic/336x189/p063zb3m.jpg",
+		"Available until 22:40 20 May 2018",
+	},
 }
 
 func TestNewMainCategory(t *testing.T) {
