@@ -322,6 +322,19 @@ var foodurls = []string{
 	"/iplayer/episode/b01mfxyy/lorraines-fast-fresh-and-easy-food-3-simple-classics",
 }
 
+var filmprogs = []struct {
+	title string
+	subtitle string
+	url string
+	synopsis string
+	thumbnail string
+	available string
+}{
+	{
+
+	},
+}
+
 func TestNewMainCategory(t *testing.T) {
 	doc := documentLoader("testhtml/food1.html")
 	td := TestIplayerDocument{doc}
