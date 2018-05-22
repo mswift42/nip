@@ -240,7 +240,7 @@ func TestProgramPage(t *testing.T) {
 			t.Error("Expected url to be: "+classicMary[i].url+" got: ", progs[i].URL)
 		}
 		if progs[i].Available != classicMary[i].available {
-			t.Errorf("Expected available to be %s, got: %s",
+			t.Errorf("Expected available to be %q, got: %q",
 				classicMary[i].available, progs[i].Available)
 		}
 	}
@@ -271,19 +271,19 @@ func TestProgramPage(t *testing.T) {
 	}
 	for i := range progs {
 		if progs[i].Subtitle != AdamCurtis[i].subtitle {
-			t.Errorf("Expected subtitle to be %s, got: %s", AdamCurtis[i].subtitle, progs[i].Subtitle)
+			t.Errorf("Expected subtitle to be %q, got: %q", AdamCurtis[i].subtitle, progs[i].Subtitle)
 		}
 		if progs[i].URL != AdamCurtis[i].url {
-			t.Errorf("Expected url to be %s, got: %s", AdamCurtis[i].url, progs[i].URL)
+			t.Errorf("Expected url to be %q, got: %q", AdamCurtis[i].url, progs[i].URL)
 		}
 		if progs[i].Thumbnail != AdamCurtis[i].thumbnail {
-			t.Errorf("Expected thumbnail to be %s, got: %s", AdamCurtis[i].thumbnail, progs[i].Thumbnail)
+			t.Errorf("Expected thumbnail to be %q, got: %q", AdamCurtis[i].thumbnail, progs[i].Thumbnail)
 		}
 		if progs[i].Synopsis != AdamCurtis[i].synopsis {
-			t.Errorf("Expected synopsis to be %s, got: %s", AdamCurtis[i].synopsis, progs[i].Synopsis)
+			t.Errorf("Expected synopsis to be %q, got: %q", AdamCurtis[i].synopsis, progs[i].Synopsis)
 		}
 		if progs[i].Available != AdamCurtis[i].available {
-			t.Errorf("Expected available to be %s, got: %s", AdamCurtis[i].available, progs[i].Available)
+			t.Errorf("Expected available to be %q, got: %q", AdamCurtis[i].available, progs[i].Available)
 		}
 	}
 }
@@ -420,7 +420,7 @@ func TestNewMainCategory(t *testing.T) {
 	foodprogs := nmc.Programmes()
 	for _, i := range foodurls {
 		if !contains(foodprogs, i) {
-			t.Errorf("Expected foodprogs to contain %s ", i)
+			t.Errorf("Expected foodprogs to contain %q ", i)
 		}
 	}
 	doc = documentLoader("testhtml/films1.html")
@@ -443,7 +443,7 @@ func TestNewMainCategory(t *testing.T) {
 	}
 	for _, i := range filmurls {
 		if !contains(filmprogrammes, i) {
-			t.Errorf("Expected filmprogrammes to contain %s ", i)
+			t.Errorf("Expected filmprogrammes to contain %q ", i)
 		}
 	}
 	for i := range filmprogs {
