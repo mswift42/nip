@@ -368,7 +368,7 @@ var filmprogs = []struct {
 		"/iplayer/episode/b05rmlr9/the-homesman",
 		"Hilary Swank and Tommy Lee Jones star in this characterful western drama.",
 		"https://ichef.bbci.co.uk/images/ic/336x189/p053038q.jpg",
-		"Available until 09:00 30 August 2018",
+		"Available until 00:50 16 May 2018",
 	},
 	{
 		"Lara Croft Tomb Raider: The Cradle of Life",
@@ -473,8 +473,8 @@ func TestNewMainCategory(t *testing.T) {
 				filmprogs[i].thumbnail, found.Thumbnail)
 		}
 		if filmprogs[i].available != found.Available {
-			t.Errorf("Expected programme to hava availability: %q. got: %q",
-				filmprogs[i].available, found.Available)
+			t.Errorf("Expected programme: %q to have availability: %q. got: %q",
+				filmprogs[i].title, filmprogs[i].available, found.Available)
 		}
 	}
 }
