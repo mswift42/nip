@@ -370,6 +370,22 @@ var filmprogs = []struct {
 		"https://ichef.bbci.co.uk/images/ic/336x189/p053038q.jpg",
 		"Available until 09:00 30 August 2018",
 	},
+	{
+		"Lara Croft Tomb Raider: The Cradle of Life",
+		"",
+		"/iplayer/episode/b007ck00/lara-croft-tomb-raider-the-cradle-of-life",
+		"Archaeologist Lara Croft faces a race against time to find mad bioweapons genius Dr Reiss.",
+		"https://ichef.bbci.co.uk/images/ic/336x189/p05zxkj2.jpg",
+		"Available until 09:00 30 August 2018",
+	},
+	{
+		"Man on the Moon",
+		"",
+		"/iplayer/episode/b007cjz1/man-on-the-moon",
+		"Biopic of controversial comedian and star of Taxi and Saturday Night Live, Andy Kaufman.",
+		"https://ichef.bbci.co.uk/images/ic/336x189/p05mwz8b.jpg",
+		"Available until 09:00 27 May 2018",
+	},
 }
 
 func TestNewMainCategory(t *testing.T) {
