@@ -115,7 +115,7 @@ func (is *iplayerSelection) available() string {
 	return avail
 }
 
-// TODO - Add available until field to Programme.
+// TODO - Add duration field to Programme.
 
 // Programme represents an Iplayer TV programme. It consists of
 // the programme's title, subtitle, a short programme description,
