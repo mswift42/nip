@@ -6,6 +6,7 @@ import (
 	"log"
 	"strings"
 	"sync"
+	"regexp"
 )
 
 type BeebURL string
@@ -118,7 +119,8 @@ func (is *iplayerSelection) available() string {
 }
 
 func (is *iplayerSelection) duration() string {
-	return is.sel.Find(".duration").Last().Text()
+	re := regexp.MustCompile(`\d+\smins`)
+	return re.FindString(is.sel.Find(".duration").Last().Text())
 }
 
 // TODO - Add duration field to Programme.
