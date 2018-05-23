@@ -67,6 +67,7 @@ func (is *iplayerSelection) programme() *Programme {
 	thumbnail := is.thumbNail()
 	pid := is.pid()
 	available := is.available()
+	duration := is.duration()
 	return &Programme{
 		Title:     title,
 		Subtitle:  subtitle,
@@ -76,6 +77,7 @@ func (is *iplayerSelection) programme() *Programme {
 		URL:       url,
 		Index:     0,
 		Available: available,
+		Duration: duration,
 	}
 }
 
@@ -116,7 +118,7 @@ func (is *iplayerSelection) available() string {
 }
 
 func (is *iplayerSelection) duration() string {
-	return is.sel.Find(".duration").Text()
+	return is.sel.Find(".duration").Last().Text()
 }
 
 // TODO - Add duration field to Programme.
