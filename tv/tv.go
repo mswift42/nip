@@ -115,6 +115,10 @@ func (is *iplayerSelection) available() string {
 	return avail
 }
 
+func (is *iplayerSelection) duration() string {
+	return is.sel.Find(".duration").Text()
+}
+
 // TODO - Add duration field to Programme.
 
 // Programme represents an Iplayer TV programme. It consists of
@@ -165,9 +169,11 @@ func newProgrammeFromProgramPage(title string, s *goquery.Selection) *Programme 
 	synopsis := s.Find(".content-item__info__secondary > .content-item__description").Text()
 	url := s.Find("a").AttrOr("href", "")
 	available := s.Find(".content-item__sublabels > span").Last().Text()
+	duration := s.Find(".content-item__sublabels > span").First().Text()
 	sel := iplayerSelection{s}
 	thumbnail := sel.extractThumbnail()
-	return &Programme{title, subtitle, synopsis, "", thumbnail, url, 0, available}
+	return &Programme{title, subtitle, synopsis, "",
+		thumbnail, url, 0, available, duration}
 }
 
 func (is *iplayerSelection) extractThumbnail() string {
