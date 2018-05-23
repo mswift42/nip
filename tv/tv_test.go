@@ -329,6 +329,7 @@ var filmprogs = []struct {
 	synopsis string
 	thumbnail string
 	available string
+	duration string
 }{
 	{
 		"A Simple Plan",
@@ -337,6 +338,7 @@ var filmprogs = []struct {
 		"Bill Paxton gets caught up in lies, deceit and murder after the discovery of $4 million.",
 		"https://ichef.bbci.co.uk/images/ic/336x189/p06586p5.jpg",
 		"Available until 09:00 27 May 2018",
+		"114 mins",
 	},
 	{
 		"Bill",
@@ -345,6 +347,8 @@ var filmprogs = []struct {
 		"Bill Shakespeare (Matthew Baynton) leaves Stratford to follow his dream.",
 		"https://ichef.bbci.co.uk/images/ic/336x189/p05r6x03.jpg",
 		"Available until 19:00 23 May 2018",
+		"88 mins",
+
 	},
 	{
 		"Buena Vista Social Club",
@@ -353,6 +357,7 @@ var filmprogs = []struct {
 		"A group of Cuban musicians are brought together by Ry Cooder to record their music.",
 		"https://ichef.bbci.co.uk/images/ic/336x189/p063zb3m.jpg",
 		"Available until 22:40 20 May 2018",
+		"105 mins",
 	},
 	{
 		"Fear Itself",
@@ -361,6 +366,7 @@ var filmprogs = []struct {
 		"Uncover how films scare us with this mesmerising journey through horror cinema.",
 		"https://ichef.bbci.co.uk/images/ic/336x189/p035db1t.jpg",
 		"Available for over a year",
+		"88 mins",
 	},
 	{
 		"The Homesman",
@@ -369,6 +375,7 @@ var filmprogs = []struct {
 		"Hilary Swank and Tommy Lee Jones star in this characterful western drama.",
 		"https://ichef.bbci.co.uk/images/ic/336x189/p053038q.jpg",
 		"Available until 00:50 16 May 2018",
+		"113 mins",
 	},
 	{
 		"Lara Croft Tomb Raider: The Cradle of Life",
@@ -377,6 +384,7 @@ var filmprogs = []struct {
 		"Archaeologist Lara Croft faces a race against time to find mad bioweapons genius Dr Reiss.",
 		"https://ichef.bbci.co.uk/images/ic/336x189/p05zxkj2.jpg",
 		"Available until 09:00 30 August 2018",
+		"105 mins",
 	},
 	{
 		"Man on the Moon",
@@ -385,6 +393,7 @@ var filmprogs = []struct {
 		"Biopic of controversial comedian and star of Taxi and Saturday Night Live, Andy Kaufman.",
 		"https://ichef.bbci.co.uk/images/ic/336x189/p05mwz8b.jpg",
 		"Available until 09:00 27 May 2018",
+		"118 mins",
 	},
 }
 
@@ -475,6 +484,10 @@ func TestNewMainCategory(t *testing.T) {
 		if filmprogs[i].available != found.Available {
 			t.Errorf("Expected programme: %q to have availability: %q. got: %q",
 				filmprogs[i].title, filmprogs[i].available, found.Available)
+		}
+		if filmprogs[i].duration != found.Duration {
+			t.Errorf("Expected programme: %q to have duration %q, got: %q",
+				filmprogs[i].title, filmprogs[i].duration, found.Duration)
 		}
 	}
 }
