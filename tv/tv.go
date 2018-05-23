@@ -108,7 +108,7 @@ func (is *iplayerSelection) pid() string {
 }
 
 func (is *iplayerSelection) available() string {
-	avail :=  is.sel.Find(".period").AttrOr("title", "")
+	avail := is.sel.Find(".period").AttrOr("title", "")
 	if avail == "" {
 		return is.sel.Find(".availability-duration").Text()
 	}
@@ -130,6 +130,7 @@ type Programme struct {
 	URL       string `json:"url"`
 	Index     int    `json:"index"`
 	Available string `json:"available"`
+	Duration  string `json:"duration"`
 }
 
 type iplayerDocument struct {
