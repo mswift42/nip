@@ -200,6 +200,7 @@ var AdamCurtis = []struct {
 	synopsis  string
 	url       string
 	available string
+	duration string
 }{
 	{
 		"HyperNormalisation",
@@ -207,6 +208,7 @@ var AdamCurtis = []struct {
 		"Welcome to the post-truth world. You know it’s not real. But you accept it as normal.",
 		"/iplayer/episode/p04b183c/adam-curtis-hypernormalisation",
 		"Available for over a year",
+		"166 mins",
 	},
 	{
 		"Bitter Lake",
@@ -214,6 +216,7 @@ var AdamCurtis = []struct {
 		"An adventurous and epic film by Adam Curtis.",
 		"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
 		"Available for over a year",
+		"137 mins",
 	},
 }
 
@@ -284,6 +287,10 @@ func TestProgramPage(t *testing.T) {
 		}
 		if progs[i].Available != AdamCurtis[i].available {
 			t.Errorf("Expected available to be %q, got: %q", AdamCurtis[i].available, progs[i].Available)
+		}
+		if progs[i].Duration != AdamCurtis[i].duration {
+			t.Errorf("Expected title %q to have duration %q, got: %q",
+				AdamCurtis[i].subtitle, AdamCurtis[i].duration, progs[i].Duration)
 		}
 	}
 }
