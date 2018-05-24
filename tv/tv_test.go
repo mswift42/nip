@@ -149,6 +149,7 @@ var classicMary = []struct {
 	synopsis  string
 	url       string
 	available string
+	duration string
 }{
 	{
 		"Series 1: Episode 6",
@@ -156,6 +157,7 @@ var classicMary = []struct {
 		"Mary unleashes some of her classic favourites that have made a comeback.",
 		"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
 		"Available for 19 days",
+		"29 mins",
 	},
 	{
 		"Series 1: Episode 5",
@@ -163,6 +165,7 @@ var classicMary = []struct {
 		"Mary Berry returns to one of her most loved locations - Port Isaac in Cornwall.",
 		"/iplayer/episode/b09xsw6b/classic-mary-berry-series-1-episode-5",
 		"Available for 16 days",
+		"29 mins",
 	},
 	{
 		"Series 1: Episode 4",
@@ -170,6 +173,7 @@ var classicMary = []struct {
 		"Mary has always loved entertaining and creates some timeless classics.",
 		"/iplayer/episode/b09x0tfw/classic-mary-berry-series-1-episode-4",
 		"Available for 9 days",
+		"29 mins",
 	},
 	{
 		"Series 1: Episode 3",
@@ -177,6 +181,7 @@ var classicMary = []struct {
 		"Mary embraces the countryside with cooking inspired by food grown on farms and in gardens.",
 		"/iplayer/episode/b09w3ynk/classic-mary-berry-series-1-episode-3",
 		"Available until Mon 1pm",
+		"29 mins",
 	},
 	{
 		"Series 1: Episode 2",
@@ -184,6 +189,7 @@ var classicMary = []struct {
 		"Mary Berry takes inspiration from a visit to a groundbreaking primary school in London.",
 		"/iplayer/episode/b09vfd5d/ad/classic-mary-berry-series-1-episode-2",
 		"Available for 13 days",
+		"30 mins",
 	},
 	{
 		"Series 1: Episode 1",
@@ -191,6 +197,7 @@ var classicMary = []struct {
 		"Mary Berry indulges her love of comfort food with homely recipes.",
 		"/iplayer/episode/b09tp4ff/ad/classic-mary-berry-series-1-episode-1",
 		"Available for 6 days",
+		"30 mins",
 	},
 }
 
