@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"github.com/mswift42/goquery"
 	"log"
+	"regexp"
 	"strings"
 	"sync"
-	"regexp"
 )
 
 type BeebURL string
@@ -78,7 +78,7 @@ func (is *iplayerSelection) programme() *Programme {
 		URL:       url,
 		Index:     0,
 		Available: available,
-		Duration: duration,
+		Duration:  duration,
 	}
 }
 
@@ -122,8 +122,6 @@ func (is *iplayerSelection) duration() string {
 	re := regexp.MustCompile(`\d+\smins`)
 	return re.FindString(is.sel.Find(".duration").Last().Text())
 }
-
-// TODO - Add duration field to Programme.
 
 // Programme represents an Iplayer TV programme. It consists of
 // the programme's title, subtitle, a short programme description,

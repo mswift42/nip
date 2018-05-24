@@ -149,7 +149,7 @@ var classicMary = []struct {
 	synopsis  string
 	url       string
 	available string
-	duration string
+	duration  string
 }{
 	{
 		"Series 1: Episode 6",
@@ -207,7 +207,7 @@ var AdamCurtis = []struct {
 	synopsis  string
 	url       string
 	available string
-	duration string
+	duration  string
 }{
 	{
 		"HyperNormalisation",
@@ -337,13 +337,13 @@ var foodurls = []string{
 }
 
 var filmprogs = []struct {
-	title string
-	subtitle string
-	url string
-	synopsis string
+	title     string
+	subtitle  string
+	url       string
+	synopsis  string
 	thumbnail string
 	available string
-	duration string
+	duration  string
 }{
 	{
 		"A Simple Plan",
@@ -362,7 +362,6 @@ var filmprogs = []struct {
 		"https://ichef.bbci.co.uk/images/ic/336x189/p05r6x03.jpg",
 		"Available until 19:00 23 May 2018",
 		"88 mins",
-
 	},
 	{
 		"Buena Vista Social Club",
@@ -473,7 +472,7 @@ func TestNewMainCategory(t *testing.T) {
 		found := findProgramme(filmprogrammes, filmprogs[i].url)
 		if found == nil {
 			t.Errorf("Expected programme: %q to be found.",
-				filmprogs[i].title + " " + filmprogs[i].subtitle)
+				filmprogs[i].title+" "+filmprogs[i].subtitle)
 		}
 		if filmprogs[i].title != found.Title {
 			t.Errorf("Expected programme to have title: %q. got: %q", filmprogs[i].title,

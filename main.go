@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/mswift42/nip/tv"
 	"fmt"
+	"github.com/mswift42/nip/tv"
 )
 
 func main() {
