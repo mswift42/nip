@@ -188,8 +188,9 @@ type Category struct {
 	programmes []*Programme
 }
 
-func newCategory(name string, mcd *MainCategoryDocument) *Category {
-	return &Category{name, mcd.Programmes()}
+func newCategory(name string, np NextPager) *Category {
+	nmc := NewMainCategory(np)
+	return &Category{name, nmc.Programmes()}
 }
 
 type MainCategoryDocument struct {
