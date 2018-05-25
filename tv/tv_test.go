@@ -1,9 +1,8 @@
 package tv
 
 import (
-	"fmt"
 	"testing"
-)
+	)
 
 func TestLoadingDocument(t *testing.T) {
 	url := TestHTMLURL("testhtml/food1.html")
@@ -99,7 +98,6 @@ func TestCollectPages(t *testing.T) {
 	doc = documentLoader("testhtml/films2.html")
 	tid = TestIplayerDocument{doc}
 	np = tid.nextPages()
-	fmt.Println(np)
 	if len(np) != 1 {
 		t.Error("Expected length of nextPages to be 1, got: ", len(np))
 	}

@@ -1,13 +1,12 @@
 package tv
 
 import (
-	"fmt"
 	"github.com/mswift42/goquery"
 	"log"
 	"regexp"
 	"strings"
 	"sync"
-)
+	)
 
 type BeebURL string
 
@@ -264,10 +263,8 @@ func NewMainCategory(np NextPager) *MainCategoryDocument {
 		selres = append(selres, isel.selectionResults()...)
 	}
 	urls := np.programPages(selres)
-	fmt.Println(urls)
 	progPages := collectPages(urls)
 	for _, i := range progPages {
-		fmt.Println(i)
 		if &i.Idoc != nil {
 			progpagedocs = append(progpagedocs, &i.Idoc)
 		} else {
@@ -282,7 +279,6 @@ var mutex = &sync.Mutex{}
 
 func collectPages(urls []Pager) []*IplayerDocumentResult {
 	var results []*IplayerDocumentResult
-	fmt.Println("Length of urls: ", len(urls))
 	c := make(chan *IplayerDocumentResult)
 	jobs := 0
 	for _, i := range urls {
@@ -305,6 +301,5 @@ func collectPages(urls []Pager) []*IplayerDocumentResult {
 		mutex.Unlock()
 		results = append(results, res)
 	}
-	fmt.Println("Length of results: ", results)
 	return results
 }
