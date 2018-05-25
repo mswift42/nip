@@ -6,7 +6,8 @@ import (
 	"regexp"
 	"strings"
 	"sync"
-	)
+	"fmt"
+)
 
 type BeebURL string
 
@@ -136,6 +137,11 @@ type Programme struct {
 	Index     int    `json:"index"`
 	Available string `json:"available"`
 	Duration  string `json:"duration"`
+}
+
+func (p *Programme) String() string {
+	return fmt.Sprintf("%s: %s\t%s, %s, %s\n",
+		p.Index, p.Title,p.Subtitle, p.Available, p.Duration)
 }
 
 type iplayerDocument struct {
