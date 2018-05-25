@@ -140,7 +140,7 @@ type Programme struct {
 }
 
 func (p *Programme) String() string {
-	return fmt.Sprintf("%s: %s\t%s, %s, %s\n",
+	return fmt.Sprintf("%d: %s %s, %s, %s\n",
 		p.Index, p.Title,p.Subtitle, p.Available, p.Duration)
 }
 

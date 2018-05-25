@@ -12,13 +12,13 @@ func main() {
 	fmt.Println(nmc)
 	progs := nmc.Programmes()
 	for _, i := range progs {
-		fmt.Println(i.Title, "\t\t", i.Subtitle)
+		fmt.Println(i)
 	}
 	foodurl := "https://www.bbc.co.uk/iplayer/categories/food/all?sort=atoz&page=1"
 	doc = tv.RemoteDocumentLoader(foodurl)
 	nmc = tv.NewMainCategory(doc)
 	progs = nmc.Programmes()
 	for _, i := range progs {
-		fmt.Println(i.Title, "\t", i.Subtitle)
+		fmt.Println(i)
 	}
 }
