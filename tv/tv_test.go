@@ -504,3 +504,15 @@ func TestNewMainCategory(t *testing.T) {
 		}
 	}
 }
+
+func TestCategory(t *testing.T) {
+	doc := documentLoader("testhtml/films1.html")
+	td := TestIplayerDocument{doc}
+	cat := newCategory("films", &td)
+	if cat.name != "films" {
+		t.Errorf("Expected category's name to be 'films' , got: %q", cat.name)
+	}
+	if len(cat.programmes) != 26 {
+		t.Error("Expected length of programmes to be 26, got: ", len(cat.programmes))
+	}
+}
