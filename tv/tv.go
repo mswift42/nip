@@ -189,8 +189,8 @@ func (is *iplayerSelection) extractThumbnail() string {
 }
 
 type Category struct {
-	name       string
-	programmes []*Programme
+	Name       string
+	Programmes []*Programme
 }
 
 func newCategory(name string, np NextPager) *Category {
