@@ -22,9 +22,20 @@ func (pdb *ProgrammeDB) toJson() ([]byte, error) {
 
 func (pdb *ProgrammeDB) Save(filename string) error {
 	pdb.Saved = time.Now()
+	pdb.index()
 	json ,err := pdb.toJson()
 	if err != nil {
 		return err
 	}
 	return ioutil.WriteFile(filename, json, 0644)
+}
+
+func (pdb *ProgrammeDB) index() {
+	index := 0
+	for _, i := range pdb.Categories {
+		for _, j := range i.Programmes {
+			j.Index = index
+			index++
+		}
+	}
 }
