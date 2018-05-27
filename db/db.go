@@ -12,6 +12,16 @@ type ProgrammeDB struct {
 	Saved time.Time `json:"saved"`
 }
 
+func RestoreProgrammeDB(filename string) (*ProgrammeDB, error) {
+	file, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	var pdb *ProgrammeDB
+	json.Unmarshal(file, pdb)
+	return pdb, nil
+}
+
 func (pdb *ProgrammeDB) toJson() ([]byte, error) {
 	marshalled, err := json.MarshalIndent(pdb, "", "\t")
 	if err != nil {
