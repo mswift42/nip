@@ -8,6 +8,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/pkg/errors"
+	"strings"
 )
 
 type ProgrammeDB struct {
@@ -79,6 +80,22 @@ func (pdb *ProgrammeDB) ListAvailableCategories() string {
 	var buffer bytes.Buffer
 	for _, i := range pdb.Categories {
 		buffer.WriteString(i.Name + "\n")
+	}
+	return buffer.String()
+}
+
+func (pdb *ProgrammeDB) FindTitle(title string) string {
+	var buffer bytes.Buffer
+	for _, i := range pdb.Categories {
+		for _, j := range i.Programmes {
+			if strings.Contains(strings.ToLower(j.String()),
+			strings.ToLower(title)) {
+				buffer.WriteString(j.String() + "\n")
+			}
+		}
+	}
+	if len(buffer.Bytes()) == 0 {
+		return "No Matches found.\n"
 	}
 	return buffer.String()
 }
