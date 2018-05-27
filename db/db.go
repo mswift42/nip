@@ -74,3 +74,11 @@ func (pdb *ProgrammeDB) findCategory(category string) (*tv.Category, error) {
 	}
 	return nil, errors.New("Can't find Category with Name: " + category)
 }
+
+func (pdb *ProgrammeDB) ListAvailableCategories() string {
+	var buffer bytes.Buffer
+	for _, i := range pdb.Categories {
+		buffer.WriteString(i.Name + "\n")
+	}
+	return buffer.String()
+}
