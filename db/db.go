@@ -11,7 +11,7 @@ import (
 )
 
 type ProgrammeDB struct {
-	Categories []tv.Category `json:"categories"`
+	Categories []*tv.Category `json:"categories"`
 	Saved time.Time `json:"saved"`
 }
 
@@ -25,7 +25,7 @@ func RestoreProgrammeDB(filename string) (*ProgrammeDB, error) {
 	return pdb, nil
 }
 
-func (pdb *ProgrammeDB) toJson() ([]byte, error) {
+func (pdb *ProgrammeDB) toJSON() ([]byte, error) {
 	marshalled, err := json.MarshalIndent(pdb, "", "\t")
 	if err != nil {
 		return nil, err
@@ -36,7 +36,7 @@ func (pdb *ProgrammeDB) toJson() ([]byte, error) {
 func (pdb *ProgrammeDB) Save(filename string) error {
 	pdb.Saved = time.Now()
 	pdb.index()
-	json ,err := pdb.toJson()
+	json ,err := pdb.toJSON()
 	if err != nil {
 		return err
 	}
