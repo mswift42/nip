@@ -5,6 +5,9 @@ import (
 	"time"
 	"encoding/json"
 	"io/ioutil"
+	"bytes"
+	"fmt"
+	"github.com/pkg/errors"
 )
 
 type ProgrammeDB struct {
@@ -48,4 +51,26 @@ func (pdb *ProgrammeDB) index() {
 			index++
 		}
 	}
+}
+
+func (pdb *ProgrammeDB) ListCategory(category string) string {
+	var buffer bytes.Buffer
+	cat, err := pdb.findCategory(category)
+	if err != nil {
+		return fmt.Sprintln(err)
+	}
+	for _, i := range cat.Programmes {
+		buffer.WriteString(i.String())
+		buffer.WriteString("\n")
+	}
+	return buffer.String()
+}
+
+func (pdb *ProgrammeDB) findCategory(category string) (*tv.Category, error) {
+	for _, i := range pdb.Categories {
+		if i.Name ==  category {
+			return i, nil
+		}
+	}
+	return nil, errors.New("Can't find Category with Name: " + category)
 }
