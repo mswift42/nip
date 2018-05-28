@@ -5,7 +5,7 @@ import (
 )
 
 func TestProgrammeDB_Save(t *testing.T) {
-	doc := DocumentLoader("../tv/testhtml/films1.html")
+	doc := documentLoader("../tv/testhtml/films1.html")
 	td := TestIplayerDocument{doc}
 	nmc
 }
