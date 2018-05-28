@@ -1,18 +1,22 @@
 package tv
 
 import (
-	"time"
-	"encoding/json"
-	"io/ioutil"
 	"bytes"
+	"encoding/json"
 	"fmt"
-	"github.com/pkg/errors"
+	"io/ioutil"
 	"strings"
+	"time"
+
+	"github.com/pkg/errors"
 )
 
+// ProgrammeDB represents a (file) DB of all saved
+// Programmes, divided by Categories. The Saved field
+// speciefies at what time the DB was last refreshed.
 type ProgrammeDB struct {
 	Categories []*Category `json:"categories"`
-	Saved time.Time `json:"saved"`
+	Saved      time.Time   `json:"saved"`
 }
 
 func RestoreProgrammeDB(filename string) (*ProgrammeDB, error) {
@@ -36,7 +40,7 @@ func (pdb *ProgrammeDB) toJSON() ([]byte, error) {
 func (pdb *ProgrammeDB) Save(filename string) error {
 	pdb.Saved = time.Now()
 	pdb.index()
-	enc,err := pdb.toJSON()
+	enc, err := pdb.toJSON()
 	if err != nil {
 		return err
 	}
@@ -68,7 +72,7 @@ func (pdb *ProgrammeDB) ListCategory(category string) string {
 
 func (pdb *ProgrammeDB) findCategory(category string) (*Category, error) {
 	for _, i := range pdb.Categories {
-		if i.Name ==  category {
+		if i.Name == category {
 			return i, nil
 		}
 	}
@@ -88,7 +92,7 @@ func (pdb *ProgrammeDB) FindTitle(title string) string {
 	for _, i := range pdb.Categories {
 		for _, j := range i.Programmes {
 			if strings.Contains(strings.ToLower(j.String()),
-			strings.ToLower(title)) {
+				strings.ToLower(title)) {
 				buffer.WriteString(j.String() + "\n")
 			}
 		}
