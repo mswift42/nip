@@ -506,11 +506,11 @@ func TestNewMainCategory(t *testing.T) {
 func TestCategory(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
 	td := TestIplayerDocument{doc}
-	cat := newCategory("films", &td)
-	if cat.name != "films" {
-		t.Errorf("Expected category's name to be 'films' , got: %q", cat.name)
+	cat := NewCategory("films", &td)
+	if cat.Name != "films" {
+		t.Errorf("Expected category's name to be 'films' , got: %q", cat.Name)
 	}
-	if len(cat.programmes) != 26 {
-		t.Error("Expected length of programmes to be 26, got: ", len(cat.programmes))
+	if len(cat.Programmes) != 26 {
+		t.Error("Expected length of programmes to be 26, got: ", len(cat.Programmes))
 	}
 }

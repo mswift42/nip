@@ -1,7 +1,6 @@
-package db
+package tv
 
 import (
-	"github.com/mswift42/nip/tv"
 	"time"
 	"encoding/json"
 	"io/ioutil"
@@ -12,7 +11,7 @@ import (
 )
 
 type ProgrammeDB struct {
-	Categories []*tv.Category `json:"categories"`
+	Categories []*Category `json:"categories"`
 	Saved time.Time `json:"saved"`
 }
 
@@ -37,11 +36,11 @@ func (pdb *ProgrammeDB) toJSON() ([]byte, error) {
 func (pdb *ProgrammeDB) Save(filename string) error {
 	pdb.Saved = time.Now()
 	pdb.index()
-	json ,err := pdb.toJSON()
+	enc,err := pdb.toJSON()
 	if err != nil {
 		return err
 	}
-	return ioutil.WriteFile(filename, json, 0644)
+	return ioutil.WriteFile(filename, enc, 0644)
 }
 
 func (pdb *ProgrammeDB) index() {
@@ -67,7 +66,7 @@ func (pdb *ProgrammeDB) ListCategory(category string) string {
 	return buffer.String()
 }
 
-func (pdb *ProgrammeDB) findCategory(category string) (*tv.Category, error) {
+func (pdb *ProgrammeDB) findCategory(category string) (*Category, error) {
 	for _, i := range pdb.Categories {
 		if i.Name ==  category {
 			return i, nil

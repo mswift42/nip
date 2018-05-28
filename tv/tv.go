@@ -193,7 +193,7 @@ type Category struct {
 	Programmes []*Programme
 }
 
-func newCategory(name string, np NextPager) *Category {
+func NewCategory(name string, np NextPager) *Category {
 	nmc := NewMainCategory(np)
 	return &Category{name, nmc.Programmes()}
 }
