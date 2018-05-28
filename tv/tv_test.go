@@ -82,7 +82,7 @@ func TestIplayerSelectionResults(t *testing.T) {
 }
 
 func TestCollectPages(t *testing.T) {
-	doc := documentLoader("testhtml/films1.html")
+	doc := DocumentLoader("testhtml/films1.html")
 	tid := TestIplayerDocument{doc}
 	np := tid.nextPages()
 	if len(np) != 1 {
@@ -95,7 +95,7 @@ func TestCollectPages(t *testing.T) {
 	if cp[0].Error != nil {
 		t.Error("Expected error for first doc in collected Pages to be nil, got: ", cp[0].Error)
 	}
-	doc = documentLoader("testhtml/films2.html")
+	doc = DocumentLoader("testhtml/films2.html")
 	tid = TestIplayerDocument{doc}
 	np = tid.nextPages()
 	if len(np) != 1 {
@@ -104,7 +104,7 @@ func TestCollectPages(t *testing.T) {
 }
 
 func TestProgramPages(t *testing.T) {
-	doc := documentLoader("testhtml/films1.html")
+	doc := DocumentLoader("testhtml/films1.html")
 	tid := TestIplayerDocument{doc}
 	selres := tid.idoc.programmeListSelection().selectionResults()
 	urls := tid.programPages(selres)
@@ -117,7 +117,7 @@ func TestProgramPages(t *testing.T) {
 	if urls[1] != TestHTMLURL("testhtml/storyville.html") {
 		t.Error("Expected second url to be 'storyville', got: ", urls[1])
 	}
-	doc = documentLoader("testhtml/food1.html")
+	doc = DocumentLoader("testhtml/food1.html")
 	tid = TestIplayerDocument{doc}
 	selres = tid.idoc.programmeListSelection().selectionResults()
 	urls = tid.programPages(selres)
@@ -226,7 +226,7 @@ var AdamCurtis = []struct {
 }
 
 func TestProgramPage(t *testing.T) {
-	doc := documentLoader("testhtml/classic_mary_berry.html")
+	doc := DocumentLoader("testhtml/classic_mary_berry.html")
 	pp := programPage{doc}
 	progs := pp.programmes()
 	if len(progs) != 6 {
@@ -252,7 +252,7 @@ func TestProgramPage(t *testing.T) {
 				classicMary[i].available, progs[i].Available)
 		}
 	}
-	doc = documentLoader("testhtml/storyville.html")
+	doc = DocumentLoader("testhtml/storyville.html")
 	pp = programPage{doc}
 	progs = pp.programmes()
 	if len(progs) != 4 {
@@ -266,7 +266,7 @@ func TestProgramPage(t *testing.T) {
 		t.Error("Expected subtitle of first storyville programme to be '112 Wedddings',"+
 			"got: ", progs[0].Subtitle)
 	}
-	doc = documentLoader("testhtml/adam_curtis.html")
+	doc = DocumentLoader("testhtml/adam_curtis.html")
 	pp = programPage{doc}
 	progs = pp.programmes()
 	if len(progs) != 2 {
@@ -409,7 +409,7 @@ var filmprogs = []struct {
 }
 
 func TestNewMainCategory(t *testing.T) {
-	doc := documentLoader("testhtml/food1.html")
+	doc := DocumentLoader("testhtml/food1.html")
 	td := TestIplayerDocument{doc}
 	nmc := NewMainCategory(&td)
 	if nmc.maindoc != td.idoc {
@@ -443,7 +443,7 @@ func TestNewMainCategory(t *testing.T) {
 			t.Errorf("Expected foodprogs to contain %q ", i)
 		}
 	}
-	doc = documentLoader("testhtml/films1.html")
+	doc = DocumentLoader("testhtml/films1.html")
 	td = TestIplayerDocument{doc}
 	nmc = NewMainCategory(&td)
 	if len(nmc.nextdocs) != 1 {
@@ -504,9 +504,9 @@ func TestNewMainCategory(t *testing.T) {
 }
 
 func TestCategory(t *testing.T) {
-	doc := documentLoader("testhtml/films1.html")
+	doc := DocumentLoader("testhtml/films1.html")
 	td := TestIplayerDocument{doc}
-	cat := newCategory("films", &td)
+	cat := NewCategory("films", &td)
 	if cat.name != "films" {
 		t.Errorf("Expected category's name to be 'films' , got: %q", cat.name)
 	}
