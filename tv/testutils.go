@@ -47,7 +47,7 @@ func (tid *TestIplayerDocument) mainDoc() *iplayerDocument {
 	return tid.idoc
 }
 
-func DocumentLoader(url string) *iplayerDocument {
+func documentLoader(url string) *iplayerDocument {
 	thu := TestHTMLURL(url)
 	c := make(chan *IplayerDocumentResult)
 	go thu.loadDocument(c)
