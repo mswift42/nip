@@ -3,12 +3,12 @@ package tv
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"strings"
 	"time"
 
 	"github.com/pkg/errors"
+	"fmt"
 )
 
 // ProgrammeDB represents a (file) DB of all saved
@@ -24,9 +24,9 @@ func RestoreProgrammeDB(filename string) (*ProgrammeDB, error) {
 	if err != nil {
 		return nil, err
 	}
-	var pdb *ProgrammeDB
-	json.Unmarshal(file, pdb)
-	return pdb, nil
+	var pdb ProgrammeDB
+	json.Unmarshal(file, &pdb)
+	return &pdb, nil
 }
 
 func (pdb *ProgrammeDB) toJSON() ([]byte, error) {
