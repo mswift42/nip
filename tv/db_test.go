@@ -33,3 +33,16 @@ func TestProgrammeDB_Save(t *testing.T) {
 		t.Error("Expected saving db should not return error, got: ", err)
 	}
 }
+
+func TestRestoreProgrammeDB(t *testing.T) {
+	pdb, err := RestoreProgrammeDB("testdb.json")
+	if err != nil {
+		t.Errorf("Expected error to be nil, got: %q", err)
+	}
+	if pdb == nil {
+		t.Error("Expected db not to be nil")
+	}
+	if pdb.Categories[0].Name != "films" {
+		t.Errorf("Expected first Category name to be 'films', got: %q ", pdb.Categories[0].Name)
+	}
+}
