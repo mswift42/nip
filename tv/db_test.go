@@ -45,4 +45,7 @@ func TestRestoreProgrammeDB(t *testing.T) {
 	if pdb.Categories[0].Name != "films" {
 		t.Errorf("Expected first Category name to be 'films', got: %q ", pdb.Categories[0].Name)
 	}
+	if len(pdb.Categories) != 1 {
+		t.Error("Expected length of categories to be 1, got: ", len(pdb.Categories))
+	}
 }
