@@ -48,4 +48,8 @@ func TestRestoreProgrammeDB(t *testing.T) {
 	if len(pdb.Categories) != 1 {
 		t.Error("Expected length of categories to be 1, got: ", len(pdb.Categories))
 	}
+	if pdb.Categories[0].Programmes[0].Title != "A Simple Plan" {
+		t.Errorf("Expected first programmes title to be 'A Simple Plan', got: %q ",
+			pdb.Categories[0].Programmes[0].Title)
+	}
 }
