@@ -3,7 +3,8 @@ package tv
 import (
 	"testing"
 	"time"
-)
+	"strings"
+	)
 
 func TestProgrammeDB_Index(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
@@ -51,5 +52,25 @@ func TestRestoreProgrammeDB(t *testing.T) {
 	if pdb.Categories[0].Programmes[0].Title != "A Simple Plan" {
 		t.Errorf("Expected first programmes title to be 'A Simple Plan', got: %q ",
 			pdb.Categories[0].Programmes[0].Title)
+	}
+}
+
+func TestProgrammeDB_ListCategory(t *testing.T) {
+	pdb, err := RestoreProgrammeDB("mockdb.json")
+	if err != nil {
+		t.Errorf("Expected error to be nil, got: %q ", err)
+	}
+	if pdb == nil {
+		t.Error("Expected db not to be nil")
+	}
+	cat := pdb.ListCategory("films")
+	if strings.Contains(cat, "Can't find Category") {
+		t.Error("Expected ListCategory to find category films.")
+	}
+	if !strings.Contains(cat, "A Simple Plan") {
+		t.Error("Expected ListCategory output to contain 'A Simple Plan'")
+	}
+	if !strings.Contains(cat, "Bill") {
+		t.Error("Expected ListCategory output to contain 'Bill'")
 	}
 }
