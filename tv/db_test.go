@@ -81,3 +81,18 @@ func TestProgrammeDB_ListCategory(t *testing.T) {
 		t.Error("There should be no listed Programmes.")
 	}
 }
+
+func TestProgrammeDB_FindTitle(t *testing.T) {
+	pdb ,err := RestoreProgrammeDB("mockdb.json")
+	if err != nil {
+		t.Errorf("Expected error to be nil, got: %q ", err)
+	}
+	prog := pdb.FindTitle("Bill")
+	if !strings.Contains(prog, "Bill") {
+		t.Error("Expected FindTitle to find Programme with title Bill.")
+	}
+	prog2 := pdb.FindTitle("Simple")
+	if !strings.Contains(prog2, "A Simple Plan") {
+		t.Error("Expected FindTitle to find Programme with title ' A Simple Plan '")
+	}
+}
