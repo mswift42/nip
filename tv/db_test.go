@@ -83,6 +83,10 @@ func TestProgrammeDB_ListCategory(t *testing.T) {
 	if strings.Contains(nocat, "A Simple Plan") {
 		t.Error("There should be no listed Programmes.")
 	}
+	foodcat := pdb.ListCategory("food")
+	if !strings.Contains(foodcat, "The Home That 2 Built") {
+		t.Error("Expected ListCategory output to contain 'The Home That 2 Built'.")
+	}
 }
 
 func TestProgrammeDB_FindTitle(t *testing.T) {
