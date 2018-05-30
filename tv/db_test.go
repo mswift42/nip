@@ -1,10 +1,10 @@
 package tv
 
 import (
+	"strings"
 	"testing"
 	"time"
-	"strings"
-	)
+)
 
 func TestProgrammeDB_Index(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
@@ -28,7 +28,10 @@ func TestProgrammeDB_Save(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
 	td := &TestIplayerDocument{doc}
 	cat := NewCategory("films", td)
-	pdb := &ProgrammeDB{[]*Category{cat}, time.Now()}
+	doc = documentLoader("testhtml/food1.html")
+	td = &TestIplayerDocument{doc}
+	cat2 := NewCategory("food", td)
+	pdb := &ProgrammeDB{[]*Category{cat, cat2}, time.Now()}
 	err := pdb.Save("mockdb.json")
 	if err != nil {
 		t.Error("Expected saving db should not return error, got: ", err)
@@ -46,8 +49,8 @@ func TestRestoreProgrammeDB(t *testing.T) {
 	if pdb.Categories[0].Name != "films" {
 		t.Errorf("Expected first Category name to be 'films', got: %q ", pdb.Categories[0].Name)
 	}
-	if len(pdb.Categories) != 1 {
-		t.Error("Expected length of categories to be 1, got: ", len(pdb.Categories))
+	if len(pdb.Categories) != 2 {
+		t.Error("Expected length of categories to be 2, got: ", len(pdb.Categories))
 	}
 	if pdb.Categories[0].Programmes[0].Title != "A Simple Plan" {
 		t.Errorf("Expected first programmes title to be 'A Simple Plan', got: %q ",
@@ -83,7 +86,7 @@ func TestProgrammeDB_ListCategory(t *testing.T) {
 }
 
 func TestProgrammeDB_FindTitle(t *testing.T) {
-	pdb ,err := RestoreProgrammeDB("mockdb.json")
+	pdb, err := RestoreProgrammeDB("mockdb.json")
 	if err != nil {
 		t.Errorf("Expected error to be nil, got: %q ", err)
 	}
