@@ -73,4 +73,11 @@ func TestProgrammeDB_ListCategory(t *testing.T) {
 	if !strings.Contains(cat, "Bill") {
 		t.Error("Expected ListCategory output to contain 'Bill'")
 	}
+	nocat := pdb.ListCategory("flms")
+	if !strings.Contains(nocat, "Can't find Category") {
+		t.Error("Expected to get error message for missing Category.")
+	}
+	if strings.Contains(nocat, "A Simple Plan") {
+		t.Error("There should be no listed Programmes.")
+	}
 }
