@@ -102,4 +102,10 @@ func TestProgrammeDB_FindTitle(t *testing.T) {
 	if !strings.Contains(prog2, "A Simple Plan") {
 		t.Error("Expected FindTitle to find Programme with title ' A Simple Plan '")
 	}
+	prog3 := pdb.FindTitle("The Home That 2 Built")
+	lines := strings.Split(prog3, "\n")
+	if len(lines) != 9 {
+		t.Error("fxpected findTitle for 'The Home that 2 built', to be 9 lines, got: ",
+			len(lines))
+	}
 }
