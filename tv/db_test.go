@@ -109,7 +109,7 @@ func TestProgrammeDB_FindTitle(t *testing.T) {
 			len(lines))
 	}
 	noprog := pdb.FindTitle("mnopqrst")
-		if !strings.Contains(noprog, "No Matches found.\n") {
-			t.Error("Did not expect go get a match.")
+	if !strings.Contains(noprog, "No Matches found.\n") {
+		t.Error("Did not expect to get a match.")
 	}
 }
