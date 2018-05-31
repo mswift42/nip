@@ -108,4 +108,8 @@ func TestProgrammeDB_FindTitle(t *testing.T) {
 		t.Error("fxpected findTitle for 'The Home that 2 built', to be 9 lines, got: ",
 			len(lines))
 	}
+	noprog := pdb.FindTitle("mnopqrst")
+		if !strings.Contains(noprog, "No Matches found.\n") {
+			t.Error("Did not expect go get a match.")
+	}
 }
