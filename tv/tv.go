@@ -1,12 +1,12 @@
 package tv
 
 import (
+	"fmt"
 	"github.com/mswift42/goquery"
 	"log"
 	"regexp"
 	"strings"
 	"sync"
-	"fmt"
 )
 
 type BeebURL string
@@ -141,7 +141,7 @@ type Programme struct {
 
 func (p *Programme) String() string {
 	return fmt.Sprintf("%d: %s %s, %s, %s\n",
-		p.Index, p.Title,p.Subtitle, p.Available, p.Duration)
+		p.Index, p.Title, p.Subtitle, p.Available, p.Duration)
 }
 
 type iplayerDocument struct {
@@ -186,16 +186,6 @@ func newProgrammeFromProgramPage(title string, s *goquery.Selection) *Programme 
 func (is *iplayerSelection) extractThumbnail() string {
 	set := is.sel.Find(".rs-image > picture > source").AttrOr("srcset", "")
 	return strings.Split(set, " ")[0]
-}
-
-type Category struct {
-	Name       string
-	Programmes []*Programme
-}
-
-func NewCategory(name string, np NextPager) *Category {
-	nmc := NewMainCategory(np)
-	return &Category{name, nmc.Programmes()}
 }
 
 type MainCategoryDocument struct {

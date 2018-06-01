@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pkg/errors"
 	"fmt"
+	"github.com/pkg/errors"
 )
 
 // ProgrammeDB represents a (file) DB of all saved

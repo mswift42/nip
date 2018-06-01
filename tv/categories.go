@@ -1,5 +1,15 @@
 package tv
 
+type Category struct {
+	Name       string
+	Programmes []*Programme
+}
+
+func NewCategory(name string, np NextPager) *Category {
+	nmc := NewMainCategory(np)
+	return &Category{name, nmc.Programmes()}
+}
+
 func loadCategory(name string, np NextPager, c chan<- *Category) {
 	c <- NewCategory(name, np)
 }

@@ -2,7 +2,7 @@ package tv
 
 import (
 	"testing"
-	)
+)
 
 func TestLoadingDocument(t *testing.T) {
 	url := TestHTMLURL("testhtml/food1.html")
@@ -522,7 +522,7 @@ func TestLoadCategories(t *testing.T) {
 	td2 := TestIplayerDocument{doc2}
 	catmap := map[string]NextPager{
 		"films": &td,
-		"food" : &td2,
+		"food":  &td2,
 	}
 	cats := loadCategories(catmap)
 	if len(cats) != 2 {
