@@ -5,13 +5,13 @@ type Category struct {
 	Programmes []*Programme
 }
 
-func NewCategory(name string, np NextPager) *Category {
+func newCategory(name string, np NextPager) *Category {
 	nmc := NewMainCategory(np)
 	return &Category{name, nmc.Programmes()}
 }
 
 func loadCategory(name string, np NextPager, c chan<- *Category) {
-	c <- NewCategory(name, np)
+	c <- newCategory(name, np)
 }
 
 func loadCategories(catmap map[string]NextPager) []*Category {
