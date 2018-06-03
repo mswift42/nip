@@ -102,3 +102,7 @@ func (pdb *ProgrammeDB) FindTitle(title string) string {
 	}
 	return buffer.String()
 }
+
+func (pdb *ProgrammeDB) sixHoursLater() bool {
+	return time.Since(pdb.Saved).Minutes() < 6 * 60
+}
