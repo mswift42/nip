@@ -25,6 +25,25 @@ func initCli() *cli.App {
 				return nil
 			},
 		},
+		{
+			Name: "category",
+			Aliases: []string{"c"},
+			Usage: "List all programmes for a category.",
+			Action: func(c *cli.Context) error {
+				fmt.Println(db.ListCategory(c.Args().Get(0)))
+				return nil
+			},
+		},
+		{
+			Name: "search",
+			Aliases: []string{"s"},
+			Usage: "Search for a programme.",
+			Action: func(c *cli.Context) error {
+				fmt.Println(db.FindTitle(c.Args().Get(0)))
+				return nil
+			},
+
+		},
 	}
 	return app
 }
