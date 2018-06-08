@@ -1,5 +1,7 @@
 package tv
 
+import "fmt"
+
 type Category struct {
 	Name       string
 	Programmes []*Programme
@@ -25,6 +27,7 @@ var caturls = map[string]Pager{
 
 
 func newCategory(name string, np NextPager) *Category {
+	fmt.Println("New Category: ", name)
 	nmc := NewMainCategory(np)
 	return &Category{name, nmc.Programmes()}
 }

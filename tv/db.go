@@ -112,6 +112,7 @@ func SaveDB() {
 	 var np []NextPager
 	 var cats []*Category
 	for _, v := range caturls {
+		fmt.Println("Loading Document: ", v)
 		go func(u Pager) {
 			u.loadDocument(c)
 		}(v)
