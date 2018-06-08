@@ -231,16 +231,17 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 	return urls
 }
 
-func DocumentsFromResults(docres []*IplayerDocumentResult) []*iplayerDocument {
-	var results []*iplayerDocument
-	for _, i := range docres {
-		if i.Error == nil {
-			results = append(results, &i.Idoc)
-		}
-	}
-	return results
-}
+//func DocumentsFromResults(docres []*IplayerDocumentResult) []*iplayerDocument {
+//	var results []*iplayerDocument
+//	for _, i := range docres {
+//		if i.Error == nil {
+//			results = append(results, &i.Idoc)
+//		}
+//	}
+//	return results
+//}
 
+// TODO - update newMainCategory to use new iplayer maindoc layout.
 func NewMainCategory(np NextPager) *MainCategoryDocument {
 	nextdocs := []*iplayerDocument{np.mainDoc()}
 	var progpagedocs []*iplayerDocument

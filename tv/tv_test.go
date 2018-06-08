@@ -3,7 +3,7 @@ package tv
 import (
 	"testing"
 )
-
+// TODO Update TESTHTML files.
 func TestLoadingDocument(t *testing.T) {
 	url := TestHTMLURL("testhtml/food1.html")
 	c := make(chan *IplayerDocumentResult)
