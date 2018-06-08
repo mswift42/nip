@@ -47,9 +47,9 @@ func loadCategories(catmap map[string]NextPager) []*Category {
 	return cats
 }
 
-func fincCatTitle(url string) string {
+func fincCatTitle(url Pager) string {
 	for k, v := range caturls {
-		if BeebURL(url) == (v) {
+		if url == v {
 			return k
 		}
 	}
