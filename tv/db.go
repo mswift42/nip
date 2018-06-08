@@ -106,3 +106,29 @@ func (pdb *ProgrammeDB) FindTitle(title string) string {
 func (pdb *ProgrammeDB) sixHoursLater() bool {
 	return time.Since(pdb.Saved).Minutes() < 6 * 60
 }
+
+func SaveDB() {
+	 c := make(chan *IplayerDocumentResult)
+	 var np []NextPager
+	 var cats []*Category
+	for _, v := range caturls {
+		go func(u Pager) {
+			u.loadDocument(c)
+		}(v)
+	}
+	for range caturls {
+		docres := <-c
+		if docres.Error == nil {
+			np = append(np, &docres.Idoc)
+		} else {
+			fmt.Println(docres.Error)
+		}
+	}
+	for _, i := range np {
+		nc := newCategory(fincCatTitle(i.mainDoc().url), i)
+		cats = append(cats, nc)
+	}
+	pdb := &ProgrammeDB{cats, time.Now()}
+	pdb.Save("mockdb.json")
+}
+
