@@ -23,6 +23,7 @@ var caturls = map[string]Pager{
 	"sport" : BeebURL("https://www.bbc.co.uk/iplayer/categories/sport/a-z?sort=atoz"),
 }
 
+
 func newCategory(name string, np NextPager) *Category {
 	nmc := NewMainCategory(np)
 	return &Category{name, nmc.Programmes()}
@@ -44,4 +45,13 @@ func loadCategories(catmap map[string]NextPager) []*Category {
 		cats = append(cats, <-c)
 	}
 	return cats
+}
+
+func fincCatTitle(url string) string {
+	for k, v := range caturls {
+		if BeebURL(url) == (v) {
+			return k
+		}
+	}
+	return ""
 }
