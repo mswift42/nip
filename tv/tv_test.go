@@ -168,35 +168,9 @@ var AdamCurtis = []struct {
 }
 
 func TestProgramPage(t *testing.T) {
-	doc := documentLoader("testhtml/classic_mary_berry.html")
+	doc := documentLoader("testhtml/storyville.html")
 	pp := programPage{doc}
 	progs := pp.programmes()
-	if len(progs) != 6 {
-		t.Error("Expected length of Programmes to be 6, got: ", len(progs))
-	}
-	for _, i := range progs {
-		if i.Title != "Classic Mary Berry" {
-			t.Error("Expected Title to be 'Classic Mary Berry, got: ", i.Title)
-		}
-	}
-	for i := range classicMary {
-		if progs[i].Subtitle != classicMary[i].subtitle {
-			t.Error("Expected subtitle to be : "+classicMary[i].subtitle+" got: ", progs[i].Subtitle)
-		}
-		if progs[i].Synopsis != classicMary[i].synopsis {
-			t.Error("Expected synopsis to be : "+classicMary[i].synopsis+" gog: ", progs[i].Synopsis)
-		}
-		if progs[i].URL != classicMary[i].url {
-			t.Error("Expected url to be: "+classicMary[i].url+" got: ", progs[i].URL)
-		}
-		if progs[i].Available != classicMary[i].available {
-			t.Errorf("Expected available to be %q, got: %q",
-				classicMary[i].available, progs[i].Available)
-		}
-	}
-	doc = documentLoader("testhtml/storyville.html")
-	pp = programPage{doc}
-	progs = pp.programmes()
 	if len(progs) != 4 {
 		t.Error("Expected length of Programmes to be 4, got: ", len(progs))
 	}
