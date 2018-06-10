@@ -32,76 +32,76 @@ func TestLoadingDocument(t *testing.T) {
 	}
 }
 
-func TestIplayerSelectionResults(t *testing.T) {
-	url := TestHTMLURL("testhtml/films1.html")
-	c := make(chan *IplayerDocumentResult)
-	go url.loadDocument(c)
-	idr := <-c
-	sel := iplayerSelection{idr.Idoc.doc.Find(".list-item-inner")}
-	selres := sel.selectionResults()
-	if len(selres) != 20 {
-		t.Error("Expected length of selectionresults to equal: ", len(selres))
-	}
-	nsel := idr.Idoc.programmeListSelection()
-	nselres := nsel.selectionResults()
-	if len(selres) != 20 {
-		t.Error("Expected length of selectionResults to equal 20, got: ", len(nselres))
-	}
-	if selres[0].programPage != nselres[0].programPage {
-		t.Error("Expected both selectionResults to be the same, got: ", nselres[0].programPage)
-	}
-	progpage := selres[0]
-	if progpage.prog != nil {
-		t.Error("Expected proramme to be nil: ", progpage.prog)
-	}
-	if progpage.programPage != "testhtml/adam_curtis.html" {
-		t.Error("Expected program Page to be 'testhtml/adam_curtis.html' not: ", progpage.programPage)
-	}
-	if selres[1].prog.Title != "A Simple Plan" {
-		t.Error("Expected second programme title to be 'A Simple Plan', got: ", selres[1].prog.Title)
-	}
-	if selres[1].programPage != "" {
-		t.Error("Expected second programPage to be an empty string, got: ", selres[1].programPage)
-	}
-	url = TestHTMLURL("testhtml/films2.html")
-	go url.loadDocument(c)
-	idr = <-c
-	sel = iplayerSelection{idr.Idoc.doc.Find(".list-item-inner")}
-	selres = sel.selectionResults()
-	if len(selres) != 2 {
-		t.Error("Expected length of selectionresults to equal 2, got: ", len(selres))
-	}
-	if selres[0].prog.Title != "Wallace and Gromit: A Close Shave" {
-		t.Error("Expected title of first films2 programme to be wallace and gromit, got: ",
-			selres[0].prog.Title)
-	}
-	if selres[1].prog.Title != "Wonder Boys" {
-		t.Error("Expected title of second films2 programme to be 'Wonder Boys', got: ",
-			selres[1].prog.Title)
-	}
-}
+//func TestIplayerSelectionResults(t *testing.T) {
+//	url := TestHTMLURL("testhtml/films1.html")
+//	c := make(chan *IplayerDocumentResult)
+//	go url.loadDocument(c)
+//	idr := <-c
+//	sel := iplayerSelection{idr.Idoc.doc.Find(".list-item-inner")}
+//	selres := sel.selectionResults()
+//	if len(selres) != 20 {
+//		t.Error("Expected length of selectionresults to equal: ", len(selres))
+//	}
+//	nsel := idr.Idoc.programmeListSelection()
+//	nselres := nsel.selectionResults()
+//	if len(selres) != 20 {
+//		t.Error("Expected length of selectionResults to equal 20, got: ", len(nselres))
+//	}
+//	if selres[0].programPage != nselres[0].programPage {
+//		t.Error("Expected both selectionResults to be the same, got: ", nselres[0].programPage)
+//	}
+//	progpage := selres[0]
+//	if progpage.prog != nil {
+//		t.Error("Expected proramme to be nil: ", progpage.prog)
+//	}
+//	if progpage.programPage != "testhtml/adam_curtis.html" {
+//		t.Error("Expected program Page to be 'testhtml/adam_curtis.html' not: ", progpage.programPage)
+//	}
+//	if selres[1].prog.Title != "A Simple Plan" {
+//		t.Error("Expected second programme title to be 'A Simple Plan', got: ", selres[1].prog.Title)
+//	}
+//	if selres[1].programPage != "" {
+//		t.Error("Expected second programPage to be an empty string, got: ", selres[1].programPage)
+//	}
+//	url = TestHTMLURL("testhtml/films2.html")
+//	go url.loadDocument(c)
+//	idr = <-c
+//	sel = iplayerSelection{idr.Idoc.doc.Find(".list-item-inner")}
+//	selres = sel.selectionResults()
+//	if len(selres) != 2 {
+//		t.Error("Expected length of selectionresults to equal 2, got: ", len(selres))
+//	}
+//	if selres[0].prog.Title != "Wallace and Gromit: A Close Shave" {
+//		t.Error("Expected title of first films2 programme to be wallace and gromit, got: ",
+//			selres[0].prog.Title)
+//	}
+//	if selres[1].prog.Title != "Wonder Boys" {
+//		t.Error("Expected title of second films2 programme to be 'Wonder Boys', got: ",
+//			selres[1].prog.Title)
+//	}
+//}
 
-func TestCollectPages(t *testing.T) {
-	doc := documentLoader("testhtml/films1.html")
-	tid := TestIplayerDocument{doc}
-	np := tid.nextPages()
-	if len(np) != 1 {
-		t.Error("Expected length of nextPages to be 1, got: ", len(np))
-	}
-	cp := collectPages(np)
-	if len(cp) != 1 {
-		t.Error("Expected length of collectedPages to be 1, got: ", len(cp))
-	}
-	if cp[0].Error != nil {
-		t.Error("Expected error for first doc in collected Pages to be nil, got: ", cp[0].Error)
-	}
-	doc = documentLoader("testhtml/films2.html")
-	tid = TestIplayerDocument{doc}
-	np = tid.nextPages()
-	if len(np) != 1 {
-		t.Error("Expected length of nextPages to be 1, got: ", len(np))
-	}
-}
+//func TestCollectPages(t *testing.T) {
+//	doc := documentLoader("testhtml/films1.html")
+//	tid := TestIplayerDocument{doc}
+//	np := tid.nextPages()
+//	if len(np) != 1 {
+//		t.Error("Expected length of nextPages to be 1, got: ", len(np))
+//	}
+//	cp := collectPages(np)
+//	if len(cp) != 1 {
+//		t.Error("Expected length of collectedPages to be 1, got: ", len(cp))
+//	}
+//	if cp[0].Error != nil {
+//		t.Error("Expected error for first doc in collected Pages to be nil, got: ", cp[0].Error)
+//	}
+//	doc = documentLoader("testhtml/films2.html")
+//	tid = TestIplayerDocument{doc}
+//	np = tid.nextPages()
+//	if len(np) != 1 {
+//		t.Error("Expected length of nextPages to be 1, got: ", len(np))
+//	}
+//}
 
 func TestProgramPages(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
@@ -139,64 +139,6 @@ func TestProgramPages(t *testing.T) {
 			t.Error("Expected error to be nil, got: ", i.Error)
 		}
 	}
-}
-
-var classicMary = []struct {
-	subtitle  string
-	thumbnail string
-	synopsis  string
-	url       string
-	available string
-	duration  string
-}{
-	{
-		"Series 1: Episode 6",
-		"https://ichef.bbci.co.uk/images/ic/304x171/p062dlmz.jpg",
-		"Mary unleashes some of her classic favourites that have made a comeback.",
-		"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
-		"Available for 19 days",
-		"29 mins",
-	},
-	{
-		"Series 1: Episode 5",
-		"https://ichef.bbci.co.uk/images/ic/304x171/p061mhz1.jpg",
-		"Mary Berry returns to one of her most loved locations - Port Isaac in Cornwall.",
-		"/iplayer/episode/b09xsw6b/classic-mary-berry-series-1-episode-5",
-		"Available for 16 days",
-		"29 mins",
-	},
-	{
-		"Series 1: Episode 4",
-		"https://ichef.bbci.co.uk/images/ic/304x171/p06106t8.jpg",
-		"Mary has always loved entertaining and creates some timeless classics.",
-		"/iplayer/episode/b09x0tfw/classic-mary-berry-series-1-episode-4",
-		"Available for 9 days",
-		"29 mins",
-	},
-	{
-		"Series 1: Episode 3",
-		"https://ichef.bbci.co.uk/images/ic/304x171/p06084xr.jpg",
-		"Mary embraces the countryside with cooking inspired by food grown on farms and in gardens.",
-		"/iplayer/episode/b09w3ynk/classic-mary-berry-series-1-episode-3",
-		"Available until Mon 1pm",
-		"29 mins",
-	},
-	{
-		"Series 1: Episode 2",
-		"https://ichef.bbci.co.uk/images/ic/304x171/p05zf2vg.jpg",
-		"Mary Berry takes inspiration from a visit to a groundbreaking primary school in London.",
-		"/iplayer/episode/b09vfd5d/ad/classic-mary-berry-series-1-episode-2",
-		"Available for 13 days",
-		"30 mins",
-	},
-	{
-		"Series 1: Episode 1",
-		"https://ichef.bbci.co.uk/images/ic/304x171/p05yp3kv.jpg",
-		"Mary Berry indulges her love of comfort food with homely recipes.",
-		"/iplayer/episode/b09tp4ff/ad/classic-mary-berry-series-1-episode-1",
-		"Available for 6 days",
-		"30 mins",
-	},
 }
 
 var AdamCurtis = []struct {
