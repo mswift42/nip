@@ -109,7 +109,7 @@ func TestProgramPages(t *testing.T) {
 	selres := tid.idoc.programmeListSelection().selectionResults()
 	urls := tid.programPages(selres)
 	if len(urls) != 2 {
-		t.Error("Expected length of urls to be 1, got: ", len(urls))
+		t.Error("Expected length of urls to be 2, got: ", len(urls))
 	}
 	if urls[0] != TestHTMLURL("testhtml/adam_curtis.html") {
 		t.Error("Expected first url to be 'adam_curtis', got: ", urls[0])
@@ -121,18 +121,19 @@ func TestProgramPages(t *testing.T) {
 	tid = TestIplayerDocument{doc}
 	selres = tid.idoc.programmeListSelection().selectionResults()
 	urls = tid.programPages(selres)
-	if len(urls) != 15 {
-		t.Error("Expected length of urls to be 15, got: ", len(urls))
+	if len(urls) != 20 {
+		t.Error("Expected length of urls to be 20, got: ", len(urls))
 	}
-	if urls[0] != TestHTMLURL("testhtml/back_in_time_for_tea.html") {
-		t.Error("Expected first food page to be 'back_in_time_for_tea', got: ", urls[0])
+	if urls[0] != TestHTMLURL("testhtml/britains_best_home_cook.html") {
+		t.Error("Expected first food page to be 'britains_best_home_cook', got: ", urls[0])
 	}
-	if urls[14] != TestHTMLURL("testhtml/saturday_kitchen.html") {
-		t.Error("expected last programpage to be 'saturday kitchen' got: ", urls[14])
+	if urls[19] != TestHTMLURL("testhtml/top_of_the_shop_with_tom_kerridge.html") {
+		t.Error("expected last programpage to be 'top of the shop with " +
+			"tom kerridge' got: ", urls[19])
 	}
 	docs := collectPages(urls)
-	if len(docs) != 15 {
-		t.Error("Expected length of collected docs to be 15, got: ", len(docs))
+	if len(docs) != 20 {
+		t.Error("Expected length of collected docs to be 20, got: ", len(docs))
 	}
 	for _, i := range docs {
 		if i.Error != nil {
