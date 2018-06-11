@@ -57,7 +57,7 @@ func (is *iplayerSelection) selectionResults() []*iplayerSelectionResult {
 }
 
 func (is *iplayerSelection) programmeSite() string {
-	return is.sel.Find(".view-more-container").AttrOr("href", "")
+	return is.sel.Find(".lnk").AttrOr("href", "")
 }
 
 func (is *iplayerSelection) programme() *Programme {
