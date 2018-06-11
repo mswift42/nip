@@ -150,7 +150,7 @@ type iplayerDocument struct {
 }
 
 func (id *iplayerDocument) programmeListSelection() *iplayerSelection {
-	return &iplayerSelection{id.doc.Find(".list-item-inner")}
+	return &iplayerSelection{id.doc.Find(".content-item")}
 }
 
 type IplayerDocumentResult struct {
