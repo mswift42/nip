@@ -357,8 +357,8 @@ func TestCategory(t *testing.T) {
 	if cat.Name != "films" {
 		t.Errorf("Expected category's name to be 'films' , got: %q", cat.Name)
 	}
-	if len(cat.Programmes) != 26 {
-		t.Error("Expected length of programmes to be 26, got: ", len(cat.Programmes))
+	if len(cat.Programmes) != 28 {
+		t.Error("Expected length of programmes to be 28, got: ", len(cat.Programmes))
 	}
 }
 

@@ -62,7 +62,7 @@ func (is *iplayerSelection) programmeSite() string {
 
 func (is *iplayerSelection) programme() *Programme {
 	title := is.title()
-	//subtitle := is.subtitle()
+	subtitle := is.subtitle()
 	//synopsis := is.synopsis()
 	//url := is.url()
 	//thumbnail := is.thumbNail()
@@ -80,7 +80,7 @@ func (is *iplayerSelection) programme() *Programme {
 	//	Available: available,
 	//	Duration:  duration,
 	//}
-	return newProgrammeFromProgramPage(title, is.sel)
+	return newProgrammeFromProgramPage(title, subtitle, is.sel)
 }
 
 func (is *iplayerSelection) title() string {
@@ -88,7 +88,8 @@ func (is *iplayerSelection) title() string {
 }
 
 func (is *iplayerSelection) subtitle() string {
-	return is.sel.Find(".secondary > .subtitle").Text()
+	return is.sel.Find(".content-item__info__primary > " +
+		".content-item__description").Text()
 }
 
 func (is *iplayerSelection) synopsis() string {
@@ -167,13 +168,13 @@ func (pp *programPage) programmes() []*Programme {
 	var results []*Programme
 	title := pp.doc.doc.Find(".hero-header__title").Text()
 	pp.doc.doc.Find(".content-item").Each(func(i int, s *goquery.Selection) {
-		results = append(results, newProgrammeFromProgramPage(title, s))
+		subtitle := s.Find(".content-item__title").Text()
+		results = append(results, newProgrammeFromProgramPage(title, subtitle, s))
 	})
 	return results
 }
 
-func newProgrammeFromProgramPage(title string, s *goquery.Selection) *Programme {
-	subtitle := s.Find(".content-item__info__primary > .content-item__description").Text()
+func newProgrammeFromProgramPage(title string, subtitle string, s *goquery.Selection) *Programme {
 	synopsis := s.Find(".content-item__info__secondary > .content-item__description").Text()
 	url := s.Find("a").AttrOr("href", "")
 	available := s.Find(".content-item__sublabels > span").Last().Text()
