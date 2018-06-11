@@ -3,6 +3,7 @@ package tv
 import (
 	"testing"
 )
+
 // TODO Update TESTHTML files.
 func TestLoadingDocument(t *testing.T) {
 	url := TestHTMLURL("testhtml/food1.html")
@@ -128,7 +129,7 @@ func TestProgramPages(t *testing.T) {
 		t.Error("Expected first food page to be 'britains_best_home_cook', got: ", urls[0])
 	}
 	if urls[19] != TestHTMLURL("testhtml/top_of_the_shop_with_tom_kerridge.html") {
-		t.Error("expected last programpage to be 'top of the shop with " +
+		t.Error("expected last programpage to be 'top of the shop with "+
 			"tom kerridge' got: ", urls[19])
 	}
 	docs := collectPages(urls)
@@ -221,19 +222,12 @@ var filmurls = []string{
 	"/iplayer/episode/b04n1hfy/storyville-112-weddings",
 	"/iplayer/episode/p04b183c/adam-curtis-hypernormalisation",
 	"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
-	"/iplayer/episode/b03p8shj/buena-vista-social-club",
-	"/iplayer/episode/b00749zc/primary-colors",
-	"/iplayer/episode/b0078nh3/wonder-boys",
-	"/iplayer/episode/b0078cwc/a-simple-plan",
 	"/iplayer/episode/p0351g0z/fear-itself",
-	"/iplayer/episode/b05rmlr9/the-homesman",
-	"/iplayer/episode/b01q0k5b/wallace-and-gromit-a-close-shave",
+	"/iplayer/episode/b08nfjwt/wallace-and-gromit-the-wrong-trousers",
 }
 
 var foodurls = []string{
 	"/iplayer/episode/b00mtr6m/caribbean-food-made-easy-episode-4",
-	"/iplayer/episode/b0752bbd/chef-vs-science-the-ultimate-kitchen-challenge",
-	"/iplayer/episode/b09yn368/classic-mary-berry-series-1-episode-6",
 	"/iplayer/episode/p05rts0s/delia-smiths-cookery-course-series-1-10-puddings",
 	"/iplayer/episode/p05rsy31/ken-homs-chinese-cookery-rice",
 	"/iplayer/episode/p05rsw3r/ken-homs-chinese-cookery-meat",
@@ -241,10 +235,6 @@ var foodurls = []string{
 	"/iplayer/episode/p05tjrrz/madhur-jaffreys-flavours-of-india-tamil-nadu",
 	"/iplayer/episode/p05t9skh/madhur-jaffreys-flavours-of-india-goa",
 	"/iplayer/episode/p05t9pn8/madhur-jaffreys-flavours-of-india-punjab",
-	"/iplayer/episode/b07xsyr1/yes-chef-series-1-20-friday-final-4",
-	"/iplayer/episode/b07xsq9v/yes-chef-series-1-19-mary-ann-gilchrist",
-	"/iplayer/episode/b07xspv0/yes-chef-series-1-18-ryan-simpson",
-	"/iplayer/episode/b07xsplr/yes-chef-series-1-17-atul-kochhar",
 	"/iplayer/episode/b01mwxk4/lorraines-fast-fresh-and-easy-food-6-everyday-easy",
 	"/iplayer/episode/b01mrcxt/lorraines-fast-fresh-and-easy-food-5-posh-nosh",
 	"/iplayer/episode/b01ml70w/lorraines-fast-fresh-and-easy-food-4-baking-it",
@@ -261,33 +251,6 @@ var filmprogs = []struct {
 	duration  string
 }{
 	{
-		"A Simple Plan",
-		"",
-		"/iplayer/episode/b0078cwc/a-simple-plan",
-		"Bill Paxton gets caught up in lies, deceit and murder after the discovery of $4 million.",
-		"https://ichef.bbci.co.uk/images/ic/336x189/p06586p5.jpg",
-		"Available until 09:00 27 May 2018",
-		"114 mins",
-	},
-	{
-		"Bill",
-		"",
-		"/iplayer/episode/b08lvcg1/bill",
-		"Bill Shakespeare (Matthew Baynton) leaves Stratford to follow his dream.",
-		"https://ichef.bbci.co.uk/images/ic/336x189/p05r6x03.jpg",
-		"Available until 19:00 23 May 2018",
-		"88 mins",
-	},
-	{
-		"Buena Vista Social Club",
-		"",
-		"/iplayer/episode/b03p8shj/buena-vista-social-club",
-		"A group of Cuban musicians are brought together by Ry Cooder to record their music.",
-		"https://ichef.bbci.co.uk/images/ic/336x189/p063zb3m.jpg",
-		"Available until 22:40 20 May 2018",
-		"105 mins",
-	},
-	{
 		"Fear Itself",
 		"",
 		"/iplayer/episode/p0351g0z/fear-itself",
@@ -297,15 +260,6 @@ var filmprogs = []struct {
 		"88 mins",
 	},
 	{
-		"The Homesman",
-		"",
-		"/iplayer/episode/b05rmlr9/the-homesman",
-		"Hilary Swank and Tommy Lee Jones star in this characterful western drama.",
-		"https://ichef.bbci.co.uk/images/ic/336x189/p053038q.jpg",
-		"Available until 00:50 16 May 2018",
-		"113 mins",
-	},
-	{
 		"Lara Croft Tomb Raider: The Cradle of Life",
 		"",
 		"/iplayer/episode/b007ck00/lara-croft-tomb-raider-the-cradle-of-life",
@@ -313,15 +267,6 @@ var filmprogs = []struct {
 		"https://ichef.bbci.co.uk/images/ic/336x189/p05zxkj2.jpg",
 		"Available until 09:00 30 August 2018",
 		"105 mins",
-	},
-	{
-		"Man on the Moon",
-		"",
-		"/iplayer/episode/b007cjz1/man-on-the-moon",
-		"Biopic of controversial comedian and star of Taxi and Saturday Night Live, Andy Kaufman.",
-		"https://ichef.bbci.co.uk/images/ic/336x189/p05mwz8b.jpg",
-		"Available until 09:00 27 May 2018",
-		"118 mins",
 	},
 }
 
@@ -348,20 +293,20 @@ func TestNewMainCategory(t *testing.T) {
 	doc = documentLoader("testhtml/films1.html")
 	td = TestIplayerDocument{doc}
 	nmc = NewMainCategory(&td)
-	if len(nmc.nextdocs) != 1 {
-		t.Error("Expected length of nextdocs to be 1, got: ", len(nmc.nextdocs))
+	if len(nmc.nextdocs) != 0 {
+		t.Error("Expected length of nextdocs to be 0, got: ", len(nmc.nextdocs))
 	}
 	filmprogpagedocs := nmc.programpagedocs
 	if len(filmprogpagedocs) != 2 {
 		t.Error("Expected length of film programpages to be 2, got: ", len(filmprogpagedocs))
 	}
 	filmres := nmc.selectionresults
-	if len(filmres) != 22 {
-		t.Error("Expected length of selectionresults to be 22, got: ", len(filmres))
+	if len(filmres) != 24 {
+		t.Error("Expected length of selectionresults to be 24, got: ", len(filmres))
 	}
 	filmprogrammes := nmc.Programmes()
-	if len(filmprogrammes) != 26 {
-		t.Error("Expected length of programmes to be 26, got: ", len(filmprogrammes))
+	if len(filmprogrammes) != 28 {
+		t.Error("Expected length of programmes to be 28, got: ", len(filmprogrammes))
 	}
 	for _, i := range filmurls {
 		if !contains(filmprogrammes, i) {
