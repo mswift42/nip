@@ -109,7 +109,7 @@ func TestProgramPages(t *testing.T) {
 	selres := tid.idoc.programmeListSelection().selectionResults()
 	urls := tid.programPages(selres)
 	if len(urls) != 2 {
-		t.Error("Expected length of urls to be 2, got: ", len(urls))
+		t.Error("Expected length of urls to be 1, got: ", len(urls))
 	}
 	if urls[0] != TestHTMLURL("testhtml/adam_curtis.html") {
 		t.Error("Expected first url to be 'adam_curtis', got: ", urls[0])
