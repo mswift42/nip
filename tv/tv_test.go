@@ -33,54 +33,38 @@ func TestLoadingDocument(t *testing.T) {
 	}
 }
 
-//func TestIplayerSelectionResults(t *testing.T) {
-//	url := TestHTMLURL("testhtml/films1.html")
-//	c := make(chan *IplayerDocumentResult)
-//	go url.loadDocument(c)
-//	idr := <-c
-//	sel := iplayerSelection{idr.Idoc.doc.Find(".list-item-inner")}
-//	selres := sel.selectionResults()
-//	if len(selres) != 20 {
-//		t.Error("Expected length of selectionresults to equal: ", len(selres))
-//	}
-//	nsel := idr.Idoc.programmeListSelection()
-//	nselres := nsel.selectionResults()
-//	if len(selres) != 20 {
-//		t.Error("Expected length of selectionResults to equal 20, got: ", len(nselres))
-//	}
-//	if selres[0].programPage != nselres[0].programPage {
-//		t.Error("Expected both selectionResults to be the same, got: ", nselres[0].programPage)
-//	}
-//	progpage := selres[0]
-//	if progpage.prog != nil {
-//		t.Error("Expected proramme to be nil: ", progpage.prog)
-//	}
-//	if progpage.programPage != "testhtml/adam_curtis.html" {
-//		t.Error("Expected program Page to be 'testhtml/adam_curtis.html' not: ", progpage.programPage)
-//	}
-//	if selres[1].prog.Title != "A Simple Plan" {
-//		t.Error("Expected second programme title to be 'A Simple Plan', got: ", selres[1].prog.Title)
-//	}
-//	if selres[1].programPage != "" {
-//		t.Error("Expected second programPage to be an empty string, got: ", selres[1].programPage)
-//	}
-//	url = TestHTMLURL("testhtml/films2.html")
-//	go url.loadDocument(c)
-//	idr = <-c
-//	sel = iplayerSelection{idr.Idoc.doc.Find(".list-item-inner")}
-//	selres = sel.selectionResults()
-//	if len(selres) != 2 {
-//		t.Error("Expected length of selectionresults to equal 2, got: ", len(selres))
-//	}
-//	if selres[0].prog.Title != "Wallace and Gromit: A Close Shave" {
-//		t.Error("Expected title of first films2 programme to be wallace and gromit, got: ",
-//			selres[0].prog.Title)
-//	}
-//	if selres[1].prog.Title != "Wonder Boys" {
-//		t.Error("Expected title of second films2 programme to be 'Wonder Boys', got: ",
-//			selres[1].prog.Title)
-//	}
-//}
+func TestIplayerSelectionResults(t *testing.T) {
+	url := TestHTMLURL("testhtml/films1.html")
+	c := make(chan *IplayerDocumentResult)
+	go url.loadDocument(c)
+	idr := <-c
+	sel := iplayerSelection{idr.Idoc.doc.Find(".content-item")}
+	selres := sel.selectionResults()
+	if len(selres) != 24 {
+		t.Error("Expected length of selectionresults to equal: 24, got: ", len(selres))
+	}
+	nsel := idr.Idoc.programmeListSelection()
+	nselres := nsel.selectionResults()
+	if len(selres) != 24 {
+		t.Error("Expected length of selectionResults to equal 24, got: ", len(nselres))
+	}
+	if selres[0].programPage != nselres[0].programPage {
+		t.Error("Expected both selectionResults to be the same, got: ", nselres[0].programPage)
+	}
+	progpage := selres[0]
+	if progpage.prog != nil {
+		t.Error("Expected proramme to be nil: ", progpage.prog)
+	}
+	if progpage.programPage != "testhtml/adam_curtis.html" {
+		t.Error("Expected program Page to be 'testhtml/adam_curtis.html' not: ", progpage.programPage)
+	}
+	if selres[1].prog.Title != "Brideshead Revisited" {
+		t.Error("Expected second programme title to be 'Brideshead Revisited', got: ", selres[1].prog.Title)
+	}
+	if selres[1].programPage != "" {
+		t.Error("Expected second programPage to be an empty string, got: ", selres[1].programPage)
+	}
+}
 
 func TestCollectPages(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
