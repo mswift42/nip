@@ -82,27 +82,22 @@ func TestLoadingDocument(t *testing.T) {
 //	}
 //}
 
-//func TestCollectPages(t *testing.T) {
-//	doc := documentLoader("testhtml/films1.html")
-//	tid := TestIplayerDocument{doc}
-//	np := tid.nextPages()
-//	if len(np) != 1 {
-//		t.Error("Expected length of nextPages to be 1, got: ", len(np))
-//	}
-//	cp := collectPages(np)
-//	if len(cp) != 1 {
-//		t.Error("Expected length of collectedPages to be 1, got: ", len(cp))
-//	}
-//	if cp[0].Error != nil {
-//		t.Error("Expected error for first doc in collected Pages to be nil, got: ", cp[0].Error)
-//	}
-//	doc = documentLoader("testhtml/films2.html")
-//	tid = TestIplayerDocument{doc}
-//	np = tid.nextPages()
-//	if len(np) != 1 {
-//		t.Error("Expected length of nextPages to be 1, got: ", len(np))
-//	}
-//}
+func TestCollectPages(t *testing.T) {
+	doc := documentLoader("testhtml/films1.html")
+	tid := TestIplayerDocument{doc}
+	isel := tid.idoc.programmeListSelection()
+	np := tid.programPages(isel.selectionResults())
+	if len(np) != 2 {
+		t.Error("Expected length of nextPages to be 1, got: ", len(np))
+	}
+	cp := collectPages(np)
+	if len(cp) != 2 {
+		t.Error("Expected length of collectedPages to be 1, got: ", len(cp))
+	}
+	if cp[0].Error != nil {
+		t.Error("Expected error for first doc in collected Pages to be nil, got: ", cp[0].Error)
+	}
+}
 
 func TestProgramPages(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
