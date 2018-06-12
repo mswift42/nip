@@ -4,7 +4,6 @@ import (
 	"testing"
 )
 
-// TODO Update TESTHTML files.
 func TestLoadingDocument(t *testing.T) {
 	url := TestHTMLURL("testhtml/food1.html")
 	c := make(chan *IplayerDocumentResult)
@@ -147,6 +146,7 @@ var AdamCurtis = []struct {
 		"137 mins",
 	},
 }
+// TODO Add food program page to test.
 
 func TestProgramPage(t *testing.T) {
 	doc := documentLoader("testhtml/storyville.html")
@@ -196,7 +196,7 @@ func TestProgramPage(t *testing.T) {
 		}
 	}
 }
-
+// TODO Add more urls to testurls.
 var filmurls = []string{
 	"/iplayer/episode/b04n1hfy/storyville-112-weddings",
 	"/iplayer/episode/p04b183c/adam-curtis-hypernormalisation",
@@ -219,7 +219,7 @@ var foodurls = []string{
 	"/iplayer/episode/b01ml70w/lorraines-fast-fresh-and-easy-food-4-baking-it",
 	"/iplayer/episode/b01mfxyy/lorraines-fast-fresh-and-easy-food-3-simple-classics",
 }
-
+// TODO add more progs to filmprogs/foodprogs.
 var filmprogs = []struct {
 	title     string
 	subtitle  string
