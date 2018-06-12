@@ -66,14 +66,12 @@ func (is *iplayerSelection) programme() *Programme {
 	//synopsis := is.synopsis()
 	//url := is.url()
 	//thumbnail := is.thumbNail()
-	//pid := is.pid()
 	//available := is.available()
 	//duration := is.duration()
 	//return &Programme{
 	//	Title:     title,
 	//	Subtitle:  subtitle,
 	//	Synopsis:  synopsis,
-	//	PID:       pid,
 	//	Thumbnail: thumbnail,
 	//	URL:       url,
 	//	Index:     0,
@@ -104,14 +102,6 @@ func (is *iplayerSelection) thumbNail() string {
 	return is.sel.Find(".rs-image > picture > source").AttrOr("srcset", "")
 }
 
-func (is *iplayerSelection) pid() string {
-	pid := is.sel.AttrOr("data-ip-id", "")
-	if pid != "" {
-		return pid
-	}
-	return is.sel.Find(".list-item-inner > a").AttrOr("data-episode-id", "")
-}
-
 func (is *iplayerSelection) available() string {
 	avail := is.sel.Find(".period").AttrOr("title", "")
 	if avail == "" {
@@ -133,7 +123,6 @@ type Programme struct {
 	Title     string `json:"title"`
 	Subtitle  string `json:"subtitle"`
 	Synopsis  string `json:"synopsis"`
-	PID       string `json:"pid"`
 	Thumbnail string `json:"thumbnail"`
 	URL       string `json:"url"`
 	Index     int    `json:"index"`
@@ -181,7 +170,7 @@ func newProgrammeFromProgramPage(title string, subtitle string, s *goquery.Selec
 	duration := s.Find(".content-item__sublabels > span").First().Text()
 	sel := iplayerSelection{s}
 	thumbnail := sel.extractThumbnail()
-	return &Programme{title, subtitle, synopsis, "",
+	return &Programme{title, subtitle, synopsis,
 		thumbnail, url, 0, available, duration}
 }
 
