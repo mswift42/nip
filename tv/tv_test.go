@@ -147,6 +147,23 @@ var AdamCurtis = []struct {
 	},
 }
 // TODO Add food program page to test.
+var DeliaSmith = []struct {
+	subtitle string
+	thumbnail string
+	synopsis string
+	url string
+	available string
+	duration string
+}{
+	{
+			"Series 1: 10. Puddings",
+			"https://ichef.bbci.co.uk/images/ic/304x171/p062csnk.jpg",
+			"Delia makes several delicious and economical puddings. (1979).",
+			"/iplayer/episode/p05rts0s/delia-smiths-cookery-course-series-1-10-puddings",
+			"Available for over a year",
+			"25 mins",
+	},
+}
 
 func TestProgramPage(t *testing.T) {
 	doc := documentLoader("testhtml/storyville.html")
