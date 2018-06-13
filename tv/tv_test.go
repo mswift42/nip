@@ -158,7 +158,7 @@ var DeliaSmith = []struct {
 	{
 			"Series 1: 10. Puddings",
 			"https://ichef.bbci.co.uk/images/ic/304x171/p062csnk.jpg",
-			"Delia makes several delicious and economical puddings. (1979).",
+			"Delia makes several delicious and economical puddings. (1979)",
 			"/iplayer/episode/p05rts0s/delia-smiths-cookery-course-series-1-10-puddings",
 			"Available for over a year",
 			"25 mins",
@@ -210,6 +210,44 @@ func TestProgramPage(t *testing.T) {
 		if progs[i].Duration != AdamCurtis[i].duration {
 			t.Errorf("Expected title %q to have duration %q, got: %q",
 				AdamCurtis[i].subtitle, AdamCurtis[i].duration, progs[i].Duration)
+		}
+	}
+	doc = documentLoader("testhtml/delia_smiths_cookery_course.html")
+	pp = programPage{doc}
+	progs = pp.programmes()
+	if len(progs) != 10 {
+		t.Error("Expected length of Delia Smith programmes to be 10, got: ", len(progs))
+	}
+	for _, i := range progs {
+		if i.Title != "Delia Smith's Cookery Course" {
+			t.Error("Expected title to be 'Delia Smith's Cookery Course, got: ",
+				i.Title)
+		}
+	}
+	for i := range DeliaSmith {
+		if progs[i].Subtitle != DeliaSmith[i].subtitle {
+			t.Errorf("Epected subtitle to be %q, got: %q",
+				DeliaSmith[i].subtitle, progs[i].Subtitle)
+		}
+		if progs[i].Synopsis != DeliaSmith[i].synopsis {
+			t.Errorf("Expected synopsis to be %q, got: %q",
+				DeliaSmith[i].synopsis, progs[i].Synopsis)
+		}
+		if progs[i].URL != DeliaSmith[i].url {
+			t.Errorf("Expecte url to be %q, got: %q",
+				DeliaSmith[i].url, progs[i].URL)
+		}
+		if progs[i].Thumbnail != DeliaSmith[i].thumbnail {
+			t.Errorf("Expected thumbnail to be %q, got: %q",
+				DeliaSmith[i].thumbnail, progs[i].Thumbnail)
+		}
+		if progs[i].Duration != DeliaSmith[i].duration {
+			t.Errorf("Expected duration to be %q, got: %q",
+				DeliaSmith[i].duration, progs[i].Duration)
+		}
+		if progs[i].Available != DeliaSmith[i].available {
+			t.Errorf("Expected available to be %q, got: %q",
+				DeliaSmith[i].available, progs[i].Available)
 		}
 	}
 }
