@@ -146,22 +146,47 @@ var AdamCurtis = []struct {
 		"137 mins",
 	},
 }
+
 // TODO Add food program page to test.
 var DeliaSmith = []struct {
-	subtitle string
+	subtitle  string
 	thumbnail string
-	synopsis string
-	url string
+	synopsis  string
+	url       string
 	available string
-	duration string
+	duration  string
 }{
 	{
-			"Series 1: 10. Puddings",
-			"https://ichef.bbci.co.uk/images/ic/304x171/p062csnk.jpg",
-			"Delia makes several delicious and economical puddings. (1979)",
-			"/iplayer/episode/p05rts0s/delia-smiths-cookery-course-series-1-10-puddings",
-			"Available for over a year",
-			"25 mins",
+		"Series 1: 10. Puddings",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p062csnk.jpg",
+		"Delia makes several delicious and economical puddings. (1979)",
+		"/iplayer/episode/p05rts0s/delia-smiths-cookery-course-series-1-10-puddings",
+		"Available for over a year",
+		"25 mins",
+	},
+	{
+		"Series 1: 9. Pulses",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p062csn5.jpg",
+		"Delia prepares unusual and economical meals from a range of pulses. (1979)",
+		"/iplayer/episode/p05rtqvt/delia-smiths-cookery-course-series-1-9-pulses",
+		"Available for over a year",
+		"23 mins",
+	},
+	{
+		"Series 1: 8. Winter Vegetables",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p062csjp.jpg",
+		"Get the best out of winter veg with these delicious recipes. (1979)",
+		"/iplayer/episode/p05rtnzc/delia-smiths-cookery-course-series-1-8-winter-vegetables",
+		"Available for over a year",
+		"24 mins",
+	},
+	{
+		"Series 1: 7. Spices and Flavourings",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p062csj4.jpg",
+		"Delia shows how to use spices to produce beautiful food. (1978)",
+		"/iplayer/episode/p05rt7cc/delia-smiths-cookery-course-series-1-7-spices-and-flavourings",
+		"Available for over a year",
+		"25 mins",
 	},
 }
 
@@ -251,6 +276,7 @@ func TestProgramPage(t *testing.T) {
 		}
 	}
 }
+
 // TODO Add more urls to testurls.
 var filmurls = []string{
 	"/iplayer/episode/b04n1hfy/storyville-112-weddings",
@@ -274,6 +300,7 @@ var foodurls = []string{
 	"/iplayer/episode/b01ml70w/lorraines-fast-fresh-and-easy-food-4-baking-it",
 	"/iplayer/episode/b01mfxyy/lorraines-fast-fresh-and-easy-food-3-simple-classics",
 }
+
 // TODO add more progs to filmprogs/foodprogs.
 var filmprogs = []struct {
 	title     string
