@@ -360,6 +360,24 @@ var filmprogs = []struct {
 		"Available for 2 months",
 		"105 mins",
 	},
+	{
+		"Meet the Fockers",
+		"",
+		"/iplayer/episode/b008lyr3/meet-the-fockers",
+		"Ben Stiller and Robert De Niro star in this blockbuster comedy sequel.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p02x86xz.jpg",
+		"Available until Sun 1:20am",
+		"110 mins",
+	},
+	{
+		"My Old Lady",
+		"",
+		"/iplayer/episode/b055d9vt/my-old-lady",
+		"Comic, poignant relationship drama with Kevin Kline and Maggie Smith.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p04tm316.jpg",
+		"Available until Tue 12am",
+		"102 mins",
+	},
 }
 
 func TestNewMainCategory(t *testing.T) {
