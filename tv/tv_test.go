@@ -307,6 +307,17 @@ var foodurls = []string{
 	"/iplayer/episode/b01mrcxt/lorraines-fast-fresh-and-easy-food-5-posh-nosh",
 	"/iplayer/episode/b01ml70w/lorraines-fast-fresh-and-easy-food-4-baking-it",
 	"/iplayer/episode/b01mfxyy/lorraines-fast-fresh-and-easy-food-3-simple-classics",
+	"/iplayer/episode/p05rt529/delia-smiths-cookery-course-series-1-6-sauces",
+	"/iplayer/episode/p05rt7cc/delia-smiths-cookery-course-series-1-7-spices-and-flavourings",
+	"/iplayer/episode/p05rtnzc/delia-smiths-cookery-course-series-1-8-winter-vegetables",
+	"/iplayer/episode/p05rtqvt/delia-smiths-cookery-course-series-1-9-pulses",
+	"/iplayer/episode/p05rts0s/delia-smiths-cookery-course-series-1-10-puddings",
+	"/iplayer/episode/b0b61r7j/britains-best-home-cook-series-1-episode-6",
+	"/iplayer/episode/b0b5c1h5/britains-best-home-cook-series-1-episode-5",
+	"/iplayer/episode/b0b4fkyb/britains-best-home-cook-series-1-episode-4",
+	"/iplayer/episode/b0b3lh5g/britains-best-home-cook-series-1-episode-3",
+	"/iplayer/episode/b0b2wj6k/britains-best-home-cook-series-1-episode-2",
+	"/iplayer/episode/b0b2289t/britains-best-home-cook-series-1-episode-1",
 }
 
 // TODO add more progs to filmprogs/foodprogs.
