@@ -285,13 +285,23 @@ func TestProgramPage(t *testing.T) {
 	}
 }
 
-// TODO Add more urls to testurls.
 var filmurls = []string{
 	"/iplayer/episode/b04n1hfy/storyville-112-weddings",
 	"/iplayer/episode/p04b183c/adam-curtis-hypernormalisation",
 	"/iplayer/episode/p02gyz6b/adam-curtis-bitter-lake",
 	"/iplayer/episode/p0351g0z/fear-itself",
 	"/iplayer/episode/b08nfjwt/wallace-and-gromit-the-wrong-trousers",
+	"/iplayer/episode/b014f32p/brideshead-revisited",
+	"/iplayer/episode/b00t61gx/the-damned-united",
+	"/iplayer/episode/b0b49py6/dina",
+	"/iplayer/episode/b007793l/great-expectations",
+	"/iplayer/episode/b0b57pqy/kenny",
+	"/iplayer/episode/b0b57d0w/king-lear",
+	"/iplayer/episode/b0148wk1/ladies-in-lavender",
+	"/iplayer/episode/b0074fln/lara-croft-tomb-raider",
+	"/iplayer/episode/b007ck00/lara-croft-tomb-raider-the-cradle-of-life",
+	"/iplayer/episode/b061tt33/lucky-them",
+	"/iplayer/episode/b008lyr3/meet-the-fockers",
 }
 
 var foodurls = []string{
