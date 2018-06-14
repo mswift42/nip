@@ -318,6 +318,8 @@ var foodurls = []string{
 	"/iplayer/episode/b0b3lh5g/britains-best-home-cook-series-1-episode-3",
 	"/iplayer/episode/b0b2wj6k/britains-best-home-cook-series-1-episode-2",
 	"/iplayer/episode/b0b2289t/britains-best-home-cook-series-1-episode-1",
+	"/iplayer/episode/b0b53xqs/the-big-crash-diet-experiment",
+	"/iplayer/episode/b08gj545/the-secrets-of-your-food-series-1-1-we-are-what-we-eat",
 }
 
 // TODO add more progs to filmprogs/foodprogs.
