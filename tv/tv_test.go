@@ -378,6 +378,24 @@ var filmprogs = []struct {
 		"Available until Tue 12am",
 		"102 mins",
 	},
+	{
+		"Passion",
+		"",
+		"/iplayer/episode/b03ftl7s/passion",
+		"Rivalry turns deadly in this tense thriller starring Rachel McAdams and Noomi Rapace.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p03n5crh.jpg",
+		"Expires tonight 2:35am",
+		"94 mins",
+	},
+	{
+		"The Past",
+		"",
+		"/iplayer/episode/b09sqss5/the-past",
+		"A man attends his divorce hearing and gets embroiled in his wife's new relationship.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p04rmr04.jpg",
+		"Available for 17 days",
+		"126 mins",
+	},
 }
 
 func TestNewMainCategory(t *testing.T) {
