@@ -188,6 +188,14 @@ var DeliaSmith = []struct {
 		"Available for over a year",
 		"25 mins",
 	},
+	{
+		"Series 1: 6. Sauces",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p062csj1.jpg",
+		"Delia shares her tips on how to avoid lumps and curdling. (1978)",
+		"/iplayer/episode/p05rt529/delia-smiths-cookery-course-series-1-6-sauces",
+		"Available for over a year",
+		"24 mins",
+	},
 }
 
 func TestProgramPage(t *testing.T) {
