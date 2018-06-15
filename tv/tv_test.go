@@ -523,6 +523,7 @@ func TestNewMainCategory(t *testing.T) {
 				filmprogs[i].title, filmprogs[i].duration, found.Duration)
 		}
 	}
+	// TODO - Test foodprogs.
 }
 
 func TestCategory(t *testing.T) {
