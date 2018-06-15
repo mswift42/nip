@@ -396,6 +396,24 @@ var filmprogs = []struct {
 		"Available for 17 days",
 		"126 mins",
 	},
+	{
+		"Quartet",
+		"",
+		"/iplayer/episode/b03ftm2k/quartet",
+		"Ensemble comedy drama directed by Dustin Hoffman. With Maggie Smith and Tom Courtenay.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p02fbt45.jpg",
+		"Available for 24 days",
+		"92 mins",
+	},
+	{
+		"Shaun the Sheep the Movie",
+		"",
+		"/iplayer/episode/b05zxj5s/shaun-the-sheep-the-movie",
+		"Shaun takes the day off to have some fun, but he gets more than he bargained for.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p05r3g5y.jpg",
+		"Available for 18 days",
+		"85 mins",
+	},
 }
 
 func TestNewMainCategory(t *testing.T) {
