@@ -416,6 +416,20 @@ var filmprogs = []struct {
 	},
 }
 
+var foodprogs = []struct {
+	title string
+	subtitle string
+	url string
+	synopsis string
+	thumbnail string
+	available string
+	duration string
+}{
+	{
+
+	},
+}
+
 func TestNewMainCategory(t *testing.T) {
 	doc := documentLoader("testhtml/food1.html")
 	td := TestIplayerDocument{doc}
