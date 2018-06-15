@@ -426,7 +426,22 @@ var foodprogs = []struct {
 	duration string
 }{
 	{
-
+		"The Big Crash Diet Experiment",
+		"",
+		"/iplayer/episode/b0b53xqs/the-big-crash-diet-experiment",
+		"Dr Javid Abdelmoneim and four overweight volunteers put crash dieting to the test.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p067xj99.jpg",
+		"Available for 21 days",
+		"58 mins",
+	},
+	{
+		"Britain's Best Home Cook",
+		"Series 1: Episode 6",
+		"/iplayer/episode/b0b61r7j/britains-best-home-cook-series-1-episode-6",
+		"In the quarter-final the five remaining cooks must impress the judges with sharing feasts.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p068kn5j.jpg",
+		"Available for 6 months",
+		"58 mins",
 	},
 }
 
