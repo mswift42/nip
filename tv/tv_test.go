@@ -147,7 +147,6 @@ var AdamCurtis = []struct {
 	},
 }
 
-// TODO Add food program page to test.
 var DeliaSmith = []struct {
 	subtitle  string
 	thumbnail string
@@ -332,7 +331,6 @@ var foodurls = []string{
 	"/iplayer/episode/b08gj545/the-secrets-of-your-food-series-1-1-we-are-what-we-eat",
 }
 
-// TODO add more progs to filmprogs/foodprogs.
 var filmprogs = []struct {
 	title     string
 	subtitle  string
