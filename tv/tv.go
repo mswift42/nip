@@ -149,6 +149,24 @@ type programPage struct {
 	doc *iplayerDocument
 }
 
+func newProgramme(title, subtitle string, isel *iplayerSelection) *Programme {
+	synopsis := isel.synopsis()
+	thumbnail := isel.thumbNail()
+	url := isel.thumbNail()
+	available := isel.available()
+	duration := isel.duration()
+	return &Programme{
+		title,
+		subtitle,
+		synopsis,
+		thumbnail,
+		url,
+		0,
+		available,
+		duration,
+	}
+}
+
 func (pp *programPage) programmes() []*Programme {
 	var results []*Programme
 	title := pp.doc.doc.Find(".hero-header__title").Text()
