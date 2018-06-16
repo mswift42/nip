@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/mswift42/goquery"
 	"log"
-	"regexp"
 	"strings"
 	"sync"
 )
@@ -59,6 +58,7 @@ func (is *iplayerSelection) selectionResults() []*iplayerSelectionResult {
 func (is *iplayerSelection) programmeSite() string {
 	return is.sel.Find(".lnk").AttrOr("href", "")
 }
+
 // TODO refactor newProgramme method for programme / programmePage.
 func (is *iplayerSelection) programme() *Programme {
 	title := is.title()
@@ -91,7 +91,8 @@ func (is *iplayerSelection) subtitle() string {
 }
 
 func (is *iplayerSelection) synopsis() string {
-	return is.sel.Find(".synopsis").Text()
+	return is.sel.Find(".content-item__info__secondary " +
+		"> .content-item__description").Text()
 }
 
 func (is *iplayerSelection) url() string {
@@ -103,16 +104,11 @@ func (is *iplayerSelection) thumbNail() string {
 }
 
 func (is *iplayerSelection) available() string {
-	avail := is.sel.Find(".period").AttrOr("title", "")
-	if avail == "" {
-		return is.sel.Find(".availability-duration").Text()
-	}
-	return avail
+	return is.sel.Find(".content-item__sublabels > span").Last().Text()
 }
 
 func (is *iplayerSelection) duration() string {
-	re := regexp.MustCompile(`\d+\smins`)
-	return re.FindString(is.sel.Find(".duration").Last().Text())
+	return is.sel.Find(".content-item__sublabels > span").First().Text()
 }
 
 // Programme represents an Iplayer TV programme. It consists of
@@ -232,7 +228,6 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 //	return results
 //}
 
-// TODO - update newMainCategory to use new iplayer maindoc layout.
 func NewMainCategory(np NextPager) *MainCategoryDocument {
 	nextdocs := []*iplayerDocument{np.mainDoc()}
 	var progpagedocs []*iplayerDocument
