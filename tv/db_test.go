@@ -112,3 +112,29 @@ func TestProgrammeDB_FindTitle(t *testing.T) {
 		t.Error("Did not expect to get a match.")
 	}
 }
+
+func TestProgrammeDB_SixHoursLater(t *testing.T) {
+	pdb, err := RestoreProgrammeDB("mockdb.json")
+	if err != nil {
+		t.Errorf("Expected error to be nil, got|: %s ", err)
+	}
+	t1 := time.Date(2018, 6, 16, 12, 0, 0, 0, time.UTC)
+	t2 := time.Date(2018, 6, 16, 18, 0, 0, 0, time.UTC)
+	t3 := time.Date(2018, 6, 16, 17, 59, 0, 0, time.UTC)
+	t4 := time.Date(2018, 6, 	18, 0, 0, 0,0,  time.UTC)
+	t5 := time.Date(2018, 6, 16, 13, 0, 0, 0, time.UTC)
+	pdb.Saved = t1
+	if !pdb.sixHoursLater(t2) {
+		t.Error("Expected sixHoursLater to be true, got: ", pdb.sixHoursLater(t2))
+	}
+	if pdb.sixHoursLater(t3) {
+		t.Error("Expected sixHoursLater to be false, got: ", pdb.sixHoursLater(t3))
+	}
+	if !pdb.sixHoursLater(t4) {
+		t.Error("Expected sixHoursLater to be true, got: ", pdb.sixHoursLater(t4))
+	}
+	if pdb.sixHoursLater(t5) {
+		t.Error("Expected sixHoursLater to be false, got: ", pdb.sixHoursLater(t5))
+	}
+
+}
