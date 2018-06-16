@@ -461,6 +461,24 @@ var foodprogs = []struct {
 		"Available for 3 months",
 		"59 mins",
 	},
+	{
+		"Caribbean Food Made Easy",
+		"Episode 4",
+		"/iplayer/episode/b00mtr6m/caribbean-food-made-easy-episode-4",
+		"Levi takes to the seas to show Mull fishermen how to dub up their catch.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p05rgkdn.jpg",
+		"Available for over a year",
+		"29 mins",
+	},
+	{
+		"Caribbean Food Made Easy",
+		"Episode 3",
+		"/iplayer/episode/b00mnk09/caribbean-food-made-easy-episode-3",
+		"Levi challenges Cornish pasty eaters in Falmouth to try his golden vegetable patties.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p05rgkgr.jpg",
+		"Available for over a year",
+		"29 mins",
+	},
 
 }
 
