@@ -443,6 +443,25 @@ var foodprogs = []struct {
 		"Available for 6 months",
 		"58 mins",
 	},
+	{
+		"Britain's Fat Fight with Hugh Fearnley-Whittingstall",
+		"Series 1: Episode 3",
+		"/iplayer/episode/b0b2x6d8/britains-fat-fight-with-hugh-fearnleywhittingstall-series-1-episode-3",
+		"Hugh learns of simple and obvious changes which could be made to GPs surgeries.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p065x5ck.jpg",
+		"Available for 3 months",
+		"59 mins",
+	},
+	{
+		"Britain's Fat Fight with Hugh Fearnley-Whittingstall",
+		"Series 1: Episode 2",
+		"/iplayer/episode/b0b1zh3y/britains-fat-fight-with-hugh-fearnleywhittingstall-series-1-episode-2",
+		"Hugh Fearnley-Whittingstall turns the spotlight on popular high street restaurant chains.",
+		"https://ichef.bbci.co.uk/images/ic/304x171/p0657lgn.jpg",
+		"Available for 3 months",
+		"59 mins",
+	},
+
 }
 
 func TestNewMainCategory(t *testing.T) {
@@ -476,24 +495,24 @@ func TestNewMainCategory(t *testing.T) {
 				foodprogs[i].title, found.Title)
 		}
 		if foodprogs[i].subtitle != found.Subtitle {
-			t.Errorf("Expected programme to have subtitle: %q. got: %q ",
-				foodprogs[i].subtitle, found.Subtitle)
+			t.Errorf("Expected programme %q to have subtitle: %q. got: %q ",
+				foodprogs[i].title, foodprogs[i].subtitle, found.Subtitle)
 		}
 		if foodprogs[i].url != found.URL {
-			t.Errorf("Expected programme to have url: %q. got: %q ",
-				foodprogs[i].url, found.URL)
+			t.Errorf("Expected programme %q %q to have url: %q. got: %q ",
+				foodprogs[i].title, foodprogs[i].subtitle, foodprogs[i].url, found.URL)
 		}
 		if foodprogs[i].thumbnail != found.Thumbnail {
-			t.Errorf("Expected programme to have thumbnail: %q. got: %q ",
-				foodprogs[i].thumbnail, found.Thumbnail)
+			t.Errorf("Expected programme %q %q to have thumbnail: %q. got: %q ",
+				foodprogs[i].title, foodprogs[i].subtitle, foodprogs[i].thumbnail, found.Thumbnail)
 		}
 		if foodprogs[i].available != found.Available {
-			t.Errorf("Expected programme to have availability : %q. got: %q ",
-				foodprogs[i].available, found.Available)
+			t.Errorf("Expected programme %q %q to have availability : %q. got: %q ",
+				foodprogs[i].title, foodprogs[i].subtitle, foodprogs[i].available, found.Available)
 		}
 		if foodprogs[i].duration != found.Duration {
-			t.Errorf("Expected programme to have duration %q, got: %q ",
-				foodprogs[i].duration, found.Duration)
+			t.Errorf("Expected programme %q %q to have duration %q, got: %q ",
+				foodprogs[i].title, foodprogs[i].subtitle, foodprogs[i].duration, found.Duration)
 		}
 	}
 	doc = documentLoader("testhtml/films1.html")
