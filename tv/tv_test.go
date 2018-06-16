@@ -459,10 +459,41 @@ func TestNewMainCategory(t *testing.T) {
 	if len(foodprogpagedocs) != 20 {
 		t.Error("Expected length of programpage docs to be 19, got: ", len(foodprogpagedocs))
 	}
-	foodprogs := nmc.Programmes()
+	foodprogrammes := nmc.Programmes()
 	for _, i := range foodurls {
-		if !contains(foodprogs, i) {
-			t.Errorf("Expected foodprogs to contain %q ", i)
+		if !contains(foodprogrammes, i) {
+			t.Errorf("Expected foodprogrammes to contain %q ", i)
+		}
+	}
+	for i := range foodprogs {
+		found := findProgramme(foodprogrammes, foodprogs[i].url)
+		if found == nil {
+			t.Errorf("Expected programme: %q to be found.",
+				foodprogs[i].title + foodprogs[i].subtitle)
+		}
+		if foodprogs[i].title != found.Title {
+			t.Errorf("Expected programme to have have title: %q. got: %q",
+				foodprogs[i].title, found.Title)
+		}
+		if foodprogs[i].subtitle != found.Subtitle {
+			t.Errorf("Expected programme to have subtitle: %q. got: %q ",
+				foodprogs[i].subtitle, found.Subtitle)
+		}
+		if foodprogs[i].url != found.URL {
+			t.Errorf("Expected programme to have url: %q. got: %q ",
+				foodprogs[i].url, found.URL)
+		}
+		if foodprogs[i].thumbnail != found.Thumbnail {
+			t.Errorf("Expected programme to have thumbnail: %q. got: %q ",
+				foodprogs[i].thumbnail, found.Thumbnail)
+		}
+		if foodprogs[i].available != found.Available {
+			t.Errorf("Expected programme to have availability : %q. got: %q ",
+				foodprogs[i].available, found.Available)
+		}
+		if foodprogs[i].duration != found.Duration {
+			t.Errorf("Expected programme to have duration %q, got: %q ",
+				foodprogs[i].duration, found.Duration)
 		}
 	}
 	doc = documentLoader("testhtml/films1.html")
@@ -523,7 +554,6 @@ func TestNewMainCategory(t *testing.T) {
 				filmprogs[i].title, filmprogs[i].duration, found.Duration)
 		}
 	}
-	// TODO - Test foodprogs.
 }
 
 func TestCategory(t *testing.T) {
