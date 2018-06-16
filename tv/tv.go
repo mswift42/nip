@@ -99,8 +99,10 @@ func (is *iplayerSelection) url() string {
 	return is.sel.Find("a").AttrOr("href", "")
 }
 
-func (is *iplayerSelection) thumbNail() string {
-	return is.sel.Find(".rs-image > picture > source").AttrOr("srcset", "")
+
+func (is *iplayerSelection) thumbnail() string {
+	set := is.sel.Find(".rs-image > picture > source").AttrOr("srcset", "")
+	return strings.Split(set, " ")[0]
 }
 
 func (is *iplayerSelection) available() string {
@@ -151,8 +153,8 @@ type programPage struct {
 
 func newProgramme(title, subtitle string, isel *iplayerSelection) *Programme {
 	synopsis := isel.synopsis()
-	thumbnail := isel.thumbNail()
-	url := isel.thumbNail()
+	thumbnail := isel.thumbnail()
+	url := isel.url()
 	available := isel.available()
 	duration := isel.duration()
 	return &Programme{
@@ -172,7 +174,7 @@ func (pp *programPage) programmes() []*Programme {
 	title := pp.doc.doc.Find(".hero-header__title").Text()
 	pp.doc.doc.Find(".content-item").Each(func(i int, s *goquery.Selection) {
 		subtitle := s.Find(".content-item__title").Text()
-		results = append(results, newProgrammeFromProgramPage(title, subtitle, s))
+		results = append(results, newProgramme(title, subtitle, &iplayerSelection{s}))
 	})
 	return results
 }
@@ -183,15 +185,11 @@ func newProgrammeFromProgramPage(title string, subtitle string, s *goquery.Selec
 	available := s.Find(".content-item__sublabels > span").Last().Text()
 	duration := s.Find(".content-item__sublabels > span").First().Text()
 	sel := iplayerSelection{s}
-	thumbnail := sel.extractThumbnail()
+	thumbnail := sel.thumbnail()
 	return &Programme{title, subtitle, synopsis,
 		thumbnail, url, 0, available, duration}
 }
 
-func (is *iplayerSelection) extractThumbnail() string {
-	set := is.sel.Find(".rs-image > picture > source").AttrOr("srcset", "")
-	return strings.Split(set, " ")[0]
-}
 
 type MainCategoryDocument struct {
 	maindoc          *iplayerDocument
