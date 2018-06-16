@@ -59,7 +59,6 @@ func (is *iplayerSelection) programmeSite() string {
 	return is.sel.Find(".lnk").AttrOr("href", "")
 }
 
-// TODO refactor newProgramme method for programme / programmePage.
 func (is *iplayerSelection) programme() *Programme {
 	title := is.title()
 	subtitle := is.subtitle()
