@@ -63,22 +63,7 @@ func (is *iplayerSelection) programmeSite() string {
 func (is *iplayerSelection) programme() *Programme {
 	title := is.title()
 	subtitle := is.subtitle()
-	//synopsis := is.synopsis()
-	//url := is.url()
-	//thumbnail := is.thumbNail()
-	//available := is.available()
-	//duration := is.duration()
-	//return &Programme{
-	//	Title:     title,
-	//	Subtitle:  subtitle,
-	//	Synopsis:  synopsis,
-	//	Thumbnail: thumbnail,
-	//	URL:       url,
-	//	Index:     0,
-	//	Available: available,
-	//	Duration:  duration,
-	//}
-	return newProgrammeFromProgramPage(title, subtitle, is.sel)
+	return newProgramme(title, subtitle, is)
 }
 
 func (is *iplayerSelection) title() string {
