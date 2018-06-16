@@ -164,18 +164,6 @@ func (pp *programPage) programmes() []*Programme {
 	return results
 }
 
-func newProgrammeFromProgramPage(title string, subtitle string, s *goquery.Selection) *Programme {
-	synopsis := s.Find(".content-item__info__secondary > .content-item__description").Text()
-	url := s.Find("a").AttrOr("href", "")
-	available := s.Find(".content-item__sublabels > span").Last().Text()
-	duration := s.Find(".content-item__sublabels > span").First().Text()
-	sel := iplayerSelection{s}
-	thumbnail := sel.thumbnail()
-	return &Programme{title, subtitle, synopsis,
-		thumbnail, url, 0, available, duration}
-}
-
-
 type MainCategoryDocument struct {
 	maindoc          *iplayerDocument
 	nextdocs         []*iplayerDocument
