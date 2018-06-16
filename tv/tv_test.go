@@ -415,13 +415,13 @@ var filmprogs = []struct {
 }
 
 var foodprogs = []struct {
-	title string
-	subtitle string
-	url string
-	synopsis string
+	title     string
+	subtitle  string
+	url       string
+	synopsis  string
 	thumbnail string
 	available string
-	duration string
+	duration  string
 }{
 	{
 		"The Big Crash Diet Experiment",
@@ -477,7 +477,6 @@ var foodprogs = []struct {
 		"Available for over a year",
 		"29 mins",
 	},
-
 }
 
 func TestNewMainCategory(t *testing.T) {
@@ -504,7 +503,7 @@ func TestNewMainCategory(t *testing.T) {
 		found := findProgramme(foodprogrammes, foodprogs[i].url)
 		if found == nil {
 			t.Errorf("Expected programme: %q to be found.",
-				foodprogs[i].title + foodprogs[i].subtitle)
+				foodprogs[i].title+foodprogs[i].subtitle)
 		}
 		if foodprogs[i].title != found.Title {
 			t.Errorf("Expected programme to have have title: %q. got: %q",

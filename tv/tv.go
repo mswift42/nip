@@ -83,7 +83,6 @@ func (is *iplayerSelection) url() string {
 	return is.sel.Find("a").AttrOr("href", "")
 }
 
-
 func (is *iplayerSelection) thumbnail() string {
 	set := is.sel.Find(".rs-image > picture > source").AttrOr("srcset", "")
 	return strings.Split(set, " ")[0]

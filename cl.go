@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/urfave/cli"
-	"github.com/mswift42/nip/tv"
 	"fmt"
+	"github.com/mswift42/nip/tv"
+	"github.com/urfave/cli"
 )
 
 func initCli() *cli.App {
@@ -18,32 +18,31 @@ func initCli() *cli.App {
 	// TODO - add command to open home page of programme.
 	app.Commands = []cli.Command{
 		{
-			Name: "list",
+			Name:    "list",
 			Aliases: []string{"l"},
-			Usage: "List all available categories.",
+			Usage:   "List all available categories.",
 			Action: func(c *cli.Context) error {
 				fmt.Println(db.ListAvailableCategories())
 				return nil
 			},
 		},
 		{
-			Name: "category",
+			Name:    "category",
 			Aliases: []string{"c"},
-			Usage: "List all programmes for a category.",
+			Usage:   "List all programmes for a category.",
 			Action: func(c *cli.Context) error {
 				fmt.Println(db.ListCategory(c.Args().Get(0)))
 				return nil
 			},
 		},
 		{
-			Name: "search",
+			Name:    "search",
 			Aliases: []string{"s"},
-			Usage: "Search for a programme.",
+			Usage:   "Search for a programme.",
 			Action: func(c *cli.Context) error {
 				fmt.Println(db.FindTitle(c.Args().Get(0)))
 				return nil
 			},
-
 		},
 	}
 	return app

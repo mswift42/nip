@@ -108,9 +108,9 @@ func (pdb *ProgrammeDB) sixHoursLater(dt time.Time) bool {
 }
 
 func SaveDB() {
-	 c := make(chan *IplayerDocumentResult)
-	 var np []NextPager
-	 var cats []*Category
+	c := make(chan *IplayerDocumentResult)
+	var np []NextPager
+	var cats []*Category
 	for _, v := range caturls {
 		fmt.Println("Loading Document: ", v)
 		go func(u Pager) {
@@ -132,4 +132,3 @@ func SaveDB() {
 	pdb := &ProgrammeDB{cats, time.Now()}
 	pdb.Save("mockdb.json")
 }
-

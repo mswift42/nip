@@ -1,9 +1,9 @@
 package tv
 
 import (
+	"strings"
 	"testing"
 	"time"
-	"strings"
 )
 
 func TestProgrammeDB_Index(t *testing.T) {
@@ -121,7 +121,7 @@ func TestProgrammeDB_SixHoursLater(t *testing.T) {
 	t1 := time.Date(2018, 6, 16, 12, 0, 0, 0, time.UTC)
 	t2 := time.Date(2018, 6, 16, 18, 0, 0, 0, time.UTC)
 	t3 := time.Date(2018, 6, 16, 17, 59, 0, 0, time.UTC)
-	t4 := time.Date(2018, 6, 	18, 0, 0, 0,0,  time.UTC)
+	t4 := time.Date(2018, 6, 18, 0, 0, 0, 0, time.UTC)
 	t5 := time.Date(2018, 6, 16, 13, 0, 0, 0, time.UTC)
 	pdb.Saved = t1
 	if !pdb.sixHoursLater(t2) {
