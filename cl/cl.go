@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/mswift42/nip/tv"
 	"github.com/urfave/cli"
-	"runtime"
 	"os/exec"
+	"runtime"
 	"strconv"
 )
 
@@ -48,9 +48,9 @@ func InitCli() *cli.App {
 			},
 		},
 		{
-			Name: "show",
+			Name:    "show",
 			Aliases: []string{"sh"},
-			Usage:	"Open Programmes homepage.",
+			Usage:   "Open Programmes homepage.",
 			Action: func(c *cli.Context) error {
 				ind := c.Args().Get(0)
 				index, err := strconv.ParseInt(ind, 10, 0)
@@ -62,12 +62,12 @@ func InitCli() *cli.App {
 					fmt.Println(err)
 				}
 				switch runtime.GOOS {
-				case "linux" :
+				case "linux":
 					err = exec.Command("xdg-open", url).Start()
-				case "darwin" :
+				case "darwin":
 					err = exec.Command("open", url).Start()
-				case "windows" :
-					 err = exec.Command("cmd", "/c", url).Start()
+				case "windows":
+					err = exec.Command("cmd", "/c", url).Start()
 				default:
 					fmt.Println("Unsupported platform.")
 				}

@@ -1,8 +1,8 @@
 package main
 
 import (
-			"os"
 	"github.com/mswift42/nip/cl"
+	"os"
 )
 
 func main() {

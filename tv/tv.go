@@ -8,6 +8,8 @@ import (
 	"sync"
 )
 
+const bbcprefix = "https://bbc.co.uk"
+
 type BeebURL string
 
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {

@@ -111,7 +111,7 @@ func (pdb *ProgrammeDB) FindUrl(index int) (string, error) {
 	for _, i := range pdb.Categories {
 		for _, j := range i.Programmes {
 			if j.Index == index {
-				return j.URL, nil
+				return bbcprefix + j.URL, nil
 			}
 		}
 	}
