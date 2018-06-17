@@ -8,7 +8,7 @@ import (
 	"os/exec"
 )
 
-func initCli() *cli.App {
+func InitCli() *cli.App {
 	db, err := tv.RestoreProgrammeDB("tv/mockdb.json")
 	if err != nil {
 		panic(err)
@@ -62,6 +62,9 @@ func initCli() *cli.App {
 					 err = exec.Command("cmd", "/c", url).Start()
 				default:
 					fmt.Println("Unsupported platform.")
+				}
+				if err != nil {
+					fmt.Println(err)
 				}
 				return nil
 			},
