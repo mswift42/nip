@@ -107,6 +107,18 @@ func (pdb *ProgrammeDB) sixHoursLater(dt time.Time) bool {
 	return dur.Truncate(time.Hour).Hours() >= 6
 }
 
+func (pdb *ProgrammeDB) FindUrl(index int) (string, error) {
+	for _, i := range pdb.Categories {
+		for _, j := range i.Programmes {
+			if j.Index == index {
+				return j.URL, nil
+			}
+		}
+	}
+	return "", errors.New(fmt.Sprintf("Could not find Programme with index %d",
+		index))
+}
+
 func SaveDB() {
 	c := make(chan *IplayerDocumentResult)
 	var np []NextPager
