@@ -6,10 +6,11 @@ import (
 	"github.com/urfave/cli"
 	"runtime"
 	"os/exec"
+	"strconv"
 )
 
 func InitCli() *cli.App {
-	db, err := tv.RestoreProgrammeDB("tv/mockdb.json")
+	db, err := tv.RestoreProgrammeDB("mockdb.json")
 	if err != nil {
 		panic(err)
 	}
@@ -51,8 +52,15 @@ func InitCli() *cli.App {
 			Aliases: []string{"sh"},
 			Usage:	"Open Programmes homepage.",
 			Action: func(c *cli.Context) error {
-				url := c.Args().Get(0)
-				var err error
+				ind := c.Args().Get(0)
+				index, err := strconv.ParseInt(ind, 10, 0)
+				if err != nil {
+					fmt.Println("Please enter valid index number.")
+				}
+				url, err := db.FindUrl(int(index))
+				if err != nil {
+					fmt.Println(err)
+				}
 				switch runtime.GOOS {
 				case "linux" :
 					err = exec.Command("xdg-open", url).Start()
