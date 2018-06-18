@@ -9,6 +9,7 @@ import (
 
 	"fmt"
 	"github.com/pkg/errors"
+	"github.com/gosuri/uiprogress"
 )
 
 // ProgrammeDB represents a (file) DB of all saved
@@ -123,6 +124,8 @@ func SaveDB() {
 	c := make(chan *IplayerDocumentResult)
 	var np []NextPager
 	var cats []*Category
+	uiprogress.Start()
+	bar := uiprogress.AddBar(len(caturls)).AppendCompleted()
 	for _, v := range caturls {
 		go func(u Pager) {
 			u.loadDocument(c)
@@ -132,6 +135,7 @@ func SaveDB() {
 		docres := <-c
 		if docres.Error == nil {
 			np = append(np, &docres.Idoc)
+			bar.Incr()
 		} else {
 			fmt.Println(docres.Error)
 		}
@@ -141,6 +145,7 @@ func SaveDB() {
 		cats = append(cats, nc)
 	}
 	pdb := &ProgrammeDB{cats, time.Now()}
+	uiprogress.Stop()
 	pdb.Save("mockdb.json")
 }
 
