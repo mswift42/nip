@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-	// TODO - Add ProgressBars for save method.
 	//url := "https://www.bbc.co.uk/iplayer/categories/films/all?sort=atoz&page=1"
 	//doc := tv.RemoteDocumentLoader(url)
 	//nmc := tv.NewMainCategory(doc)

@@ -18,7 +18,6 @@ func InitCli() *cli.App {
 	app.Setup()
 	app.Name = "nip"
 
-	// TODO - add command to open home page of programme.
 	app.Commands = []cli.Command{
 		{
 			Name:    "list",
