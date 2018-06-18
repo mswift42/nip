@@ -144,3 +144,13 @@ func SaveDB() {
 	pdb := &ProgrammeDB{cats, time.Now()}
 	pdb.Save("mockdb.json")
 }
+
+func init() {
+	pdb, err := RestoreProgrammeDB("mockdb.json")
+	if err != nil {
+		SaveDB()
+	}
+	if pdb.sixHoursLater(time.Now()) {
+		SaveDB()
+	}
+}
