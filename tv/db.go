@@ -124,7 +124,6 @@ func SaveDB() {
 	var np []NextPager
 	var cats []*Category
 	for _, v := range caturls {
-		fmt.Println("Loading Document: ", v)
 		go func(u Pager) {
 			u.loadDocument(c)
 		}(v)
@@ -149,8 +148,9 @@ func init() {
 	pdb, err := RestoreProgrammeDB("mockdb.json")
 	if err != nil {
 		SaveDB()
-	}
-	if pdb.sixHoursLater(time.Now()) {
-		SaveDB()
+	} else {
+		if pdb.sixHoursLater(time.Now()) {
+			SaveDB()
+		}
 	}
 }
