@@ -56,7 +56,7 @@ func InitCli() *cli.App {
 				if err != nil {
 					fmt.Println("Please enter valid index number.")
 				}
-				url, err := db.FindUrl(int(index))
+				url, err := db.FindURL(int(index))
 				if err != nil {
 					fmt.Println(err)
 				}
