@@ -20,6 +20,8 @@ type ProgrammeDB struct {
 	Saved      time.Time   `json:"saved"`
 }
 
+// RestoreProgrammeDB takes a path to a json file, reads it, and if
+// successful, unmarshals it as struct ProgrammeDB.
 func RestoreProgrammeDB(filename string) (*ProgrammeDB, error) {
 	file, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -38,6 +40,9 @@ func (pdb *ProgrammeDB) toJSON() ([]byte, error) {
 	return marshalled, err
 }
 
+// Save takes a path to json file, adds the current time to field
+// 'Saved', converts it to json in a human readable format, and if successful
+// saves it to said file.
 func (pdb *ProgrammeDB) Save(filename string) error {
 	pdb.Saved = time.Now()
 	pdb.index()
@@ -58,6 +63,8 @@ func (pdb *ProgrammeDB) index() {
 	}
 }
 
+// ListCategory takes the name for a category, searches the ProgrammeDB
+// for it, and if found, returns a string with all the category's programmes.
 func (pdb *ProgrammeDB) ListCategory(category string) string {
 	var buffer bytes.Buffer
 	cat, err := pdb.findCategory(category)
@@ -80,6 +87,8 @@ func (pdb *ProgrammeDB) findCategory(category string) (*Category, error) {
 	return nil, errors.New("Can't find Category with Name: " + category)
 }
 
+// ListAvailableCategories returns a string with the name of all categories stored
+// in ProgrammeDB.
 func (pdb *ProgrammeDB) ListAvailableCategories() string {
 	var buffer bytes.Buffer
 	for _, i := range pdb.Categories {
@@ -87,7 +96,9 @@ func (pdb *ProgrammeDB) ListAvailableCategories() string {
 	}
 	return buffer.String()
 }
-
+// FindTitle searches for a given term in the ProgrammeDB.
+// Whenever a programmes title contains the searchterm, the
+// programme is appended to the result string.
 func (pdb *ProgrammeDB) FindTitle(title string) string {
 	var buffer bytes.Buffer
 	for _, i := range pdb.Categories {
@@ -108,7 +119,9 @@ func (pdb *ProgrammeDB) sixHoursLater(dt time.Time) bool {
 	return dur.Truncate(time.Hour).Hours() >= 6
 }
 
-func (pdb *ProgrammeDB) FindUrl(index int) (string, error) {
+// FindURL takes an index, queries the ProgrammeDB for it, and if found,
+// returns the URL for the matching programme.
+func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 	for _, i := range pdb.Categories {
 		for _, j := range i.Programmes {
 			if j.Index == index {
