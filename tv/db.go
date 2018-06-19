@@ -129,8 +129,7 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 			}
 		}
 	}
-	return "", errors.New(fmt.Sprintf("Could not find Programme with index %d",
-		index))
+	return "", fmt.Errorf("could not find Programme with index %d", index)
 }
 
 // SaveDB makes a new Category for all entries in caturls,
