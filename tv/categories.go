@@ -1,5 +1,7 @@
 package tv
 
+// Category represents an Iplayer Prograamme, consisting of its name
+// and a list of its programmes.
 type Category struct {
 	Name       string
 	Programmes []*Programme
