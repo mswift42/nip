@@ -133,6 +133,8 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 		index))
 }
 
+// SaveDB makes a new Category for all entries in caturls,
+// and if successful, stores stem in ProgrammeDB.
 func SaveDB() {
 	c := make(chan *IplayerDocumentResult)
 	var np []NextPager
