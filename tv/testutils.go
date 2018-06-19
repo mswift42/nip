@@ -7,7 +7,11 @@ import (
 	"github.com/mswift42/goquery"
 )
 
+// TestHTMLURL is the path to a local testhtml file.
 type TestHTMLURL string
+
+// A TestIplayerDocument is a goquery.Document
+// for a saved to file, copy of a BBC iplayer page.
 type TestIplayerDocument struct {
 	idoc *iplayerDocument
 }
@@ -51,17 +55,6 @@ func documentLoader(url string) *iplayerDocument {
 	thu := TestHTMLURL(url)
 	c := make(chan *IplayerDocumentResult)
 	go thu.loadDocument(c)
-	idr := <-c
-	if idr.Error != nil {
-		panic(idr.Error)
-	}
-	return &idr.Idoc
-}
-
-func RemoteDocumentLoader(url string) *iplayerDocument {
-	bu := BeebURL(url)
-	c := make(chan *IplayerDocumentResult)
-	go bu.loadDocument(c)
 	idr := <-c
 	if idr.Error != nil {
 		panic(idr.Error)
