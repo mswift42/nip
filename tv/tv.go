@@ -2,14 +2,16 @@ package tv
 
 import (
 	"fmt"
-	"github.com/mswift42/goquery"
 	"log"
 	"strings"
 	"sync"
+
+	"github.com/mswift42/goquery"
 )
 
 const bbcprefix = "https://bbc.co.uk"
 
+// BeebURL is the url for an iplayer web site.
 type BeebURL string
 
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
@@ -206,16 +208,6 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 	}
 	return urls
 }
-
-//func DocumentsFromResults(docres []*IplayerDocumentResult) []*iplayerDocument {
-//	var results []*iplayerDocument
-//	for _, i := range docres {
-//		if i.Error == nil {
-//			results = append(results, &i.Idoc)
-//		}
-//	}
-//	return results
-//}
 
 func NewMainCategory(np NextPager) *MainCategoryDocument {
 	nextdocs := []*iplayerDocument{np.mainDoc()}
