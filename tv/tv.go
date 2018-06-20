@@ -129,6 +129,9 @@ func (id *iplayerDocument) programmeListSelection() *iplayerSelection {
 	return &iplayerSelection{id.doc.Find(".content-item")}
 }
 
+// An IplayerDocumentResult is the result of generating a new
+// goquery.Document from a iplayer url.
+// If successful, the Idoc will be an iplayerDocument and nil for The error field.
 type IplayerDocumentResult struct {
 	Idoc  iplayerDocument
 	Error error
@@ -166,6 +169,11 @@ func (pp *programPage) programmes() []*Programme {
 	return results
 }
 
+// A MainCategoryDocument is the collection point for an iplayer category.
+// maindoc is the root (or page 1) document, nextdocs pages 2 - n,
+// programpagedocs are the docuemnts for all programmes that have more
+// than 1 episode, and selectionresults have the programmes with only
+// one available episode.
 type MainCategoryDocument struct {
 	maindoc          *iplayerDocument
 	nextdocs         []*iplayerDocument
@@ -173,6 +181,8 @@ type MainCategoryDocument struct {
 	selectionresults []*iplayerSelectionResult
 }
 
+// Programmes traverses all iplayerdocuments of an MainCategoryDocument
+// and returns all their programmes.
 func (mcd *MainCategoryDocument) Programmes() []*Programme {
 	var results []*Programme
 	for _, i := range mcd.selectionresults {
@@ -209,6 +219,8 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 	return urls
 }
 
+// NewMainCategory generates a new MainCategoryDocument
+// from a root iplayer category document (eg. films, food)
 func NewMainCategory(np NextPager) *MainCategoryDocument {
 	nextdocs := []*iplayerDocument{np.mainDoc()}
 	var progpagedocs []*iplayerDocument
