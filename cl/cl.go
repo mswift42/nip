@@ -2,11 +2,12 @@ package cl
 
 import (
 	"fmt"
-	"github.com/mswift42/nip/tv"
-	"github.com/urfave/cli"
 	"os/exec"
 	"runtime"
 	"strconv"
+
+	"github.com/mswift42/nip/tv"
+	"github.com/urfave/cli"
 )
 
 func InitCli() *cli.App {
@@ -72,6 +73,25 @@ func InitCli() *cli.App {
 				}
 				if err != nil {
 					fmt.Println(err)
+				}
+				return nil
+			},
+		},
+		{
+			Name:    "url",
+			Aliases: []string{"u"},
+			Usage:   "print programme's url",
+			Action: func(c *cli.Context) error {
+				ind := c.Args().Get(0)
+				index, err := strconv.ParseInt(ind, 10, 0)
+				if err != nil {
+					fmt.Println("Please enter valid index number.")
+				}
+				url, err := db.FindURL(int(index))
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					fmt.Println(url)
 				}
 				return nil
 			},
