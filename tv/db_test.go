@@ -45,6 +45,13 @@ func TestRestoreProgrammeDB(t *testing.T) {
 	if pdb == nil {
 		t.Error("Expected db not to be nil!")
 	}
+	npdb, err := RestoreProgrammeDB("nosuchfile.json")
+	if npdb != nil {
+		t.Error("Expected db to be nil, got: ", npdb)
+	}
+	if err == nil {
+		t.Error("Expected err not to be nil, got: ", err)
+	}
 	if pdb.Categories[0].Name != "films" {
 		t.Errorf("Expected first Category name to be 'films', got: %q ", pdb.Categories[0].Name)
 	}
