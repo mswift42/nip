@@ -10,6 +10,8 @@ import (
 	"github.com/urfave/cli"
 )
 
+// InitCli loads the ProgrammeDB into memory
+// and sets up the command line commands.
 func InitCli() *cli.App {
 	db, err := tv.RestoreProgrammeDB("mockdb.json")
 	if err != nil {
