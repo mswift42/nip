@@ -1,4 +1,4 @@
-package tv
+package db
 
 import (
 	"bytes"
