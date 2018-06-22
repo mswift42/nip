@@ -593,7 +593,7 @@ func TestNewMainCategory(t *testing.T) {
 func TestCategory(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
 	td := TestIplayerDocument{doc}
-	cat := newCategory("films", &td)
+	cat := NewCategory("films", &td)
 	if cat.Name != "films" {
 		t.Errorf("Expected category's name to be 'films' , got: %q", cat.Name)
 	}
