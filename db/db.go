@@ -10,13 +10,16 @@ import (
 	"fmt"
 	"github.com/pkg/errors"
 	"github.com/gosuri/uiprogress"
+	"github.com/mswift42/nip/tv"
 )
+
+const bbcprefix = "https://bbc.co.uk"
 
 // ProgrammeDB represents a (file) DB of all saved
 // Programmes, divided by Categories. The Saved field
 // speciefies at what time the DB was last refreshed.
 type ProgrammeDB struct {
-	Categories []*Category `json:"categories"`
+	Categories []*tv.Category `json:"categories"`
 	Saved      time.Time   `json:"saved"`
 }
 
@@ -78,7 +81,7 @@ func (pdb *ProgrammeDB) ListCategory(category string) string {
 	return buffer.String()
 }
 
-func (pdb *ProgrammeDB) findCategory(category string) (*Category, error) {
+func (pdb *ProgrammeDB) findCategory(category string) (*tv.Category, error) {
 	for _, i := range pdb.Categories {
 		if i.Name == category {
 			return i, nil
@@ -135,9 +138,9 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 // SaveDB makes a new Category for all entries in caturls,
 // and if successful, stores stem in ProgrammeDB.
 func SaveDB() {
-	c := make(chan *IplayerDocumentResult)
-	var np []NextPager
-	var cats []*Category
+	c := make(chan *tv.IplayerDocumentResult)
+	var np []tv.NextPager
+	var cats []*tv.Category
 	uiprogress.Start()
 	bar := uiprogress.AddBar(len(caturls)).AppendCompleted()
 	for _, v := range caturls {
@@ -161,6 +164,30 @@ func SaveDB() {
 	pdb := &ProgrammeDB{cats, time.Now()}
 	uiprogress.Stop()
 	pdb.Save("mockdb.json")
+}
+
+var caturls = map[string]tv.Pager{
+	"films":          tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/films/a-z?sort=atoz&page=1"),
+	"food":           tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/food/a-z?sort=atoz&page=1"),
+	"comedy":         tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/comedy/a-z?sort=atoz"),
+	"crime":          tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/drama-crime/a-z?sort=atoz"),
+	"classic+period": tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/drama-classic-and-period/a-z?sort=atoz"),
+	"scifi+fantasy":  tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/drama-sci-fi-and-fantasy/a-z?sort=atoz"),
+	"documentaries":  tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/documentaries/a-z?sort=atoz"),
+	"arts":           tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/arts/a-z?sort=atoz"),
+	"entertainment":  tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/entertainment/a-z?sort=atoz"),
+	"history":        tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/history/a-z?sort=atoz"),
+	"lifestyle":      tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/lifestyle/a-z?sort=atoz"),
+	"music":          tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/music/a-z?sort=atoz"),
+	"news":           tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/news/a-z?sort=atoz"),
+	"science&nature": tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/science-and-nature/a-z?sort=atoz"),
+	"sport":          tv.BeebURL("https://www.bbc.co.uk/iplayer/categories/sport/a-z?sort=atoz"),
+}
+// NewCategory takes a category name and a category root document, generates
+// a NewMainCategory and returns a Category.
+func NewCategory(name string, np tv.NextPager) *tv.Category {
+	nmc := tv.NewMainCategory(np)
+	return &tv.Category{name, nmc.Programmes()}
 }
 
 func init() {
