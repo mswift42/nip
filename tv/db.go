@@ -137,14 +137,11 @@ func (pdb *ProgrammeDB) FindProgramme(index int) (*Programme, error) {
 // FindURL takes an index, queries the ProgrammeDB for it, and if found,
 // returns the URL for the matching programme.
 func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
-	for _, i := range pdb.Categories {
-		for _, j := range i.Programmes {
-			if j.Index == index {
-				return bbcprefix + j.URL, nil
-			}
-		}
+	prog, err := pdb.FindProgramme(index)
+	if err != nil {
+		return "", err
 	}
-	return "", fmt.Errorf("could not find Programme with index %d", index)
+	return bbcprefix + prog.URL, nil
 }
 
 // SaveDB makes a new Category for all entries in caturls,
