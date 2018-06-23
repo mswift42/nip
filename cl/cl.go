@@ -98,6 +98,24 @@ func InitCli() *cli.App {
 				return nil
 			},
 		},
+		{
+			Name: "synopsis",
+			Aliases: []string{"syn"},
+			Usage: "print programme's synopsis",
+			Action: func(c *cli.Context) error {
+				ind := c.Args().Get(0)
+				index, err := strconv.ParseInt(ind, 10, 0)
+				if err != nil {
+					fmt.Println("Please enter valid index number.")
+				}
+				prog, err := db.Find
+				if err != nil {
+					fmt.Println(err)
+				} else {
+					fmt.Println()
+				}
+			}
+		}
 	}
 	return app
 }
