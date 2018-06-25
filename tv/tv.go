@@ -9,10 +9,10 @@ import (
 	"github.com/mswift42/goquery"
 )
 
-const bbcprefix = "https://bbc.co.uk"
-
 // BeebURL is the url for an iplayer web site.
 type BeebURL string
+
+const bbcprefix = "https://bbc.co.uk"
 
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	var url string
