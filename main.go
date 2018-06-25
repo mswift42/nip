@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/mswift42/nip/cl"
 	"os"
+	"log"
 )
 
 func main() {
@@ -23,5 +24,8 @@ func main() {
 	//}
 	//tv.SaveDB()
 	app := cl.InitCli()
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
