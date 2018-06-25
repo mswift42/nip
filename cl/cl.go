@@ -104,6 +104,9 @@ func InitCli() *cli.App {
 			Aliases: []string{"syn"},
 			Usage:   "print programme's synopsis",
 			Action: func(c *cli.Context) error {
+				if len(c.Args()) != 1 {
+					fmt.Println("Please enter valid index number.")
+				}
 				ind := c.Args().Get(0)
 				index, err := strconv.ParseInt(ind, 10, 0)
 				if err != nil {
@@ -113,7 +116,7 @@ func InitCli() *cli.App {
 				if err != nil {
 					fmt.Println(err)
 				} else {
-					fmt.Println(prog.Synopsis)
+					fmt.Println(prog.String() + "\n" + prog.Synopsis)
 				}
 				return nil
 			},
