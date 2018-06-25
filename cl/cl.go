@@ -20,6 +20,7 @@ func InitCli() *cli.App {
 	app := cli.NewApp()
 	app.Setup()
 	app.Name = "nip"
+	app.Usage = "search for iplayer tv programmes."
 
 	app.Commands = []cli.Command{
 		{
