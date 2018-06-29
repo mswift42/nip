@@ -601,18 +601,3 @@ func TestCategory(t *testing.T) {
 		t.Error("Expected length of programmes to be 28, got: ", len(cat.Programmes))
 	}
 }
-
-func TestLoadCategories(t *testing.T) {
-	doc := documentLoader("testhtml/films1.html")
-	td := TestIplayerDocument{doc}
-	doc2 := documentLoader("testhtml/food1.html")
-	td2 := TestIplayerDocument{doc2}
-	catmap := map[string]NextPager{
-		"films": &td,
-		"food":  &td2,
-	}
-	cats := loadCategories(catmap)
-	if len(cats) != 2 {
-		t.Error("Expected length of categories to be 2, got: ", len(cats))
-	}
-}
