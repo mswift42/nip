@@ -31,10 +31,6 @@ func NewCategory(name string, np NextPager) *Category {
 	return &Category{name, nmc.Programmes()}
 }
 
-func loadCategory(name string, np NextPager, c chan<- *Category) {
-	c <- NewCategory(name, np)
-}
-
 func fincCatTitle(url Pager) string {
 	for k, v := range caturls {
 		if url == v {
