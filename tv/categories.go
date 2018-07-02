@@ -25,28 +25,10 @@ var caturls = map[string]Pager{
 	"sport":          BeebURL("https://www.bbc.co.uk/iplayer/categories/sport/a-z?sort=atoz"),
 }
 // NewCategory takes a category name and a category root document, generates
-// a NewMainCategory and returns a Category.
+// a newMainCategory and returns a Category.
 func NewCategory(name string, np NextPager) *Category {
-	nmc := NewMainCategory(np)
+	nmc := newMainCategory(np)
 	return &Category{name, nmc.Programmes()}
-}
-
-func loadCategory(name string, np NextPager, c chan<- *Category) {
-	c <- NewCategory(name, np)
-}
-
-func loadCategories(catmap map[string]NextPager) []*Category {
-	var cats []*Category
-	c := make(chan *Category)
-	for n, np := range catmap {
-		go func(name string, np NextPager) {
-			loadCategory(name, np, c)
-		}(n, np)
-	}
-	for range catmap {
-		cats = append(cats, <-c)
-	}
-	return cats
 }
 
 func fincCatTitle(url Pager) string {

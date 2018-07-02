@@ -482,7 +482,7 @@ var foodprogs = []struct {
 func TestNewMainCategory(t *testing.T) {
 	doc := documentLoader("testhtml/food1.html")
 	td := TestIplayerDocument{doc}
-	nmc := NewMainCategory(&td)
+	nmc := newMainCategory(&td)
 	if nmc.maindoc != td.idoc {
 		t.Error("Expected maincategory maindoc and original document to be identical, got: ", nmc.maindoc)
 	}
@@ -532,7 +532,7 @@ func TestNewMainCategory(t *testing.T) {
 	}
 	doc = documentLoader("testhtml/films1.html")
 	td = TestIplayerDocument{doc}
-	nmc = NewMainCategory(&td)
+	nmc = newMainCategory(&td)
 	if len(nmc.nextdocs) != 0 {
 		t.Error("Expected length of nextdocs to be 0, got: ", len(nmc.nextdocs))
 	}
@@ -599,20 +599,5 @@ func TestCategory(t *testing.T) {
 	}
 	if len(cat.Programmes) != 28 {
 		t.Error("Expected length of programmes to be 28, got: ", len(cat.Programmes))
-	}
-}
-
-func TestLoadCategories(t *testing.T) {
-	doc := documentLoader("testhtml/films1.html")
-	td := TestIplayerDocument{doc}
-	doc2 := documentLoader("testhtml/food1.html")
-	td2 := TestIplayerDocument{doc2}
-	catmap := map[string]NextPager{
-		"films": &td,
-		"food":  &td2,
-	}
-	cats := loadCategories(catmap)
-	if len(cats) != 2 {
-		t.Error("Expected length of categories to be 2, got: ", len(cats))
 	}
 }

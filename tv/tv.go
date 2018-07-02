@@ -219,9 +219,9 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 	return urls
 }
 
-// NewMainCategory generates a new MainCategoryDocument
+// newMainCategory generates a new MainCategoryDocument
 // from a root iplayer category document (eg. films, food)
-func NewMainCategory(np NextPager) *MainCategoryDocument {
+func newMainCategory(np NextPager) *MainCategoryDocument {
 	nextdocs := []*iplayerDocument{np.mainDoc()}
 	var progpagedocs []*iplayerDocument
 	npages := np.nextPages()
