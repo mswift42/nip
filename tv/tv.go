@@ -219,6 +219,20 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 	return urls
 }
 
+type relatedLink struct {
+	title string
+	name  string
+}
+
+func (id *iplayerDocument) relatedLinks() []*relatedLink {
+	var rellinks []*relatedLink
+	id.doc.Find("related-link > a").Each(func(i int, s *goquery.Selection) {
+		rl := relatedLink{s.Text(), s.AttrOr("href", "")}
+		rellinks = append(rellinks, &rl)
+	})
+	return rellinks
+}
+
 // newMainCategory generates a new MainCategoryDocument
 // from a root iplayer category document (eg. films, food)
 func newMainCategory(np NextPager) *MainCategoryDocument {
