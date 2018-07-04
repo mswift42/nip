@@ -221,7 +221,7 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 
 type relatedLink struct {
 	title string
-	name  string
+	url   string
 }
 
 func (id *iplayerDocument) relatedLinks() []*relatedLink {

@@ -601,3 +601,19 @@ func TestCategory(t *testing.T) {
 		t.Error("Expected length of programmes to be 28, got: ", len(cat.Programmes))
 	}
 }
+
+func TestRelatedLinks(t *testing.T) {
+	doc := documentLoader("testhtml/lara_croft_tomb_raider_programme.html")
+	td := TestIplayerDocument{doc}
+	rl := td.idoc.relatedLinks()
+	if len(rl) != 3 {
+		t.Error("expected length of related links to be 3, got: ", len(rl))
+	}
+	if rl[0].title != "IMDb: Lara Croft Tomb Raider" {
+		t.Errorf("Expected title to be %q, got: %q",
+			"IMDb: Lara Croft Tomb Raider", rl[0].title)
+	}
+	if rl[0].url != "http://www.imdb.com/title/tt0146316/?ref_=nv_sr_1" {
+		t.Errorf("Got url of %q", rl[0].url)
+	}
+}
