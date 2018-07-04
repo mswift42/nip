@@ -226,7 +226,7 @@ type relatedLink struct {
 
 func (id *iplayerDocument) relatedLinks() []*relatedLink {
 	var rellinks []*relatedLink
-	id.doc.Find("related-link > a").Each(func(i int, s *goquery.Selection) {
+	id.doc.Find(".related-link > a").Each(func(i int, s *goquery.Selection) {
 		rl := relatedLink{s.Text(), s.AttrOr("href", "")}
 		rellinks = append(rellinks, &rl)
 	})
