@@ -3,7 +3,7 @@ package tv
 // Pager is the interface that wraps the loadDocument method.
 //
 // loadDocument sends the result of generating a new iplayerDocument
-// from either a remote url, or the path to a local html file to
+// from either a remote Url, or the path to a local html file to
 // a provided channel of type *IplayerDocumentResult.
 type Pager interface {
 	loadDocument(chan<- *IplayerDocumentResult)

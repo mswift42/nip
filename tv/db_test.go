@@ -18,7 +18,7 @@ func TestProgrammeDB_Index(t *testing.T) {
 	}
 	for _, i := range pdb.Categories[0].Programmes[1:] {
 		if !(i.Index > 0) {
-			t.Errorf("Expected for title %q index to be '> 0', got: %d", i.Title, i.Index)
+			t.Errorf("Expected for Title %q index to be '> 0', got: %d", i.Title, i.Index)
 		}
 	}
 
@@ -59,7 +59,7 @@ func TestRestoreProgrammeDB(t *testing.T) {
 		t.Error("Expected length of categories to be 2, got: ", len(pdb.Categories))
 	}
 	if pdb.Categories[0].Programmes[0].Title != "Brideshead Revisited" {
-		t.Errorf("Expected first programmes title to be 'Brideshead Revisited', got: %q ",
+		t.Errorf("Expected first programmes Title to be 'Brideshead Revisited', got: %q ",
 			pdb.Categories[0].Programmes[0].Title)
 	}
 }
@@ -102,11 +102,11 @@ func TestProgrammeDB_FindTitle(t *testing.T) {
 	}
 	prog := pdb.FindTitle("Tomb")
 	if !strings.Contains(prog, "Tomb") {
-		t.Error("Expected FindTitle to find Programme with title Bill.")
+		t.Error("Expected FindTitle to find Programme with Title Bill.")
 	}
 	prog2 := pdb.FindTitle("Brideshead")
 	if !strings.Contains(prog2, "Brideshead") {
-		t.Error("Expected FindTitle to find Programme with title ' A Simple Plan '")
+		t.Error("Expected FindTitle to find Programme with Title ' A Simple Plan '")
 	}
 	prog3 := pdb.FindTitle("The Home That 2 Built")
 	lines := strings.Split(prog3, "\n")

@@ -99,7 +99,7 @@ func (pdb *ProgrammeDB) ListAvailableCategories() string {
 }
 
 // FindTitle searches for a given term in the ProgrammeDB.
-// Whenever a programmes title contains the searchterm, the
+// Whenever a programmes Title contains the searchterm, the
 // programme is appended to the result string.
 func (pdb *ProgrammeDB) FindTitle(title string) string {
 	var buffer bytes.Buffer
@@ -144,7 +144,7 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 	return bbcprefix + prog.URL, nil
 }
 
-func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*relatedLink, error) {
+func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*RelatedLink, error) {
 	prog, err := pdb.FindProgramme(index)
 	if err != nil {
 		return nil, err
