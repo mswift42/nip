@@ -121,6 +121,29 @@ func InitCli() *cli.App {
 				return nil
 			},
 		},
+		{
+			Name: "links",
+			Aliases: []string{"lnk"},
+			Usage: "show related links for a programme with index n",
+			Action: func(c *cli.Context) error {
+				if len(c.Args()) != 1 {
+					fmt.Println("Please enter valid index number.")
+				}
+				ind := c.Args().Get(0)
+				index, err := strconv.ParseInt(ind, 10, 0)
+				if err != nil {
+					fmt.Println("Please enter valid index number")
+				}
+				rl, err := db.FindRelatedLinks(int(index))
+				if err != nil {
+					fmt.Println(err)
+				}
+				for _, i := range rl {
+					fmt.Println(i.Title, " : ", i.Url)
+				}
+				return nil
+			},
+		},
 	}
 	return app
 }
