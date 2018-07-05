@@ -602,6 +602,24 @@ func TestCategory(t *testing.T) {
 	}
 }
 
+var tomb_raider_prog = []struct {
+	name string
+	url  string
+}{
+	{
+		"IMDb: Lara Croft Tomb Raider",
+		"http://www.imdb.com/title/tt0146316/?ref_=nv_sr_1",
+	},
+	{
+		"Rotten Tomatoes: Lara Croft Tomb Raider",
+		"https://www.rottentomatoes.com/m/lara_croft_tomb_raider",
+	},
+	{
+		"Wikipedia: Lara Croft Tomb Raider",
+		"https://en.wikipedia.org/wiki/Tomb_Raider",
+	},
+}
+
 func TestRelatedLinks(t *testing.T) {
 	doc := documentLoader("testhtml/lara_croft_tomb_raider_programme.html")
 	td := TestIplayerDocument{doc}
