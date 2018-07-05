@@ -9,7 +9,7 @@ import (
 	"github.com/mswift42/goquery"
 )
 
-// BeebURL is the url for an iplayer web site.
+// BeebURL is the Url for an iplayer web site.
 type BeebURL string
 
 const bbcprefix = "https://bbc.co.uk"
@@ -101,15 +101,15 @@ func (is *iplayerSelection) duration() string {
 }
 
 // Programme represents an Iplayer TV programme. It consists of
-// the programme's title, subtitle, a short programme description,
-// The Iplayer Programme ID, the url to its thumbnail, the url
+// the programme's Title, subtitle, a short programme description,
+// The Iplayer Programme ID, the Url to its thumbnail, the Url
 // to the programme's website and a unique index.
 type Programme struct {
-	Title     string `json:"title"`
+	Title     string `json:"Title"`
 	Subtitle  string `json:"subtitle"`
 	Synopsis  string `json:"synopsis"`
 	Thumbnail string `json:"thumbnail"`
-	URL       string `json:"url"`
+	URL       string `json:"Url"`
 	Index     int    `json:"index"`
 	Available string `json:"available"`
 	Duration  string `json:"duration"`
@@ -130,7 +130,7 @@ func (id *iplayerDocument) programmeListSelection() *iplayerSelection {
 }
 
 // An IplayerDocumentResult is the result of generating a new
-// goquery.Document from a iplayer url.
+// goquery.Document from a iplayer Url.
 // If successful, the Idoc will be an iplayerDocument and nil for The error field.
 type IplayerDocumentResult struct {
 	Idoc  iplayerDocument
@@ -219,15 +219,15 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 	return urls
 }
 
-type relatedLink struct {
-	title string
-	url   string
+type RelatedLink struct {
+	Title string
+	Url   string
 }
 
-func (id *iplayerDocument) relatedLinks() []*relatedLink {
-	var rellinks []*relatedLink
+func (id *iplayerDocument) relatedLinks() []*RelatedLink {
+	var rellinks []*RelatedLink
 	id.doc.Find(".related-link > a").Each(func(i int, s *goquery.Selection) {
-		rl := relatedLink{s.Text(), s.AttrOr("href", "")}
+		rl := RelatedLink{s.Text(), s.AttrOr("href", "")}
 		rellinks = append(rellinks, &rl)
 	})
 	return rellinks

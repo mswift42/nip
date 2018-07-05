@@ -58,7 +58,7 @@ func TestIplayerSelectionResults(t *testing.T) {
 		t.Error("Expected program Page to be 'testhtml/adam_curtis.html' not: ", progpage.programPage)
 	}
 	if selres[1].prog.Title != "Brideshead Revisited" {
-		t.Error("Expected second programme title to be 'Brideshead Revisited', got: ", selres[1].prog.Title)
+		t.Error("Expected second programme Title to be 'Brideshead Revisited', got: ", selres[1].prog.Title)
 	}
 	if selres[1].programPage != "" {
 		t.Error("Expected second programPage to be an empty string, got: ", selres[1].programPage)
@@ -91,10 +91,10 @@ func TestProgramPages(t *testing.T) {
 		t.Error("Expected length of urls to be 2, got: ", len(urls))
 	}
 	if urls[0] != TestHTMLURL("testhtml/adam_curtis.html") {
-		t.Error("Expected first url to be 'adam_curtis', got: ", urls[0])
+		t.Error("Expected first Url to be 'adam_curtis', got: ", urls[0])
 	}
 	if urls[1] != TestHTMLURL("testhtml/storyville.html") {
-		t.Error("Expected second url to be 'storyville', got: ", urls[1])
+		t.Error("Expected second Url to be 'storyville', got: ", urls[1])
 	}
 	doc = documentLoader("testhtml/food1.html")
 	tid = TestIplayerDocument{doc}
@@ -205,7 +205,7 @@ func TestProgramPage(t *testing.T) {
 		t.Error("Expected length of Programmes to be 4, got: ", len(progs))
 	}
 	if progs[0].Title != "Storyville" {
-		t.Error("Expected title of first storyville programme to be 'Storyville', "+
+		t.Error("Expected Title of first storyville programme to be 'Storyville', "+
 			"got: ", progs[0].Title)
 	}
 	if progs[0].Subtitle != "112 Weddings" {
@@ -220,7 +220,7 @@ func TestProgramPage(t *testing.T) {
 	}
 	for _, i := range progs {
 		if i.Title != "Adam Curtis" {
-			t.Error("Expected title to be Adam Curtis, got: ", i.Title)
+			t.Error("Expected Title to be Adam Curtis, got: ", i.Title)
 		}
 	}
 	for i := range progs {
@@ -228,7 +228,7 @@ func TestProgramPage(t *testing.T) {
 			t.Errorf("Expected subtitle to be %q, got: %q", AdamCurtis[i].subtitle, progs[i].Subtitle)
 		}
 		if progs[i].URL != AdamCurtis[i].url {
-			t.Errorf("Expected url to be %q, got: %q", AdamCurtis[i].url, progs[i].URL)
+			t.Errorf("Expected Url to be %q, got: %q", AdamCurtis[i].url, progs[i].URL)
 		}
 		if progs[i].Thumbnail != AdamCurtis[i].thumbnail {
 			t.Errorf("Expected thumbnail to be %q, got: %q", AdamCurtis[i].thumbnail, progs[i].Thumbnail)
@@ -240,7 +240,7 @@ func TestProgramPage(t *testing.T) {
 			t.Errorf("Expected available to be %q, got: %q", AdamCurtis[i].available, progs[i].Available)
 		}
 		if progs[i].Duration != AdamCurtis[i].duration {
-			t.Errorf("Expected title %q to have duration %q, got: %q",
+			t.Errorf("Expected Title %q to have duration %q, got: %q",
 				AdamCurtis[i].subtitle, AdamCurtis[i].duration, progs[i].Duration)
 		}
 	}
@@ -252,7 +252,7 @@ func TestProgramPage(t *testing.T) {
 	}
 	for _, i := range progs {
 		if i.Title != "Delia Smith's Cookery Course" {
-			t.Error("Expected title to be 'Delia Smith's Cookery Course, got: ",
+			t.Error("Expected Title to be 'Delia Smith's Cookery Course, got: ",
 				i.Title)
 		}
 	}
@@ -266,7 +266,7 @@ func TestProgramPage(t *testing.T) {
 				DeliaSmith[i].synopsis, progs[i].Synopsis)
 		}
 		if progs[i].URL != DeliaSmith[i].url {
-			t.Errorf("Expecte url to be %q, got: %q",
+			t.Errorf("Expecte Url to be %q, got: %q",
 				DeliaSmith[i].url, progs[i].URL)
 		}
 		if progs[i].Thumbnail != DeliaSmith[i].thumbnail {
@@ -506,7 +506,7 @@ func TestNewMainCategory(t *testing.T) {
 				foodprogs[i].title+foodprogs[i].subtitle)
 		}
 		if foodprogs[i].title != found.Title {
-			t.Errorf("Expected programme to have have title: %q. got: %q",
+			t.Errorf("Expected programme to have have Title: %q. got: %q",
 				foodprogs[i].title, found.Title)
 		}
 		if foodprogs[i].subtitle != found.Subtitle {
@@ -514,7 +514,7 @@ func TestNewMainCategory(t *testing.T) {
 				foodprogs[i].title, foodprogs[i].subtitle, found.Subtitle)
 		}
 		if foodprogs[i].url != found.URL {
-			t.Errorf("Expected programme %q %q to have url: %q. got: %q ",
+			t.Errorf("Expected programme %q %q to have Url: %q. got: %q ",
 				foodprogs[i].title, foodprogs[i].subtitle, foodprogs[i].url, found.URL)
 		}
 		if foodprogs[i].thumbnail != found.Thumbnail {
@@ -560,7 +560,7 @@ func TestNewMainCategory(t *testing.T) {
 				filmprogs[i].title+" "+filmprogs[i].subtitle)
 		}
 		if filmprogs[i].title != found.Title {
-			t.Errorf("Expected programme to have title: %q. got: %q", filmprogs[i].title,
+			t.Errorf("Expected programme to have Title: %q. got: %q", filmprogs[i].title,
 				found.Title)
 		}
 		if filmprogs[i].subtitle != found.Subtitle {
@@ -568,7 +568,7 @@ func TestNewMainCategory(t *testing.T) {
 				filmprogs[i].subtitle, found.Subtitle)
 		}
 		if filmprogs[i].url != found.URL {
-			t.Errorf("Expected programme to have url: %q. got: %q",
+			t.Errorf("Expected programme to have Url: %q. got: %q",
 				filmprogs[i].url, found.URL)
 		}
 		if filmprogs[i].synopsis != found.Synopsis {
@@ -608,7 +608,7 @@ var tomb_raider_prog = []struct {
 }{
 	{
 		"IMDb: Lara Croft Tomb Raider",
-		"http://www.imdb.com/title/tt0146316/?ref_=nv_sr_1",
+		"http://www.imdb.com/Title/tt0146316/?ref_=nv_sr_1",
 	},
 	{
 		"Rotten Tomatoes:  Lara Croft Tomb Raider",
@@ -628,13 +628,13 @@ func TestRelatedLinks(t *testing.T) {
 		t.Error("expected length of related links to be 3, got: ", len(rl))
 	}
 	for i := range tomb_raider_prog {
-		if tomb_raider_prog[i].name != rl[i].title {
-			t.Errorf("Expected title to be %q, got: %q",
-				tomb_raider_prog[i].name, rl[i].title)
+		if tomb_raider_prog[i].name != rl[i].Title {
+			t.Errorf("Expected Title to be %q, got: %q",
+				tomb_raider_prog[i].name, rl[i].Title)
 		}
-		if tomb_raider_prog[i].url != rl[i].url {
-			t.Errorf("Expected url for %q to be %q, got: %q",
-				tomb_raider_prog[i].url, tomb_raider_prog[i].name, rl[i].url)
+		if tomb_raider_prog[i].url != rl[i].Url {
+			t.Errorf("Expected Url for %q to be %q, got: %q",
+				tomb_raider_prog[i].url, tomb_raider_prog[i].name, rl[i].Url)
 		}
 	}
 }
