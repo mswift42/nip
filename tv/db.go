@@ -144,6 +144,31 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 	return bbcprefix + prog.URL, nil
 }
 
+func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*relatedLink, error) {
+	prog, err := pdb.FindProgramme(index)
+	if err != nil {
+		return nil, err
+	}
+	bu := BeebURL(prog.URL)
+	c := make(chan *IplayerDocumentResult)
+	go bu.loadDocument(c)
+	idr := <-c
+	if idr.Error != nil {
+		return nil, err
+	}
+	hp := idr.Idoc.doc.Find(".inline-list__item > a").AttrOr("href", "")
+	if hp == "" {
+		return nil, fmt.Errorf("failed to find Programme Home Page")
+	}
+	bu = BeebURL(hp)
+	go bu.loadDocument(c)
+	idr = <-c
+	if idr.Error != nil {
+		return nil, err
+	}
+	return idr.Idoc.relatedLinks(), nil
+}
+
 // SaveDB makes a new Category for all entries in caturls,
 // and if successful, stores stem in ProgrammeDB.
 func SaveDB() {
