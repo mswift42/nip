@@ -160,7 +160,7 @@ func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*RelatedLink, error) {
 	if hp == "" {
 		return nil, fmt.Errorf("failed to find Programme Home Page")
 	}
-	bu = BeebURL(hp)
+	bu = BeebURL(bbcprefix + hp)
 	go bu.loadDocument(c)
 	idr = <-c
 	if idr.Error != nil {
