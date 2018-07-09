@@ -20,7 +20,7 @@ func findProgrammeIndex(c *cli.Context) (int, error) {
 		fmt.Println("Please enter valid index number.")
 		return 0, err
 	}
-	return int(index), 0
+	return int(index), nil
 }
 
 // InitCli loads the ProgrammeDB into memory
@@ -166,6 +166,20 @@ func InitCli() *cli.App {
 			Aliases: []string{"g", "d", "get"},
 			Usage:   "use youtube-dl to download programme with index n",
 			Action: func(c *cli.Context) error {
+				ind, err := findProgrammeIndex(c)
+				if err != nil {
+					fmt.Println("Please enter valid index number.")
+					return nil
+				}
+				prog, err := db.FindProgramme(int(ind))
+				if err != nil {
+					fmt.Println("Could not find Programme with index ", ind)
+					return nil
+				}
+				err = exec.Command("gnome-terminal", "e", "youtube-dl", "-f", "best", prog.URL).Start()
+				if err != nil {
+					fmt.Println(err)
+				}
 				return nil
 			},
 		},
