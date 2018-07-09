@@ -122,9 +122,9 @@ func InitCli() *cli.App {
 			},
 		},
 		{
-			Name: "links",
+			Name:    "links",
 			Aliases: []string{"lnk"},
-			Usage: "show related links for a programme with index n",
+			Usage:   "show related links for a programme with index n",
 			Action: func(c *cli.Context) error {
 				if len(c.Args()) != 1 {
 					fmt.Println("Please enter valid index number.")
@@ -138,6 +138,8 @@ func InitCli() *cli.App {
 				if err != nil {
 					fmt.Println(err)
 				}
+				// TODO - if len(rl) == 0 show Text that now related links
+				// are available.
 				for _, i := range rl {
 					fmt.Println(i.Title, " : ", i.Url)
 				}
