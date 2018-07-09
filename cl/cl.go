@@ -138,10 +138,12 @@ func InitCli() *cli.App {
 				if err != nil {
 					fmt.Println(err)
 				}
-				// TODO - if len(rl) == 0 show Text that now related links
-				// are available.
-				for _, i := range rl {
-					fmt.Println(i.Title, " : ", i.Url)
+				if len(rl) == 0 {
+					fmt.Println("Sorry, no related links were found.")
+				} else {
+					for _, i := range rl {
+						fmt.Println(i.Title, " : ", i.Url)
+					}
 				}
 				return nil
 			},
