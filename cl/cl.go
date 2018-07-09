@@ -176,10 +176,14 @@ func InitCli() *cli.App {
 					fmt.Println("Could not find Programme with index ", ind)
 					return nil
 				}
-				err = exec.Command("gnome-terminal", "e", "youtube-dl", "-f", "best", prog.URL).Start()
+				fmt.Println("Downloading Programme \n", prog.String())
+				u, _ := db.FindURL(int(ind))
+				cmd := exec.Command("bash", "-c", "youtube-dl -f best "+u)
+				err = cmd.Start()
 				if err != nil {
 					fmt.Println(err)
 				}
+				err = cmd.Wait()
 				return nil
 			},
 		},
