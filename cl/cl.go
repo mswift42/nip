@@ -151,5 +151,3 @@ func InitCli() *cli.App {
 	}
 	return app
 }
-
-// TODO - Add links to imdb / rottentomatoes / wikipedia.
