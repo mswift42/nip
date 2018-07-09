@@ -608,7 +608,7 @@ var tomb_raider_prog = []struct {
 }{
 	{
 		"IMDb: Lara Croft Tomb Raider",
-		"http://www.imdb.com/Title/tt0146316/?ref_=nv_sr_1",
+		"http://www.imdb.com/title/tt0146316/?ref_=nv_sr_1",
 	},
 	{
 		"Rotten Tomatoes:  Lara Croft Tomb Raider",
@@ -634,7 +634,7 @@ func TestRelatedLinks(t *testing.T) {
 		}
 		if tomb_raider_prog[i].url != rl[i].Url {
 			t.Errorf("Expected Url for %q to be %q, got: %q",
-				tomb_raider_prog[i].url, tomb_raider_prog[i].name, rl[i].Url)
+				tomb_raider_prog[i].name, tomb_raider_prog[i].url, rl[i].Url)
 		}
 	}
 }
