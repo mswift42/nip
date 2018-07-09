@@ -10,6 +10,19 @@ import (
 	"github.com/urfave/cli"
 )
 
+func findProgrammeIndex(c *cli.Context) (int, error) {
+	if len(c.Args()) != 1 {
+		fmt.Println("Please enter valid index number.")
+	}
+	ind := c.Args().Get(0)
+	index, err := strconv.ParseInt(ind, 10, 0)
+	if err != nil {
+		fmt.Println("Please enter valid index number.")
+		return 0, err
+	}
+	return int(index), 0
+}
+
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
 func InitCli() *cli.App {
@@ -145,6 +158,14 @@ func InitCli() *cli.App {
 						fmt.Println(i.Title, " : ", i.Url)
 					}
 				}
+				return nil
+			},
+		},
+		{
+			Name:    "download",
+			Aliases: []string{"g", "d", "get"},
+			Usage:   "use youtube-dl to download programme with index n",
+			Action: func(c *cli.Context) error {
 				return nil
 			},
 		},
