@@ -149,10 +149,13 @@ func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*RelatedLink, error) {
 	if err != nil {
 		return nil, err
 	}
+	uiprogress.Start()
+	bar := uiprogress.AddBar(2).AppendCompleted()
 	bu := BeebURL(prog.URL)
 	c := make(chan *IplayerDocumentResult)
 	go bu.loadDocument(c)
 	idr := <-c
+	bar.Incr()
 	if idr.Error != nil {
 		return nil, err
 	}
@@ -163,9 +166,11 @@ func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*RelatedLink, error) {
 	bu = BeebURL(bbcprefix + hp)
 	go bu.loadDocument(c)
 	idr = <-c
+	bar.Incr()
 	if idr.Error != nil {
 		return nil, err
 	}
+	uiprogress.Stop()
 	return idr.Idoc.relatedLinks(), nil
 }
 
