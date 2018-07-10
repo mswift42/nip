@@ -169,6 +169,9 @@ func InitCli() *cli.App {
 			Aliases: []string{"g", "d", "get"},
 			Usage:   "use youtube-dl to download programme with index n",
 			Action: func(c *cli.Context) error {
+				// credits go to Krzysztof Kowalczyk for his blogpost
+				// Advanced ccommand execution in Go:
+				// https://blog.kowalczyk.info/article/wOYk/advanced-command-execution-in-go-with-osexec.html
 				var stdoutBuf, stderrBuf bytes.Buffer
 				ind, err := findProgrammeIndex(c)
 				if err != nil {
