@@ -6,11 +6,12 @@ import (
 	"runtime"
 	"strconv"
 
-	"github.com/mswift42/nip/tv"
-	"github.com/urfave/cli"
 	"bytes"
 	"io"
 	"os"
+
+	"github.com/mswift42/nip/tv"
+	"github.com/urfave/cli"
 )
 
 func findProgrammeIndex(c *cli.Context) (int, error) {
@@ -25,6 +26,10 @@ func findProgrammeIndex(c *cli.Context) (int, error) {
 	}
 	return int(index), nil
 }
+
+// TODO - use findProgrammeIndex in fitting commands.
+// TODO - add download sub command that lists iplayer downloadable formats.
+// TODO - add download sub command that takes download format as argument.
 
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
