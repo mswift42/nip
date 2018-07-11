@@ -220,9 +220,9 @@ func InitCli() *cli.App {
 			},
 		},
 		{
-			Name: "formats",
+			Name:    "formats",
 			Aliases: []string{"f"},
-			Usage: "list youtube-dl formats for programme with index n",
+			Usage:   "list youtube-dl formats for programme with index n",
 			Action: func(c *cli.Context) error {
 				ind, err := findProgrammeIndex(c)
 				if err != nil {
@@ -234,9 +234,17 @@ func InitCli() *cli.App {
 					fmt.Println("could not find Programme with index ", ind)
 				}
 				fmt.Println("Listing Formats for Programme \n", prog.String())
-				u, _ := db.FindURL(int(ind))
-				cmd := exec.Command("bash", "-c", "youtube-dl -F " + u)
+				u := tv.BBCPrefix + prog.URL
+				cmd := exec.Command("bash", "-c", "youtube-dl -F "+u)
+				if err != nil {
+					fmt.Println(err)
+				}
+				out, err := cmd.CombinedOutput()
+				if err != nil {
+					fmt.Println(err)
+				}
 				cmd.Start()
+				fmt.Println(string(out))
 				cmd.Wait()
 				return nil
 			},
@@ -244,4 +252,4 @@ func InitCli() *cli.App {
 	}
 	return app
 
-	}
+}
