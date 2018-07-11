@@ -141,7 +141,7 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return bbcprefix + prog.URL, nil
+	return BBCPrefix + prog.URL, nil
 }
 
 func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*RelatedLink, error) {
@@ -163,7 +163,7 @@ func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*RelatedLink, error) {
 	if hp == "" {
 		return nil, fmt.Errorf("failed to find Programme Home Page")
 	}
-	bu = BeebURL(bbcprefix + hp)
+	bu = BeebURL(BBCPrefix + hp)
 	go bu.loadDocument(c)
 	idr = <-c
 	bar.Incr()

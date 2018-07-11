@@ -12,7 +12,7 @@ import (
 // BeebURL is the Url for an iplayer web site.
 type BeebURL string
 
-const bbcprefix = "https://bbc.co.uk"
+const BBCPrefix = "https://bbc.co.uk"
 
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	var url string
