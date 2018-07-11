@@ -10,6 +10,8 @@ import (
 	"io"
 	"os"
 
+	"bufio"
+
 	"github.com/mswift42/nip/tv"
 	"github.com/urfave/cli"
 )
@@ -239,12 +241,15 @@ func InitCli() *cli.App {
 				if err != nil {
 					fmt.Println(err)
 				}
-				out, err := cmd.CombinedOutput()
+				outpipe, err := cmd.StdoutPipe()
 				if err != nil {
 					fmt.Println(err)
 				}
 				cmd.Start()
-				fmt.Println(string(out))
+				scanner := bufio.NewScanner(outpipe)
+				for scanner.Scan() {
+					fmt.Println(scanner.Text())
+				}
 				cmd.Wait()
 				return nil
 			},
