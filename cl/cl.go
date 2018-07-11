@@ -6,10 +6,6 @@ import (
 	"runtime"
 	"strconv"
 
-	"bytes"
-	"io"
-	"os"
-
 	"bufio"
 
 	"github.com/mswift42/nip/tv"
@@ -176,10 +172,6 @@ func InitCli() *cli.App {
 			Aliases: []string{"g", "d", "get"},
 			Usage:   "use youtube-dl to download programme with index n",
 			Action: func(c *cli.Context) error {
-				// credits go to Krzysztof Kowalczyk for his blogpost
-				// Advanced ccommand execution in Go:
-				// https://blog.kowalczyk.info/article/wOYk/advanced-command-execution-in-go-with-osexec.html
-				var stdoutBuf, stderrBuf bytes.Buffer
 				ind, err := findProgrammeIndex(c)
 				if err != nil {
 					fmt.Println("Please enter valid index number.")
@@ -191,33 +183,19 @@ func InitCli() *cli.App {
 					return nil
 				}
 				fmt.Println("Downloading Programme \n", prog.String())
-				u, _ := db.FindURL(int(ind))
-				cmd := exec.Command("bash", "-c", "youtube-dl -f best "+u)
-				stdoutIn, _ := cmd.StdoutPipe()
-				stderrIn, _ := cmd.StderrPipe()
-				var errStdout, errStderr error
-				stdout := io.MultiWriter(os.Stdout, &stdoutBuf)
-				stderr := io.MultiWriter(os.Stderr, &stderrBuf)
-				err = cmd.Start()
+				u := tv.BBCPrefix + prog.URL
+				cmd := exec.Command("/bin/sh", "-c", "youtube-dl -f best "+u)
+				outpipe, err := cmd.StdoutPipe()
 				if err != nil {
 					fmt.Println(err)
 				}
-				go func() {
-					_, errStdout = io.Copy(stdout, stdoutIn)
-				}()
-
-				go func() {
-					_, errStderr = io.Copy(stderr, stderrIn)
-				}()
-				err = cmd.Wait()
-				if err != nil {
-					fmt.Println(err)
+				cmd.Start()
+				scanner := bufio.NewScanner(outpipe)
+				scanner.Split(bufio.ScanRunes)
+				for scanner.Scan() {
+					fmt.Print(scanner.Text())
 				}
-				if errStdout != nil || errStderr != nil {
-					fmt.Println(err)
-				}
-				outStr, errStr := string(stdoutBuf.Bytes()), string(stderrBuf.Bytes())
-				fmt.Printf("\nout:\n%s\nerr:\n%s\n", outStr, errStr)
+				cmd.Wait()
 				return nil
 			},
 		},
@@ -237,7 +215,7 @@ func InitCli() *cli.App {
 				}
 				fmt.Println("Listing Formats for Programme \n", prog.String())
 				u := tv.BBCPrefix + prog.URL
-				cmd := exec.Command("bash", "-c", "youtube-dl -F "+u)
+				cmd := exec.Command("/bin/sh", "-c", "youtube-dl -F "+u)
 				if err != nil {
 					fmt.Println(err)
 				}
