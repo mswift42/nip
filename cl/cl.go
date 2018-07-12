@@ -12,7 +12,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-func findProgrammeIndex(c *cli.Context) (int, error) {
+func extractIndex(c *cli.Context) (int, error) {
 	if len(c.Args()) != 1 {
 		fmt.Println("Please enter valid index number.")
 	}
@@ -25,7 +25,7 @@ func findProgrammeIndex(c *cli.Context) (int, error) {
 	return int(index), nil
 }
 
-// TODO - use findProgrammeIndex in fitting commands.
+// TODO - use extractIndex in fitting commands.
 // TODO - add download sub command that lists iplayer downloadable formats.
 // TODO - add download sub command that takes download format as argument.
 
@@ -145,7 +145,7 @@ func InitCli() *cli.App {
 			Aliases: []string{"lnk"},
 			Usage:   "show related links for a programme with index n",
 			Action: func(c *cli.Context) error {
-				index, err := findProgrammeIndex(c)
+				index, err := extractIndex(c)
 				if err != nil {
 					fmt.Println("Please enter valid index number.")
 				}
@@ -168,7 +168,7 @@ func InitCli() *cli.App {
 			Aliases: []string{"g", "d", "get"},
 			Usage:   "use youtube-dl to download programme with index n",
 			Action: func(c *cli.Context) error {
-				ind, err := findProgrammeIndex(c)
+				ind, err := extractIndex(c)
 				if err != nil {
 					fmt.Println("Please enter valid index number.")
 					return nil
@@ -200,7 +200,7 @@ func InitCli() *cli.App {
 			Aliases: []string{"f"},
 			Usage:   "list youtube-dl formats for programme with index n",
 			Action: func(c *cli.Context) error {
-				ind, err := findProgrammeIndex(c)
+				ind, err := extractIndex(c)
 				if err != nil {
 					fmt.Println("Please enter valid index number.")
 					return nil
