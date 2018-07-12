@@ -25,7 +25,9 @@ func extractIndex(c *cli.Context) (int, error) {
 	return int(index), nil
 }
 
-// TODO - add download sub command that lists iplayer downloadable formats.
+// TODO - set folder for storing and reading of db.
+// TODO - add entry in db for downloaded programmes.
+// TODO - check when running if programmes are stored > 30 days.
 // TODO - add download sub command that takes download format as argument.
 
 // InitCli loads the ProgrammeDB into memory
