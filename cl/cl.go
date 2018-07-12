@@ -17,7 +17,7 @@ func findProgrammeIndex(c *cli.Context) (int, error) {
 		fmt.Println("Please enter valid index number.")
 	}
 	ind := c.Args().Get(0)
-	index, err := strconv.ParseInt(ind, 10, 0)
+	index, err := strconv.ParseInt(ind, 10, 64)
 	if err != nil {
 		fmt.Println("Please enter valid index number.")
 		return 0, err
@@ -145,15 +145,11 @@ func InitCli() *cli.App {
 			Aliases: []string{"lnk"},
 			Usage:   "show related links for a programme with index n",
 			Action: func(c *cli.Context) error {
-				if len(c.Args()) != 1 {
+				index, err := findProgrammeIndex(c)
+				if err != nil {
 					fmt.Println("Please enter valid index number.")
 				}
-				ind := c.Args().Get(0)
-				index, err := strconv.ParseInt(ind, 10, 0)
-				if err != nil {
-					fmt.Println("Please enter valid index number")
-				}
-				rl, err := db.FindRelatedLinks(int(index))
+				rl, err := db.FindRelatedLinks(index)
 				if err != nil {
 					fmt.Println(err)
 				}
@@ -177,7 +173,7 @@ func InitCli() *cli.App {
 					fmt.Println("Please enter valid index number.")
 					return nil
 				}
-				prog, err := db.FindProgramme(int(ind))
+				prog, err := db.FindProgramme(ind)
 				if err != nil {
 					fmt.Println("Could not find Programme with index ", ind)
 					return nil
