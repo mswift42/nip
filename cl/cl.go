@@ -25,7 +25,6 @@ func extractIndex(c *cli.Context) (int, error) {
 	return int(index), nil
 }
 
-// TODO - use extractIndex in fitting commands.
 // TODO - add download sub command that lists iplayer downloadable formats.
 // TODO - add download sub command that takes download format as argument.
 
@@ -74,12 +73,12 @@ func InitCli() *cli.App {
 			Aliases: []string{"sh"},
 			Usage:   "Open Programmes homepage.",
 			Action: func(c *cli.Context) error {
-				ind := c.Args().Get(0)
-				index, err := strconv.ParseInt(ind, 10, 0)
+				index, err := extractIndex(c)
 				if err != nil {
-					fmt.Println("Please enter valid index number.")
+					fmt.Println(err)
+					return nil
 				}
-				url, err := db.FindURL(int(index))
+				url, err := db.FindURL(index)
 				if err != nil {
 					fmt.Println(err)
 				}
@@ -104,12 +103,12 @@ func InitCli() *cli.App {
 			Aliases: []string{"u"},
 			Usage:   "print programme's url",
 			Action: func(c *cli.Context) error {
-				ind := c.Args().Get(0)
-				index, err := strconv.ParseInt(ind, 10, 0)
+				index, err := extractIndex(c)
 				if err != nil {
-					fmt.Println("Please enter valid index number.")
+					fmt.Println(err)
+					return nil
 				}
-				url, err := db.FindURL(int(index))
+				url, err := db.FindURL(index)
 				if err != nil {
 					fmt.Println(err)
 				} else {
@@ -123,15 +122,12 @@ func InitCli() *cli.App {
 			Aliases: []string{"syn"},
 			Usage:   "print programme's synopsis",
 			Action: func(c *cli.Context) error {
-				if len(c.Args()) != 1 {
-					fmt.Println("Please enter valid index number.")
-				}
-				ind := c.Args().Get(0)
-				index, err := strconv.ParseInt(ind, 10, 0)
+				index, err := extractIndex(c)
 				if err != nil {
-					fmt.Println("Please enter valid index number.")
+					fmt.Println(err)
+					return nil
 				}
-				prog, err := db.FindProgramme(int(index))
+				prog, err := db.FindProgramme(index)
 				if err != nil {
 					fmt.Println(err)
 				} else {
