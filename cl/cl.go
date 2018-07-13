@@ -166,6 +166,10 @@ func InitCli() *cli.App {
 			Aliases: []string{"g", "d", "get"},
 			Usage:   "use youtube-dl to download programme with index n",
 			Action: func(c *cli.Context) error {
+				var format string
+				if len(c.Args()) == 2 {
+					format = c.Args().Get(1)
+				}
 				ind, err := extractIndex(c)
 				if err != nil {
 					fmt.Println("Please enter valid index number.")
@@ -178,7 +182,12 @@ func InitCli() *cli.App {
 				}
 				fmt.Println("Downloading Programme \n", prog.String())
 				u := tv.BBCPrefix + prog.URL
-				cmd := exec.Command("/bin/sh", "-c", "youtube-dl -f best "+u)
+				var cmd *exec.Cmd
+				if format != "" {
+					cmd = exec.Command("/bin/sh", "-c", "youtube-dl -f "+format+" "+u)
+				} else {
+					cmd = exec.Command("/bin/sh", "-c", "youtube-dl -f best "+u)
+				}
 				outpipe, err := cmd.StdoutPipe()
 				if err != nil {
 					fmt.Println(err)
