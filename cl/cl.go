@@ -13,7 +13,7 @@ import (
 )
 
 func extractIndex(c *cli.Context) (int, error) {
-	if len(c.Args()) != 1 {
+	if len(c.Args()) < 1 {
 		fmt.Println("Please enter valid index number.")
 	}
 	ind := c.Args().Get(0)
