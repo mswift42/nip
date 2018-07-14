@@ -21,6 +21,13 @@ type ProgrammeDB struct {
 	Saved      time.Time   `json:"saved"`
 }
 
+// SavedProgramme is the url to a downloaded programme
+// and the time it was downloaded.
+type SavedProgramme struct {
+	File  string    `json:"url"`
+	Saved time.Time `json:"saved"`
+}
+
 // RestoreProgrammeDB takes a path to a json file, reads it, and if
 // successful, unmarshals it as struct ProgrammeDB.
 func RestoreProgrammeDB(filename string) (*ProgrammeDB, error) {
