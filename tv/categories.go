@@ -25,6 +25,19 @@ var caturls = map[string]Pager{
 	"sport":          BeebURL("https://www.bbc.co.uk/iplayer/categories/sport/a-z?sort=atoz"),
 }
 
+func catNameCompleter(cat string) string {
+
+}
+
+func matchesName(name string, nameslice []string) bool {
+	for _, i := range nameslice {
+		if name == i {
+			return true
+		}
+		return false
+	}
+}
+
 // NewCategory takes a category name and a category root document, generates
 // a newMainCategory and returns a Category.
 func NewCategory(name string, np NextPager) *Category {
