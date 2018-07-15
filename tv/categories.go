@@ -21,12 +21,43 @@ var caturls = map[string]Pager{
 	"lifestyle":      BeebURL("https://www.bbc.co.uk/iplayer/categories/lifestyle/a-z?sort=atoz"),
 	"music":          BeebURL("https://www.bbc.co.uk/iplayer/categories/music/a-z?sort=atoz"),
 	"news":           BeebURL("https://www.bbc.co.uk/iplayer/categories/news/a-z?sort=atoz"),
-	"science&nature": BeebURL("https://www.bbc.co.uk/iplayer/categories/science-and-nature/a-z?sort=atoz"),
+	"science+nature": BeebURL("https://www.bbc.co.uk/iplayer/categories/science-and-nature/a-z?sort=atoz"),
 	"sport":          BeebURL("https://www.bbc.co.uk/iplayer/categories/sport/a-z?sort=atoz"),
 }
 
-func catNameCompleter(cat string) string {
-
+func catNameCompleter(cat string) (string, error) {
+	switch {
+	case matchesName(cat, []string{"films", "flms", "film"}):
+		return "films", nil
+	case matchesName(cat, []string{"food", "fod", "fd"}):
+		return "food", nil
+	case matchesName(cat, []string{"comedy", "cdy", "come", "cmdy", "comed"}):
+		return "comedy", nil
+	case matchesName(cat, []string{"crime", "crm", "crim"}):
+		return "crime", nil
+	case matchesName(cat, []string{"classic+period", "classic", "period",
+		"clsic", "prd", "class", "per", "peri", "clic"}):
+		return "classic+period", nil
+	case matchesName(cat, []string{"scifi+fantasy", "scifi", "fantasy", "scfi",
+		"fanta", "sci", "scyfy", "scify", "fantas", "ftsy"}):
+		return "scifi+fantasy", nil
+	case matchesName(cat, []string{"documentaries", "docu", "documentary", "docus"}):
+		return "documentaries", nil
+	case matchesName(cat, []string{"arts", "art", "ats"}):
+		return "arts", nil
+	case matchesName(cat, []string{"entertainment", "etainment", "tainment",
+		"etertainment"}):
+		return "entertainment", nil
+	case matchesName(cat, []string{"history", "hstory", "histo"}):
+		return "history", nil
+	case matchesName(cat, []string{"lifestyle", "lfestyle", "life", "style"}):
+		return "lifestyle", nil
+	case matchesName(cat, []string{"music", "msic", "music"}):
+		return "music", nil
+	case matchesName(cat, []string{"news", "nws"}):
+		return "news", nil
+	case matchesName(cat, []string{""})
+	}
 }
 
 func matchesName(name string, nameslice []string) bool {
