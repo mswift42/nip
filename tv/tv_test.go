@@ -638,3 +638,41 @@ func TestRelatedLinks(t *testing.T) {
 		}
 	}
 }
+
+var catnametests = []struct {
+	in  string
+	out string
+}{
+	{"films", "films"},
+	{"flms", "films"},
+	{"food", "food"},
+	{"comedy", "comedy"},
+	{"cdy", "comedy"},
+	{"crime", "crime"},
+	{"clic", "classic+period"},
+	{"classic", "classic+period"},
+	{"scifi", "scifi+fantasy"},
+	{"fantasy", "scifi+fantasy"},
+	{"docu", "documentaries"},
+	{"arts", "arts"},
+	{"etainment", "entertainment"},
+	{"hstory", "history"},
+	{"life", "lifestyle"},
+	{"music", "music"},
+	{"news", "news"},
+	{"science", "science+nature"},
+	{"nature", "science+nature"},
+	{"sport", "sport"},
+	{"n", ""},
+	{"", ""},
+}
+
+func TestCatNameCompleter(t *testing.T) {
+	for _, i := range catnametests {
+		out, _ := catNameCompleter(i.in)
+		if out != i.out {
+			t.Errorf("Expected out for %v to be %v, got %v",
+				i.in, i.out, out)
+		}
+	}
+}
