@@ -204,7 +204,7 @@ func SaveDB() {
 		}
 	}
 	for _, i := range np {
-		nc := NewCategory(fincCatTitle(i.mainDoc().url), i)
+		nc := NewCategory(findCatTitle(i.mainDoc().url), i)
 		cats = append(cats, nc)
 	}
 	pdb := &ProgrammeDB{cats, time.Now()}
