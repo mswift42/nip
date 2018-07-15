@@ -1,5 +1,7 @@
 package tv
 
+import "fmt"
+
 // Category represents an Iplayer Prograamme, consisting of its name
 // and a list of its programmes.
 type Category struct {
@@ -56,7 +58,13 @@ func catNameCompleter(cat string) (string, error) {
 		return "music", nil
 	case matchesName(cat, []string{"news", "nws"}):
 		return "news", nil
-	case matchesName(cat, []string{""})
+	case matchesName(cat, []string{"science+nature", "science", "nature",
+		"scence", "natur", "nture", "scienc", "sceince"}):
+		return "science+nature", nil
+	case matchesName(cat, []string{"sport", "spor", "sprt"}):
+		return "sport", nil
+	default:
+		return "", fmt.Errorf("could not find any matching category")
 	}
 }
 
@@ -65,8 +73,8 @@ func matchesName(name string, nameslice []string) bool {
 		if name == i {
 			return true
 		}
-		return false
 	}
+	return false
 }
 
 // NewCategory takes a category name and a category root document, generates
