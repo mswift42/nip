@@ -9,17 +9,17 @@ import (
 
 	"fmt"
 
-	"github.com/gosuri/uiprogress"
-	"github.com/pkg/errors"
 	"log"
+
+	"github.com/gosuri/uiprogress"
 )
 
 // ProgrammeDB represents a (file) DB of all saved
 // Programmes, divided by Categories. The Saved field
 // speciefies at what time the DB was last refreshed.
 type ProgrammeDB struct {
-	Categories []*Category `json:"categories"`
-	Saved      time.Time   `json:"saved"`
+	Categories      []*Category       `json:"categories"`
+	Saved           time.Time         `json:"saved"`
 	SavedProgrammes []*SavedProgramme `json:"saved_programmes"`
 }
 
@@ -29,7 +29,6 @@ type SavedProgramme struct {
 	File  string    `json:"url"`
 	Saved time.Time `json:"saved"`
 }
-
 
 // RestoreProgrammeDB takes a path to a json file, reads it, and if
 // successful, unmarshals it as struct ProgrammeDB.
