@@ -10,7 +10,6 @@ import (
 	"fmt"
 
 	"github.com/gosuri/uiprogress"
-	"github.com/pkg/errors"
 )
 
 // ProgrammeDB represents a (file) DB of all saved
@@ -87,13 +86,15 @@ func (pdb *ProgrammeDB) ListCategory(category string) string {
 }
 
 func (pdb *ProgrammeDB) findCategory(category string) (*Category, error) {
-	for _, i := range pdb.Categories {
-		cat, _ := catNameCompleter(category)
-		if cat != "" {
-			return cat, nil
+	cat, err := catNameCompleter(category)
+	if err == nil {
+		for _, i := range pdb.Categories {
+			if cat == i.Name {
+				return i, nil
+			}
 		}
 	}
-	return nil, errors.New("Can't find Category with Name: " + category)
+	return nil, err
 }
 
 // ListAvailableCategories returns a string with the name of all categories stored
