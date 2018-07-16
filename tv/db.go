@@ -10,6 +10,8 @@ import (
 	"fmt"
 
 	"github.com/gosuri/uiprogress"
+	"github.com/pkg/errors"
+	"log"
 )
 
 // ProgrammeDB represents a (file) DB of all saved
@@ -18,6 +20,7 @@ import (
 type ProgrammeDB struct {
 	Categories []*Category `json:"categories"`
 	Saved      time.Time   `json:"saved"`
+	SavedProgrammes []*SavedProgramme `json:"saved_programmes"`
 }
 
 // SavedProgramme is the url to a downloaded programme
@@ -26,6 +29,7 @@ type SavedProgramme struct {
 	File  string    `json:"url"`
 	Saved time.Time `json:"saved"`
 }
+
 
 // RestoreProgrammeDB takes a path to a json file, reads it, and if
 // successful, unmarshals it as struct ProgrammeDB.
@@ -209,7 +213,12 @@ func SaveDB() {
 		nc := NewCategory(findCatTitle(i.mainDoc().url), i)
 		cats = append(cats, nc)
 	}
-	pdb := &ProgrammeDB{cats, time.Now()}
+	pdbold, err := RestoreProgrammeDB("mockdb.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	sp := pdbold.SavedProgrammes
+	pdb := &ProgrammeDB{cats, time.Now(), sp}
 	uiprogress.Stop()
 	pdb.Save("mockdb.json")
 }
