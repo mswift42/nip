@@ -28,6 +28,14 @@ type SavedProgramme struct {
 	Saved time.Time `json:"saved"`
 }
 
+func (sp *SavedProgramme) toJson() ([]byte, error) {
+	marshalled, err := json.MarshalIndent(sp, "", "\t")
+	if err != nil {
+		return nil, err
+	}
+	return marshalled, err
+}
+
 // RestoreProgrammeDB takes a path to a json file, reads it, and if
 // successful, unmarshals it as struct ProgrammeDB.
 func RestoreProgrammeDB(filename string) (*ProgrammeDB, error) {
