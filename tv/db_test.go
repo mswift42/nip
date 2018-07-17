@@ -10,7 +10,8 @@ func TestProgrammeDB_Index(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
 	td := &TestIplayerDocument{doc}
 	cat := NewCategory("films", td)
-	pdb := &ProgrammeDB{[]*Category{cat}, time.Now()}
+	var sp []*SavedProgramme
+	pdb := &ProgrammeDB{[]*Category{cat}, time.Now(), sp}
 	pdb.index()
 	fp := pdb.Categories[0].Programmes[0]
 	if fp.Index != 0 {
@@ -30,7 +31,8 @@ func TestProgrammeDB_Save(t *testing.T) {
 	doc = documentLoader("testhtml/food1.html")
 	td = &TestIplayerDocument{doc}
 	cat2 := NewCategory("food", td)
-	pdb := &ProgrammeDB{[]*Category{cat, cat2}, time.Now()}
+	var sp []*SavedProgramme
+	pdb := &ProgrammeDB{[]*Category{cat, cat2}, time.Now(), sp}
 	err := pdb.Save("mockdb.json")
 	if err != nil {
 		t.Error("Expected saving db should not return error, got: ", err)
