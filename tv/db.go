@@ -156,6 +156,13 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 	return BBCPrefix + prog.URL, nil
 }
 
+func (pdb *ProgrammeDB) MarkSaved(filename string) error {
+	pdb.SavedProgrammes = append(pdb.SavedProgrammes, &SavedProgramme{filename, time.Now()})
+	return nil
+}
+
+// FindRelatedLinks loads the root page of a Programme.
+// If found, it returns a slice of its related links, e.g. IMDB, Wikipedia, RottenTomatoes,...
 func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*RelatedLink, error) {
 	prog, err := pdb.FindProgramme(index)
 	if err != nil {
