@@ -28,7 +28,6 @@ func extractIndex(c *cli.Context) (int, error) {
 // TODO - set folder for storing and reading of db.
 // TODO - add entry in db for downloaded programmes.
 // TODO - check when running if programmes are stored > 30 days.
-// TODO - add map to abbreviate category names.
 
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
@@ -212,7 +211,7 @@ func InitCli() *cli.App {
 					fmt.Println("Please enter valid index number.")
 					return nil
 				}
-				prog, err := db.FindProgramme(int(ind))
+				prog, err := db.FindProgramme(ind)
 				if err != nil {
 					fmt.Println("could not find Programme with index ", ind)
 				}
