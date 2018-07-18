@@ -191,13 +191,19 @@ func InitCli() *cli.App {
 				if err != nil {
 					fmt.Println(err)
 				}
-				cmd.Start()
+				err = cmd.Start()
+				if err != nil {
+					fmt.Println(err)
+				}
 				scanner := bufio.NewScanner(outpipe)
 				scanner.Split(bufio.ScanRunes)
 				for scanner.Scan() {
 					fmt.Print(scanner.Text())
 				}
-				cmd.Wait()
+				err = cmd.Wait()
+				if err != nil {
+					fmt.Println(err)
+				}
 				return nil
 			},
 		},
@@ -225,12 +231,18 @@ func InitCli() *cli.App {
 				if err != nil {
 					fmt.Println(err)
 				}
-				cmd.Start()
+				err = cmd.Start()
+				if err != nil {
+					fmt.Println(err)
+				}
 				scanner := bufio.NewScanner(outpipe)
 				for scanner.Scan() {
 					fmt.Println(scanner.Text())
 				}
-				cmd.Wait()
+				err = cmd.Wait()
+				if err != nil {
+					fmt.Println(err)
+				}
 				return nil
 			},
 		},
