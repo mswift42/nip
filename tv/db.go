@@ -222,7 +222,10 @@ func SaveDB() {
 	sp := pdbold.SavedProgrammes
 	pdb := &ProgrammeDB{cats, time.Now(), sp}
 	uiprogress.Stop()
-	pdb.Save("mockdb.json")
+	err = pdb.Save("mockdb.json")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func init() {
