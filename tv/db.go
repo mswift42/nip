@@ -38,7 +38,10 @@ func RestoreProgrammeDB(filename string) (*ProgrammeDB, error) {
 		return nil, err
 	}
 	var pdb ProgrammeDB
-	json.Unmarshal(file, &pdb)
+	err = json.Unmarshal(file, &pdb)
+	if err != nil {
+		return nil, err
+	}
 	return &pdb, nil
 }
 
