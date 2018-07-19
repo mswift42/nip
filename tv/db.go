@@ -159,6 +159,9 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 	return BBCPrefix + prog.URL, nil
 }
 
+// FindRelatedLinks downloads the home page of a programme, looks up
+// that pages home page, downloads it, looks up the related links section,
+// and returns a slice of them, e.g. IMDB, Wikipedia, RottenTomatoes.
 func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*RelatedLink, error) {
 	prog, err := pdb.FindProgramme(index)
 	if err != nil {

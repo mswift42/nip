@@ -12,6 +12,7 @@ import (
 // BeebURL is the Url for an iplayer web site.
 type BeebURL string
 
+// BBCPrefix is the iplayer hostname.
 const BBCPrefix = "https://bbc.co.uk"
 
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
@@ -219,6 +220,9 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 	return urls
 }
 
+// RelatedLink represents a link entry on a programme's root home page.
+// It consists of a title, e.g. IMDB, and the url, e.g.
+// https://www.imdb.com/title/tt0146316/?ref_=ttfc_fc_tt
 type RelatedLink struct {
 	Title string
 	Url   string
