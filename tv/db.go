@@ -136,6 +136,17 @@ func (pdb *ProgrammeDB) sixHoursLater(dt time.Time) bool {
 	return dur.Truncate(time.Hour).Hours() >= 6
 }
 
+func (pdb *ProgrammeDB) toBeDeletedProgrammes() []*SavedProgramme {
+	var sp []*SavedProgramme
+	for _, i := range pdb.SavedProgrammes {
+		since  := time.Since(i.Saved).Truncate(time.Hour).Hours() / 24
+		if since > 30.0 {
+			sp = append(sp, i)
+		}
+	}
+	return sp
+}
+
 // FindProgramme takes an index, queries the ProgrammeDB for it, and if found,
 // returns it.
 func (pdb *ProgrammeDB) FindProgramme(index int) (*Programme, error) {
