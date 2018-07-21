@@ -156,9 +156,10 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 	return BBCPrefix + prog.URL, nil
 }
 
-func (pdb *ProgrammeDB) MarkSaved(filename string) error {
+// markSaved adds the filename of a downloaded programme + the
+// date when it was downloaded to the SavedProgrammes entry in the ProgrammeDB.
+func (pdb *ProgrammeDB) markSaved(filename string) {
 	pdb.SavedProgrammes = append(pdb.SavedProgrammes, &SavedProgramme{filename, time.Now()})
-	return nil
 }
 
 // FindRelatedLinks loads the root page of a Programme.
