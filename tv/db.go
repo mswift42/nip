@@ -12,6 +12,7 @@ import (
 	"log"
 
 	"github.com/gosuri/uiprogress"
+	"os"
 )
 
 // ProgrammeDB represents a (file) DB of all saved
@@ -38,7 +39,10 @@ func RestoreProgrammeDB(filename string) (*ProgrammeDB, error) {
 		return nil, err
 	}
 	var pdb ProgrammeDB
-	json.Unmarshal(file, &pdb)
+	err = json.Unmarshal(file, &pdb)
+	if err != nil {
+		return nil, err
+	}
 	return &pdb, nil
 }
 
@@ -131,6 +135,19 @@ func (pdb *ProgrammeDB) FindTitle(title string) string {
 func (pdb *ProgrammeDB) sixHoursLater(dt time.Time) bool {
 	dur := dt.Sub(pdb.Saved)
 	return dur.Truncate(time.Hour).Hours() >= 6
+}
+
+func (pdb *ProgrammeDB) toBeDeletedProgrammes() []*SavedProgramme {
+	var sp []*SavedProgramme
+	for _, i := range pdb.SavedProgrammes {
+		if _, err := os.Stat(i.File); os.IsExist(err) {
+			since := time.Since(i.Saved).Truncate(time.Hour).Hours() / 24
+			if since > 30.0 {
+				sp = append(sp, i)
+			}
+		}
+	}
+	return sp
 }
 
 // FindProgramme takes an index, queries the ProgrammeDB for it, and if found,
@@ -227,7 +244,10 @@ func SaveDB() {
 	sp := pdbold.SavedProgrammes
 	pdb := &ProgrammeDB{cats, time.Now(), sp}
 	uiprogress.Stop()
-	pdb.Save("mockdb.json")
+	err = pdb.Save("mockdb.json")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func init() {
