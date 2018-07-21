@@ -11,8 +11,9 @@ import (
 
 	"log"
 
-	"github.com/gosuri/uiprogress"
 	"os"
+
+	"github.com/gosuri/uiprogress"
 )
 
 // ProgrammeDB represents a (file) DB of all saved
