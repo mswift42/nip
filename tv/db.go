@@ -212,9 +212,9 @@ func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*RelatedLink, error) {
 	return idr.Idoc.relatedLinks(), nil
 }
 
-// SaveDB makes a new Category for all entries in caturls,
+// RefreshDB makes a new Category for all entries in caturls,
 // and if successful, stores stem in ProgrammeDB.
-func SaveDB() {
+func RefreshDB() {
 	c := make(chan *IplayerDocumentResult)
 	var np []NextPager
 	var cats []*Category
@@ -254,10 +254,10 @@ func SaveDB() {
 func init() {
 	pdb, err := RestoreProgrammeDB("mockdb.json")
 	if err != nil {
-		SaveDB()
+		RefreshDB()
 	} else {
 		if pdb.sixHoursLater(time.Now()) {
-			SaveDB()
+			RefreshDB()
 		}
 	}
 	tobedel := pdb.toBeDeletedProgrammes()
