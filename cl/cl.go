@@ -26,7 +26,6 @@ func extractIndex(c *cli.Context) (int, error) {
 }
 
 // TODO - set folder for storing and reading of db.
-// TODO - check when running if programmes are stored > 30 days.
 
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
