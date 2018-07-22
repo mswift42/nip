@@ -8,6 +8,10 @@ import (
 
 	"bufio"
 
+	"strings"
+
+	"os"
+
 	"github.com/mswift42/nip/tv"
 	"github.com/urfave/cli"
 )
@@ -26,6 +30,7 @@ func extractIndex(c *cli.Context) (int, error) {
 }
 
 // TODO - set folder for storing and reading of db.
+// TODO - spkit SaveDb into more functions for saving of db and refreshing .
 
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
@@ -195,12 +200,27 @@ func InitCli() *cli.App {
 				}
 				scanner := bufio.NewScanner(outpipe)
 				scanner.Split(bufio.ScanRunes)
+				var target string
 				for scanner.Scan() {
 					fmt.Print(scanner.Text())
+					target += scanner.Text()
 				}
 				err = cmd.Wait()
 				if err != nil {
 					fmt.Println(err)
+				}
+				split := strings.Split(target, "\n")
+				for _, i := range split {
+					if strings.Contains(i, "Destination:") {
+						fmt.Println("Found it: ", i[25:])
+						cwd, err := os.Getwd()
+						if err != nil {
+							fmt.Println(err)
+						}
+						db.MarkSaved(cwd + i[25:])
+						fmt.Println(db.SavedProgrammes)
+						fmt.Println(cwd + i[25:])
+					}
 				}
 				return nil
 			},

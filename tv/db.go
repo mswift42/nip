@@ -176,7 +176,7 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 
 // markSaved adds the filename of a downloaded programme + the
 // date when it was downloaded to the SavedProgrammes entry in the ProgrammeDB.
-func (pdb *ProgrammeDB) markSaved(filename string) {
+func (pdb *ProgrammeDB) MarkSaved(filename string) {
 	pdb.SavedProgrammes = append(pdb.SavedProgrammes, &SavedProgramme{filename, time.Now()})
 }
 
