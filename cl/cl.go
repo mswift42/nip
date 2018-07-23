@@ -14,6 +14,8 @@ import (
 
 	"os/user"
 
+	"log"
+
 	"github.com/mswift42/nip/tv"
 	"github.com/urfave/cli"
 )
@@ -45,6 +47,11 @@ func getUser() (string, error) {
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
 func InitCli() *cli.App {
+	home, err := getUser()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("db path: ", home+tv.ProgDBPath)
 	db, err := tv.RestoreProgrammeDB("mockdb.json")
 	if err != nil {
 		panic(err)
