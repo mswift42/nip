@@ -12,8 +12,10 @@ import (
 // BeebURL is the Url for an iplayer web site.
 type BeebURL string
 
-// BBCPrefix is the iplayer hostname.
-const BBCPrefix = "https://bbc.co.uk"
+const (
+	BBCPrefix  = "https://bbc.co.uk" // BBCPrefix is the iplayer hostname.
+	ProgDBPath = ".config/nip/progdb.json"
+)
 
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	var url string
