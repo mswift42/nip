@@ -30,7 +30,7 @@ func extractIndex(c *cli.Context) (int, error) {
 }
 
 // TODO - set folder for storing and reading of db.
-// TODO - spkit SaveDb into more functions for saving of db and refreshing .
+// TODO - split SaveDb into more functions for saving of db and refreshing .
 
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
