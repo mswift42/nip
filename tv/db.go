@@ -177,7 +177,13 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 // markSaved adds the filename of a downloaded programme + the
 // date when it was downloaded to the SavedProgrammes entry in the ProgrammeDB.
 func (pdb *ProgrammeDB) MarkSaved(filename string) {
-	pdb.SavedProgrammes = append(pdb.SavedProgrammes, &SavedProgramme{filename, time.Now()})
+	pdbold, err := RestoreProgrammeDB("../mockdb.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+	sp := append(pdbold.SavedProgrammes, &SavedProgramme{filename, time.Now()})
+	pdbnew := &ProgrammeDB{pdbold.Categories, pdb.Saved, sp}
+	pdbnew.Save("../mockdb.json")
 }
 
 // FindRelatedLinks loads the root page of a Programme.

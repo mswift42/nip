@@ -34,7 +34,7 @@ func extractIndex(c *cli.Context) (int, error) {
 }
 
 // TODO - set folder for storing and reading of db.
-// TODO - spkit SaveDb into more functions for saving of db and refreshing .
+// TODO - split SaveDb into more functions for saving of db and refreshing .
 
 func getUser() (string, error) {
 	usr, err := user.Current()
