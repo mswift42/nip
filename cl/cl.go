@@ -12,6 +12,8 @@ import (
 
 	"os"
 
+	"os/user"
+
 	"github.com/mswift42/nip/tv"
 	"github.com/urfave/cli"
 )
@@ -31,6 +33,14 @@ func extractIndex(c *cli.Context) (int, error) {
 
 // TODO - set folder for storing and reading of db.
 // TODO - spkit SaveDb into more functions for saving of db and refreshing .
+
+func getUser() (string, error) {
+	usr, err := user.Current()
+	if err != nil {
+		return "", err
+	}
+	return usr.HomeDir, nil
+}
 
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
