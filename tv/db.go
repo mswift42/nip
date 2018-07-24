@@ -13,8 +13,6 @@ import (
 
 	"os"
 
-	"os/user"
-
 	"github.com/gosuri/uiprogress"
 )
 
@@ -32,14 +30,6 @@ type ProgrammeDB struct {
 type SavedProgramme struct {
 	File  string    `json:"url"`
 	Saved time.Time `json:"saved"`
-}
-
-func SetupDB() error {
-	usr, err := user.Current()
-	if err != nil {
-		return err
-	}
-
 }
 
 // RestoreProgrammeDB takes a path to a json file, reads it, and if
@@ -184,7 +174,7 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 	return BBCPrefix + prog.URL, nil
 }
 
-// markSaved adds the filename of a downloaded programme + the
+// MarkSaved adds the filename of a downloaded programme + the
 // date when it was downloaded to the SavedProgrammes entry in the ProgrammeDB.
 func (pdb *ProgrammeDB) MarkSaved(filename string) {
 	pdbold, err := RestoreProgrammeDB("../mockdb.json")

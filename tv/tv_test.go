@@ -602,7 +602,7 @@ func TestCategory(t *testing.T) {
 	}
 }
 
-var tomb_raider_prog = []struct {
+var tombRaiderProg = []struct {
 	name string
 	url  string
 }{
@@ -627,14 +627,14 @@ func TestRelatedLinks(t *testing.T) {
 	if len(rl) != 3 {
 		t.Error("expected length of related links to be 3, got: ", len(rl))
 	}
-	for i := range tomb_raider_prog {
-		if tomb_raider_prog[i].name != rl[i].Title {
+	for i := range tombRaiderProg {
+		if tombRaiderProg[i].name != rl[i].Title {
 			t.Errorf("Expected Title to be %q, got: %q",
-				tomb_raider_prog[i].name, rl[i].Title)
+				tombRaiderProg[i].name, rl[i].Title)
 		}
-		if tomb_raider_prog[i].url != rl[i].Url {
+		if tombRaiderProg[i].url != rl[i].URL {
 			t.Errorf("Expected Url for %q to be %q, got: %q",
-				tomb_raider_prog[i].name, tomb_raider_prog[i].url, rl[i].Url)
+				tombRaiderProg[i].name, tombRaiderProg[i].url, rl[i].URL)
 		}
 	}
 }

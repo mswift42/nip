@@ -6,18 +6,18 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/mswift42/goquery"
-	"runtime"
 	"os"
 	"os/user"
+	"runtime"
+
+	"github.com/mswift42/goquery"
 )
 
 // BeebURL is the UrlgetUser for an iplayer web site.
 type BeebURL string
 
-const (
-	BBCPrefix  = "https://bbc.co.uk" // BBCPrefix is the iplayer hostname.
-)
+// BBCPrefix is the iplayer hostname.
+const BBCPrefix = "https://bbc.co.uk"
 
 func GetDBPath() string {
 	usr, err := user.Current()
@@ -248,7 +248,7 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 // https://www.imdb.com/title/tt0146316/?ref_=ttfc_fc_tt
 type RelatedLink struct {
 	Title string
-	Url   string
+	URL   string
 }
 
 func (id *iplayerDocument) relatedLinks() []*RelatedLink {
