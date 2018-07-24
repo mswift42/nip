@@ -27,12 +27,13 @@ func GetDBPath() string {
 	var path string
 	switch runtime.GOOS {
 	case "linux", "darwin":
-		path = "/.config/nip/progdb.json"
+		path = usr.HomeDir + "/.config/nip/"
 	default:
-		path = "progdb.json"
+		path = usr.HomeDir
 	}
-	if _, err := os.Stat(usr.HomeDir + path); os.IsNotExist(err) {
+	if _, err := os.Stat(path + "progdb.json"); os.IsNotExist(err) {
 		os.MkdirAll(path, os.ModePerm)
+		os.Create(path + "progdb.json")
 	}
 	return path
 }

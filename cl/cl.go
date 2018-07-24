@@ -32,13 +32,12 @@ func extractIndex(c *cli.Context) (int, error) {
 // TODO - set folder for storing and reading of db.
 // TODO - split SaveDb into more functions for saving of db and refreshing .
 
-
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
 func InitCli() *cli.App {
 	dbpath := tv.GetDBPath()
 	fmt.Println(dbpath)
-	db, err := tv.RestoreProgrammeDB(dbpath)
+	db, err := tv.RestoreProgrammeDB(dbpath + "progdb.json")
 	if err != nil {
 		panic(err)
 	}
