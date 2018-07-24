@@ -12,7 +12,7 @@ import (
 
 	"os"
 
-			"github.com/mswift42/nip/tv"
+	"github.com/mswift42/nip/tv"
 	"github.com/urfave/cli"
 )
 
