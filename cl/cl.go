@@ -12,11 +12,7 @@ import (
 
 	"os"
 
-	"os/user"
-
-	"log"
-
-	"github.com/mswift42/nip/tv"
+			"github.com/mswift42/nip/tv"
 	"github.com/urfave/cli"
 )
 
@@ -36,23 +32,13 @@ func extractIndex(c *cli.Context) (int, error) {
 // TODO - set folder for storing and reading of db.
 // TODO - split SaveDb into more functions for saving of db and refreshing .
 
-func getHome() (string, error) {
-	usr, err := user.Current()
-	if err != nil {
-		return "", err
-	}
-	return usr.HomeDir, nil
-}
 
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
 func InitCli() *cli.App {
-	home, err := getHome()
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("db path: ", home+tv.ProgDBPath)
-	db, err := tv.RestoreProgrammeDB("mockdb.json")
+	dbpath := tv.GetDBPath()
+	fmt.Println(dbpath)
+	db, err := tv.RestoreProgrammeDB(dbpath)
 	if err != nil {
 		panic(err)
 	}

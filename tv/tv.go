@@ -17,7 +17,6 @@ type BeebURL string
 
 const (
 	BBCPrefix  = "https://bbc.co.uk" // BBCPrefix is the iplayer hostname.
-	ProgDBPath = "/.config/nip/progdb.json"
 )
 
 func GetDBPath() string {
