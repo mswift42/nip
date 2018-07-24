@@ -36,7 +36,7 @@ func extractIndex(c *cli.Context) (int, error) {
 // TODO - set folder for storing and reading of db.
 // TODO - split SaveDb into more functions for saving of db and refreshing .
 
-func getUser() (string, error) {
+func getHome() (string, error) {
 	usr, err := user.Current()
 	if err != nil {
 		return "", err
@@ -47,7 +47,7 @@ func getUser() (string, error) {
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
 func InitCli() *cli.App {
-	home, err := getUser()
+	home, err := getHome()
 	if err != nil {
 		log.Fatal(err)
 	}
