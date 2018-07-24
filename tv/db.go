@@ -13,6 +13,8 @@ import (
 
 	"os"
 
+	"os/user"
+
 	"github.com/gosuri/uiprogress"
 )
 
@@ -30,6 +32,14 @@ type ProgrammeDB struct {
 type SavedProgramme struct {
 	File  string    `json:"url"`
 	Saved time.Time `json:"saved"`
+}
+
+func SetupDB() error {
+	usr, err := user.Current()
+	if err != nil {
+		return err
+	}
+
 }
 
 // RestoreProgrammeDB takes a path to a json file, reads it, and if
@@ -244,21 +254,21 @@ func RefreshDB() {
 		nc := NewCategory(findCatTitle(i.mainDoc().url), i)
 		cats = append(cats, nc)
 	}
-	pdbold, err := RestoreProgrammeDB("mockdb.json")
+	pdbold, err := RestoreProgrammeDB("/home/martin/.config/nip/progdb.json")
 	if err != nil {
 		log.Fatal(err)
 	}
 	sp := pdbold.SavedProgrammes
 	pdb := &ProgrammeDB{cats, time.Now(), sp}
 	uiprogress.Stop()
-	err = pdb.Save("mockdb.json")
+	err = pdb.Save("/home/martin/.config/nip/progdb.json")
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
 func init() {
-	pdb, err := RestoreProgrammeDB("mockdb.json")
+	pdb, err := RestoreProgrammeDB("/home/martin/.config/nip/progdb.json")
 	if err != nil {
 		RefreshDB()
 	} else {

@@ -52,7 +52,7 @@ func InitCli() *cli.App {
 		log.Fatal(err)
 	}
 	fmt.Println("db path: ", home+tv.ProgDBPath)
-	db, err := tv.RestoreProgrammeDB("mockdb.json")
+	db, err := tv.RestoreProgrammeDB(home + tv.ProgDBPath)
 	if err != nil {
 		panic(err)
 	}
