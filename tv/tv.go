@@ -7,15 +7,36 @@ import (
 	"sync"
 
 	"github.com/mswift42/goquery"
+	"runtime"
+	"os"
+	"os/user"
 )
 
-// BeebURL is the Url for an iplayer web site.
+// BeebURL is the UrlgetUser for an iplayer web site.
 type BeebURL string
 
 const (
 	BBCPrefix  = "https://bbc.co.uk" // BBCPrefix is the iplayer hostname.
 	ProgDBPath = "/.config/nip/progdb.json"
 )
+
+func GetDBPath() string {
+	usr, err := user.Current()
+	if err != nil {
+		log.Fatal(err)
+	}
+	var path string
+	switch runtime.GOOS {
+	case "linux", "darwin":
+		path = "/.config/nip/progdb.json"
+	default:
+		path = "progdb.json"
+	}
+	if _, err := os.Stat(usr.HomeDir + path); os.IsNotExist(err) {
+		os.MkdirAll(path, os.ModePerm)
+	}
+	return path
+}
 
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	var url string
