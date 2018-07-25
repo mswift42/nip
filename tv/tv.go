@@ -31,9 +31,10 @@ func GetDBPath() string {
 	default:
 		path = usr.HomeDir
 	}
-	if _, err := os.Stat(path + "progdb.json"); os.IsNotExist(err) {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
 		os.MkdirAll(path, os.ModePerm)
 		os.Create(path + "progdb.json")
+
 	}
 	return path
 }

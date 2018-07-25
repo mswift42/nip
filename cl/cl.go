@@ -159,7 +159,7 @@ func InitCli() *cli.App {
 					fmt.Println("Sorry, no related links were found.")
 				} else {
 					for _, i := range rl {
-						fmt.Println(i.Title, " : ", i.Url)
+						fmt.Println(i.Title, " : ", i.URL)
 					}
 				}
 				return nil
