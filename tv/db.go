@@ -244,21 +244,23 @@ func RefreshDB() {
 		nc := NewCategory(findCatTitle(i.mainDoc().url), i)
 		cats = append(cats, nc)
 	}
-	pdbold, err := RestoreProgrammeDB("/home/martin/.config/nip/progdb.json")
+	path := GetDBPath()
+	pdbold, err := RestoreProgrammeDB(path)
 	if err != nil {
 		log.Fatal(err)
 	}
 	sp := pdbold.SavedProgrammes
 	pdb := &ProgrammeDB{cats, time.Now(), sp}
 	uiprogress.Stop()
-	err = pdb.Save("/home/martin/.config/nip/progdb.json")
+	err = pdb.Save(path)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
 func init() {
-	pdb, err := RestoreProgrammeDB("/home/martin/.config/nip/progdb.json")
+	dbpath := GetDBPath()
+	pdb, err := RestoreProgrammeDB(dbpath)
 	if err != nil {
 		RefreshDB()
 	} else {
