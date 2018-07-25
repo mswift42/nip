@@ -33,7 +33,7 @@ func GetDBPath() string {
 	default:
 		path = usr.HomeDir
 	}
-	if _, err := os.Stat(path); os.IsNotExist(err) {
+	if _, err := os.Stat(path + "progdb.json"); os.IsNotExist(err) {
 		os.MkdirAll(path, os.ModePerm)
 		pdb := &ProgrammeDB{[]*Category{}, time.Now(), []*SavedProgramme{}}
 		if err := pdb.Save(path + "progdb.json"); err != nil {
