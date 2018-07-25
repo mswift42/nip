@@ -244,7 +244,7 @@ func RefreshDB() {
 		nc := NewCategory(findCatTitle(i.mainDoc().url), i)
 		cats = append(cats, nc)
 	}
-	path := GetDBPath()
+	path := GetDBPath() + "progdb.json"
 	pdbold, err := RestoreProgrammeDB(path)
 	if err != nil {
 		log.Fatal(err)

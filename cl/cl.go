@@ -29,6 +29,7 @@ func extractIndex(c *cli.Context) (int, error) {
 	return int(index), nil
 }
 
+// TODO - add setup db method, saving empty db to progdb.json
 // TODO - set folder for storing and reading of db.
 // TODO - split SaveDb into more functions for saving of db and refreshing .
 
