@@ -10,6 +10,8 @@ import (
 	"os/user"
 	"runtime"
 
+	"time"
+
 	"github.com/mswift42/goquery"
 )
 
@@ -33,8 +35,10 @@ func GetDBPath() string {
 	}
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		os.MkdirAll(path, os.ModePerm)
-		os.Create(path + "progdb.json")
-
+		pdb := &ProgrammeDB{[]*Category{}, time.Now(), []*SavedProgramme{}}
+		if err := pdb.Save(path + "progdb.json"); err != nil {
+			panic(err)
+		}
 	}
 	return path
 }
