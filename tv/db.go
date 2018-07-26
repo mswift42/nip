@@ -221,7 +221,7 @@ func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*RelatedLink, error) {
 
 // RefreshDB makes a new Category for all entries in caturls,
 // and if successful, stores stem in ProgrammeDB.
-func RefreshDB() {
+func RefreshDB(filename string) {
 	c := make(chan *IplayerDocumentResult)
 	var np []NextPager
 	var cats []*Category
@@ -245,15 +245,14 @@ func RefreshDB() {
 		nc := NewCategory(findCatTitle(i.mainDoc().url), i)
 		cats = append(cats, nc)
 	}
-	path := GetDBPath() + "progdb.json"
-	pdbold, err := RestoreProgrammeDB(path)
+	pdbold, err := RestoreProgrammeDB(filename)
 	if err != nil {
 		panic(err)
 	}
 	sp := pdbold.SavedProgrammes
 	pdb := &ProgrammeDB{cats, time.Now(), sp}
 	uiprogress.Stop()
-	err = pdb.Save(path)
+	err = pdb.Save(filename)
 	if err != nil {
 		panic(err)
 	}
