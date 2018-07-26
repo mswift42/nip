@@ -260,12 +260,13 @@ func RefreshDB(filename string) {
 
 func init() {
 	dbpath := GetDBPath()
+	filename := "progdb.json"
 	pdb, err := RestoreProgrammeDB(dbpath)
 	if err != nil {
-		RefreshDB()
+		RefreshDB(dbpath + filename)
 	} else {
 		if pdb.sixHoursLater(time.Now()) {
-			RefreshDB()
+			RefreshDB(dbpath + filename)
 		}
 	}
 	tobedel := pdb.toBeDeletedProgrammes()
