@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"io/ioutil"
+	"os"
 	"strings"
 	"time"
 
@@ -138,15 +139,15 @@ func (pdb *ProgrammeDB) sixHoursLater(dt time.Time) bool {
 
 func (pdb *ProgrammeDB) toBeDeletedProgrammes() []*SavedProgramme {
 	var sp []*SavedProgramme
-	//for _, i := range pdb.SavedProgrammes {
-	//	fmt.Println("Ranging over Saved Programmes: ", i)
-	//	if _, err := os.Stat(i.File); os.IsExist(err) {
-	//		since := time.Since(i.Saved).Truncate(time.Hour).Hours() / 24
-	//		if since > 30.0 {
-	//			sp = append(sp, i)
-	//		}
-	//	}
-	//}
+	for _, i := range pdb.SavedProgrammes {
+		fmt.Println("Ranging over Saved Programmes: ", i)
+		if _, err := os.Stat(i.File); os.IsExist(err) {
+			since := time.Since(i.Saved).Truncate(time.Hour).Hours() / 24
+			if since > 30.0 {
+				sp = append(sp, i)
+			}
+		}
+	}
 	return sp
 }
 
