@@ -19,7 +19,10 @@ import (
 type BeebURL string
 
 // BBCPrefix is the iplayer hostname.
-const BBCPrefix = "https://bbc.co.uk"
+const (
+	BBCPrefix = "https://bbc.co.uk"
+	NipDB     = "progdb.json"
+)
 
 func GetDBPath() string {
 	usr, err := user.Current()
@@ -33,10 +36,10 @@ func GetDBPath() string {
 	default:
 		path = usr.HomeDir
 	}
-	if _, err := os.Stat(path + "progdb.json"); os.IsNotExist(err) {
+	if _, err := os.Stat(path + NipDB); os.IsNotExist(err) {
 		os.MkdirAll(path, os.ModePerm)
 		pdb := &ProgrammeDB{[]*Category{}, time.Now(), []*SavedProgramme{}}
-		if err := pdb.Save(path + "progdb.json"); err != nil {
+		if err := pdb.Save(path + NipDB); err != nil {
 			panic(err)
 		}
 	}
