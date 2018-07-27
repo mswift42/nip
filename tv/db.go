@@ -259,11 +259,11 @@ func RefreshDB(filename string) {
 func init() {
 	dbpath := GetDBPath()
 	filename := "progdb.json"
-	pdb, err := RestoreProgrammeDB(dbpath)
+	pdb, err := RestoreProgrammeDB(dbpath + filename)
 	if err != nil {
 		RefreshDB(dbpath + filename)
 	} else {
-		if pdb.sixHoursLater(time.Now()) {
+		if pdb.sixHoursLater(time.Now()) || len(pdb.Categories) == 0 {
 			RefreshDB(dbpath + filename)
 		}
 	}
