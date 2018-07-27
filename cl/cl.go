@@ -215,12 +215,8 @@ func InitCli() *cli.App {
 				split := strings.Split(target, "\n")
 				for _, i := range split {
 					if strings.Contains(i, "Destination:") {
-						fmt.Println("Found it: ", i[24:])
-						cwd, err := os.Getwd()
-						if err != nil {
-							fmt.Println(err)
-						}
-						db.MarkSaved(cwd + string(os.PathSeparator) + i[24:])
+						path := tv.GetDBPath()
+						db.MarkSaved(path + string(os.PathSeparator) + i[24:])
 						fmt.Println(db.SavedProgrammes)
 					}
 				}
