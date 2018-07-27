@@ -10,8 +10,6 @@ import (
 
 	"strings"
 
-	"os"
-
 	"github.com/mswift42/nip/tv"
 	"github.com/urfave/cli"
 )
@@ -38,7 +36,7 @@ func extractIndex(c *cli.Context) (int, error) {
 func InitCli() *cli.App {
 	dbpath := tv.GetDBPath()
 	fmt.Println(dbpath)
-	db, err := tv.RestoreProgrammeDB(dbpath + "progdb.json")
+	db, err := tv.RestoreProgrammeDB(dbpath + tv.NipDB)
 	if err != nil {
 		panic(err)
 	}
@@ -216,7 +214,7 @@ func InitCli() *cli.App {
 				for _, i := range split {
 					if strings.Contains(i, "Destination:") {
 						path := tv.GetDBPath()
-						db.MarkSaved(path + string(os.PathSeparator) + i[24:])
+						db.MarkSaved(path + i[24:])
 						fmt.Println(db.SavedProgrammes)
 					}
 				}
