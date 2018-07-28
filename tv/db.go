@@ -151,6 +151,16 @@ func (pdb *ProgrammeDB) toBeDeletedProgrammes() []*SavedProgramme {
 	return sp
 }
 
+func (pdb *ProgrammeDB) removeFromSaved(sp *SavedProgramme) {
+	var progs []*SavedProgramme
+	for _, i := range pdb.SavedProgrammes {
+		if sp.File != i.File {
+			progs = append(progs, i)
+		}
+	}
+	pdb.SavedProgrammes = progs
+}
+
 // FindProgramme takes an index, queries the ProgrammeDB for it, and if found,
 // returns it.
 func (pdb *ProgrammeDB) FindProgramme(index int) (*Programme, error) {
