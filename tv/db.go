@@ -137,6 +137,11 @@ func (pdb *ProgrammeDB) sixHoursLater(dt time.Time) bool {
 	return dur.Truncate(time.Hour).Hours() >= 6
 }
 
+// toBeDeletedProgrammes checks the SavedProgrammes entry of the programme DB
+// and returns programmes stored for longer than 30 days and which still
+// exist at the path they were downloaded to.
+// Programmes that are listed in SavedProgrammes, but don't exist any more,
+// are removed from the db.
 func (pdb *ProgrammeDB) toBeDeletedProgrammes() []*SavedProgramme {
 	var sp []*SavedProgramme
 	for _, i := range pdb.SavedProgrammes {
@@ -146,6 +151,8 @@ func (pdb *ProgrammeDB) toBeDeletedProgrammes() []*SavedProgramme {
 			if since > 30.0 {
 				sp = append(sp, i)
 			}
+		} else {
+			pdb.removeFromSaved(i)
 		}
 	}
 	return sp
@@ -280,6 +287,7 @@ func init() {
 		}
 	}
 	tobedel := pdb.toBeDeletedProgrammes()
+	pdb.Save(dbpath + filename)
 	if len(tobedel) > 0 {
 		fmt.Println("The following Programmes were downloaded > 30 days ago and have to be deleted: ")
 		for _, i := range tobedel {
