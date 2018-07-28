@@ -27,7 +27,6 @@ func extractIndex(c *cli.Context) (int, error) {
 	return int(index), nil
 }
 
-// TODO - When checking savedProgrammes, if file does not exist, remove from list.
 // TODO - split SaveDb into more functions for saving of db and refreshing .
 
 // InitCli loads the ProgrammeDB into memory
