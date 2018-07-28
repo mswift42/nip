@@ -33,7 +33,6 @@ func extractIndex(c *cli.Context) (int, error) {
 // and sets up the command line commands.
 func InitCli() *cli.App {
 	dbpath := tv.GetDBPath()
-	fmt.Println(dbpath)
 	db, err := tv.RestoreProgrammeDB(dbpath + tv.NipDB)
 	if err != nil {
 		panic(err)
