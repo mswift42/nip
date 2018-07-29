@@ -146,7 +146,9 @@ func (pdb *ProgrammeDB) toBeDeletedProgrammes() []*SavedProgramme {
 	var sp []*SavedProgramme
 	for _, i := range pdb.SavedProgrammes {
 		if _, err := os.Stat(i.File); os.IsExist(err) {
+			fmt.Println(err)
 			since := time.Since(i.Saved).Truncate(time.Hour).Hours() / 24
+			fmt.Println(since)
 			if since > 30.0 {
 				sp = append(sp, i)
 			}

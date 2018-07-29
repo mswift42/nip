@@ -122,6 +122,30 @@ func TestProgrammeDB_FindTitle(t *testing.T) {
 	}
 }
 
+func TestProgrammeDB_ToBeDeletedProgrammes(t *testing.T) {
+	pdb, err := RestoreProgrammeDB("mockdb.json")
+	if err != nil {
+		t.Errorf("Expected error to be nil, got: %q ", err)
+	}
+	oldprogs := pdb.toBeDeletedProgrammes()
+	if len(oldprogs) != 0 {
+		t.Errorf("Expected length of saved programmes to be 0, got: %q", len(oldprogs))
+	}
+	t1 := time.Date(2018, 04, 30, 12, 0, 0, 0, time.UTC)
+	t2 := time.Date(2018, time.January, 1, 0, 0, 0, 0, time.UTC)
+	t3 := time.Now()
+	sp1 := &SavedProgramme{"mocksavedprog1", t1}
+	sp2 := &SavedProgramme{"mocksavedprog2", t2}
+	sp3 := &SavedProgramme{"mocksavedprog3", t3}
+	pdbnew := &ProgrammeDB{[]*Category{},
+		time.Now(), []*SavedProgramme{sp1, sp2, sp3}}
+	oldprogs = pdbnew.toBeDeletedProgrammes()
+	if len(oldprogs) != 2 {
+		t.Error("Expected length of to be deleted programmes to be 2, got: ",
+			len(oldprogs))
+	}
+}
+
 func TestProgrammeDB_SixHoursLater(t *testing.T) {
 	pdb, err := RestoreProgrammeDB("mockdb.json")
 	if err != nil {
