@@ -27,6 +27,8 @@ func extractIndex(c *cli.Context) (int, error) {
 	return int(index), nil
 }
 
+// TODO - add tests for toBeDeleted method.
+// TODO - add helptext for cli commands.
 // TODO - split SaveDb into more functions for saving of db and refreshing .
 
 // InitCli loads the ProgrammeDB into memory
