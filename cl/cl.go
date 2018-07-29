@@ -27,7 +27,6 @@ func extractIndex(c *cli.Context) (int, error) {
 	return int(index), nil
 }
 
-// TODO - add tests for toBeDeleted method.
 // TODO - add helptext for cli commands.
 // TODO - split SaveDb into more functions for saving of db and refreshing .
 
@@ -46,18 +45,21 @@ func InitCli() *cli.App {
 
 	app.Commands = []cli.Command{
 		{
-			Name:    "list",
-			Aliases: []string{"l"},
-			Usage:   "List all available categories.",
+			Name:     "list",
+			Aliases:  []string{"l"},
+			Usage:    "List all available categories.",
+			HelpName: "list",
 			Action: func(c *cli.Context) error {
 				fmt.Println(db.ListAvailableCategories())
 				return nil
 			},
 		},
 		{
-			Name:    "category",
-			Aliases: []string{"c"},
-			Usage:   "List all programmes for a category.",
+			Name:      "category",
+			Aliases:   []string{"c"},
+			Usage:     "List all programmes for a category.",
+			HelpName:  "category",
+			ArgsUsage: "[index]",
 			Action: func(c *cli.Context) error {
 				fmt.Println(db.ListCategory(c.Args().Get(0)))
 				return nil
