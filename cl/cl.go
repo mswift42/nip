@@ -110,9 +110,11 @@ func InitCli() *cli.App {
 			},
 		},
 		{
-			Name:    "url",
-			Aliases: []string{"u"},
-			Usage:   "print programme's url",
+			Name:      "url",
+			Aliases:   []string{"u"},
+			Usage:     "print programme's url",
+			HelpName:  "url",
+			ArgsUsage: "[index]",
 			Action: func(c *cli.Context) error {
 				index, err := extractIndex(c)
 				if err != nil {
@@ -129,9 +131,11 @@ func InitCli() *cli.App {
 			},
 		},
 		{
-			Name:    "synopsis",
-			Aliases: []string{"syn"},
-			Usage:   "print programme's synopsis",
+			Name:      "synopsis",
+			Aliases:   []string{"syn"},
+			Usage:     "print programme's synopsis",
+			HelpName:  "synopsis",
+			ArgsUsage: "[index]",
 			Action: func(c *cli.Context) error {
 				index, err := extractIndex(c)
 				if err != nil {
@@ -148,9 +152,11 @@ func InitCli() *cli.App {
 			},
 		},
 		{
-			Name:    "links",
-			Aliases: []string{"lnk"},
-			Usage:   "show related links for a programme with index n",
+			Name:      "links",
+			Aliases:   []string{"lnk"},
+			Usage:     "show related links for a programme",
+			HelpName:  "links",
+			ArgsUsage: "[index]",
 			Action: func(c *cli.Context) error {
 				index, err := extractIndex(c)
 				if err != nil {
