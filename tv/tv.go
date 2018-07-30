@@ -24,6 +24,9 @@ const (
 	NipDB     = "progdb.json"
 )
 
+// GetDBPath returns the path to the json programme DB.
+// If no db exists at this path, it creates an empty db
+// and saves it to disk.
 func GetDBPath() string {
 	usr, err := user.Current()
 	if err != nil {
