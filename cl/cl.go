@@ -177,9 +177,12 @@ func InitCli() *cli.App {
 			},
 		},
 		{
-			Name:    "download",
-			Aliases: []string{"g", "d", "get"},
-			Usage:   "use youtube-dl to download programme with index n",
+			Name:      "download",
+			Aliases:   []string{"g", "d", "get"},
+			Usage:     "use youtube-dl to download programme with index n",
+			UsageText: "download programmes with index n. If no format is specified,\nbest available format is used.",
+			HelpName:  "download",
+			ArgsUsage: "[index] [format]",
 			Action: func(c *cli.Context) error {
 				var format string
 				if len(c.Args()) == 2 {
@@ -234,9 +237,11 @@ func InitCli() *cli.App {
 			},
 		},
 		{
-			Name:    "formats",
-			Aliases: []string{"f"},
-			Usage:   "list youtube-dl formats for programme with index n",
+			Name:      "formats",
+			Aliases:   []string{"f"},
+			Usage:     "list youtube-dl formats for programme with index n",
+			HelpName:  "formats",
+			ArgsUsage: "[index]",
 			Action: func(c *cli.Context) error {
 				ind, err := extractIndex(c)
 				if err != nil {
