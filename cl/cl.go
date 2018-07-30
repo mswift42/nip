@@ -67,18 +67,22 @@ func InitCli() *cli.App {
 			},
 		},
 		{
-			Name:    "search",
-			Aliases: []string{"s"},
-			Usage:   "Search for a programme.",
+			Name:      "search",
+			Aliases:   []string{"s"},
+			Usage:     "Search for a programme.",
+			HelpName:  "search",
+			ArgsUsage: "[searchterm]",
 			Action: func(c *cli.Context) error {
 				fmt.Println(db.FindTitle(c.Args().Get(0)))
 				return nil
 			},
 		},
 		{
-			Name:    "show",
-			Aliases: []string{"sh"},
-			Usage:   "Open Programmes homepage.",
+			Name:      "show",
+			Aliases:   []string{"sh"},
+			Usage:     "Open Programmes homepage.",
+			HelpName:  "show",
+			ArgsUsage: "[index]",
 			Action: func(c *cli.Context) error {
 				index, err := extractIndex(c)
 				if err != nil {
