@@ -27,7 +27,7 @@ func extractIndex(c *cli.Context) (int, error) {
 	return int(index), nil
 }
 
-// TODO - implement refresh cli command.
+// TODO - make sure saved programmes are restored when updating db.
 // TODO - add helptext for cli commands.
 // TODO - split SaveDb into more functions for saving of db and refreshing .
 
