@@ -278,10 +278,11 @@ func InitCli() *cli.App {
 			},
 		},
 		{
-			Name:     "refresh",
-			Aliases:  []string{"r"},
-			Usage:    "refresh programme db",
-			HelpName: "refresh",
+			Name:      "refresh",
+			Aliases:   []string{"r"},
+			Usage:     "refresh programme db",
+			HelpName:  "refresh",
+			ArgsUsage: " ",
 			Action: func(c *cli.Context) error {
 				path := tv.GetDBPath()
 				tv.RefreshDB(path + tv.NipDB)
