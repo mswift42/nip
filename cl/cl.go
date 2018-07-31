@@ -277,6 +277,17 @@ func InitCli() *cli.App {
 				return nil
 			},
 		},
+		{
+			Name:     "refresh",
+			Aliases:  []string{"r"},
+			Usage:    "refresh programme db",
+			HelpName: "refresh",
+			Action: func(c *cli.Context) error {
+				path := tv.GetDBPath()
+				tv.RefreshDB(path + tv.NipDB)
+				return nil
+			},
+		},
 	}
 	return app
 
