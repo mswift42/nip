@@ -129,27 +129,6 @@ VERSION:
 			},
 		},
 		{
-			Name:      "url",
-			Aliases:   []string{"u"},
-			Usage:     "print programme's url",
-			HelpName:  "url",
-			ArgsUsage: "[index]",
-			Action: func(c *cli.Context) error {
-				index, err := extractIndex(c)
-				if err != nil {
-					fmt.Println(err)
-					return nil
-				}
-				url, err := db.FindURL(index)
-				if err != nil {
-					fmt.Println(err)
-				} else {
-					fmt.Println(url)
-				}
-				return nil
-			},
-		},
-		{
 			Name:      "synopsis",
 			Aliases:   []string{"syn"},
 			Usage:     "print programme's synopsis",
