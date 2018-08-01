@@ -43,7 +43,10 @@ func InitCli() *cli.App {
 	app.Setup()
 	app.Name = "nip"
 	app.Usage = "search for iplayer tv programmes."
-
+	cli.AppHelpTemplate = fmt.Sprintf(`%s
+COMMANDS:
+{{range .Commands}}   {{join .Names ", "}}{{ "\t"}}{{.Usage}}{{ "\n" }}{{end}}
+`, cli.AppHelpTemplate)
 	app.Commands = []cli.Command{
 		{
 			Name:     "list",
