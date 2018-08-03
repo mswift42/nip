@@ -286,7 +286,6 @@ func init() {
 		}
 	}
 	tobedel := pdb.toBeDeletedProgrammes()
-	pdb.Save(dbpath + filename)
 	if len(tobedel) > 0 {
 		fmt.Println("The following Programmes were downloaded > 30 days ago and have to be deleted: ")
 		for _, i := range tobedel {
