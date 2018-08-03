@@ -40,10 +40,13 @@ func GetDBPath() string {
 		path = usr.HomeDir
 	}
 	if _, err := os.Stat(path + NipDB); os.IsNotExist(err) {
-		os.MkdirAll(path, os.ModePerm)
+		err := os.MkdirAll(path, os.ModePerm)
+		if err != nil {
+			log.Fatal(err)
+		}
 		pdb := &ProgrammeDB{[]*Category{}, time.Now(), []*SavedProgramme{}}
 		if err := pdb.Save(path + NipDB); err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 	}
 	return path

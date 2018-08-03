@@ -66,7 +66,7 @@ VERSION:
 		{
 			Name:     "list",
 			Aliases:  []string{"l"},
-			Usage:    "List all available categories.",
+			Usage:    "list all available categories.",
 			HelpName: "list",
 			Action: func(c *cli.Context) error {
 				fmt.Println(db.ListAvailableCategories())
@@ -76,7 +76,7 @@ VERSION:
 		{
 			Name:      "category",
 			Aliases:   []string{"c"},
-			Usage:     "List all programmes for a category.",
+			Usage:     "list all programmes for a category.",
 			HelpName:  "category",
 			ArgsUsage: "[index]",
 			Action: func(c *cli.Context) error {
@@ -87,7 +87,7 @@ VERSION:
 		{
 			Name:      "search",
 			Aliases:   []string{"s"},
-			Usage:     "Search for a programme.",
+			Usage:     "search for a programme.",
 			HelpName:  "search",
 			ArgsUsage: "[searchterm]",
 			Action: func(c *cli.Context) error {
@@ -98,7 +98,7 @@ VERSION:
 		{
 			Name:      "show",
 			Aliases:   []string{"sh"},
-			Usage:     "Open Programmes homepage.",
+			Usage:     "open Programmes homepage.",
 			HelpName:  "show",
 			ArgsUsage: "[index]",
 			Action: func(c *cli.Context) error {
