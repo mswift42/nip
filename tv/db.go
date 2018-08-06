@@ -269,6 +269,7 @@ func RefreshDB(filename string) {
 	pdb := &ProgrammeDB{cats, time.Now(), sp}
 	uiprogress.Stop()
 	err = pdb.Save(filename)
+	close(c)
 	if err != nil {
 		panic(err)
 	}
