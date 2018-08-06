@@ -236,7 +236,7 @@ func (pdb *ProgrammeDB) FindRelatedLinks(index int) ([]*RelatedLink, error) {
 }
 
 // RefreshDB makes a new Category for all entries in caturls,
-// and if successful, stores stem in ProgrammeDB.
+// and if successful, stores them in ProgrammeDB.
 func RefreshDB(filename string) {
 	c := make(chan *IplayerDocumentResult)
 	var np []NextPager

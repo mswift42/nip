@@ -15,7 +15,7 @@ import (
 	"github.com/mswift42/goquery"
 )
 
-// BeebURL is the UrlgetUser for an iplayer web site.
+// BeebURL is the Url to an iplayer web site.
 type BeebURL string
 
 // BBCPrefix is the iplayer hostname.
