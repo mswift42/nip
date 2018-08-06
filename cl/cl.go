@@ -227,7 +227,6 @@ VERSION:
 					if strings.Contains(i, "Destination:") {
 						path := tv.GetDBPath()
 						db.MarkSaved(path + i[24:])
-						fmt.Println(db.SavedProgrammes)
 					}
 				}
 				return nil

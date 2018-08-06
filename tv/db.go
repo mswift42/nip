@@ -254,7 +254,7 @@ func RefreshDB(filename string) {
 			np = append(np, &docres.Idoc)
 			bar.Incr()
 		} else {
-			fmt.Println(docres.Error)
+			log.Fatal(docres.Error)
 		}
 	}
 	for _, i := range np {
