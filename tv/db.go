@@ -157,6 +157,11 @@ func (pdb *ProgrammeDB) toBeDeletedProgrammes() []*SavedProgramme {
 	return sp
 }
 
+func thirtyDaysLater(then, now time.Time) bool {
+	since := now.Sub(then).Truncate(time.Hour).Hours() / 24
+	return since > 30.0
+}
+
 func (pdb *ProgrammeDB) removeFromSaved(sp *SavedProgramme) {
 	var progs []*SavedProgramme
 	for _, i := range pdb.SavedProgrammes {
