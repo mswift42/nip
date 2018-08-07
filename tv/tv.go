@@ -33,11 +33,17 @@ func GetDBPath() string {
 		log.Fatal(err)
 	}
 	var path string
+	var winpath string
+	if val, ok := os.LookupEnv("XDG_CONFIG_HOME"); ok {
+		winpath = val
+	} else {
+		winpath = "%LocalAppData%"
+	}
 	switch runtime.GOOS {
 	case "linux", "darwin":
 		path = usr.HomeDir + "/.config/nip/"
 	default:
-		path = usr.HomeDir
+		path = winpath
 	}
 	if _, err := os.Stat(path + NipDB); os.IsNotExist(err) {
 		err := os.MkdirAll(path, os.ModePerm)
