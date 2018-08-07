@@ -29,9 +29,6 @@ func extractIndex(c *cli.Context) (int, error) {
 
 // TODO - make sure saved programmes are restored when updating db.
 // TODO - split SaveDb into more functions for saving of db and refreshing .
-// TODO - split toBeDeleted up. make separate function for 30 days calculation.
-// TODO - unit test 30 days later method.
-// TODO - try buffered channel for refreshdb method.
 // TODO - refreshdb - get progressbar to be more realistic.
 
 // InitCli loads the ProgrammeDB into memory
