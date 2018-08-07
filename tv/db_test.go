@@ -132,6 +132,21 @@ var thirtydayslatertest = []struct {
 		time.Date(2018, time.June, 30, 12, 0, 0, 0, time.UTC),
 		false,
 	},
+	{
+		time.Date(2018, time.June, 1, 12, 0, 0, 0, time.UTC),
+		time.Date(2018, time.July, 1, 11, 0, 0, 0, time.UTC),
+		false,
+	},
+	{
+		time.Date(2018, time.June, 1, 12, 0, 0, 0, time.UTC),
+		time.Date(2018, time.July, 1, 13, 0, 0, 0, time.UTC),
+		true,
+	},
+	{
+		time.Date(2018, time.January, 1, 12, 0, 0, 0, time.UTC),
+		time.Date(2018, time.December, 31, 24, 0, 0, 0, time.UTC),
+		true,
+	},
 }
 
 func TestThirtyDaysLater(t *testing.T) {
