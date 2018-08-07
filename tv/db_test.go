@@ -122,6 +122,27 @@ func TestProgrammeDB_FindTitle(t *testing.T) {
 	}
 }
 
+var thirtydayslatertest = []struct {
+	then time.Time
+	now  time.Time
+	want bool
+}{
+	{
+		time.Date(2018, time.June, 1, 12, 0, 0, 0, time.UTC),
+		time.Date(2018, time.June, 30, 12, 0, 0, 0, time.UTC),
+		false,
+	},
+}
+
+func TestThirtyDaysLater(t *testing.T) {
+	for _, i := range thirtydayslatertest {
+		tdl := thirtyDaysLater(i.then, i.now)
+		if tdl != i.want {
+			t.Errorf("Expected tdl to be %t, got: %t", i.want, tdl)
+		}
+	}
+}
+
 func TestProgrammeDB_ToBeDeletedProgrammes(t *testing.T) {
 	pdb, err := RestoreProgrammeDB("mockdb.json")
 	if err != nil {
