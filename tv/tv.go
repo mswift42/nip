@@ -12,6 +12,8 @@ import (
 
 	"time"
 
+	"path/filepath"
+
 	"github.com/mswift42/goquery"
 )
 
@@ -33,15 +35,15 @@ func GetDBPath() string {
 		log.Fatal(err)
 	}
 	var path string
-	var winpath string
+	var winbasepath string
 	if val, ok := os.LookupEnv("XDG_CONFIG_HOME"); ok {
-		winpath = val
+		winbasepath = val
 	} else {
-		winpath = "%LocalAppData%"
+		winbasepath = "%LocalAppData%"
 	}
 	switch runtime.GOOS {
 	case "windows":
-		path = winpath
+		path = filepath.Join(winbasepath, "nip")
 	default:
 		path = usr.HomeDir + "/.config/nip/"
 	}
