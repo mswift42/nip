@@ -246,6 +246,7 @@ func RefreshDB(filename string) {
 	var np []NextPager
 	var cats []*Category
 	uiprogress.Start()
+	uiprogress.RefreshInterval = time.Second
 	bar := uiprogress.AddBar(len(caturls)).AppendCompleted()
 	for _, v := range caturls {
 		go func(u Pager) {
@@ -256,12 +257,12 @@ func RefreshDB(filename string) {
 		docres := <-c
 		if docres.Error == nil {
 			np = append(np, &docres.Idoc)
-			bar.Incr()
 		} else {
 			log.Fatal(docres.Error)
 		}
 	}
 	for _, i := range np {
+		bar.Incr()
 		nc := NewCategory(findCatTitle(i.mainDoc().url), i)
 		cats = append(cats, nc)
 	}
