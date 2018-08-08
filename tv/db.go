@@ -245,6 +245,7 @@ func RefreshDB(filename string) {
 	c := make(chan *IplayerDocumentResult)
 	var np []NextPager
 	var cats []*Category
+	fmt.Println("refreshing iplayer programme database.")
 	uiprogress.Start()
 	uiprogress.RefreshInterval = time.Second
 	bar := uiprogress.AddBar(len(caturls)).AppendCompleted()
