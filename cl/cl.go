@@ -28,7 +28,6 @@ func extractIndex(c *cli.Context) (int, error) {
 
 // TODO - make sure saved programmes are restored when updating db.
 // TODO - split SaveDb into more functions for saving of db and refreshing .
-// TODO - refreshdb - get progressbar to be more realistic.
 
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
