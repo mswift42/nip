@@ -25,6 +25,7 @@ var caturls = map[string]Pager{
 	"news":           BeebURL("https://www.bbc.co.uk/iplayer/categories/news/a-z?sort=atoz"),
 	"science+nature": BeebURL("https://www.bbc.co.uk/iplayer/categories/science-and-nature/a-z?sort=atoz"),
 	"sport":          BeebURL("https://www.bbc.co.uk/iplayer/categories/sport/a-z?sort=atoz"),
+	"cbbc":           BeebURL("https://www.bbc.co.uk/iplayer/categories/cbbc/a-z?sort=atoz"),
 }
 
 func catNameCompleter(cat string) (string, error) {
