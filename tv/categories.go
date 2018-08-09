@@ -64,6 +64,8 @@ func catNameCompleter(cat string) (string, error) {
 		return "science+nature", nil
 	case matchesName(cat, []string{"sport", "spor", "sprt"}):
 		return "sport", nil
+	case matchesName(cat, []string{"cbbc", "cbb", "cbc", "ccbc", "ccb"}):
+		return "cbbc", nil
 	default:
 		return "", fmt.Errorf("could not find any matching category")
 	}
