@@ -97,7 +97,7 @@ VERSION:
 		{
 			Name:      "show",
 			Aliases:   []string{"sh"},
-			Usage:     "open Programmes homepage.",
+			Usage:     "open a programme's homepage.",
 			HelpName:  "show",
 			ArgsUsage: "[index]",
 			Action: func(c *cli.Context) error {
