@@ -247,7 +247,6 @@ func RefreshDB(filename string) {
 	var cats []*Category
 	fmt.Println("refreshing iplayer programme database.")
 	uiprogress.Start()
-	uiprogress.RefreshInterval = time.Second
 	bar := uiprogress.AddBar(len(caturls)).AppendCompleted()
 	for _, v := range caturls {
 		go func(u Pager) {
