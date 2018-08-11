@@ -10,6 +10,7 @@ nip - query BBC iplayer for selected categories, search for programmes by title,
 You need to have [youtube-dl](https://github.com/rg3/youtube-dl) installed, and for now
 the [Go Programming Language](https://golang.org/doc/install).
 
-Then run 
+**Then run**
+
 `go get -u github.com/mswift42/nip`
 
