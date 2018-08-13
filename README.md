@@ -5,6 +5,7 @@ nip - query [BBC iplayer](https://www.bbc.co.uk/iplayer) for selected tv categor
 - [DESCRIPTION](#description)
 - [LICENSE](#license)
 - [COMMANDS](#commands)
+- [USAGE](#usage)
 
 # INSTALLATION
 
@@ -34,13 +35,27 @@ nip is licensed under the [MIT License](https://github.com/mswift42/nip/blob/mas
 -   list, l              list all available categories.
 -   category, c          list all programmes for a category.
 -   search, s            search for a programme.
--   show, sh             open Programmes homepage.
+-   show, sh             open a programme's homepage.
 -   synopsis, syn        print programme's synopsis
 -   links, lnk           show related links for a programme
 -   download, g, d, get  use youtube-dl to download programme with index n
 -   formats, f           list youtube-dl formats for programme with index n
 -   refresh, r           refresh programme db
 
+# USAGE
 
+enter `nip` followed by the command you want to run.
 
+**Examples**
 
+`nip l` will list all categories,
+
+`nip c crime` will all programmes in category crime.
+
+`nip --help` will show the help output.
+
+`nip s pride` will list all programmes with "pride" in their title.
+
+`nip g 133` will download programme with index 133 in the best available index.
+
+`nip g 133 <youtube-dl format>` will download it with the specified youtube-dl format.
