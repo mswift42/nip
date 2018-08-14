@@ -7,13 +7,13 @@ import (
 	"sync"
 
 	"os"
-	"os/user"
 	"runtime"
 
 	"time"
 
 	"path/filepath"
 
+	"github.com/mitchellh/go-homedir"
 	"github.com/mswift42/goquery"
 )
 
@@ -30,7 +30,7 @@ const (
 // If no db exists at this path, it creates an empty db
 // and saves it to disk.
 func GetDBPath() string {
-	usr, err := user.Current()
+	home, err := homedir.Dir()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -45,7 +45,7 @@ func GetDBPath() string {
 	case "windows":
 		path = filepath.Join(winbasepath, "nip")
 	default:
-		path = usr.HomeDir + "/.config/nip/"
+		path = home + "/.config/nip/"
 	}
 	if _, err := os.Stat(path + NipDB); os.IsNotExist(err) {
 		err := os.MkdirAll(path, os.ModePerm)
