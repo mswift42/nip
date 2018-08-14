@@ -63,7 +63,7 @@ func GetDBPath() string {
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	var url string
 	if strings.HasPrefix(string(bu), "/iplayer/") {
-		url = "https://www.bbc.co.uk" + string(bu)
+		url = BBCPrefix + string(bu)
 	} else {
 		url = string(bu)
 	}
