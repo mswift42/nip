@@ -191,7 +191,7 @@ VERSION:
 				}
 				prog, err := db.FindProgramme(ind)
 				if err != nil {
-					fmt.Println("Could not find Programme with index ", ind)
+					fmt.Println(err)
 					return nil
 				}
 				fmt.Println("Downloading Programme \n", prog.String())
@@ -245,7 +245,7 @@ VERSION:
 				}
 				prog, err := db.FindProgramme(ind)
 				if err != nil {
-					fmt.Println("could not find Programme with index ", ind)
+					fmt.Println(err)
 				}
 				fmt.Println("Listing Formats for Programme \n", prog.String())
 				u := tv.BBCPrefix + prog.URL
