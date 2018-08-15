@@ -204,7 +204,9 @@ func (pdb *ProgrammeDB) MarkSaved(filename string) {
 	}
 	sp := append(pdbold.SavedProgrammes, &SavedProgramme{filename, time.Now()})
 	pdbnew := &ProgrammeDB{pdbold.Categories, pdb.Saved, sp}
-	pdbnew.Save(path + NipDB)
+	if err := pdbnew.Save(path + NipDB); err != nil {
+		log.Fatal(err)
+	}
 }
 
 // FindRelatedLinks loads the root page of a Programme.
