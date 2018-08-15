@@ -7,11 +7,9 @@ import (
 	"sync"
 
 	"os"
-	"runtime"
-
-	"time"
-
 	"path/filepath"
+	"runtime"
+	"time"
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/mswift42/goquery"
@@ -25,40 +23,6 @@ const (
 	BBCPrefix = "https://bbc.co.uk"
 	NipDB     = "progdb.json"
 )
-
-// GetDBPath returns the path to the json programme DB.
-// If no db exists at this path, it creates an empty db
-// and saves it to disk.
-func GetDBPath() string {
-	home, err := homedir.Dir()
-	if err != nil {
-		log.Fatal(err)
-	}
-	var path string
-	var winbasepath string
-	if val, ok := os.LookupEnv("XDG_CONFIG_HOME"); ok {
-		winbasepath = val
-	} else {
-		winbasepath = "%LocalAppData%"
-	}
-	switch runtime.GOOS {
-	case "windows":
-		path = filepath.Join(winbasepath, "nip")
-	default:
-		path = home + "/.config/nip/"
-	}
-	if _, err := os.Stat(path + NipDB); os.IsNotExist(err) {
-		err := os.MkdirAll(path, os.ModePerm)
-		if err != nil {
-			log.Fatal(err)
-		}
-		pdb := &ProgrammeDB{[]*Category{}, time.Now(), []*SavedProgramme{}}
-		if err := pdb.Save(path + NipDB); err != nil {
-			log.Fatal(err)
-		}
-	}
-	return path
-}
 
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	var url string
@@ -341,4 +305,38 @@ func collectPages(urls []Pager) []*IplayerDocumentResult {
 		results = append(results, res)
 	}
 	return results
+}
+
+// GetDBPath returns the path to the json programme DB.
+// If no db exists at this path, it creates an empty db
+// and saves it to disk.
+func GetDBPath() string {
+	home, err := homedir.Dir()
+	if err != nil {
+		log.Fatal(err)
+	}
+	var path string
+	var winbasepath string
+	if val, ok := os.LookupEnv("XDG_CONFIG_HOME"); ok {
+		winbasepath = val
+	} else {
+		winbasepath = "%LocalAppData%"
+	}
+	switch runtime.GOOS {
+	case "windows":
+		path = filepath.Join(winbasepath, "nip")
+	default:
+		path = home + "/.config/nip/"
+	}
+	if _, err := os.Stat(path + NipDB); os.IsNotExist(err) {
+		err := os.MkdirAll(path, os.ModePerm)
+		if err != nil {
+			log.Fatal(err)
+		}
+		pdb := &ProgrammeDB{[]*Category{}, time.Now(), []*SavedProgramme{}}
+		if err := pdb.Save(path + NipDB); err != nil {
+			log.Fatal(err)
+		}
+	}
+	return path
 }
