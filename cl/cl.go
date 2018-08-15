@@ -26,9 +26,6 @@ func extractIndex(c *cli.Context) (int, error) {
 	return int(index), nil
 }
 
-// TODO - make sure saved programmes are restored when updating db.
-// TODO - split SaveDb into more functions for saving of db and refreshing .
-
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
 func InitCli() *cli.App {
