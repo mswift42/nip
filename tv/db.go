@@ -260,7 +260,7 @@ func RefreshDB(filename string) {
 		if docres.Error == nil {
 			np = append(np, &docres.Idoc)
 		} else {
-			log.Fatal(docres.Error)
+			log.Println(docres.Error)
 		}
 	}
 	for _, i := range np {

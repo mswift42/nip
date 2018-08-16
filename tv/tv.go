@@ -257,7 +257,7 @@ func newMainCategory(np NextPager) *MainCategoryDocument {
 		if &i.Idoc != nil {
 			nextdocs = append(nextdocs, &i.Idoc)
 		} else {
-			log.Fatal(&i.Error)
+			log.Println(&i.Error)
 		}
 	}
 	var selres []*iplayerSelectionResult
@@ -271,7 +271,7 @@ func newMainCategory(np NextPager) *MainCategoryDocument {
 		if &i.Idoc != nil {
 			progpagedocs = append(progpagedocs, &i.Idoc)
 		} else {
-			log.Fatal(&i.Error)
+			log.Println(&i.Error)
 		}
 	}
 	return &MainCategoryDocument{np.mainDoc(), nextdocs[1:], progpagedocs, selres}
