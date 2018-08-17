@@ -42,7 +42,7 @@ func TestIplayerSelectionResults(t *testing.T) {
 	if len(selres) != 24 {
 		t.Error("Expected length of selectionresults to equal: 24, got: ", len(selres))
 	}
-	nsel := idr.Idoc.programmeSelection()
+	nsel := idr.Idoc.programmeNode()
 	nselres := nsel.selectionResults()
 	if len(selres) != 24 {
 		t.Error("Expected length of selectionResults to equal 24, got: ", len(nselres))
@@ -68,7 +68,7 @@ func TestIplayerSelectionResults(t *testing.T) {
 func TestCollectPages(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
 	tid := TestIplayerDocument{doc}
-	isel := tid.idoc.programmeSelection()
+	isel := tid.idoc.programmeNode()
 	np := tid.programPages(isel.selectionResults())
 	if len(np) != 2 {
 		t.Error("Expected length of nextPages to be 1, got: ", len(np))
@@ -85,7 +85,7 @@ func TestCollectPages(t *testing.T) {
 func TestProgramPages(t *testing.T) {
 	doc := documentLoader("testhtml/films1.html")
 	tid := TestIplayerDocument{doc}
-	selres := tid.idoc.programmeSelection().selectionResults()
+	selres := tid.idoc.programmeNode().selectionResults()
 	urls := tid.programPages(selres)
 	if len(urls) != 2 {
 		t.Error("Expected length of urls to be 2, got: ", len(urls))
@@ -98,7 +98,7 @@ func TestProgramPages(t *testing.T) {
 	}
 	doc = documentLoader("testhtml/food1.html")
 	tid = TestIplayerDocument{doc}
-	selres = tid.idoc.programmeSelection().selectionResults()
+	selres = tid.idoc.programmeNode().selectionResults()
 	urls = tid.programPages(selres)
 	if len(urls) != 20 {
 		t.Error("Expected length of urls to be 20, got: ", len(urls))
