@@ -135,7 +135,7 @@ type iplayerDocument struct {
 	url Pager
 }
 
-func (id *iplayerDocument) programmeSelection() *iplayerSelection {
+func (id *iplayerDocument) programmeNode() *iplayerSelection {
 	return &iplayerSelection{id.doc.Find(".content-item")}
 }
 
@@ -262,7 +262,7 @@ func newMainCategory(np NextPager) *MainCategoryDocument {
 	}
 	var selres []*iplayerSelectionResult
 	for _, i := range nextdocs {
-		isel := i.programmeSelection()
+		isel := i.programmeNode()
 		selres = append(selres, isel.selectionResults()...)
 	}
 	urls := np.programPages(selres)
