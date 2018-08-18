@@ -16,7 +16,7 @@ the [Go Programming Language](https://golang.org/doc/install).
 
 **Then run**
 
-`go get github.com/mswift42/nip`
+`go get -u github.com/mswift42/nip`
 
 
 # DESCRIPTION
