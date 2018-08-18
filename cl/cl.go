@@ -258,7 +258,7 @@ VERSION:
 				var cmd *exec.Cmd
 				switch runtime.GOOS {
 				case "windows":
-					cmd = exec.Command("cmd", "-c", "youtube-dl -F "+u)
+					cmd = exec.Command("cmd", "/c", "youtube-dl -F "+u)
 				default:
 					cmd = exec.Command("/bin/sh", "-c", "youtube-dl -F "+u)
 				}
