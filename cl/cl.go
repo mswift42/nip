@@ -255,7 +255,13 @@ VERSION:
 				}
 				fmt.Println("Listing Formats for Programme \n", prog.String())
 				u := tv.BBCPrefix + prog.URL
-				cmd := exec.Command("/bin/sh", "-c", "youtube-dl -F "+u)
+				var cmd *exec.Cmd
+				switch runtime.GOOS {
+				case "windows":
+					cmd = exec.Command("cmd", "-c", "youtube-dl -F "+u)
+				default:
+					cmd = exec.Command("/bin/sh", "-c", "youtube-dl -F "+u)
+				}
 				if err != nil {
 					fmt.Println(err)
 				}
