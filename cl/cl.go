@@ -194,10 +194,19 @@ VERSION:
 				fmt.Println("Downloading Programme \n", prog.String())
 				u := tv.BBCPrefix + prog.URL
 				var cmd *exec.Cmd
-				if format != "" {
-					cmd = exec.Command("/bin/sh", "-c", "youtube-dl -f "+format+" "+u)
-				} else {
-					cmd = exec.Command("/bin/sh", "-c", "youtube-dl -f best "+u)
+				switch runtime.GOOS {
+				case "windows":
+					if format != "" {
+						cmd = exec.Command("cmd", "/c", "youtube-dl -f "+format+" "+u)
+					} else {
+						cmd = exec.Command("cmd", "/c", "youtube-dl -f best "+u)
+					}
+				default:
+					if format != "" {
+						cmd = exec.Command("/bin/sh", "-c", "youtube-dl -f "+format+" "+u)
+					} else {
+						cmd = exec.Command("/bin/sh", "-c", "youtube-dl -f best "+u)
+					}
 				}
 				outpipe, err := cmd.StdoutPipe()
 				if err != nil {
