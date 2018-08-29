@@ -197,7 +197,7 @@ func (pdb *ProgrammeDB) FindURL(index int) (string, error) {
 // MarkSaved adds the filename of a downloaded programme + the
 // date when it was downloaded to the SavedProgrammes entry in the ProgrammeDB.
 func (pdb *ProgrammeDB) MarkSaved(filename string) {
-	path := GetDBPath()
+	path := DBPath()
 	pdbold, err := RestoreProgrammeDB(path + NipDB)
 	if err != nil {
 		log.Fatal(err)
@@ -283,7 +283,7 @@ func RefreshDB(filename string) {
 }
 
 func init() {
-	dbpath := GetDBPath()
+	dbpath := DBPath()
 	filename := NipDB
 	pdb, err := RestoreProgrammeDB(dbpath + filename)
 	if err != nil {

@@ -307,10 +307,10 @@ func collectPages(urls []Pager) []*IplayerDocumentResult {
 	return results
 }
 
-// GetDBPath returns the path to the json programme DB.
+// DBPath returns the path to the json programme DB.
 // If no db exists at this path, it creates an empty db
 // and saves it to disk.
-func GetDBPath() string {
+func DBPath() string {
 	home, err := homedir.Dir()
 	if err != nil {
 		log.Fatal(err)

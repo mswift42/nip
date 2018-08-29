@@ -29,7 +29,7 @@ func extractIndex(c *cli.Context) (int, error) {
 // InitCli loads the ProgrammeDB into memory
 // and sets up the command line commands.
 func InitCli() *cli.App {
-	dbpath := tv.GetDBPath()
+	dbpath := tv.DBPath()
 	db, err := tv.RestoreProgrammeDB(dbpath + tv.NipDB)
 	if err != nil {
 		panic(err)
@@ -230,7 +230,7 @@ VERSION:
 				split := strings.Split(target, "\n")
 				for _, i := range split {
 					if strings.Contains(i, "Destination:") {
-						path := tv.GetDBPath()
+						path := tv.DBPath()
 						db.MarkSaved(path + i[24:])
 					}
 				}
@@ -291,7 +291,7 @@ VERSION:
 			HelpName:  "refresh",
 			ArgsUsage: " ",
 			Action: func(c *cli.Context) error {
-				path := tv.GetDBPath()
+				path := tv.DBPath()
 				tv.RefreshDB(path + tv.NipDB)
 				return nil
 			},
