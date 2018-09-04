@@ -11,12 +11,15 @@ nip - query [BBC iplayer](https://www.bbc.co.uk/iplayer) for selected tv categor
 
 ## Dependencies
 
-You need to have [youtube-dl](https://github.com/rg3/youtube-dl) installed, and for now
-the [Go Programming Language](https://golang.org/doc/install).
+If you want to download iplayer programmes, You need to install [youtube-dl](https://github.com/rg3/youtube-dl).
 
-**Then run**
+If you have the Go programming language installed, you can run 
 
 `go get -u github.com/mswift42/nip`
+
+to install nip.
+
+Else, you can grab a binary from the [releases](https://github.com/mswift42/nip/releases) section.
 
 
 # DESCRIPTION
