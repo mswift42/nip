@@ -15,6 +15,7 @@ var caturls = map[string]Pager{
 	"comedy":         BeebURL("https://www.bbc.co.uk/iplayer/categories/comedy/a-z?sort=atoz"),
 	"crime":          BeebURL("https://www.bbc.co.uk/iplayer/categories/drama-crime/a-z?sort=atoz"),
 	"classic+period": BeebURL("https://www.bbc.co.uk/iplayer/categories/drama-classic-and-period/a-z?sort=atoz"),
+	"drama+soaps":    BeebURL("https://www.bbc.co.uk/iplayer/categories/drama-and-soaps/a-z?sort=atoz"),
 	"scifi+fantasy":  BeebURL("https://www.bbc.co.uk/iplayer/categories/drama-sci-fi-and-fantasy/a-z?sort=atoz"),
 	"documentaries":  BeebURL("https://www.bbc.co.uk/iplayer/categories/documentaries/a-z?sort=atoz"),
 	"arts":           BeebURL("https://www.bbc.co.uk/iplayer/categories/arts/a-z?sort=atoz"),
@@ -41,6 +42,9 @@ func catNameCompleter(cat string) (string, error) {
 	case matchesName(cat, []string{"classic+period", "classic", "period",
 		"clsic", "prd", "class", "per", "peri", "clic"}):
 		return "classic+period", nil
+	case matchesName(cat, []string{"drama+soaps", "drama", "soaps", "dram",
+		"drma", "dama", "soap", "sops", "sop"}):
+		return "drama+soaps", nil
 	case matchesName(cat, []string{"scifi+fantasy", "scifi", "fantasy", "scfi",
 		"fanta", "sci", "scyfy", "scify", "fantas", "ftsy"}):
 		return "scifi+fantasy", nil
