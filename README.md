@@ -51,14 +51,14 @@ enter `nip` followed by the command you want to run.
 
 **Examples**
 
-`nip l` will list all categories,
+`nip l` lists all categories,
 
-`nip c crime` will all programmes in category crime.
+`nip c crime` lists all programmes in category crime.
 
-`nip --help` will show the help output.
+`nip --help` shows the help output.
 
-`nip s pride` will list all programmes with "pride" in their title.
+`nip s pride` lists all programmes with "pride" in their title.
 
-`nip g 133` will download programme with index 133 in the best available index.
+`nip g 133` downloads programme with index 133 in the best available index.
 
-`nip g 133 <youtube-dl format>` will download it with the specified youtube-dl format.
+`nip g 133 <youtube-dl format>` downloads it with the specified youtube-dl format.
