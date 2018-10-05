@@ -182,8 +182,9 @@ func (pp *programPage) programmes() []*Programme {
 // A MainCategoryDocument is the collection point for an iplayer category.
 // maindoc is the root (or page 1) document, nextdocs pages 2 - n,
 // programpagedocs are the docuemnts for all programmes that have more
-// than 1 episode, and selectionresults have the programmes with only
-// one available episode.
+// than 1 episode, and selectionresults collects all the programmenodes
+// where no further documents have to be traversed, because
+// the programme consists of only one episode.
 type MainCategoryDocument struct {
 	maindoc          *iplayerDocument
 	nextdocs         []*iplayerDocument
