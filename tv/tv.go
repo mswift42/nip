@@ -214,7 +214,7 @@ func (id *iplayerDocument) mainDoc() *iplayerDocument {
 
 func (id *iplayerDocument) nextPages() []Pager {
 	var urls []Pager
-	id.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
+	id.doc.Find(".pagination__number > a").Each(func(i int, s *goquery.Selection) {
 		urls = append(urls, BeebURL(s.AttrOr("href", "")))
 	})
 	return urls
