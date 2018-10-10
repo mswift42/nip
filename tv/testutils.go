@@ -30,7 +30,7 @@ func (thu TestHTMLURL) loadDocument(c chan<- *IplayerDocumentResult) {
 }
 
 func (thu TestHTMLURL) String() string {
-	return thu.String()
+	return string(thu)
 }
 
 func (tid *TestIplayerDocument) nextPages() []Pager {

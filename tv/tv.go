@@ -25,7 +25,7 @@ const (
 )
 
 func (bu BeebURL) String() string {
-	return bu.String()
+	return string(bu)
 }
 
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
