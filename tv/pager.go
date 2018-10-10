@@ -7,6 +7,7 @@ package tv
 // a provided channel of type *IplayerDocumentResult.
 type Pager interface {
 	loadDocument(chan<- *IplayerDocumentResult)
+	String() string
 }
 
 // NextPager is the interface that wraps the mainDoc, nextPages and programPages

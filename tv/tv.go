@@ -24,6 +24,10 @@ const (
 	NipDB     = "progdb.json"
 )
 
+func (bu BeebURL) String() string {
+	return bu.String()
+}
+
 func (bu BeebURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	var url string
 	if strings.HasPrefix(string(bu), "/iplayer/") {
@@ -215,7 +219,7 @@ func (id *iplayerDocument) mainDoc() *iplayerDocument {
 func (id *iplayerDocument) nextPages() []Pager {
 	var urls []Pager
 	id.doc.Find(".pagination__number > a").Each(func(i int, s *goquery.Selection) {
-		urls = append(urls, BeebURL(s.AttrOr("href", "")))
+		urls = append(urls, BeebURL(id.url.String()+"&"+s.AttrOr("href", "")))
 	})
 	return urls
 }

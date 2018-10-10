@@ -29,6 +29,10 @@ func (thu TestHTMLURL) loadDocument(c chan<- *IplayerDocumentResult) {
 	c <- &IplayerDocumentResult{idoc, nil}
 }
 
+func (thu TestHTMLURL) String() string {
+	return thu.String()
+}
+
 func (tid *TestIplayerDocument) nextPages() []Pager {
 	var urls []Pager
 	tid.idoc.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
