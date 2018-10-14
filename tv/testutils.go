@@ -35,7 +35,7 @@ func (thu TestHTMLURL) String() string {
 
 func (tid *TestIplayerDocument) nextPages() []Pager {
 	var urls []Pager
-	tid.idoc.doc.Find(".page > a").Each(func(i int, s *goquery.Selection) {
+	tid.idoc.doc.Find(".pagination__number > a").Each(func(i int, s *goquery.Selection) {
 		urls = append(urls, TestHTMLURL(s.AttrOr("href", "")))
 	})
 	return urls
