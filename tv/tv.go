@@ -18,6 +18,16 @@ import (
 // BeebURL is the Url to an iplayer web site.
 type BeebURL string
 
+func newBeebURL(url string, idoc *iplayerDocument) BeebURL {
+	if strings.HasPrefix(url, "/iplayer/") {
+		return BeebURL(BBCPrefix + url)
+	}
+	if strings.HasPrefix(url, "?page=") {
+		return BeebURL(idoc.url.String() + url)
+	}
+	return BeebURL(url)
+}
+
 // BBCPrefix is the iplayer hostname.
 const (
 	BBCPrefix = "https://bbc.co.uk"
