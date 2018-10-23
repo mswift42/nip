@@ -220,7 +220,7 @@ func (id *iplayerDocument) nextPages() []Pager {
 	var urls []Pager
 	id.doc.Find(".pagination__number > a").Each(func(i int, s *goquery.Selection) {
 		npage := s.AttrOr("href", "")
-		bu := strings.Replace(id.url.String(), "?sort=atoz", npage, -1)
+		bu := strings.Replace(id.url.String(), "?sort=atoz", npage, 1)
 		urls = append(urls, BeebURL(bu))
 	})
 	return urls
