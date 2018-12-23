@@ -10,6 +10,7 @@ type Category struct {
 }
 
 var caturls = map[string]Pager{
+	"most-popular":   BeebURL("https://www.bbc.co.uk/iplayer/most-popular"),
 	"films":          BeebURL("https://www.bbc.co.uk/iplayer/categories/films/a-z?sort=atoz&page=1"),
 	"food":           BeebURL("https://www.bbc.co.uk/iplayer/categories/food/a-z?sort=atoz&page=1"),
 	"comedy":         BeebURL("https://www.bbc.co.uk/iplayer/categories/comedy/a-z?sort=atoz"),
@@ -31,6 +32,9 @@ var caturls = map[string]Pager{
 
 func catNameCompleter(cat string) (string, error) {
 	switch {
+	case matchesName(cat, []string{"most", "mst", "most-popular", "pop",
+		"popular", "poplar"}):
+		return "most-popular", nil
 	case matchesName(cat, []string{"films", "flms", "film"}):
 		return "films", nil
 	case matchesName(cat, []string{"food", "fod", "fd"}):
