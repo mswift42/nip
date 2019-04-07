@@ -681,4 +681,7 @@ func TestBoxSets(t *testing.T) {
 	doc := documentLoader("testhtml/luther.html")
 	td := TestIplayerDocument{doc}
 	bs := td.idoc.boxSet()
+	if len(bs) != 5 {
+		t.Errorf("Expected length of boxSet to be 5, got: %v", len(bs))
+	}
 }
