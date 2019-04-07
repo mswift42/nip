@@ -236,6 +236,14 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 	return urls
 }
 
+func (id *iplayerDocument) boxSet() []Pager {
+	var urls []Pager
+	id.doc.Find(".series-nav__button > a").Each(func(i int, s *goquery.Selection) {
+		urls = append(urls, BeebURL(s.AttrOr("href", "")))
+	})
+	return urls
+}
+
 // RelatedLink represents a link entry on a programme's root home page.
 // It consists of a title, e.g. IMDB, and the url, e.g.
 // https://www.imdb.com/title/tt0146316/?ref_=ttfc_fc_tt
