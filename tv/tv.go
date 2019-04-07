@@ -241,7 +241,6 @@ func (id *iplayerDocument) boxSet() []Pager {
 	id.doc.Find(".series-nav__button").Each(func(i int, s *goquery.Selection) {
 		url, ok := s.Attr("href")
 		if ok {
-
 			urls = append(urls, BeebURL(url))
 		}
 	})
