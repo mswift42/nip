@@ -702,4 +702,12 @@ func TestBoxSets(t *testing.T) {
 			"/iplayer/episodes/b00vk2lp/luther?seriesId=b0bxbh80",
 			bs[3].String())
 	}
+	doc = documentLoader("testhtml/fleabag.html")
+	td = TestIplayerDocument{doc}
+	bs = td.idoc.boxSet()
+	if bs[0].String() != "/iplayer/episodes/p070npjv/fleabag?seriesId=p071bjr7" {
+		t.Errorf("Expected url to be %v, got: %v",
+			"/iplayer/episodes/p070npjv/fleabag?seriesId=p071bjr7",
+			bs[0].String())
+	}
 }
