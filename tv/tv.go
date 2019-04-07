@@ -239,7 +239,11 @@ func (id *iplayerDocument) programPages(selres []*iplayerSelectionResult) []Page
 func (id *iplayerDocument) boxSet() []Pager {
 	var urls []Pager
 	id.doc.Find(".series-nav__button").Each(func(i int, s *goquery.Selection) {
-		urls = append(urls, BeebURL(s.AttrOr("href", "")))
+		url, ok := s.Attr("href")
+		if ok {
+
+			urls = append(urls, BeebURL(url))
+		}
 	})
 	return urls
 }
