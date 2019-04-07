@@ -676,3 +676,9 @@ func TestCatNameCompleter(t *testing.T) {
 		}
 	}
 }
+
+func TestBoxSets(t *testing.T) {
+	doc := documentLoader("testhtml/luther.html")
+	td := TestIplayerDocument{doc}
+	bs := td.idoc.boxSet()
+}
