@@ -676,3 +676,38 @@ func TestCatNameCompleter(t *testing.T) {
 		}
 	}
 }
+
+func TestBoxSets(t *testing.T) {
+	doc := documentLoader("testhtml/luther.html")
+	td := TestIplayerDocument{doc}
+	bs := td.idoc.boxSet()
+	if len(bs) != 4 {
+		t.Errorf("Expected length of boxSet to be 5, got: %v", len(bs))
+	}
+	if bs[0].String() != "/iplayer/episodes/b00vk2lp/luther?seriesId=b00vk2mq" {
+		t.Error("expected, got ", bs[0].String())
+	}
+	if bs[1].String() != "/iplayer/episodes/b00vk2lp/luther?seriesId=p01b2b2g" {
+		t.Errorf("Expected url to be %v, got: %v",
+			"/iplayer/episodes/b00vk2lp/luther?seriesId=p01b2b2g",
+			bs[1].String())
+	}
+	if bs[2].String() != "/iplayer/episodes/b00vk2lp/luther?seriesId=b06srp3h" {
+		t.Errorf("expected url to be %v, got: %v",
+			"/iplayer/episodes/b00vk2lp/luther?seriesId=b06srp3h",
+			bs[2].String())
+	}
+	if bs[3].String() != "/iplayer/episodes/b00vk2lp/luther?seriesId=b0bxbh80" {
+		t.Errorf("Expected url to be %v, got: %v",
+			"/iplayer/episodes/b00vk2lp/luther?seriesId=b0bxbh80",
+			bs[3].String())
+	}
+	doc = documentLoader("testhtml/fleabag.html")
+	td = TestIplayerDocument{doc}
+	bs = td.idoc.boxSet()
+	if bs[0].String() != "/iplayer/episodes/p070npjv/fleabag?seriesId=p071bjr7" {
+		t.Errorf("Expected url to be %v, got: %v",
+			"/iplayer/episodes/p070npjv/fleabag?seriesId=p071bjr7",
+			bs[0].String())
+	}
+}
