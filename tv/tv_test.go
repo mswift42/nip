@@ -15,7 +15,7 @@ func TestLoadingDocument(t *testing.T) {
 	if idr.Idoc.doc == nil {
 		t.Error("Expected Idoc not to be nil", idr.Idoc)
 	}
-	url = TestHTMLURL("testhtml/films1.html")
+	url = "testhtml/films1.html"
 	go url.loadDocument(c)
 	idr = <-c
 	if idr.Error != nil {
@@ -24,7 +24,7 @@ func TestLoadingDocument(t *testing.T) {
 	if idr.Idoc.doc == nil {
 		t.Error("Expected Idoc not to be nil: ", idr.Idoc)
 	}
-	url = TestHTMLURL("testhtml/nosuchfile.html")
+	url = "testhtml/nosuchfile.html"
 	go url.loadDocument(c)
 	idr = <-c
 	if idr.Error == nil {
