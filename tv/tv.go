@@ -183,6 +183,14 @@ func (pp *programPage) programmes() []*Programme {
 	return results
 }
 
+func (pp *programPage) seriesUrls() (bool, []Pager) {
+	bs := pp.doc.boxSet()
+	if len(bs) == 0 {
+		return false, bs
+	}
+	return true, bs
+}
+
 // A MainCategoryDocument is the collection point for an iplayer category.
 // maindoc is the root (or page 1) document, nextdocs pages 2 - n,
 // programpagedocs are the docuemnts for all programmes that have more
