@@ -728,4 +728,13 @@ func TestBoxSets(t *testing.T) {
 			bs[0].String())
 	}
 
+	doc = documentLoader("testhtml/gentleman_jack.html")
+	pp = programPage{doc}
+	ok, su = pp.seriesUrls()
+	if ok {
+		t.Error("Expected seriesUrls call to be false, got ok")
+	}
+	if len(su) != 0 {
+		t.Errorf("Expected length of series urls to be 0, got %d", len(su))
+	}
 }
