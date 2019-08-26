@@ -710,6 +710,14 @@ func TestBoxSets(t *testing.T) {
 			"/iplayer/episodes/p070npjv/fleabag?seriesId=p071bjr7",
 			bs[0].String())
 	}
+	pp := programPage{td.idoc}
+	ok, su := pp.seriesUrls()
+	if !ok {
+		t.Error("Expected seriesUrls call to be ok, got: ", ok)
+	}
+	if len(su) != 1 {
+		t.Errorf("Expected length of sweries urls to be 1, got: %d", len(su))
+	}
 
 	doc = documentLoader("testhtml/wrong_mans.html")
 	td = TestIplayerDocument{doc}
@@ -719,4 +727,5 @@ func TestBoxSets(t *testing.T) {
 			"/iplayer/episodes/p02bhkmm/the-wrong-mans?seriesId=p02bhlq2",
 			bs[0].String())
 	}
+
 }
