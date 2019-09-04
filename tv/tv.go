@@ -340,7 +340,6 @@ func DBPath() string {
 		log.Fatal(err)
 	}
 	path = filepath.Join(path, "nip")
-	fmt.Println(path)
 	if _, err := os.Stat(filepath.Join(path, NipDB)); os.IsNotExist(err) {
 		err := os.MkdirAll(path, os.ModePerm)
 		if err != nil {
@@ -351,5 +350,5 @@ func DBPath() string {
 			log.Fatal(err)
 		}
 	}
-	return path
+	return filepath.Join(path, NipDB)
 }
