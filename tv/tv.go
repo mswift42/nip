@@ -341,13 +341,13 @@ func DBPath() string {
 	}
 	path = filepath.Join(path, "nip")
 	fmt.Println(path)
-	if _, err := os.Stat(path + NipDB); os.IsNotExist(err) {
+	if _, err := os.Stat(filepath.Join(path, NipDB)); os.IsNotExist(err) {
 		err := os.MkdirAll(path, os.ModePerm)
 		if err != nil {
 			log.Fatal(err)
 		}
 		pdb := &ProgrammeDB{[]*Category{}, time.Now(), []*SavedProgramme{}}
-		if err := pdb.Save(path + NipDB); err != nil {
+		if err := pdb.Save(filepath.Join(path, NipDB)); err != nil {
 			log.Fatal(err)
 		}
 	}
