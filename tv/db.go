@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
-	"path/filepath"
 	"strings"
 	"time"
 
@@ -285,12 +284,12 @@ func RefreshDB(filename string) {
 
 func init() {
 	dbpath := DBPath()
-	pdb, err := RestoreProgrammeDB(filepath.Join(dbpath, NipDB))
+	pdb, err := RestoreProgrammeDB(dbpath)
 	if err != nil {
-		RefreshDB(filepath.Join(dbpath, NipDB))
+		RefreshDB(dbpath)
 	} else {
 		if pdb.sixHoursLater(time.Now()) || len(pdb.Categories) == 0 {
-			RefreshDB(filepath.Join(dbpath, NipDB))
+			RefreshDB(dbpath)
 		}
 	}
 	tobedel := pdb.toBeDeletedProgrammes()
