@@ -3,15 +3,13 @@ package tv
 import (
 	"fmt"
 	"log"
+	"path/filepath"
 	"strings"
 	"sync"
 
 	"os"
-	"path/filepath"
-	"runtime"
 	"time"
 
-	"github.com/mitchellh/go-homedir"
 	"github.com/mswift42/goquery"
 )
 
@@ -337,32 +335,20 @@ func collectPages(urls []Pager) []*IplayerDocumentResult {
 // If no db exists at this path, it creates an empty db
 // and saves it to disk.
 func DBPath() string {
-	home, err := homedir.Dir()
+	path, err := os.UserConfigDir()
 	if err != nil {
 		log.Fatal(err)
 	}
-	var path string
-	var winbasepath string
-	if val, ok := os.LookupEnv("XDG_CONFIG_HOME"); ok {
-		winbasepath = val
-	} else {
-		winbasepath = "%LocalAppData%"
-	}
-	switch runtime.GOOS {
-	case "windows":
-		path = filepath.Join(winbasepath, "nip")
-	default:
-		path = home + "/.config/nip/"
-	}
-	if _, err := os.Stat(path + NipDB); os.IsNotExist(err) {
+	path = filepath.Join(path, "nip")
+	if _, err := os.Stat(filepath.Join(path, NipDB)); os.IsNotExist(err) {
 		err := os.MkdirAll(path, os.ModePerm)
 		if err != nil {
 			log.Fatal(err)
 		}
 		pdb := &ProgrammeDB{[]*Category{}, time.Now(), []*SavedProgramme{}}
-		if err := pdb.Save(path + NipDB); err != nil {
+		if err := pdb.Save(filepath.Join(path, NipDB)); err != nil {
 			log.Fatal(err)
 		}
 	}
-	return path
+	return filepath.Join(path, NipDB)
 }

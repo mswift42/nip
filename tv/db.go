@@ -284,13 +284,12 @@ func RefreshDB(filename string) {
 
 func init() {
 	dbpath := DBPath()
-	filename := NipDB
-	pdb, err := RestoreProgrammeDB(dbpath + filename)
+	pdb, err := RestoreProgrammeDB(dbpath)
 	if err != nil {
-		RefreshDB(dbpath + filename)
+		RefreshDB(dbpath)
 	} else {
 		if pdb.sixHoursLater(time.Now()) || len(pdb.Categories) == 0 {
-			RefreshDB(dbpath + filename)
+			RefreshDB(dbpath)
 		}
 	}
 	tobedel := pdb.toBeDeletedProgrammes()
